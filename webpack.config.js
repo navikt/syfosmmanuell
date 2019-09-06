@@ -16,6 +16,10 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader'
+      },
+      { 
+        test: /\.less$/, 
+        use: ['style-loader', 'css-loader', 'less-loader?{"globalVars":{"nodeModulesPath":"\'~\'", "coreModulePath":"\'~\'"}}'] 
       }
     ]
   },

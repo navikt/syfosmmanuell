@@ -3,6 +3,8 @@
     // No module system, concatenated file
     "module": "none",
 
+    "moduleResolution": "node",
+
     // Set React as the JSX factory
     "jsx": "react",
 

@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import './Hello.less';
+
 export interface Props {
   name: string;
   enthusiasmLevel?: number;
