@@ -22,3 +22,8 @@ npm start
 npm run test
 ```
 
+### Bygg for produksjon
+```bash
+npm run build-prod
+```
+Genererer plain javascript til /dist

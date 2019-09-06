@@ -1,7 +1,5 @@
 const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
     entry: './src/index.tsx',
     resolve: {
@@ -22,10 +20,5 @@ module.exports = {
                 loader: 'ignore-loader' 
             }
         ]
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-          template: './src/index.html'
-        })
-    ]
+    }
 };

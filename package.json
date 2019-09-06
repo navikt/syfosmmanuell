@@ -9,7 +9,7 @@
     "build": "webpack --mode production",
     "build:js": "webpack --config webpack.config.style.js && webpack --config webpack.config.ignore.js",
     "build:html": "copyfiles index.html out",
-    "build:nav": "npm run clean && npm run build:js && npm run build:html",
+    "build-prod": "npm run clean && npm run build:js && npm run build:html",
     "watch": "webpack -w",
     "test": "jest"
   },
