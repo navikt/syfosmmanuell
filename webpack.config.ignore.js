@@ -1,14 +1,31 @@
 const path = require('path');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: './src/index.tsx',
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js']
+      },
     output: {
         path: path.join(__dirname, '/dist'),
         filename: 'bundle.nostyles.js'
     },
     module: {
         rules: [
-            { test: /\.less$/, loader: 'ignore-loader' }
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader'
+            },
+            { 
+                test: /\.less$/, 
+                loader: 'ignore-loader' 
+            }
         ]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+          template: './src/index.html'
+        })
+    ]
 };
