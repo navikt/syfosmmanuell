@@ -1,6 +1,6 @@
-# SyfoSmManuellBehandling
+# syfosmmanuell
 
-## Om SyfoSmManuellBehandling
+## Om syfosmmanuell
 Frontend til manuell behandling av sykemelding for saksbehandlere. Laget med React, Typescript, Webpack, Jest
 
 ## Installering
