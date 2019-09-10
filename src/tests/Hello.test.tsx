@@ -1,3 +1,5 @@
+/*
+
 import * as React from 'react';
 import * as enzyme from 'enzyme';
 import Hello from '../components/Hello';
@@ -29,3 +31,5 @@ it('throws when the enthusiasm level is negative', () => {
     enzyme.shallow(<Hello name='Daniel' enthusiasmLevel={-1} />);
   }).toThrow();
 });
+
+*/
