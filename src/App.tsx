@@ -1,16 +1,14 @@
 import * as React from 'react';
-import Tekstomrade from 'nav-frontend-tekstomrade';
-import NavFrontendSpinner from 'nav-frontend-spinner';
-import Sykmelding from './components/Sykmelding';
+import SykmeldingWrapper from './components/SykmeldingWrapper'
 
 const App = () => {
     return(
         <>
-            <h1>Greeting text:</h1>
-            <Sykmelding/>
-            
+            <h1>Sykmelding til manuell behandling</h1>
+            <SykmeldingWrapper/>
         </>
     )
 }
+
 
 export default App;

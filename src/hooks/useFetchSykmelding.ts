@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Sykmelding_t } from "../types/sykmeldingTypes";
 
-
 const useFetchSykmelding = ( url: string ) => {
-    const [response, setResponse] = useState(null);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [begrunnelse, setBegrunnelse] = useState<string | null>(null);
+    const [sykmelding, setSykmelding] = useState<Sykmelding_t | null>(null);
+    const [error, setError] = useState<Error | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect( () => {
         const fetchData = async () => {
@@ -13,19 +13,13 @@ const useFetchSykmelding = ( url: string ) => {
             try {
                 const res = await fetch(url);
                 const json = await res.json();
-                setResponse( () => {
-                    if (json.hasOwnProperty('begrunnelse')) {
-                        return (
-                            { 
-                                begrunnelse: json.begrunnelse,
-                                sykmelding: new Sykmelding_t(json.sykmelding)
-                            }
-                        )
-                    } else {
-                        throw new Error('JSON mangler begrunnelse');
-                    }
-                })
-                setIsLoading(false);
+                if (json.hasOwnProperty('begrunnelse')) {
+                    setBegrunnelse(json.begrunnelse);
+                    setSykmelding(new Sykmelding_t(json.sykmelding));
+                    setIsLoading(false);
+                } else {
+                    throw new Error('Sykmelding mangler begrunnelse');
+                }
             }
             catch(error) {
                 setError(error);
@@ -33,24 +27,7 @@ const useFetchSykmelding = ( url: string ) => {
         }
         fetchData();
     }, []);
-    return( { response, error, isLoading } );
+    return( { begrunnelse, sykmelding, error, isLoading } );
 }
-
-/*
-const [jsonRes, setJsonRes] = useState({ begrunnelse: '', sykmelding: {} });
-const [begrunnelse, setBegrunnelse] = useState('');
-const [sykmelding, setSykmelding] = useState({});
-
-useEffect( () => {
-    fetch(url)
-    .then( response => response.json() )
-    .then( json => setJsonRes( { begrunnelse: json.begrunnelse, sykmelding: json.sykmelding } ) )
-    .catch( error => console.error(error));
-}, []);
-useEffect( () => setBegrunnelse(jsonRes.begrunnelse), [jsonRes]);
-useEffect( () => setSykmelding(new Sykmelding_t(jsonRes.sykmelding)), [begrunnelse]);
-
-return( { begrunnelse, sykmelding } )
-*/
 
 export default useFetchSykmelding;
