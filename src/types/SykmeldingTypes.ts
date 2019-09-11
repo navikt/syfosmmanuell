@@ -12,11 +12,6 @@ interface TilbakedatertLopendeSF extends BaseSykmelding {
 
 }
 
-// legg til resterende sykemeldingskategorier
-
-
-
-
 
 export class Sykmelding_t implements BaseSykmelding {
     property: string;
@@ -27,9 +22,11 @@ export class Sykmelding_t implements BaseSykmelding {
 
 
 export class Tilbakedatert_t extends Sykmelding_t implements Tilbakedatert {
-    property1;
+    property1: number;
     constructor( parsedJson ) {
         super( parsedJson);
         this.property1 = parsedJson.property1
     }
 }
+
+// legg til resterende sykemeldingskategorier

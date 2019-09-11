@@ -8,8 +8,7 @@ const App = () => {
         <>
             <h1>Greeting text:</h1>
             <Sykmelding/>
-            <NavFrontendSpinner />
-            <Tekstomrade>New text</Tekstomrade>
+            
         </>
     )
 }
