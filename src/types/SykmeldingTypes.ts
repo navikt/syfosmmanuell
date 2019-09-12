@@ -1,3 +1,5 @@
+//ikke ferdig
+
 enum SykmeldingStatuser {
     NY = 'NY',
     SENDT = 'SENDT',

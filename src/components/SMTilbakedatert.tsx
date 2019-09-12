@@ -1,22 +1,27 @@
 import * as React from 'react';
 import { Sykmelding_t } from '../types/sykmeldingTypes';
-import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import './SykmeldingWrapper.less';
+import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import './Sykmelding.less';
 
 const SMTilbakedatert: React.FC<{ sykmelding: Sykmelding_t}> = ({sykmelding}) => {
-
-
     return (
-        <div className="sykmeldingWrapper">
-            <EkspanderbartpanelBase heading={
-                <div className="panelTittelContainer">
-                    <img src="src/img/report-problem-circle.svg" alt="" className="alertImage"/>
-                    <h2>Hello World</h2>
-                </div>}>
-            </EkspanderbartpanelBase>
-        </div>
+        <ul className="sm-container">
+            {/* Husk å legg til tags på alle tekstfelt */}
+            <li className="sm-container-item">
+                <Undertittel>Sykmelding</Undertittel>
+            </li>
+            <li className="sm-container-item">
+                <Element>ID</Element>
+                <Normaltekst>{sykmelding.id}</Normaltekst>
+            </li>
+            <li className="sm-container-item">
+                <Element>Message ID</Element>
+                <Normaltekst>{sykmelding.msgId}</Normaltekst>
+            </li>
+            {/* Add all listitems with correct formatting */}
+        </ul>
     )
-    return <p>SYKMELDING: {sykmelding.id}</p>;
 }
+
 
 export default SMTilbakedatert;
