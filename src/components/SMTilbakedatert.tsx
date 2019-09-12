@@ -19,4 +19,5 @@ const SMTilbakedatert: React.FC<{ sykmelding: Sykmelding}> = ({sykmelding}) => (
     </ul>
 )
 
+
 export default SMTilbakedatert;
