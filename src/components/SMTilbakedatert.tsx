@@ -5,7 +5,6 @@ import './Sykmelding.less';
 
 const SMTilbakedatert: React.FC<{ sykmelding: Sykmelding_t}> = ({sykmelding}) => (
     <ul className="sm-container">
-        {/* Husk å legg til tags på alle tekstfelt */}
         <li className="sm-container-item">
             <Undertittel>Sykmelding</Undertittel>
         </li>
@@ -17,7 +16,6 @@ const SMTilbakedatert: React.FC<{ sykmelding: Sykmelding_t}> = ({sykmelding}) =>
             <Element>Message ID</Element>
             <Normaltekst>{sykmelding.msgId}</Normaltekst>
         </li>
-        {/* Add all listitems with correct formatting */}
     </ul>
 )
 

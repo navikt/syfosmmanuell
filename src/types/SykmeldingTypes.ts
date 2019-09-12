@@ -1,4 +1,3 @@
-//ikke ferdig
 
 enum SykmeldingStatuser {
     NY = 'NY',
