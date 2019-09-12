@@ -9,29 +9,29 @@ import './SykmeldingWrapper.less'
 
 
 const sykmeldingHeader = data =>  (<>
-    <div className="begrunnelse">
+    <div className="sm-header sm-header__begrunnelse">
         <Element>Årsak til manuell vurdering</Element>
         <Normaltekst>{data.begrunnelse}</Normaltekst>
     </div>
-    <div className="arbgiver-sykmelder">
+    <div className="sm-header sm-header__arbgiver-sykmelder">
     <Element>Arbeidsgiver: "placeholder"</Element>
         <Element>Sykmelder: "placeholder"</Element>
     </div>
 </>);
 
 const sykmeldingFooter = <>
-    <div className="buttons">
+    <div className="sm-footer sm-footer__godkjenn-avvis">
         <button>"Godkjenn placeholder"</button>
         <button>"Avvis placeholder"</button>
     </div>
-    <div className="radio-buttons">
+    <div className="sm-footer sm-footer__ferdig-avbryt">
         <button>"Ferdigstill placeholder"</button>
         <button>"Avbryd placeholder"</button>
     </div>
 </>;
 
 const SykmeldingWrapper = () => {
-    const data = useFetchSykmelding('src/moch/sykmeld.json'); // change to env variable later
+    const data = useFetchSykmelding('src/moch/sykmeld.json');
     
     if (data.isLoading) { 
         return (
@@ -44,10 +44,10 @@ const SykmeldingWrapper = () => {
         switch (data.begrunnelse) {
             case TILBAKEDATERT_MED_BEGRUNNELSE: {
                 return (
-                    <div className="sykmeldingWrapper">
+                    <div className="ekspanderbartpanel-konteiner">
                         <EkspanderbartpanelBase heading={
-                            <div className="panelTittelContainer">
-                                <img src="src/img/report-problem-circle.svg" alt="" className="alertImage"/> {/* find out how to color the icon */}
+                            <div className="ekspanderbartpanel">
+                                <img src="src/img/report-problem-circle.svg" alt="Alert image" className="ekspanderbartpanel__ikon"/>
                                 <Undertittel>En sykmelding må vurderes manuelt</Undertittel>
                             </div>
                         }>
