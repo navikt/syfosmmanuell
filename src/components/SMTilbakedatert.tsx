@@ -5,14 +5,14 @@ import './Sykmelding.less';
 
 const SMTilbakedatert: React.FC<{ sykmelding: Sykmelding}> = ({sykmelding}) => (
     <ul className="sykmelding">
-        <li className="sykmelding__tittel liste-element">
+        <li className="sykmelding__tittel">
             <Undertittel>Sykmelding</Undertittel>
         </li>
-        <li className="sykmelding__element liste-element">
+        <li className="sykmelding__element">
             <Element>ID</Element>
             <Normaltekst>{sykmelding.id}</Normaltekst>
         </li>
-        <li className="sykmelding__element liste-element">
+        <li className="sykmelding__element">
             <Element>Message ID</Element>
             <Normaltekst>{sykmelding.msgId}</Normaltekst>
         </li>
