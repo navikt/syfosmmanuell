@@ -31,7 +31,7 @@ const sykmeldingFooter = <>
 </>;
 
 const SykmeldingWrapper = () => {
-    const data = useFetchSykmelding('src/moch/sykmeld.json');
+    const data = useFetchSykmelding('src/mock/sykmeld.json');
     
     if (data.isLoading) { 
         return (
