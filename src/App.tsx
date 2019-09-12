@@ -1,10 +1,10 @@
 import * as React from 'react';
 import SykmeldingWrapper from './components/SykmeldingWrapper'
+import './App.less';
 
 const App = () => {
     return(
         <>
-            <h1>Sykmelding til manuell behandling</h1>
             <SykmeldingWrapper/>
         </>
     )
