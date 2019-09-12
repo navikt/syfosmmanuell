@@ -7,31 +7,32 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import './SykmeldingWrapper.less'
 
+
+const sykmeldingHeader = data =>  (<>
+    <div className="begrunnelse">
+        <Element>Årsak til manuell vurdering</Element>
+        <Normaltekst>{data.begrunnelse}</Normaltekst>
+    </div>
+    <div className="arbgiver-sykmelder">
+    <Element>Arbeidsgiver: "placeholder"</Element>
+        <Element>Sykmelder: "placeholder"</Element>
+    </div>
+</>);
+
+const sykmeldingFooter = <>
+    <div className="buttons">
+        <button>"Godkjenn placeholder"</button>
+        <button>"Avvis placeholder"</button>
+    </div>
+    <div className="radio-buttons">
+        <button>"Ferdigstill placeholder"</button>
+        <button>"Avbryd placeholder"</button>
+    </div>
+</>;
+
 const SykmeldingWrapper = () => {
     const data = useFetchSykmelding('src/moch/sykmeld.json'); // change to env variable later
     
-    const sykmeldingHeader = <>
-        <div className="begrunnelse">
-            <Element>Årsak til manuell vurdering</Element>
-            <Normaltekst>{data.begrunnelse}</Normaltekst>
-        </div>
-        <div className="arbgiver-sykmelder">
-        <Element>Arbeidsgiver: "placeholder"</Element>
-            <Element>Sykmelder: "placeholder"</Element>
-        </div>
-    </>;
-
-    const sykmeldingFooter = <>
-        <div className="buttons">
-            <button>"Godkjenn placeholder"</button>
-            <button>"Avvis placeholder"</button>
-        </div>
-        <div className="radio-buttons">
-            <button>"Ferdigstill placeholder"</button>
-            <button>"Avbryd placeholder"</button>
-        </div>
-    </>;
-
     if (data.isLoading) { 
         return (
             <div className="spinner">
@@ -50,14 +51,13 @@ const SykmeldingWrapper = () => {
                                 <Undertittel>En sykmelding må vurderes manuelt</Undertittel>
                             </div>
                         }>
-                            {sykmeldingHeader}
+                            {sykmeldingHeader(data)}
                             <SMTilbakedatert sykmelding={data.sykmelding}/>
                             {sykmeldingFooter}
                         </EkspanderbartpanelBase>
                     </div>
                 )
             }
-            {/* More cases for different sykmelding kategorier */}
             default: {
                 return <p>nothing to show</p>
             }
