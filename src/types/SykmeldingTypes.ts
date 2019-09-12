@@ -1,4 +1,4 @@
-export class Sykmelding_t {
+export class Sykmelding {
     id: string;
     msgId: string;
     psientAktoerId: string;
