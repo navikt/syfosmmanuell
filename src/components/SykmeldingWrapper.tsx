@@ -9,22 +9,22 @@ import './SykmeldingWrapper.less'
 
 
 const sykmeldingHeader = data =>  (<>
-    <div className="sm-header sm-header__begrunnelse">
+    <div className="sykmelding-header sykmelding-header__begrunnelse">
         <Element>Årsak til manuell vurdering</Element>
         <Normaltekst>{data.begrunnelse}</Normaltekst>
     </div>
-    <div className="sm-header sm-header__arbgiver-sykmelder">
+    <div className="sykmelding-header sykmleding-header__arbgiver-sykmelder">
     <Element>Arbeidsgiver: "placeholder"</Element>
         <Element>Sykmelder: "placeholder"</Element>
     </div>
 </>);
 
 const sykmeldingFooter = <>
-    <div className="sm-footer sm-footer__godkjenn-avvis">
+    <div className="sykmelding-footer sykmelding-footer__godkjenn-avvis">
         <button>"Godkjenn placeholder"</button>
         <button>"Avvis placeholder"</button>
     </div>
-    <div className="sm-footer sm-footer__ferdig-avbryt">
+    <div className="sykmelding-footer sykmelding-footer__ferdig-avbryt">
         <button>"Ferdigstill placeholder"</button>
         <button>"Avbryd placeholder"</button>
     </div>
