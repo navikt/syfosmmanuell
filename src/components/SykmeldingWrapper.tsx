@@ -6,6 +6,7 @@ import SMTilbakedatert from './SMTilbakedatert';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import './SykmeldingWrapper.less'
+import GodkjenningsKnapper from './GodkjenningsKnapper';
 
 
 const sykmeldingHeader = data =>  (<>
@@ -55,7 +56,7 @@ const SykmeldingWrapper = () => {
                         }>
                             {sykmeldingHeader(data)}
                             <SMTilbakedatert sykmelding={data.sykmelding}/>
-                            {sykmeldingFooter}
+                            <GodkjenningsKnapper />
                         </EkspanderbartpanelBase>
                     </div>
                 )
