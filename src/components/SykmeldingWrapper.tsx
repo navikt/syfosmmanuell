@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { TILBAKEDATERT_MED_BEGRUNNELSE } from '../types/begrunnelser';
 import useFetchSykmelding from '../hooks/useFetchSykmelding';
 import NavFrontendSpinner from 'nav-frontend-spinner';
@@ -33,8 +34,12 @@ const sykmeldingFooter = <>
 </>;
 
 const SykmeldingWrapper = () => {
-    const data = useFetchSykmelding('src/mock/sykmeld.json');
+    const data = useFetchSykmelding();
     
+    useEffect( () => {
+        data.callFetch('src/mock/sykmeld.json');
+    }, [])
+
     if (data.isLoading) { 
         return (
             <div className="spinner">
