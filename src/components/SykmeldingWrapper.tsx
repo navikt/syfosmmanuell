@@ -56,7 +56,7 @@ const SykmeldingWrapper = () => {
                         }>
                             {sykmeldingHeader(data)}
                             <SMTilbakedatert sykmelding={data.sykmelding}/>
-                            <GodkjenningsKnapper />
+                            <GodkjenningsKnapper begrunnelse={TILBAKEDATERT_MED_BEGRUNNELSE}/>
                         </EkspanderbartpanelBase>
                     </div>
                 )
