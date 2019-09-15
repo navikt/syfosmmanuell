@@ -6,7 +6,7 @@ import SMTilbakedatert from './SMTilbakedatert';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import './SykmeldingWrapper.less'
-import GodkjenningsKnapper from './GodkjenningsKnapper';
+import Knapper from './Knapper';
 
 
 const sykmeldingHeader = data =>  (<>
@@ -53,11 +53,13 @@ const SykmeldingWrapper = () => {
                         }>
                             {sykmeldingHeader(data)}
                             <SMTilbakedatert sykmelding={data.sykmelding}/>
-                            <GodkjenningsKnapper begrunnelse={TILBAKEDATERT_MED_BEGRUNNELSE} handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt}/>
+                            <Knapper begrunnelse={TILBAKEDATERT_MED_BEGRUNNELSE} handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt}/>
                         </EkspanderbartpanelBase>
                     </div>
                 )
             }
+            default:
+                return (<></>)
         }
     }
 }

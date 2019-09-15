@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { begrunnelsestekster } from '../types/begrunnelser';
-import './GodkjenningsKnapper.less'
+import './Knapper.less'
 
-const GodkjenningsKnapper: React.FC<{ begrunnelse: string, handterAvgjorelse(valg: boolean): void, handterAvbryt(): void }> = ({begrunnelse, handterAvgjorelse, handterAvbryt}) => {
+const Knapper: React.FC<{ begrunnelse: string, handterAvgjorelse(valg: boolean): void, handterAvbryt(): void }> = ({begrunnelse, handterAvgjorelse, handterAvbryt}) => {
     const begrunnelsestekst = begrunnelsestekster[begrunnelse];
     const [erGodkjent, setErGodkjent] = useState<boolean | null>(null);
     const [kanSendeInn, setKanSendeInn] = useState<boolean>(false);
@@ -41,4 +41,4 @@ const GodkjenningsKnapper: React.FC<{ begrunnelse: string, handterAvgjorelse(val
     )
 }
 
-export default GodkjenningsKnapper
+export default Knapper
