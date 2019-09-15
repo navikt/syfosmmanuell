@@ -22,17 +22,6 @@ const sykmeldingHeader = data =>  (<>
     </div>
 </>);
 
-const sykmeldingFooter = <>
-    <div className="sykmelding-footer__godkjenn-avvis">
-        <button>"Godkjenn placeholder"</button>
-        <button>"Avvis placeholder"</button>
-    </div>
-    <div className="sykmelding-footer__ferdig-avbryt">
-        <button>"Ferdigstill placeholder"</button>
-        <button>"Avbryd placeholder"</button>
-    </div>
-</>;
-
 const SykmeldingWrapper = () => {
     const data = useFetchSykmelding('src/mock/sykmeld.json');
     
@@ -68,9 +57,6 @@ const SykmeldingWrapper = () => {
                         </EkspanderbartpanelBase>
                     </div>
                 )
-            }
-            default: {
-                return <p>nothing to show</p>
             }
         }
     }
