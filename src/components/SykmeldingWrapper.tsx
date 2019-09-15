@@ -36,6 +36,14 @@ const sykmeldingFooter = <>
 const SykmeldingWrapper = () => {
     const data = useFetchSykmelding('src/mock/sykmeld.json');
     
+    const handterAvgjorelse = (erGodkjent: boolean) => {
+        console.log("Avgjørelse håndteres i wrapper: " + erGodkjent);
+    }
+
+    const handterAvbryt = () => {
+        console.log("Avbryt håndteres i wrapper ")
+    }
+
     if (data.isLoading) { 
         return (
             <div className="spinner">
@@ -56,7 +64,7 @@ const SykmeldingWrapper = () => {
                         }>
                             {sykmeldingHeader(data)}
                             <SMTilbakedatert sykmelding={data.sykmelding}/>
-                            <GodkjenningsKnapper begrunnelse={TILBAKEDATERT_MED_BEGRUNNELSE}/>
+                            <GodkjenningsKnapper begrunnelse={TILBAKEDATERT_MED_BEGRUNNELSE} handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt}/>
                         </EkspanderbartpanelBase>
                     </div>
                 )
