@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import { Sykmelding } from "../types/sykmeldingTypes";
 
-const useFetchSykmelding = ( url: string ) => {
+const useFetchSykmelding = () => {
     const [begrunnelse, setBegrunnelse] = useState<string | null>(null);
     const [sykmelding, setSykmelding] = useState<Sykmelding | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [url, setUrl] = useState<string | null>(null);
 
     useEffect( () => {
+        setIsLoading(true);
         const fetchData = async () => {
-            setIsLoading(true);
             try {
                 const res = await fetch(url);
                 const json = await res.json();
-                if (json.hasOwnProperty('begrunnelse')) {
+                if (json.begrunnelse) {
                     setBegrunnelse(json.begrunnelse);
                     setSykmelding(new Sykmelding(json.sykmelding));
                     setIsLoading(false);
@@ -26,8 +27,9 @@ const useFetchSykmelding = ( url: string ) => {
             };
         }
         fetchData();
-    }, []);
-    return( { begrunnelse, sykmelding, error, isLoading } );
+    }, [url]);
+
+    return( { begrunnelse, sykmelding, error, isLoading, callFetch: setUrl } );
 }
 
 export default useFetchSykmelding;
