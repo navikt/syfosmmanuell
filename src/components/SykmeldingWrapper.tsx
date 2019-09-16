@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { TILBAKEDATERT_MED_BEGRUNNELSE } from '../types/begrunnelser';
 import useFetchSykmelding from '../hooks/useFetchSykmelding';
 import NavFrontendSpinner from 'nav-frontend-spinner';
@@ -23,7 +24,7 @@ const sykmeldingHeader = data =>  (<>
 </>);
 
 const SykmeldingWrapper = () => {
-    const data = useFetchSykmelding('src/mock/sykmeld.json');
+    const data = useFetchSykmelding();
     
     const handterAvgjorelse = (erGodkjent: boolean) => {
         console.log("Avgjørelse håndteres i wrapper: " + erGodkjent);
@@ -32,6 +33,9 @@ const SykmeldingWrapper = () => {
     const handterAvbryt = () => {
         console.log("Avbryt håndteres i wrapper ")
     }
+    useEffect( () => {
+        data.callFetch('src/mock/sykmeld.json');
+    }, [])
 
     if (data.isLoading) { 
         return (
