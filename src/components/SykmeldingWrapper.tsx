@@ -7,6 +7,7 @@ import SMTilbakedatert from './SMTilbakedatert';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import './SykmeldingWrapper.less'
+import Knapper from './Knapper';
 
 
 const sykmeldingHeader = data =>  (<>
@@ -22,20 +23,16 @@ const sykmeldingHeader = data =>  (<>
     </div>
 </>);
 
-const sykmeldingFooter = <>
-    <div className="sykmelding-footer__godkjenn-avvis">
-        <button>"Godkjenn placeholder"</button>
-        <button>"Avvis placeholder"</button>
-    </div>
-    <div className="sykmelding-footer__ferdig-avbryt">
-        <button>"Ferdigstill placeholder"</button>
-        <button>"Avbryd placeholder"</button>
-    </div>
-</>;
-
 const SykmeldingWrapper = () => {
     const data = useFetchSykmelding();
     
+    const handterAvgjorelse = (erGodkjent: boolean) => {
+        console.log("Avgjørelse håndteres i wrapper: " + erGodkjent);
+    }
+
+    const handterAvbryt = () => {
+        console.log("Avbryt håndteres i wrapper ")
+    }
     useEffect( () => {
         data.callFetch('src/mock/sykmeld.json');
     }, [])
@@ -60,14 +57,13 @@ const SykmeldingWrapper = () => {
                         }>
                             {sykmeldingHeader(data)}
                             <SMTilbakedatert sykmelding={data.sykmelding}/>
-                            {sykmeldingFooter}
+                            <Knapper begrunnelse={TILBAKEDATERT_MED_BEGRUNNELSE} handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt}/>
                         </EkspanderbartpanelBase>
                     </div>
                 )
             }
-            default: {
-                return <p>nothing to show</p>
-            }
+            default:
+                return (<></>)
         }
     }
 }
