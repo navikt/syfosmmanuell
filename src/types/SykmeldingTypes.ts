@@ -36,7 +36,7 @@ export class Sykmelding {
             tom: Date,
             aktivitetIkkeMulig: null,
             avventendeInnspillTilArbeidsgiver: null,
-            behandlingsdager: null,
+            behandlingsdager: number | null,
             gradert: {
                 reisetilskudd: boolean,
                 grad: number
