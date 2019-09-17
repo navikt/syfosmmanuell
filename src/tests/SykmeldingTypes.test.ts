@@ -13,6 +13,8 @@ describe('SykmeldingTypes', () => {
     test('Dato skal være riktig formattert', () => {
         expect(sykmelding.perioder[0].fom).toEqual(dayjs(mockSykmelding.perioder[0].fom).toDate())
     })
+
+    test('')
 })
 
 
