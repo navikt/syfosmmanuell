@@ -35,11 +35,7 @@ const SykmeldingWrapper = () => {
     }
     useEffect( () => {
         data.callFetch('src/mock/sykmeld.json');
-    }, [])
-
-    useEffect( () => {
-        console.log(data.sykmelding);
-    }, [data.sykmelding])
+    }, []);
 
     if (data.isLoading) { 
         return (
