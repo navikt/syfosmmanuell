@@ -6,15 +6,18 @@ describe('SykmeldingTypes', () => {
     beforeAll(() => {
         sykmelding = new Sykmelding(mockSykmelding);
     })
-    test.skip('Skal returnere riktig sykemelding', () => {
-        expect(JSON.stringify(sykmelding)).toEqual(JSON.stringify(mockSykmelding));
+
+    test('Burde parse alle properties', () => {
+        expect(sykmelding.id).toBe("detteerensykmeldingid");
+        expect(sykmelding.msgId).toBe("123124334");
     })
 
-    test('Dato skal være riktig formattert', () => {
-        expect(sykmelding.perioder[0].fom).toEqual(dayjs(mockSykmelding.perioder[0].fom).toDate())
+    test('Burde returnere "null" for manglende ikke-påkrevd property', () => {
+        const newMockSykmelding = JSON.parse(JSON.stringify(mockSykmelding));
+        delete newMockSykmelding.meldingTilArbeidsgiver;
+        sykmelding = new Sykmelding(newMockSykmelding);
+        expect(sykmelding.meldingTilArbeidsgiver).toBeNull();
     })
-
-    test('')
 })
 
 

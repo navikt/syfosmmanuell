@@ -6,8 +6,7 @@ class MedisinskVurdering {
     svangerskap: boolean;
     yrkesskade: boolean;
     yrkesskadeDato?: Date;
-    annenFraversArsak?: AnnenFraversArsak
-
+    annenFraversArsak?: AnnenFraversArsak;
     constructor(medisinskVurdering) {
         this.hovedDiagnose = medisinskVurdering.hovedDiagnose ? new Diagnose(medisinskVurdering.hovedDiagnose) : null;
         this.biDiagnoser = medisinskVurdering.biDiagnoser.map(biDiagnose => {
@@ -15,7 +14,7 @@ class MedisinskVurdering {
         });
         this.svangerskap = medisinskVurdering.svangerskap;
         this.yrkesskade = medisinskVurdering.yrkesskade;
-        this.yrkesskadeDato = dayjs(medisinskVurdering.yrkesskadeDato).toDate();
+        this.yrkesskadeDato = medisinskVurdering.yrkesskadeDato ? dayjs(medisinskVurdering.yrkesskadeDato).toDate() : null;
         this.annenFraversArsak = medisinskVurdering.annenFraversArsak ? new AnnenFraversArsak(medisinskVurdering.annenFraversArsak) : null;
     }
 }
@@ -31,9 +30,9 @@ class Diagnose {
 
 class AnnenFraversArsak {
     beskrivelse?: string;
-    grunn: AnnenFraverGrunn[]
+    grunn: AnnenFraverGrunn[];
     constructor(annenFraversArsak) {
-        this.beskrivelse = annenFraversArsak.beskrivelse,
+        this.beskrivelse = annenFraversArsak.beskrivelse ? annenFraversArsak.beskrivelse : null,
         this.grunn = annenFraversArsak.grunn
     }
 }
@@ -58,9 +57,9 @@ class Arbeidsgiver {
     stillingsprosent?: number;
     constructor(arbeidsgiver) {
         this.harArbeidsgiver = arbeidsgiver.harArbeidsgiver;
-        this.navn = arbeidsgiver.navn;
-        this.yrkesbetegnelse = arbeidsgiver.yrkesbetegnelse;
-        this.stillingsprosent = arbeidsgiver.stillingsprosent;
+        this.navn = arbeidsgiver.navn ? arbeidsgiver.navn : null;
+        this.yrkesbetegnelse = arbeidsgiver.yrkesbetegnelse ? arbeidsgiver.yrkesbetegnelse : null;
+        this.stillingsprosent = arbeidsgiver.stillingsprosent ? arbeidsgiver.stillingsprosent : null;
     }
 }
 
@@ -82,8 +81,8 @@ class Periode {
         this.fom = dayjs(periode.fom).toDate();
         this.tom = dayjs(periode.tom).toDate();
         this.aktivitetIkkeMulig = periode.aktivitetIkkeMulig ? new AktivitetIkkeMulig(periode.aktivitetIkkeMulig) : null;
-        this.avventendeInnspillTilArbeidsgiver = periode.avventendeInnspillTilArbeidsgiver;
-        this.behandlingsdager = periode.behandlingsdager;
+        this.avventendeInnspillTilArbeidsgiver = periode.avventendeInnspillTilArbeidsgiver ? periode.avventendeInnspillTilArbeidsgiver : null;
+        this.behandlingsdager = periode.behandlingsdager ? periode.behandlingsdager : null;
         this.gradert = periode.gradert ? new Gradert(periode.gradert) : null;
         this.reisetilskudd = periode.reisetilskudd;
     }
@@ -102,7 +101,7 @@ class MedisinskArsak {
     beskrivelse?: string;
     arsak: MedisinskArsakType[];
     constructor(medisinskArsak) {
-        this.beskrivelse = medisinskArsak.beskrivelse;
+        this.beskrivelse = medisinskArsak.beskrivelse ? medisinskArsak.beskrivelse : null;
         this.arsak = medisinskArsak.arsak;
     }
 }
@@ -118,7 +117,7 @@ class ArbeidsrelatertArsak {
     beskrivelse?: string;
     arsak: ArbeidsrelatertArsakType[];
     constructor(medisinskArsak) {
-        this.beskrivelse = medisinskArsak.beskrivelse;
+        this.beskrivelse = medisinskArsak.beskrivelse ? medisinskArsak.beskrivelse : null;
         this.arsak = medisinskArsak.arsak;
     }
 }
@@ -144,7 +143,7 @@ class Prognose {
     erIkkeIArbeid?: ErIkkeIArbeid;
     constructor(prognose) {
         this.arbeidsforEtterPeriode = prognose.arbeidsforEtterPeriode;
-        this.hensynArbeidsplassen = prognose.hensynArbeidsplassen;
+        this.hensynArbeidsplassen = prognose.hensynArbeidsplassen ? prognose.hensynArbeidsplassen : null;
         this.erIArbeid = prognose.erIArbeid ? new ErIArbeid(prognose.erIArbeid) : null;
         this.erIkkeIArbeid = prognose.erIkkeIArbeid ? new ErIkkeIArbeid(prognose.erIkkeIArbeid) : null;
     }
@@ -158,8 +157,8 @@ class ErIArbeid {
     constructor(erIArbeid) {
         this.egetArbeidPaSikt = erIArbeid.egetArbeidPaSikt;
         this.annetArbeidPaSikt = erIArbeid.annetArbeidPaSikt;
-        this.arbeidFOM = dayjs(erIArbeid.arbeidFOM).toDate();
-        this.vurderingsdato = dayjs(erIArbeid.vurderingsdato).toDate();
+        this.arbeidFOM = erIArbeid.arbeidFOM ? dayjs(erIArbeid.arbeidFOM).toDate() : null;
+        this.vurderingsdato = erIArbeid.vurderingsdato ? dayjs(erIArbeid.vurderingsdato).toDate() : null;
     }
 }
 
@@ -169,8 +168,8 @@ class ErIkkeIArbeid {
     vurderingsdato?: Date;
     constructor(erIkkeIArbeid) {
         this.arbeidsforPaSikt = erIkkeIArbeid.arbeidsforPaSikt;
-        this.arbeidsforFOM = dayjs(erIkkeIArbeid.arbeidsforFOM).toDate();
-        this.vurderingsdato = dayjs(erIkkeIArbeid.vurderingsdato).toDate();
+        this.arbeidsforFOM = erIkkeIArbeid.arbeidsforFOM ? dayjs(erIkkeIArbeid.arbeidsforFOM).toDate() : null;
+        this.vurderingsdato = erIkkeIArbeid.vurderingsdato ? dayjs(erIkkeIArbeid.vurderingsdato).toDate() : null;
     }
 }
 
@@ -179,7 +178,7 @@ class MeldingTilNAV {
     beskrivBistand?: string;
     constructor(meldingTilNAV) {
         this.bistandUmiddelbart = meldingTilNAV.bistandUmiddelbart;
-        this.beskrivBistand = meldingTilNAV.beskrivBistand;
+        this.beskrivBistand = meldingTilNAV.beskrivBistand ? meldingTilNAV.beskrivBistand : null;
     }
 }
 
@@ -187,8 +186,8 @@ class KontaktMedPasient {
     kontaktDato?: Date;
     begrunnelseIkkeKontakt?: string;
     constructor(kontaktMedPasient) {
-        this.kontaktDato = dayjs(kontaktMedPasient.kontaktDato).toDate();
-        this.begrunnelseIkkeKontakt = kontaktMedPasient.begrunnelseIkkeKontakt;
+        this.kontaktDato = kontaktMedPasient.kontaktDato ? dayjs(kontaktMedPasient.kontaktDato).toDate() : null;
+        this.begrunnelseIkkeKontakt = kontaktMedPasient.begrunnelseIkkeKontakt ? kontaktMedPasient.begrunnelseIkkeKontakt : null;
     }
 }
 
@@ -204,14 +203,14 @@ class Behandler {
     tlf?: string;
     constructor(behandler) {
         this.fornavn = behandler.fornavn;
-        this.mellomnavn = behandler.mellomnavn;
+        this.mellomnavn = behandler.mellomnavn ? behandler.mellomnavn : null;
         this.etternavn = behandler.etternavn;
         this.aktoerId = behandler.aktoerId;
         this.fnr = behandler.fnr;
-        this.hpr = behandler.hpr;
-        this.her = behandler.her;
+        this.hpr = behandler.hpr ? behandler.hpr : null;
+        this.her = behandler.her ? behandler.her : null;
         this.adresse = behandler.adresse;
-        this.tlf = behandler.tlf;
+        this.tlf = behandler.tlf ? behandler.tlf : null;
     }
 }
 
@@ -222,11 +221,11 @@ class Adresse {
     postboks?: string;
     land?: string;
     constructor(adresse) {
-        this.gate = adresse.gate;
-        this.postnummer = adresse.postnummer;
-        this.kommune = adresse.kommune;
-        this.postboks = adresse.postboks;
-        this.land = adresse.land;
+        this.gate = adresse.gate ? adresse.gate : null;
+        this.postnummer = adresse.postnummer ? adresse.postnummer : null;
+        this.kommune = adresse.kommune ? adresse.kommune : null;
+        this.postboks = adresse.postboks ? adresse.postboks : null;
+        this.land = adresse.land ? adresse.land : null;
     }
 }
 
@@ -298,16 +297,16 @@ export class Sykmelding {
                 this.utdypendeOpplysninger.set(key, opplysning);
             })
         })
-        this.tiltakArbeidsplassen = sykmelding.tiltakArbeidsplassen;
-        this.tiltakNAV = sykmelding.tiltakNAV;
-        this.andreTiltak = sykmelding.andreTiltak;
+        this.tiltakArbeidsplassen = sykmelding.tiltakArbeidsplassen ? sykmelding.tiltakArbeidsplassen : null;
+        this.tiltakNAV = sykmelding.tiltakNAV ? sykmelding.tiltakNAV : null;
+        this.andreTiltak = sykmelding.andreTiltak ? sykmelding.andreTiltak : null;
         this.meldingTilNAV = sykmelding.meldingTilNAV ? new MeldingTilNAV(sykmelding.meldingTilNAV) : null;
-        this.meldingTilArbeidsgiver = sykmelding.meldingTilArbeidsgiver;
+        this.meldingTilArbeidsgiver = sykmelding.meldingTilArbeidsgiver ? sykmelding.meldingTilArbeidsgiver : null;
         this.kontaktMedPasient = new KontaktMedPasient(sykmelding.kontaktMedPasient);
         this.behandletTidspunkt = dayjs(sykmelding.behandletTidspunkt).toDate();
         this.behandler = new Behandler(sykmelding.behandler);
         this.avsenderSystem = new AvsenderSystem(sykmelding.avsenderSystem);
-        this.syketilfelleStartDato = dayjs(sykmelding.syketilfelleStartDato).toDate();
+        this.syketilfelleStartDato = sykmelding.syketilfelleStartDato ? dayjs(sykmelding.syketilfelleStartDato).toDate() : null;
         this.signaturDato = dayjs(sykmelding.signaturDato).toDate();
         this.navnFastlege = sykmelding.navnFastlege;
     }
