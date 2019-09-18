@@ -3,7 +3,7 @@ class RuleInfo {
     messageForSender: string;
     messageForUser: string;
     constructor(ruleInfo) {
-        const rName = ruleInfo.ruleName as keyof typeof RuleNames;
+        const rName = ruleInfo.ruleName as keyof RuleNames;
         this.ruleName = RuleNames[rName];
         this.messageForSender = ruleInfo.messageForSender;
         this.messageForUser = ruleInfo.messageForUser;

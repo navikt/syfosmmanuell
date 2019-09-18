@@ -46,6 +46,7 @@ const SykmeldingWrapper = () => {
         )
     }
     else if (data.begrunnelser) {
+        console.log(data)
         switch (data.begrunnelser.ruleHits[0].ruleName) {
             case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING: {
                 return (

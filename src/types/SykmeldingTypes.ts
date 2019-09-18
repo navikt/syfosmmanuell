@@ -9,9 +9,7 @@ class MedisinskVurdering {
     annenFraversArsak?: AnnenFraversArsak;
     constructor(medisinskVurdering) {
         this.hovedDiagnose = medisinskVurdering.hovedDiagnose ? new Diagnose(medisinskVurdering.hovedDiagnose) : null;
-        this.biDiagnoser = medisinskVurdering.biDiagnoser.map(biDiagnose => {
-            new Diagnose(biDiagnose);
-        });
+        this.biDiagnoser = medisinskVurdering.biDiagnoser.map(biDiagnose => new Diagnose(biDiagnose));
         this.svangerskap = medisinskVurdering.svangerskap;
         this.yrkesskade = medisinskVurdering.yrkesskade;
         this.yrkesskadeDato = medisinskVurdering.yrkesskadeDato ? dayjs(medisinskVurdering.yrkesskadeDato).toDate() : null;
@@ -33,9 +31,7 @@ class AnnenFraversArsak {
     grunn: AnnenFraverGrunn[];
     constructor(annenFraversArsak) {
         this.beskrivelse = annenFraversArsak.beskrivelse ? annenFraversArsak.beskrivelse : null;
-        const grunnTemp = annenFraversArsak.grunn.map( grunn => {
-            AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn]
-        } )
+        const grunnTemp = annenFraversArsak.grunn.map( grunn => AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn] )
         this.grunn = grunnTemp;
     }
 }
@@ -106,9 +102,7 @@ class MedisinskArsak {
     arsak: MedisinskArsakType[];
     constructor(medisinskArsak) {
         this.beskrivelse = medisinskArsak.beskrivelse ? medisinskArsak.beskrivelse : null;
-        const arsakTemp = medisinskArsak.arsak.map( arsak => {
-            MedisinskArsak[arsak as keyof typeof MedisinskArsak]
-        })
+        const arsakTemp = medisinskArsak.arsak.map( arsak => MedisinskArsak[arsak as keyof typeof MedisinskArsak] )
         this.arsak = arsakTemp;
     }
 }
@@ -125,9 +119,7 @@ class ArbeidsrelatertArsak {
     arsak: ArbeidsrelatertArsakType[];
     constructor(arbeidsrelatertArsak) {
         this.beskrivelse = arbeidsrelatertArsak.beskrivelse ? arbeidsrelatertArsak.beskrivelse : null;
-        const arsakTemp = arbeidsrelatertArsak.arsak.map( arsak => {
-            MedisinskArsak[arsak as keyof typeof MedisinskArsak]
-        })
+        const arsakTemp = arbeidsrelatertArsak.arsak.map( arsak => MedisinskArsak[arsak as keyof typeof MedisinskArsak] );
         this.arsak = arsakTemp;
     }
 }
@@ -255,9 +247,7 @@ class SporsmalSvar {
     constructor(sporsmalSvar) {
         this.sporsmal = sporsmalSvar.sporsmal;
         this.svar = sporsmalSvar.svar;
-        const restriksjonerTemp = sporsmalSvar.restriksjoner.map( restriksjon => {
-            SvarRestriksjon[restriksjon as keyof typeof SvarRestriksjon]
-        })
+        const restriksjonerTemp = sporsmalSvar.restriksjoner.map( restriksjon => SvarRestriksjon[restriksjon as keyof typeof SvarRestriksjon]);
         this.restriksjoner = restriksjonerTemp;
     }
 }
