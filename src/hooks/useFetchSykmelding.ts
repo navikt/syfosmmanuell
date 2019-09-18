@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Sykmelding } from "../types/sykmeldingTypes";
+import { Sykmelding } from "../types/SykmeldingTypes";
 import { ValidationResult } from '../types/ValidationResultTypes';
 
 const useFetchSykmelding = () => {
