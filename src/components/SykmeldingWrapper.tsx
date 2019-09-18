@@ -24,7 +24,7 @@ const sykmeldingHeader = data => (<>
 </>);
 
 const SykmeldingWrapper = () => {
-    const data = useFetchSykmelding();
+    const { begrunnelser, sykmelding, error, isLoading, callFetch } = useFetchSykmelding();
     
     const handterAvgjorelse = (erGodkjent: boolean) => {
         console.log("Avgjørelse håndteres i wrapper: " + erGodkjent);
@@ -35,19 +35,19 @@ const SykmeldingWrapper = () => {
     }
 
     useEffect( () => {
-        data.callFetch('src/mock/sykmeld.json');
+        callFetch('src/mock/sykmeld.json');
     }, []);
 
-    if (data.isLoading) { 
+    if (isLoading) { 
         return (
             <div className="spinner">
                 <NavFrontendSpinner/>
             </div>
         )
     }
-    else if (data.begrunnelser) {
-        console.log(data)
-        switch (data.begrunnelser.ruleHits[0].ruleName) {
+    else if (begrunnelser) {
+        console.log(sykmelding)
+        switch (begrunnelser.ruleHits[0].ruleName) {
             case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING: {
                 return (
                     <div className="ekspanderbartpanel-konteiner">
@@ -57,8 +57,7 @@ const SykmeldingWrapper = () => {
                                 <Undertittel>En sykmelding må vurderes manuelt</Undertittel>
                             </div>
                         }>
-                            {sykmeldingHeader(data)}
-                            <SMTilbakedatert sykmelding={data.sykmelding}/>
+                            <SMTilbakedatert sykmelding={sykmelding}/>
                         <Knapper begrunnelse={"RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING"} handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt}/>
                         </EkspanderbartpanelBase>
                     </div>
