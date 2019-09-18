@@ -10,7 +10,7 @@ import './SykmeldingWrapper.less'
 import Knapper from './Knapper';
 
 
-const sykmeldingHeader = data =>  (<>
+const sykmeldingHeader = data => (<>
     <div className="sykmelding-header">
         <div className="sykmelding-header__begrunnelse">
             <Element>Årsak til manuell vurdering</Element>
@@ -33,6 +33,7 @@ const SykmeldingWrapper = () => {
     const handterAvbryt = () => {
         console.log("Avbryt håndteres i wrapper ")
     }
+    
     useEffect( () => {
         data.callFetch('src/mock/sykmeld.json');
     }, []);

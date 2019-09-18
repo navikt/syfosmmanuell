@@ -1,5 +1,5 @@
 {
-    "begrunnelse": "TILBAKEDATERT_MED_BEGRUNNELSE",
+    "validationResult": "TILBAKEDATERT_MED_BEGRUNNELSE",
     "sykmelding": {
       "id": "detteerensykmeldingid",
       "msgId": "123124334",
