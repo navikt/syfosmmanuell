@@ -6,6 +6,9 @@ const ArsakVisning: React.FC<{ arsaker: ValidationResult}> = ({arsaker}) => {
     return (
         <div className="arsaker">
             <Element>Årsak til manuell vurdering</Element>
+            <ul className="">
+
+            </ul>
             <Normaltekst>{arsaker.ruleHits[0].ruleName}</Normaltekst>
         </div>
     )

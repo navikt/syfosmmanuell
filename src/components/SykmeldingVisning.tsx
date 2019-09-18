@@ -9,15 +9,15 @@ const SykmeldingVisning: React.FC<{ sykmelding: Sykmelding}> = ({sykmelding}) =>
                 <Element>Arbeidsgiver: "placeholder"</Element>
                 <Element>Sykmelder: "placeholder"</Element>
         </div>
-        <ul className="sykmelding">
-            <li className="sykmelding__tittel">
+        <ul className="liste sykmelding">
+            <li className="liste__element sykmelding__tittel">
                 <Undertittel>Sykmelding</Undertittel>
             </li>
-            <li className="sykmelding__element">
+            <li className="liste__element sykmelding__element">
                 <Element>ID</Element>
                 <Normaltekst>{sykmelding.id}</Normaltekst>
             </li>
-            <li className="sykmelding__element">
+            <li className="liste__element sykmelding__element">
                 <Element>Message ID</Element>
                 <Normaltekst>{sykmelding.msgId}</Normaltekst>
             </li>
