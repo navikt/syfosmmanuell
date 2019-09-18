@@ -64,18 +64,12 @@ const SykmeldingWrapper = () => {
                 )
             }
             case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE: {
-                console.log("should not print")
                 return <></>
             }
             case RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L: {
-                if (data.begrunnelser.ruleHits[0].ruleName == RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L) {
-                    console.log("equals")
-                }
-                console.log("should not print 2")
                 return <></>
             } 
             case RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT: {
-                console.log("should not print 3")
                 return <></>
             }
             default:
