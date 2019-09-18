@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { TILBAKEDATERT_MED_BEGRUNNELSE } from '../types/begrunnelser';
+import { RuleNames } from '../types/ValidationResultTypes';
 import useFetchSykmelding from '../hooks/useFetchSykmelding';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import SMTilbakedatert from './SMTilbakedatert';
@@ -10,11 +10,11 @@ import './SykmeldingWrapper.less'
 import Knapper from './Knapper';
 
 
-const sykmeldingHeader = data =>  (<>
+const sykmeldingHeader = data => (<>
     <div className="sykmelding-header">
         <div className="sykmelding-header__begrunnelse">
             <Element>Årsak til manuell vurdering</Element>
-            <Normaltekst>{data.begrunnelse}</Normaltekst>
+            <Normaltekst>{data.begrunnelser.ruleHits[0].ruleName}</Normaltekst>
         </div>
         <div className="sykmelding-header__arbgiver-sykmelder">
             <Element>Arbeidsgiver: "placeholder"</Element>
@@ -33,9 +33,10 @@ const SykmeldingWrapper = () => {
     const handterAvbryt = () => {
         console.log("Avbryt håndteres i wrapper ")
     }
+
     useEffect( () => {
         data.callFetch('src/mock/sykmeld.json');
-    }, [])
+    }, []);
 
     if (data.isLoading) { 
         return (
@@ -44,9 +45,9 @@ const SykmeldingWrapper = () => {
             </div>
         )
     }
-    else {
-        switch (data.begrunnelse) {
-            case TILBAKEDATERT_MED_BEGRUNNELSE: {
+    else if (data.begrunnelser) {
+        switch (data.begrunnelser.ruleHits[0].ruleName) {
+            case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING: {
                 return (
                     <div className="ekspanderbartpanel-konteiner">
                         <EkspanderbartpanelBase heading={
@@ -57,15 +58,27 @@ const SykmeldingWrapper = () => {
                         }>
                             {sykmeldingHeader(data)}
                             <SMTilbakedatert sykmelding={data.sykmelding}/>
-                            <Knapper begrunnelse={TILBAKEDATERT_MED_BEGRUNNELSE} handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt}/>
+                        <Knapper begrunnelse={"RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING"} handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt}/>
                         </EkspanderbartpanelBase>
                     </div>
                 )
             }
+            case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE: {
+                return <></>
+            }
+            case RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L: {
+                return <></>
+            } 
+            case RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT: {
+                return <></>
+            }
             default:
-                return (<></>)
+                return (<><p>hello</p></>)
         }
     }
+    else {
+        return <p>nothing to show</p>
+    } 
 }
 
 export default SykmeldingWrapper;

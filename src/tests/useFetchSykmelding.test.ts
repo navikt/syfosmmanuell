@@ -3,6 +3,7 @@ import useFetchSykmelding from '../hooks/useFetchSykmelding';
 import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-test-renderer";
 import { Sykmelding } from "../types/sykmeldingTypes";
+import { RuleNames } from '../types/ValidationresultTypes';
 
 const url = 'src/mock/sykmeld.json';
 
@@ -29,7 +30,7 @@ describe("useFetchSykmelding", () => {
         await act(async () => {
             result.current.callFetch(url);
         });
-        expect(result.current.begrunnelse).toBe("TILBAKEDATERT_MED_BEGRUNNELSE");
+        expect(result.current.begrunnelser.ruleHits[0].ruleName).toBe(RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING);
     })
 
     it("Returnert sykmelding skal være av typen 'Sykmelding'", async () => {
@@ -58,7 +59,16 @@ const jsonSykmeldingManglerBegrunnelse = {
 }
 
 const jsonSykmelding = {
-    "begrunnelse": "TILBAKEDATERT_MED_BEGRUNNELSE",
+    "validationResult": {
+      "status": "MANUAL_PROCESSING",
+      "ruleHits": [
+        {
+          "ruleName": "TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING",
+          "messageForSender": "message for sender",
+          "messageForUser": "message for user"
+        }
+      ]
+    },
     "sykmelding": {
       "id": "detteerensykmeldingid",
       "msgId": "123124334",

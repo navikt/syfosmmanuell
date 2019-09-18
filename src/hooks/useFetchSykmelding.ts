@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Sykmelding } from "../types/sykmeldingTypes";
+import { Sykmelding } from "../types/SykmeldingTypes";
+import { ValidationResult } from '../types/ValidationResultTypes';
 
 const useFetchSykmelding = () => {
-    const [begrunnelse, setBegrunnelse] = useState<string | null>(null);
+    const [begrunnelser, setBegrunnelser] = useState<ValidationResult | null>(null);
     const [sykmelding, setSykmelding] = useState<Sykmelding | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -14,8 +15,8 @@ const useFetchSykmelding = () => {
             try {
                 const res = await fetch(url);
                 const json = await res.json();
-                if (json.begrunnelse) {
-                    setBegrunnelse(json.begrunnelse);
+                if (json.validationResult) {
+                    setBegrunnelser(new ValidationResult(json.validationResult));
                     setSykmelding(new Sykmelding(json.sykmelding));
                     setIsLoading(false);
                 } else {
@@ -29,7 +30,7 @@ const useFetchSykmelding = () => {
         fetchData();
     }, [url]);
 
-    return( { begrunnelse, sykmelding, error, isLoading, callFetch: setUrl } );
+    return( { begrunnelser, sykmelding, error, isLoading, callFetch: setUrl } );
 }
 
 export default useFetchSykmelding;
