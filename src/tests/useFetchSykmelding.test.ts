@@ -3,7 +3,7 @@ import useFetchSykmelding from '../hooks/useFetchSykmelding';
 import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-test-renderer";
 import { Sykmelding } from "../types/sykmeldingTypes";
-import { RuleNames } from '../types/ValidationresultTypes';
+import { RuleNames } from '../types/ValidationResultTypes';
 
 const url = 'src/mock/sykmeld.json';
 

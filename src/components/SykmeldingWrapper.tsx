@@ -3,25 +3,13 @@ import { useEffect } from 'react';
 import { RuleNames } from '../types/ValidationResultTypes';
 import useFetchSykmelding from '../hooks/useFetchSykmelding';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import SMTilbakedatert from './SMTilbakedatert';
+import SykmeldingVisning from './SykmeldingVisning';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import './SykmeldingWrapper.less'
 import Knapper from './Knapper';
 
 
-const sykmeldingHeader = data => (<>
-    <div className="sykmelding-header">
-        <div className="sykmelding-header__begrunnelse">
-            <Element>Årsak til manuell vurdering</Element>
-            <Normaltekst>{data.begrunnelser.ruleHits[0].ruleName}</Normaltekst>
-        </div>
-        <div className="sykmelding-header__arbgiver-sykmelder">
-            <Element>Arbeidsgiver: "placeholder"</Element>
-            <Element>Sykmelder: "placeholder"</Element>
-        </div>
-    </div>
-</>);
 
 const SykmeldingWrapper = () => {
     const { begrunnelser, sykmelding, error, isLoading, callFetch } = useFetchSykmelding();
@@ -57,7 +45,7 @@ const SykmeldingWrapper = () => {
                                 <Undertittel>En sykmelding må vurderes manuelt</Undertittel>
                             </div>
                         }>
-                            <SMTilbakedatert sykmelding={sykmelding}/>
+                            <SykmeldingVisning sykmelding={sykmelding}/>
                         <Knapper begrunnelse={"RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING"} handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt}/>
                         </EkspanderbartpanelBase>
                     </div>
