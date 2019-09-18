@@ -39,10 +39,10 @@ const SykmeldingWrapper = () => {
                     </div>
                 }>
                     <ArsakVisning arsaker={arsaker}/>
-                    <SykmeldingVisning sykmelding={sykmelding}/>
+                    <SykmeldingVisning arsaker={arsaker} sykmelding={sykmelding}/>
                     <Knapper begrunnelse={"RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING"} handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt}/>
                 </EkspanderbartpanelBase>
-                </div>  
+                </div>
             }
         </>
     ) 
