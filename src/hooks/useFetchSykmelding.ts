@@ -3,7 +3,7 @@ import { Sykmelding } from "../types/SykmeldingTypes";
 import { ValidationResult } from '../types/ValidationResultTypes';
 
 const useFetchSykmelding = () => {
-    const [begrunnelser, setBegrunnelser] = useState<ValidationResult | null>(null);
+    const [arsaker, setArsaker] = useState<ValidationResult | null>(null);
     const [sykmelding, setSykmelding] = useState<Sykmelding | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -16,7 +16,7 @@ const useFetchSykmelding = () => {
                 const res = await fetch(url);
                 const json = await res.json();
                 if (json.validationResult) {
-                    setBegrunnelser(new ValidationResult(json.validationResult));
+                    setArsaker(new ValidationResult(json.validationResult));
                     setSykmelding(new Sykmelding(json.sykmelding));
                     setIsLoading(false);
                 } else {
@@ -30,7 +30,7 @@ const useFetchSykmelding = () => {
         fetchData();
     }, [url]);
 
-    return( { begrunnelser, sykmelding, error, isLoading, callFetch: setUrl } );
+    return( { arsaker, sykmelding, error, isLoading, callFetch: setUrl } );
 }
 
 export default useFetchSykmelding;

@@ -8,6 +8,7 @@ import { RuleNames } from '../types/ValidationResultTypes';
 const url = 'src/mock/sykmeld.json';
 
 describe("useFetchSykmelding", () => {
+      
     beforeEach(() => {
         //window.fetch = fetch;
         fetchMock.resetMocks();
@@ -30,7 +31,7 @@ describe("useFetchSykmelding", () => {
         await act(async () => {
             result.current.callFetch(url);
         });
-        expect(result.current.begrunnelser.ruleHits[0].ruleName).toBe(RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING);
+        expect(result.current.arsaker.ruleHits[0].ruleName).toBe(RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING);
     })
 
     it("Returnert sykmelding skal være av typen 'Sykmelding'", async () => {

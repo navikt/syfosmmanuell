@@ -5,19 +5,19 @@ import useFetchSykmelding from '../hooks/useFetchSykmelding';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import SykmeldingVisning from './SykmeldingVisning';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import './SykmeldingWrapper.less'
 import Knapper from './Knapper';
 
 
 
 const SykmeldingWrapper = () => {
-    const { begrunnelser, sykmelding, error, isLoading, callFetch } = useFetchSykmelding();
+    const { arsaker, sykmelding, error, isLoading, callFetch } = useFetchSykmelding();
     
     const handterAvgjorelse = (erGodkjent: boolean) => {
         console.log("Avgjørelse håndteres i wrapper: " + erGodkjent);
     }
-
+    
     const handterAvbryt = () => {
         console.log("Avbryt håndteres i wrapper ")
     }
@@ -33,9 +33,9 @@ const SykmeldingWrapper = () => {
             </div>
         )
     }
-    else if (begrunnelser) {
+    else if (arsaker) {
         console.log(sykmelding)
-        switch (begrunnelser.ruleHits[0].ruleName) {
+        switch (arsaker.ruleHits[0].ruleName) {
             case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING: {
                 return (
                     <div className="ekspanderbartpanel-konteiner">
