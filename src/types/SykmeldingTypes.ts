@@ -32,12 +32,15 @@ class AnnenFraversArsak {
     beskrivelse?: string;
     grunn: AnnenFraverGrunn[];
     constructor(annenFraversArsak) {
-        this.beskrivelse = annenFraversArsak.beskrivelse ? annenFraversArsak.beskrivelse : null,
-        this.grunn = annenFraversArsak.grunn
+        this.beskrivelse = annenFraversArsak.beskrivelse ? annenFraversArsak.beskrivelse : null;
+        const grunnTemp = annenFraversArsak.grunn.map( grunn => {
+            AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn]
+        } )
+        this.grunn = grunnTemp;
     }
 }
 
-enum AnnenFraverGrunn {
+export enum AnnenFraverGrunn {
     GODKJENT_HELSEINSTITUSJON = "Når vedkommende er innlagt i en godkjent helseinstitusjon",
     BEHANDLING_FORHINDRER_ARBEID = "Når vedkommende er under behandling og legen erklærer at behandlingen gjør det nødvendig at vedkommende ikke arbeider",
     ARBEIDSRETTET_TILTAK = "Når vedkommende deltar på et arbeidsrettet tiltak",
@@ -56,14 +59,15 @@ class Arbeidsgiver {
     yrkesbetegnelse?: string;
     stillingsprosent?: number;
     constructor(arbeidsgiver) {
-        this.harArbeidsgiver = arbeidsgiver.harArbeidsgiver;
+        const harArbeidsgiver = arbeidsgiver.harArbeidsgiver as keyof typeof HarArbeidsgiver;
+        this.harArbeidsgiver = HarArbeidsgiver[harArbeidsgiver];
         this.navn = arbeidsgiver.navn ? arbeidsgiver.navn : null;
         this.yrkesbetegnelse = arbeidsgiver.yrkesbetegnelse ? arbeidsgiver.yrkesbetegnelse : null;
         this.stillingsprosent = arbeidsgiver.stillingsprosent ? arbeidsgiver.stillingsprosent : null;
     }
 }
 
-enum HarArbeidsgiver {
+export enum HarArbeidsgiver {
     EN_ARBEIDSGIVER = "Én arbeidsgiver",
     FLERE_ARBEIDSGIVERE = "Flere arbeidsgivere",
     INGEN_ARBEIDSGIVER = "Ingen arbeidsgiver"
@@ -102,11 +106,14 @@ class MedisinskArsak {
     arsak: MedisinskArsakType[];
     constructor(medisinskArsak) {
         this.beskrivelse = medisinskArsak.beskrivelse ? medisinskArsak.beskrivelse : null;
-        this.arsak = medisinskArsak.arsak;
+        const arsakTemp = medisinskArsak.arsak.map( arsak => {
+            MedisinskArsak[arsak as keyof typeof MedisinskArsak]
+        })
+        this.arsak = arsakTemp;
     }
 }
 
-enum MedisinskArsakType {
+export enum MedisinskArsakType {
     TILSTAND_HINDRER_AKTIVITET = "Helsetilstanden hindrer pasienten i å være i aktivitet",
     AKTIVITET_FORVERRER_TILSTAND = "Aktivitet vil forverre helsetilstanden",
     AKTIVITET_FORHINDRER_BEDRING = "Aktivitet vil hindre/forsinke bedring av helsetilstanden",
@@ -116,13 +123,16 @@ enum MedisinskArsakType {
 class ArbeidsrelatertArsak {
     beskrivelse?: string;
     arsak: ArbeidsrelatertArsakType[];
-    constructor(medisinskArsak) {
-        this.beskrivelse = medisinskArsak.beskrivelse ? medisinskArsak.beskrivelse : null;
-        this.arsak = medisinskArsak.arsak;
+    constructor(arbeidsrelatertArsak) {
+        this.beskrivelse = arbeidsrelatertArsak.beskrivelse ? arbeidsrelatertArsak.beskrivelse : null;
+        const arsakTemp = arbeidsrelatertArsak.arsak.map( arsak => {
+            MedisinskArsak[arsak as keyof typeof MedisinskArsak]
+        })
+        this.arsak = arsakTemp;
     }
 }
 
-enum ArbeidsrelatertArsakType {
+export enum ArbeidsrelatertArsakType {
     MANGLENDE_TILRETTELEGGING = "Manglende tilrettelegging på arbeidsplassen",
     ANNET = "Annet"
 }
@@ -245,11 +255,14 @@ class SporsmalSvar {
     constructor(sporsmalSvar) {
         this.sporsmal = sporsmalSvar.sporsmal;
         this.svar = sporsmalSvar.svar;
-        this.restriksjoner = sporsmalSvar.restriksjoner
+        const restriksjonerTemp = sporsmalSvar.restriksjoner.map( restriksjon => {
+            SvarRestriksjon[restriksjon as keyof typeof SvarRestriksjon]
+        })
+        this.restriksjoner = restriksjonerTemp;
     }
 }
 
-enum SvarRestriksjon {
+export enum SvarRestriksjon {
     SKJERMET_FOR_ARBEIDSGIVER = "Informasjonen skal ikke vises arbeidsgiver",
     SKJERMET_FOR_PASIENT = "Informasjonen skal ikke vises pasient",
     SKJERMET_FOR_NAV = "Informasjonen skal ikke vises NAV"
