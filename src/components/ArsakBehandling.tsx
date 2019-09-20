@@ -5,9 +5,10 @@ import { useState, useEffect } from 'react';
 
 import SykmeldingVisning from './SykmeldingVisning';
 import Knapper, { KnappeTekst } from './Knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
+import './ArsakBehandling.less';
 
 const ArsakBehandling: React.FC<{ arsaker: ValidationResult, sykmelding: Sykmelding, handterFerdigstill(arsaker: ValidationResult, erGodkjent: boolean): void, handterAvbryt(): void }> = ({arsaker, sykmelding, handterFerdigstill, handterAvbryt}) => {
     const [arsakVurdering, setArsakVurdering] = useState<Map<RuleNames, boolean | null> | null>(null);
@@ -67,29 +68,29 @@ const ArsakBehandling: React.FC<{ arsaker: ValidationResult, sykmelding: Sykmeld
         )
     }
     else if (arsaker.ruleHits.length > 1) {
-        console.log("flere regler enn 1")
         return (
             <>
             {!currentArsak && arsakVurdering &&
                 <>
                 <div className="arsak-visning">
-                    <ul className="liste arsak-liste">
+                    <Element>Årsaker til manuell behandling</Element>
+                    <ol className="liste arsak-liste">
                         {
                             arsaker.ruleHits.map( (arsak, index) => {
                                 return (
                                     <li key={index} className="liste__element arsak-liste__element">
-                                        <div className="arsak-liste__elemet--venstre">{<Normaltekst>{arsak.ruleName}.</Normaltekst>}</div>
-                                        <div className="arsak-liste__elemet--hoyre">
-                                            {console.log(arsakVurdering)}
+                                        <div className="arsak-liste__element--number">{<Element>{index+1}.</Element>}</div>
+                                        <div className="arsak-liste__element--venstre">{<Normaltekst>{arsak.ruleName}.</Normaltekst>}</div>
+                                        <div className="arsak-liste__element--hoyre">
                                             {(arsakVurdering.get(arsak.ruleName) == true) && <p>true</p>}
                                             {(arsakVurdering.get(arsak.ruleName) == false) && <p>false</p>}
-                                            {(arsakVurdering.get(arsak.ruleName) == null) && <Knapp htmlType="button" onClick={() => setCurrentArsak(arsak.ruleName)} className="innsending__ferdigstill">Vurder</Knapp>}
+                                            {(arsakVurdering.get(arsak.ruleName) == null) && <Knapp form="kompakt" htmlType="button" onClick={() => setCurrentArsak(arsak.ruleName)} className="innsending__ferdigstill">Vurder</Knapp>}
                                         </div>
                                     </li>
                                 )
                             })
                         }
-                    </ul>
+                    </ol>
                 </div>
                 <div className="innsending">
                     {(totalVurdering == null) && <Knapp disabled htmlType="button" className="innsending__ferdigstill">{KnappeTekst.FERDIGSTILL}</Knapp>}

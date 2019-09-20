@@ -11,13 +11,13 @@ const SykmeldingVisning: React.FC<{ arsaker: ValidationResult, sykmelding: Sykme
                 <Element>Sykmelder: {sykmelding.navnFastlege}</Element>
         </div>
         <div className="sykmelding">
-            <Undertittel className="sykmelding__tittel">Sykmelding</Undertittel>
-            <ul className="liste">
-                <li className="liste__element sykmelding__element">
+            <Undertittel className="sykmelding-liste__tittel">Sykmelding</Undertittel>
+            <ul className="liste sykmelding-liste">
+                <li className="liste__element sykmelding-liste__element">
                     <Element>ID</Element>
                     <Normaltekst>{sykmelding.id}</Normaltekst>
                 </li>
-                <li className="liste__element sykmelding__element">
+                <li className="liste__element sykmelding-liste__element">
                     <Element>Message ID</Element>
                     <Normaltekst>{sykmelding.msgId}</Normaltekst>
                 </li>
