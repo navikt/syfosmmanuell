@@ -1,10 +1,9 @@
 # syfosmmanuell
 
 ## Om syfosmmanuell
-Frontend til manuell behandling av sykemelding for saksbehandlere. Laget med React, Typescript, Webpack, Jest
+Frontend til manuell behandling av sykemelding for saksbehandlere. Laget med React og Typescript
 
-![Alt text](system-arkitektur.svg)
-<img src="system-arkitektur.svg">
+<img style="width: 80%" src="system-arkitektur.svg">
 
 ## Installering
 Klon bibliotek og last ned avhengigheter ´
