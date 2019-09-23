@@ -4,7 +4,12 @@ import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import './SykmeldingVisning.less';
 import { ValidationResult } from '../types/ValidationResultTypes';
 
-const SykmeldingVisning: React.FC<{ arsaker: ValidationResult, sykmelding: Sykmelding }> = ({ arsaker, sykmelding}) => (
+interface SykmeldingProps {
+    arsaker: ValidationResult;
+    sykmelding: Sykmelding;
+}
+
+const SykmeldingVisning: React.FC<SykmeldingProps> = ({ arsaker, sykmelding }: SykmeldingProps) => (
     <>
         <div className="arsak-visning">
             <Element>Årsak til manuell behandling</Element>
@@ -26,8 +31,8 @@ const SykmeldingVisning: React.FC<{ arsaker: ValidationResult, sykmelding: Sykme
                     <Normaltekst>{sykmelding.msgId}</Normaltekst>
                 </li>
             </ul>
-        </div> 
+        </div>
     </>
-)
+);
 
 export default SykmeldingVisning;
