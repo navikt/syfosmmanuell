@@ -11,8 +11,8 @@ const SykmeldingVisning: React.FC<{ arsaker: ValidationResult, sykmelding: Sykme
             <Normaltekst>{arsaker.ruleHits[0].ruleName}.</Normaltekst>
         </div>
         <div className="arbeidsgiver-sykmelder">
-                <Element>Arbeidsgiver: {sykmelding.arbeidsgiver.navn}</Element>
-                <Element>Sykmelder: {sykmelding.navnFastlege}</Element>
+            <Element>Arbeidsgiver: {sykmelding.arbeidsgiver.navn}</Element>
+            <Element>Sykmelder: {sykmelding.navnFastlege}</Element>
         </div>
         <div className="sykmelding">
             <Undertittel className="sykmelding-liste__tittel">Sykmelding</Undertittel>
