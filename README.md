@@ -1,12 +1,12 @@
 # syfosmmanuell
 
 ## Om syfosmmanuell
-Frontend til manuell behandling av sykemelding for saksbehandlere. Laget med React og Typescript
+Frontend til manuell behandling av sykemelding for saksbehandlere. Laget med React og Typescript. Figuren under viser systemarkitektur og tilknytning til Modia.
 
-<img style="width: 80%" src="system-arkitektur.svg">
+<img src="system-arkitektur.svg">
 
 ## Installering
-Klon bibliotek og last ned avhengigheter ´
+Klon bibliotek og last ned avhengigheter
 ```bash
 git clone <repo-link>
 npm install
@@ -23,9 +23,13 @@ npm start
 ```bash
 npm run test
 ```
+For watch mode med automatisk rerun av tester, kan følgende kommando kjøres
+```bash
+npm run test-watch
+```
 
 ### Bygg for produksjon
 ```bash
 npm run build-prod
 ```
-Genererer plain javascript til /dist
+Genererer statiske filer til "/dist"-mappen
