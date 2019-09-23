@@ -11,15 +11,9 @@ import './App.less';
 const App = () => {
     const { arsaker, sykmelding, error, isLoading, callFetch } = useFetchSykmelding();
 
-    const handterAvgjorelse = ( arsaker: ValidationResult, erGodkjent: boolean) => {
-        // set arsakErVurdert til true/false
+    const handterAvgjorelse = ( arsaker: ValidationResult, erGodkjent: boolean) => {};
 
-        console.log("Avgjørelse håndteres i wrapper: " + erGodkjent);
-    }
-
-    const handterAvbryt = () => {
-        console.log("Avbryt håndteres i wrapper ")
-    }
+    const handterAvbryt = () => {};
 
     useEffect( () => {
         callFetch('src/mock/sykmeld.json');
