@@ -19,6 +19,22 @@ const App = () => {
         callFetch('src/mock/sykmeld.json');
     }, []);
     
+    const spinner = <div className="spinner"><NavFrontendSpinner/></div>;
+
+    const ekspanderbartPanel = <div className="ekspanderbartpanel">
+        <EkspanderbartpanelBase heading={
+            <div className="ekspanderbartpanel__header">
+                <img src="src/img/report-problem-circle.svg" alt="Alert image" className="ekspanderbartpanel__ikon"/>
+                <Undertittel>En sykmelding må vurderes manuelt</Undertittel>
+            </div>
+        }>
+            <ArsakBehandling arsaker={arsaker} sykmelding={sykmelding} handterFerdigstill={handterAvgjorelse} handterAvbryt={handterAvbryt} />
+        </EkspanderbartpanelBase>
+    </div>;
+
+    return (
+        <>{(!isLoading && arsaker)? ekspanderbartPanel : spinner}</>
+    )
     return (
         <>
             {isLoading && <div className="spinner"><NavFrontendSpinner/></div>}
