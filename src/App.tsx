@@ -24,7 +24,7 @@ const App = () => {
     const ekspanderbartPanel = <div className="ekspanderbartpanel">
         <EkspanderbartpanelBase heading={
             <div className="ekspanderbartpanel__header">
-                <img src="src/img/report-problem-circle.svg" alt="Alert image" className="ekspanderbartpanel__ikon"/>
+                <img src="src/img/report-problem-circle.svg" alt="Varselikon" className="ekspanderbartpanel__ikon"/>
                 <Undertittel>En sykmelding må vurderes manuelt</Undertittel>
             </div>
         }>
@@ -33,25 +33,8 @@ const App = () => {
     </div>;
 
     return (
-        <>{(!isLoading && arsaker)? ekspanderbartPanel : spinner}</>
+        <>{(!isLoading && arsaker) ? ekspanderbartPanel : spinner}</>
     )
-    return (
-        <>
-            {isLoading && <div className="spinner"><NavFrontendSpinner/></div>}
-            {!isLoading && arsaker &&
-                <div className="ekspanderbartpanel">
-                <EkspanderbartpanelBase heading={
-                    <div className="ekspanderbartpanel__header">
-                        <img src="src/img/report-problem-circle.svg" alt="Alert image" className="ekspanderbartpanel__ikon"/>
-                        <Undertittel>En sykmelding må vurderes manuelt</Undertittel>
-                    </div>
-                }>
-                    <ArsakBehandling arsaker={arsaker} sykmelding={sykmelding} handterFerdigstill={handterAvgjorelse} handterAvbryt={handterAvbryt} />
-                </EkspanderbartpanelBase>
-                </div>
-            }
-        </>
-    ) 
 }
 
 export default App;
