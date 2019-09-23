@@ -6,6 +6,10 @@ import { ValidationResult } from '../types/ValidationResultTypes';
 
 const SykmeldingVisning: React.FC<{ arsaker: ValidationResult, sykmelding: Sykmelding }> = ({ arsaker, sykmelding}) => (
     <>
+        <div className="arsak-visning">
+            <Element>Årsak til manuell behandling</Element>
+            <Normaltekst>{arsaker.ruleHits[0].ruleName}.</Normaltekst>
+        </div>
         <div className="arbeidsgiver-sykmelder">
                 <Element>Arbeidsgiver: {sykmelding.arbeidsgiver.navn}</Element>
                 <Element>Sykmelder: {sykmelding.navnFastlege}</Element>
