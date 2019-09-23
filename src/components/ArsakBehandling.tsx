@@ -82,9 +82,9 @@ const ArsakBehandling: React.FC<{ arsaker: ValidationResult, sykmelding: Sykmeld
                                         <div className="arsak-liste__element--number">{<Element>{index+1}.</Element>}</div>
                                         <div className="arsak-liste__element--venstre">{<Normaltekst>{arsak.ruleName}.</Normaltekst>}</div>
                                         <div className="arsak-liste__element--hoyre">
-                                            {(arsakVurdering.get(arsak.ruleName) == true) && <p>true</p>}
-                                            {(arsakVurdering.get(arsak.ruleName) == false) && <p>false</p>}
-                                            {(arsakVurdering.get(arsak.ruleName) == null) && <Knapp form="kompakt" htmlType="button" onClick={() => setCurrentArsak(arsak.ruleName)} className="innsending__ferdigstill">Vurder</Knapp>}
+                                            {(arsakVurdering.get(arsak.ruleName) == true) && <img src="src/img/check-circle-2.svg" alt="Declined icon" className="ikon"/>}
+                                            {(arsakVurdering.get(arsak.ruleName) == false) && <img src="src/img/cross-circle.svg" alt="Declined icon" className="ikon"/>}
+                                            {(arsakVurdering.get(arsak.ruleName) == null) && <Knapp form="kompakt" htmlType="button" onClick={() => setCurrentArsak(arsak.ruleName)}>Vurder</Knapp>}
                                         </div>
                                     </li>
                                 )
@@ -94,7 +94,7 @@ const ArsakBehandling: React.FC<{ arsaker: ValidationResult, sykmelding: Sykmeld
                 </div>
                 <div className="innsending">
                     {(totalVurdering == null) && <Knapp disabled htmlType="button" className="innsending__ferdigstill">{KnappeTekst.FERDIGSTILL}</Knapp>}
-                    {(totalVurdering != null) && <Knapp htmlType="button" onClick={() => handterFerdigstill(arsaker, totalVurdering)} className="innsending__ferdigstill">{KnappeTekst.FERDIGSTILL}</Knapp>}
+                    {(totalVurdering != null) && <Knapp htmlType="button" onClick={() => handterFerdigstill(arsaker, totalVurdering)}>{KnappeTekst.FERDIGSTILL}</Knapp>}
                     <Flatknapp onClick={handterAvbryt} className="innsending__avbryt">Avbryt</Flatknapp>
                 </div>
             </>
