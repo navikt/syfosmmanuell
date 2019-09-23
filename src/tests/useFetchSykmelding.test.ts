@@ -10,7 +10,6 @@ const url = 'src/mock/sykmeld.json';
 describe("useFetchSykmelding", () => {
       
     beforeEach(() => {
-        //window.fetch = fetch;
         fetchMock.resetMocks();
     });
     afterAll(() => {
