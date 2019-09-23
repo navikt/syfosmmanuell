@@ -17,21 +17,22 @@ const Knapper: React.FC<{ regel: RuleNames, knappeTekst: KnappeTekst, handterAvg
     const [kanSendeInn, setKanSendeInn] = useState<boolean>(false);
 
     useEffect( () => {
+        console.log(regel)
         switch(regel) {
             case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING: {
-                setBegrunnelseTekst( () => { return "tilbakedatering med begrunnelse" })
+                setBegrunnelseTekst("tilbakedatering med begrunnelse")
                 break;
             }
             case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE: {
-                setBegrunnelseTekst( () => { return "tilbakedatering" })
+                setBegrunnelseTekst("tilbakedatering")
                 break;
             }
             case RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L: {
-                setBegrunnelseTekst( () => { return "knytning til muskel- og skjelettlidelser" })
+                setBegrunnelseTekst("knytning til muskel- og skjelettlidelser")
                 break;
             }
             case RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT: {
-                setBegrunnelseTekst( () => { return "avventende sykmelding med flere perioder" })
+                setBegrunnelseTekst("avventende sykmelding med flere perioder")
                 break;
             }
         }

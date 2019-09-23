@@ -63,7 +63,7 @@ const ArsakBehandling: React.FC<{ arsaker: ValidationResult, sykmelding: Sykmeld
         return (
             <div className="sykmelding-visning">
                 <SykmeldingVisning arsaker={arsaker} sykmelding={sykmelding}/>
-                <Knapper regel={currentArsak} knappeTekst={KnappeTekst.FERDIGSTILL} handterAvgjorelse={oppdaterArsakVurdering} handterAvbryt={arsakVurderingAvbrutt}/>
+                <Knapper regel={arsaker.ruleHits[0].ruleName} knappeTekst={KnappeTekst.FERDIGSTILL} handterAvgjorelse={oppdaterArsakVurdering} handterAvbryt={arsakVurderingAvbrutt}/>
             </div>
         )
     }
