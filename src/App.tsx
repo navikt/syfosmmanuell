@@ -8,12 +8,12 @@ import { ValidationResult } from './types/ValidationResultTypes';
 import ArsakBehandling from './components/ArsakBehandling';
 import './App.less';
 
-const App = () => {
+const App: React.FC = () => {
     const { arsaker, sykmelding, error, isLoading, callFetch } = useFetchSykmelding();
 
-    const handterAvgjorelse = (arsaker: ValidationResult, erGodkjent: boolean) => {};
+    const handterAvgjorelse = (arsaker: ValidationResult, erGodkjent: boolean): void => {};
 
-    const handterAvbryt = () => {};
+    const handterAvbryt = (): void => {};
 
     useEffect(() => {
         callFetch('src/mock/sykmelding-flere-regler.json');
