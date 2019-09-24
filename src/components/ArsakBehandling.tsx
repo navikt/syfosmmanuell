@@ -9,6 +9,7 @@ import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
 import './ArsakBehandling.less';
+import useArsakVurdering from '../hooks/useArsakVurdering';
 
 interface ArsakBehandlingProps {
     arsaker: ValidationResult;
@@ -23,47 +24,13 @@ const ArsakBehandling: React.FC<ArsakBehandlingProps> = ({
     handterFerdigstill,
     handterAvbryt,
 }: ArsakBehandlingProps) => {
-    const [arsakVurdering, setArsakVurdering] = useState<Map<RuleNames, boolean | null> | null>(null);
-    const [totalVurdering, setTotalVurdering] = useState<boolean | null>(null);
-    const [currentArsak, setCurrentArsak] = useState<RuleNames | null>(null);
-    const [antallArsakerVurdert, setAntallArsakerVurdert] = useState<number>(0);
-
-    useEffect(() => {
-        const VurderingMap: Map<RuleNames, boolean> = new Map();
-        arsaker.ruleHits.forEach(rule => {
-            VurderingMap.set(rule.ruleName, null);
-        });
-        setArsakVurdering(VurderingMap);
-    }, []);
-
-    useEffect(() => {
-        if (antallArsakerVurdert == arsaker.ruleHits.length) {
-            for (const [, value] of arsakVurdering) {
-                if (value == false) {
-                    setTotalVurdering(false);
-                    break;
-                }
-            }
-        }
-    }, [arsakVurdering]);
-
-    const oppdaterArsakVurdering = (ruleName: RuleNames, vurdering: boolean): void => {
-        setAntallArsakerVurdert(antallArsakerVurdert + 1);
-        if (arsaker.ruleHits.length == 1) {
-            handterFerdigstill(arsaker, vurdering);
-        }
-        const nyArsakVurdering: Map<RuleNames, boolean> = new Map(arsakVurdering);
-        nyArsakVurdering.set(ruleName, vurdering);
-        setArsakVurdering(nyArsakVurdering);
-        setCurrentArsak(null);
-    };
-
-    const arsakVurderingAvbrutt = (): void => {
-        if (arsaker.ruleHits.length == 1) {
-            handterAvbryt();
-        }
-        setCurrentArsak(null);
-    };
+    const {
+        arsakVurdering,
+        currentArsak,
+        antallArsakerVurdert,
+        totalVurdering,
+        oppdaterArsakVurdering: oppdaterArsakVurdering,
+    } = useArsakVurdering();
 
     const enkelArsakVisning = (
         <div className="sykmelding-visning">

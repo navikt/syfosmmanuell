@@ -12,8 +12,12 @@ class MedisinskVurdering {
         this.biDiagnoser = medisinskVurdering.biDiagnoser.map(biDiagnose => new Diagnose(biDiagnose));
         this.svangerskap = medisinskVurdering.svangerskap;
         this.yrkesskade = medisinskVurdering.yrkesskade;
-        this.yrkesskadeDato = medisinskVurdering.yrkesskadeDato ? dayjs(medisinskVurdering.yrkesskadeDato).toDate() : null;
-        this.annenFraversArsak = medisinskVurdering.annenFraversArsak ? new AnnenFraversArsak(medisinskVurdering.annenFraversArsak) : null;
+        this.yrkesskadeDato = medisinskVurdering.yrkesskadeDato
+            ? dayjs(medisinskVurdering.yrkesskadeDato).toDate()
+            : null;
+        this.annenFraversArsak = medisinskVurdering.annenFraversArsak
+            ? new AnnenFraversArsak(medisinskVurdering.annenFraversArsak)
+            : null;
     }
 }
 
@@ -31,22 +35,24 @@ class AnnenFraversArsak {
     grunn: AnnenFraverGrunn[];
     constructor(annenFraversArsak) {
         this.beskrivelse = annenFraversArsak.beskrivelse ? annenFraversArsak.beskrivelse : null;
-        const grunnTemp = annenFraversArsak.grunn.map( grunn => AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn] )
+        const grunnTemp = annenFraversArsak.grunn.map(
+            grunn => AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn],
+        );
         this.grunn = grunnTemp;
     }
 }
 
 export enum AnnenFraverGrunn {
-    GODKJENT_HELSEINSTITUSJON = "Når vedkommende er innlagt i en godkjent helseinstitusjon",
-    BEHANDLING_FORHINDRER_ARBEID = "Når vedkommende er under behandling og legen erklærer at behandlingen gjør det nødvendig at vedkommende ikke arbeider",
-    ARBEIDSRETTET_TILTAK = "Når vedkommende deltar på et arbeidsrettet tiltak",
-    MOTTAR_TILSKUDD_GRUNNET_HELSETILSTAND = "Når vedkommende på grunn av sykdom, skade eller lyte får tilskott når vedkommende på grunn av sykdom, skade eller lyte får tilskott",
-    NODVENDIG_KONTROLLUNDENRSOKELSE = "Når vedkommende er til nødvendig kontrollundersøkelse som krever minst 24 timers fravær, reisetid medregnet",
-    SMITTEFARE = "Når vedkommende myndighet har nedlagt forbud mot at han eller hun arbeider på grunn av smittefare",
-    ABORT = "Når vedkommende er arbeidsufør som følge av svangerskapsavbrudd",
-    UFOR_GRUNNET_BARNLOSHET = "Når vedkommende er arbeidsufør som følge av behandling for barnløshet",
-    DONOR = "Når vedkommende er donor eller er under vurdering som donor",
-    BEHANDLING_STERILISERING = "Når vedkommende er arbeidsufør som følge av behandling i forbindelse med sterilisering"
+    GODKJENT_HELSEINSTITUSJON = 'Når vedkommende er innlagt i en godkjent helseinstitusjon',
+    BEHANDLING_FORHINDRER_ARBEID = 'Når vedkommende er under behandling og legen erklærer at behandlingen gjør det nødvendig at vedkommende ikke arbeider',
+    ARBEIDSRETTET_TILTAK = 'Når vedkommende deltar på et arbeidsrettet tiltak',
+    MOTTAR_TILSKUDD_GRUNNET_HELSETILSTAND = 'Når vedkommende på grunn av sykdom, skade eller lyte får tilskott når vedkommende på grunn av sykdom, skade eller lyte får tilskott',
+    NODVENDIG_KONTROLLUNDENRSOKELSE = 'Når vedkommende er til nødvendig kontrollundersøkelse som krever minst 24 timers fravær, reisetid medregnet',
+    SMITTEFARE = 'Når vedkommende myndighet har nedlagt forbud mot at han eller hun arbeider på grunn av smittefare',
+    ABORT = 'Når vedkommende er arbeidsufør som følge av svangerskapsavbrudd',
+    UFOR_GRUNNET_BARNLOSHET = 'Når vedkommende er arbeidsufør som følge av behandling for barnløshet',
+    DONOR = 'Når vedkommende er donor eller er under vurdering som donor',
+    BEHANDLING_STERILISERING = 'Når vedkommende er arbeidsufør som følge av behandling i forbindelse med sterilisering',
 }
 
 class Arbeidsgiver {
@@ -64,9 +70,9 @@ class Arbeidsgiver {
 }
 
 export enum HarArbeidsgiver {
-    EN_ARBEIDSGIVER = "Én arbeidsgiver",
-    FLERE_ARBEIDSGIVERE = "Flere arbeidsgivere",
-    INGEN_ARBEIDSGIVER = "Ingen arbeidsgiver"
+    EN_ARBEIDSGIVER = 'Én arbeidsgiver',
+    FLERE_ARBEIDSGIVERE = 'Flere arbeidsgivere',
+    INGEN_ARBEIDSGIVER = 'Ingen arbeidsgiver',
 }
 
 class Periode {
@@ -80,8 +86,12 @@ class Periode {
     constructor(periode) {
         this.fom = dayjs(periode.fom).toDate();
         this.tom = dayjs(periode.tom).toDate();
-        this.aktivitetIkkeMulig = periode.aktivitetIkkeMulig ? new AktivitetIkkeMulig(periode.aktivitetIkkeMulig) : null;
-        this.avventendeInnspillTilArbeidsgiver = periode.avventendeInnspillTilArbeidsgiver ? periode.avventendeInnspillTilArbeidsgiver : null;
+        this.aktivitetIkkeMulig = periode.aktivitetIkkeMulig
+            ? new AktivitetIkkeMulig(periode.aktivitetIkkeMulig)
+            : null;
+        this.avventendeInnspillTilArbeidsgiver = periode.avventendeInnspillTilArbeidsgiver
+            ? periode.avventendeInnspillTilArbeidsgiver
+            : null;
         this.behandlingsdager = periode.behandlingsdager ? periode.behandlingsdager : null;
         this.gradert = periode.gradert ? new Gradert(periode.gradert) : null;
         this.reisetilskudd = periode.reisetilskudd;
@@ -92,8 +102,12 @@ class AktivitetIkkeMulig {
     medisinskArsak?: MedisinskArsak;
     arbeidsrelatertArsak?: ArbeidsrelatertArsak;
     constructor(aktivitetIkkeMulig) {
-        this.medisinskArsak = aktivitetIkkeMulig.medisinskArsak ? new MedisinskArsak(aktivitetIkkeMulig.medisinskArsak) : null;
-        this.arbeidsrelatertArsak = aktivitetIkkeMulig.arbeidsrelatertArsak ? aktivitetIkkeMulig.arbeidsrelatertArsak : null;
+        this.medisinskArsak = aktivitetIkkeMulig.medisinskArsak
+            ? new MedisinskArsak(aktivitetIkkeMulig.medisinskArsak)
+            : null;
+        this.arbeidsrelatertArsak = aktivitetIkkeMulig.arbeidsrelatertArsak
+            ? aktivitetIkkeMulig.arbeidsrelatertArsak
+            : null;
     }
 }
 
@@ -102,16 +116,16 @@ class MedisinskArsak {
     arsak: MedisinskArsakType[];
     constructor(medisinskArsak) {
         this.beskrivelse = medisinskArsak.beskrivelse ? medisinskArsak.beskrivelse : null;
-        const arsakTemp = medisinskArsak.arsak.map( arsak => MedisinskArsak[arsak as keyof typeof MedisinskArsak] )
+        const arsakTemp = medisinskArsak.arsak.map(arsak => MedisinskArsak[arsak as keyof typeof MedisinskArsak]);
         this.arsak = arsakTemp;
     }
 }
 
 export enum MedisinskArsakType {
-    TILSTAND_HINDRER_AKTIVITET = "Helsetilstanden hindrer pasienten i å være i aktivitet",
-    AKTIVITET_FORVERRER_TILSTAND = "Aktivitet vil forverre helsetilstanden",
-    AKTIVITET_FORHINDRER_BEDRING = "Aktivitet vil hindre/forsinke bedring av helsetilstanden",
-    ANNET = "Annet"
+    TILSTAND_HINDRER_AKTIVITET = 'Helsetilstanden hindrer pasienten i å være i aktivitet',
+    AKTIVITET_FORVERRER_TILSTAND = 'Aktivitet vil forverre helsetilstanden',
+    AKTIVITET_FORHINDRER_BEDRING = 'Aktivitet vil hindre/forsinke bedring av helsetilstanden',
+    ANNET = 'Annet',
 }
 
 class ArbeidsrelatertArsak {
@@ -119,14 +133,14 @@ class ArbeidsrelatertArsak {
     arsak: ArbeidsrelatertArsakType[];
     constructor(arbeidsrelatertArsak) {
         this.beskrivelse = arbeidsrelatertArsak.beskrivelse ? arbeidsrelatertArsak.beskrivelse : null;
-        const arsakTemp = arbeidsrelatertArsak.arsak.map( arsak => MedisinskArsak[arsak as keyof typeof MedisinskArsak] );
+        const arsakTemp = arbeidsrelatertArsak.arsak.map(arsak => MedisinskArsak[arsak as keyof typeof MedisinskArsak]);
         this.arsak = arsakTemp;
     }
 }
 
 export enum ArbeidsrelatertArsakType {
-    MANGLENDE_TILRETTELEGGING = "Manglende tilrettelegging på arbeidsplassen",
-    ANNET = "Annet"
+    MANGLENDE_TILRETTELEGGING = 'Manglende tilrettelegging på arbeidsplassen',
+    ANNET = 'Annet',
 }
 
 class Gradert {
@@ -134,7 +148,7 @@ class Gradert {
     grad: number;
     constructor(gradert) {
         this.reisetilskudd = gradert.reisetilskudd;
-        this.grad = gradert.grad
+        this.grad = gradert.grad;
     }
 }
 
@@ -189,7 +203,9 @@ class KontaktMedPasient {
     begrunnelseIkkeKontakt?: string;
     constructor(kontaktMedPasient) {
         this.kontaktDato = kontaktMedPasient.kontaktDato ? dayjs(kontaktMedPasient.kontaktDato).toDate() : null;
-        this.begrunnelseIkkeKontakt = kontaktMedPasient.begrunnelseIkkeKontakt ? kontaktMedPasient.begrunnelseIkkeKontakt : null;
+        this.begrunnelseIkkeKontakt = kontaktMedPasient.begrunnelseIkkeKontakt
+            ? kontaktMedPasient.begrunnelseIkkeKontakt
+            : null;
     }
 }
 
@@ -247,15 +263,17 @@ class SporsmalSvar {
     constructor(sporsmalSvar) {
         this.sporsmal = sporsmalSvar.sporsmal;
         this.svar = sporsmalSvar.svar;
-        const restriksjonerTemp = sporsmalSvar.restriksjoner.map( restriksjon => SvarRestriksjon[restriksjon as keyof typeof SvarRestriksjon]);
+        const restriksjonerTemp = sporsmalSvar.restriksjoner.map(
+            restriksjon => SvarRestriksjon[restriksjon as keyof typeof SvarRestriksjon],
+        );
         this.restriksjoner = restriksjonerTemp;
     }
 }
 
 export enum SvarRestriksjon {
-    SKJERMET_FOR_ARBEIDSGIVER = "Informasjonen skal ikke vises arbeidsgiver",
-    SKJERMET_FOR_PASIENT = "Informasjonen skal ikke vises pasient",
-    SKJERMET_FOR_NAV = "Informasjonen skal ikke vises NAV"
+    SKJERMET_FOR_ARBEIDSGIVER = 'Informasjonen skal ikke vises arbeidsgiver',
+    SKJERMET_FOR_PASIENT = 'Informasjonen skal ikke vises pasient',
+    SKJERMET_FOR_NAV = 'Informasjonen skal ikke vises NAV',
 }
 
 export class Sykmelding {
@@ -281,25 +299,25 @@ export class Sykmelding {
     signaturDato: Date;
     navnFastlege: string;
 
-    constructor( sykmelding ) {
+    constructor(sykmelding) {
         this.id = sykmelding.id;
         this.msgId = sykmelding.msgId;
-        this.pasientAktoerId = sykmelding.pasientAktoerId,
-        this.medisinskVurdering = new MedisinskVurdering(sykmelding.medisinskVurdering);
-        this.skjermesForPasient = sykmelding.skjermesForPasient,
-        this.arbeidsgiver = new Arbeidsgiver(sykmelding.arbeidsgiver);
+        (this.pasientAktoerId = sykmelding.pasientAktoerId),
+            (this.medisinskVurdering = new MedisinskVurdering(sykmelding.medisinskVurdering));
+        (this.skjermesForPasient = sykmelding.skjermesForPasient),
+            (this.arbeidsgiver = new Arbeidsgiver(sykmelding.arbeidsgiver));
         this.perioder = new Array<Periode>();
-        sykmelding.perioder.forEach( periode => {
-            this.perioder.push(new Periode(periode))
-        })
+        sykmelding.perioder.forEach(periode => {
+            this.perioder.push(new Periode(periode));
+        });
         this.prognose = sykmelding.prognose ? new Prognose(sykmelding.prognose) : null;
         this.utdypendeOpplysninger = new Map<string, Map<string, SporsmalSvar>>();
-        Object.keys(sykmelding.utdypendeOpplysninger).forEach( key => {
-            Object.keys(sykmelding.utdypendeOpplysninger[key]).forEach( key2 => {
+        Object.keys(sykmelding.utdypendeOpplysninger).forEach(key => {
+            Object.keys(sykmelding.utdypendeOpplysninger[key]).forEach(key2 => {
                 const opplysning = new Map<string, SporsmalSvar>().set(key2, sykmelding.utdypendeOpplysninger[key]);
                 this.utdypendeOpplysninger.set(key, opplysning);
-            })
-        })
+            });
+        });
         this.tiltakArbeidsplassen = sykmelding.tiltakArbeidsplassen ? sykmelding.tiltakArbeidsplassen : null;
         this.tiltakNAV = sykmelding.tiltakNAV ? sykmelding.tiltakNAV : null;
         this.andreTiltak = sykmelding.andreTiltak ? sykmelding.andreTiltak : null;
@@ -309,7 +327,9 @@ export class Sykmelding {
         this.behandletTidspunkt = dayjs(sykmelding.behandletTidspunkt).toDate();
         this.behandler = new Behandler(sykmelding.behandler);
         this.avsenderSystem = new AvsenderSystem(sykmelding.avsenderSystem);
-        this.syketilfelleStartDato = sykmelding.syketilfelleStartDato ? dayjs(sykmelding.syketilfelleStartDato).toDate() : null;
+        this.syketilfelleStartDato = sykmelding.syketilfelleStartDato
+            ? dayjs(sykmelding.syketilfelleStartDato).toDate()
+            : null;
         this.signaturDato = dayjs(sykmelding.signaturDato).toDate();
         this.navnFastlege = sykmelding.navnFastlege;
     }

@@ -1,3 +1,10 @@
+export enum RuleNames {
+    BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L = 'Manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapittel L (muskel- og skjelettsykdommer)',
+    TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING = 'Sykmeldingen er tilbakedatert med begrunnelse',
+    TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmelding i løpende sykefravær er tilbakedatert med begrunnelse',
+    AVVENTENDE_SYKMELDING_KOMBINERT = 'To perioder',
+}
+
 class RuleInfo {
     ruleName: RuleNames;
     messageForSender: string;
@@ -10,17 +17,10 @@ class RuleInfo {
     }
 }
 
-export enum RuleNames {
-    BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L = "Manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapittel L (muskel- og skjelettsykdommer)",
-    TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING = "Sykmeldingen er tilbakedatert med begrunnelse",
-    TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = "Sykmelding i løpende sykefravær er tilbakedatert med begrunnelse",
-    AVVENTENDE_SYKMELDING_KOMBINERT = "To perioder"
-}
-
 enum Status {
     OK,
     MANUAL_PROCESSING,
-    INVALID
+    INVALID,
 }
 
 export class ValidationResult {
@@ -28,6 +28,6 @@ export class ValidationResult {
     ruleHits: RuleInfo[];
     constructor(validationResult) {
         this.status = validationResult.status;
-        this.ruleHits = validationResult.ruleHits.map( ruleHit => new RuleInfo(ruleHit) );
+        this.ruleHits = validationResult.ruleHits.map(ruleHit => new RuleInfo(ruleHit));
     }
 }
