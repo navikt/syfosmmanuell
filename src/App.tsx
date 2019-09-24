@@ -16,7 +16,7 @@ const App = () => {
     const handterAvbryt = () => {};
 
     useEffect(() => {
-        callFetch('src/mock/sykmeld.json');
+        callFetch('src/mock/sykmelding-flere-regler.json');
     }, []);
 
     const spinner = (

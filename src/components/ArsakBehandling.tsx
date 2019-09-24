@@ -29,22 +29,21 @@ const ArsakBehandling: React.FC<ArsakBehandlingProps> = ({
     const [antallArsakerVurdert, setAntallArsakerVurdert] = useState<number>(0);
 
     useEffect(() => {
-        const arsakMap: Map<RuleNames, boolean> = new Map();
+        const VurderingMap: Map<RuleNames, boolean> = new Map();
         arsaker.ruleHits.forEach(rule => {
-            arsakMap.set(rule.ruleName, null);
+            VurderingMap.set(rule.ruleName, null);
         });
-        setArsakVurdering(arsakMap);
+        setArsakVurdering(VurderingMap);
     }, []);
 
     useEffect(() => {
         if (antallArsakerVurdert == arsaker.ruleHits.length) {
-            let totVurdering = true;
-            arsakVurdering.forEach(value => {
+            for (const [, value] of arsakVurdering) {
                 if (value == false) {
-                    totVurdering = false;
+                    setTotalVurdering(false);
+                    break;
                 }
-            });
-            setTotalVurdering(totVurdering);
+            }
         }
     }, [arsakVurdering]);
 
