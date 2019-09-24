@@ -48,7 +48,7 @@ const ArsakBehandling: React.FC<ArsakBehandlingProps> = ({
         }
     }, [arsakVurdering]);
 
-    const oppdaterArsakVurdering = (ruleName: RuleNames, vurdering: boolean) => {
+    const oppdaterArsakVurdering = (ruleName: RuleNames, vurdering: boolean): void => {
         setAntallArsakerVurdert(antallArsakerVurdert + 1);
         if (arsaker.ruleHits.length == 1) {
             handterFerdigstill(arsaker, vurdering);
@@ -56,11 +56,10 @@ const ArsakBehandling: React.FC<ArsakBehandlingProps> = ({
         const nyArsakVurdering: Map<RuleNames, boolean> = new Map(arsakVurdering);
         nyArsakVurdering.set(ruleName, vurdering);
         setArsakVurdering(nyArsakVurdering);
-        console.log(arsakVurdering);
         setCurrentArsak(null);
     };
 
-    const arsakVurderingAvbrutt = () => {
+    const arsakVurderingAvbrutt = (): void => {
         if (arsaker.ruleHits.length == 1) {
             handterAvbryt();
         }
@@ -117,7 +116,7 @@ const ArsakBehandling: React.FC<ArsakBehandlingProps> = ({
                                                     <Knapp
                                                         form="kompakt"
                                                         htmlType="button"
-                                                        onClick={() => setCurrentArsak(arsak.ruleName)}
+                                                        onClick={(): void => setCurrentArsak(arsak.ruleName)}
                                                     >
                                                         Vurder
                                                     </Knapp>
@@ -135,7 +134,10 @@ const ArsakBehandling: React.FC<ArsakBehandlingProps> = ({
                                 </Knapp>
                             )}
                             {totalVurdering != null && (
-                                <Knapp htmlType="button" onClick={() => handterFerdigstill(arsaker, totalVurdering)}>
+                                <Knapp
+                                    htmlType="button"
+                                    onClick={(): void => handterFerdigstill(arsaker, totalVurdering)}
+                                >
                                     {KnappeTekst.FERDIGSTILL}
                                 </Knapp>
                             )}

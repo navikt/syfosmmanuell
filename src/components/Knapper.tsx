@@ -24,7 +24,6 @@ const Knapper: React.FC<KnappeProps> = ({ regel, knappeTekst, handterAvgjorelse,
     const [kanSendeInn, setKanSendeInn] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log(regel);
         switch (regel) {
             case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING: {
                 setBegrunnelseTekst('tilbakedatering med begrunnelse');
@@ -45,7 +44,7 @@ const Knapper: React.FC<KnappeProps> = ({ regel, knappeTekst, handterAvgjorelse,
         }
     }, []);
 
-    const radioEndring = event => {
+    const radioEndring = (event: React.ChangeEvent<HTMLInputElement>): void => {
         if (event.target.value == 'godkjenn') {
             setErGodkjent(() => true);
             setKanSendeInn(() => true);
@@ -55,7 +54,7 @@ const Knapper: React.FC<KnappeProps> = ({ regel, knappeTekst, handterAvgjorelse,
         }
     };
 
-    const sendAvgjorelseTilParent = () => {
+    const sendAvgjorelseTilParent = (): void => {
         if (kanSendeInn) {
             handterAvgjorelse(regel, erGodkjent);
         }
@@ -63,18 +62,18 @@ const Knapper: React.FC<KnappeProps> = ({ regel, knappeTekst, handterAvgjorelse,
 
     return (
         <>
-            <div onChange={event => radioEndring(event)} className="radio">
+            <div className="radio">
                 <Radio
                     value="godkjenn"
                     label={'Godkjenn ' + begrunnelseTekst}
                     name="godkjenn-avvis-radioknapper"
-                    className="radio__godkjenn"
+                    onChange={radioEndring}
                 />
                 <Radio
                     value="avvis"
                     label={'Avvis ' + begrunnelseTekst}
                     name="godkjenn-avvis-radioknapper"
-                    className="radio__avvis"
+                    onChange={radioEndring}
                 />
             </div>
             <div className="innsending">
