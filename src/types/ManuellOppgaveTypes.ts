@@ -1,14 +1,14 @@
-import { ValidationResult } from './ValidationResultTypes';
+import { ValidationResultWithStatus } from './ValidationResultTypes';
 import { Sykmelding } from './SykmeldingTypes';
 
 export class ManuellOppgave {
     manOppgId: number;
-    valideringsResultat: ValidationResult;
+    valideringsResultat: ValidationResultWithStatus;
     sykmelding: Sykmelding;
 
     constructor(manuellOppgave) {
         this.manOppgId = manuellOppgave.manOppgId;
-        this.valideringsResultat = new ValidationResult(manuellOppgave.valideringsResultat);
+        this.valideringsResultat = new ValidationResultWithStatus(manuellOppgave.valideringsResultat);
         this.sykmelding = new Sykmelding(manuellOppgave.sykmelding);
     }
 }

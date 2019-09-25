@@ -31,3 +31,18 @@ export class ValidationResult {
         this.ruleHits = validationResult.ruleHits.map(ruleHit => new RuleInfo(ruleHit));
     }
 }
+
+export class ValidationResultWithStatus extends ValidationResult {
+    public behandlet: Map<RuleNames, boolean | null>;
+    constructor(validationResult) {
+        super(validationResult);
+        const behandletMap = new Map<RuleNames, boolean>();
+        validationResult.ruleHits.forEach(ruleHit => {
+            behandletMap.set(ruleHit.ruleName, false);
+        });
+        this.behandlet = behandletMap;
+    }
+    setBehandlet = (arsak: RuleNames, vurdering: boolean): void => {
+        this.behandlet.set(arsak, vurdering);
+    };
+}
