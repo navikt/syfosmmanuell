@@ -33,7 +33,7 @@ export class ValidationResult {
 }
 
 export class ValidationResultWithStatus extends ValidationResult {
-    public behandlet: Map<RuleNames, boolean | null>;
+    behandlet: Map<RuleNames, boolean | null>;
     constructor(validationResult) {
         super(validationResult);
         const behandletMap = new Map<RuleNames, boolean>();

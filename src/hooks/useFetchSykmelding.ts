@@ -10,9 +10,7 @@ interface UseFetchSykmeldingInterface {
     callFetch: Function;
 }
 
-type Hook = () => UseFetchSykmeldingInterface;
-
-const useFetchSykmelding: Hook = () => {
+const useFetchSykmelding = (): UseFetchSykmeldingInterface => {
     const [arsaker, setArsaker] = useState<ValidationResult | null>(null);
     const [sykmelding, setSykmelding] = useState<Sykmelding | null>(null);
     const [error, setError] = useState<Error | null>(null);
