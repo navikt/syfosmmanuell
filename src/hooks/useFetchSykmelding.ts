@@ -1,43 +1,46 @@
 import { useState, useEffect } from 'react';
 import { Sykmelding } from '../types/SykmeldingTypes';
 import { ValidationResult } from '../types/ValidationResultTypes';
+import { useManOppgBehandlingContext } from '../App';
+import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
 
 interface UseFetchSykmeldingInterface {
-    arsaker: ValidationResult;
-    sykmelding: Sykmelding;
-    error: Error;
-    isLoading: boolean;
     callFetch: Function;
 }
 
 const useFetchSykmelding = (): UseFetchSykmeldingInterface => {
-    const [arsaker, setArsaker] = useState<ValidationResult | null>(null);
-    const [sykmelding, setSykmelding] = useState<Sykmelding | null>(null);
-    const [error, setError] = useState<Error | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [url, setUrl] = useState<string | null>(null);
 
+    const { oppdaterManOppgaver, oppdaterError, oppdaterIsLoading } = useManOppgBehandlingContext();
+
     useEffect(() => {
-        setIsLoading(true);
+        oppdaterIsLoading(true);
         const fetchData = async (): Promise<void> => {
             try {
                 const res = await fetch(url);
                 const json = await res.json();
                 if (json.validationResult) {
-                    setArsaker(new ValidationResult(json.validationResult));
-                    setSykmelding(new Sykmelding(json.sykmelding));
-                    setIsLoading(false);
+                    const oppgave = new Array<ManuellOppgave>();
+                    oppgave.push(new ManuellOppgave(json));
+                    oppdaterManOppgaver(oppgave);
+                    //setArsaker(new ValidationResult(json.validationResult));
+                    //setSykmelding(new Sykmelding(json.sykmelding));
+                    //setIsLoading(false);
                 } else {
                     throw new Error('Sykmelding mangler begrunnelse');
                 }
             } catch (error) {
-                setError(error);
+                oppdaterError(error);
             }
         };
         fetchData();
     }, [url]);
 
-    return { arsaker, sykmelding, error, isLoading, callFetch: setUrl };
+    useEffect(() => {
+        setUrl('src/mock/sykmelding-flere-regler.json');
+    }, []);
+
+    return { callFetch: setUrl };
 };
 
 export default useFetchSykmelding;

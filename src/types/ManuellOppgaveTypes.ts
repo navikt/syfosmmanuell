@@ -8,7 +8,7 @@ export class ManuellOppgave {
 
     constructor(manuellOppgave) {
         this.manOppgId = manuellOppgave.manOppgId;
-        this.valideringsResultat = new ValidationResultWithStatus(manuellOppgave.valideringsResultat);
+        this.valideringsResultat = new ValidationResultWithStatus(manuellOppgave.validationResult);
         this.sykmelding = new Sykmelding(manuellOppgave.sykmelding);
     }
 }

@@ -1,3 +1,4 @@
+/*
 import * as React from 'react';
 import { ValidationResult, RuleNames } from '../types/ValidationResultTypes';
 import { Sykmelding } from '../types/SykmeldingTypes';
@@ -125,3 +126,4 @@ const ArsakBehandling: React.FC<ArsakBehandlingProps> = ({
 };
 
 export default ArsakBehandling;
+*/

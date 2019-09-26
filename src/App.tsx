@@ -5,20 +5,18 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Undertittel } from 'nav-frontend-typografi';
 import { ValidationResult } from './types/ValidationResultTypes';
-import ArsakBehandling from './components/ArsakBehandling';
+//import ArsakBehandling from './components/ArsakBehandling';
 import './App.less';
+import OppgaveBehandling from './components/OppgaveBehandling';
+
+import TestComponent from './components/testComponent';
+import createUseContext from 'constate';
+import useManOppgBehandling from './hooks/useManOppgBehandling';
+
+import StoreProvider from './store/StoreProvider';
+import { DataFetcher } from './components/DataFetcher';
 
 const App: React.FC = () => {
-    const { arsaker, sykmelding, error, isLoading, callFetch } = useFetchSykmelding();
-
-    const handterAvgjorelse = (arsaker: ValidationResult, erGodkjent: boolean): void => {};
-
-    const handterAvbryt = (): void => {};
-
-    useEffect(() => {
-        callFetch('src/mock/sykmelding-flere-regler.json');
-    }, []);
-
     const spinner = (
         <div className="spinner">
             <NavFrontendSpinner />
@@ -38,18 +36,18 @@ const App: React.FC = () => {
                         <Undertittel>En sykmelding må vurderes manuelt</Undertittel>
                     </div>
                 }
-            >
-                <ArsakBehandling
-                    arsaker={arsaker}
-                    sykmelding={sykmelding}
-                    handterFerdigstill={handterAvgjorelse}
-                    handterAvbryt={handterAvbryt}
-                />
-            </EkspanderbartpanelBase>
+            ></EkspanderbartpanelBase>
         </div>
     );
+    //return <>{!isLoading && arsaker ? ekspanderbartPanel : spinner}</>;
 
-    return <>{!isLoading && arsaker ? ekspanderbartPanel : spinner}</>;
+    return (
+        <StoreProvider>
+            <DataFetcher>
+                <TestComponent />
+            </DataFetcher>
+        </StoreProvider>
+    );
 };
 
 export default App;

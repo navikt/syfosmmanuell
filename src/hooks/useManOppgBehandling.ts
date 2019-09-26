@@ -1,25 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
 import { RuleNames } from '../types/ValidationResultTypes';
 
 interface UseManOppgBehandlingInterface {
     manOppgaver: ManuellOppgave[] | null;
-    aktuellManOppgave: ManuellOppgave;
-    aktuellArsak: RuleNames;
-    oppdaterManOppgaver: Function;
+    setManOppgaver: Function;
+    aktuellManOppgave: ManuellOppgave | null;
+    setAktuellManOppgave: Function;
+    aktuellArsak: RuleNames | null;
+    setAktuellArsak: Function;
     oppdaterVurdering: Function;
-    oppdaterAktuellManOppgave: Function;
-    oppdaterAktuellArsak: Function;
+    error: Error;
+    setError: Function;
+    isLoading: boolean;
+    setIsLoading: Function;
 }
 
 const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const [manOppgaver, setManOppgaver] = useState<ManuellOppgave[] | null>(null);
     const [aktuellManOppgave, setAktuellManOppgave] = useState<ManuellOppgave | null>(null);
     const [aktuellArsak, setAktuellArsak] = useState<RuleNames | null>(null);
-
-    const oppdaterManOppgaver = (manuelleOppgaver: ManuellOppgave[]): void => {
-        setManOppgaver(manuelleOppgaver);
-    };
+    const [error, setError] = useState<Error | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const oppdaterVurdering = (vurdering: boolean): void => {
         const nyOppgave = new ManuellOppgave(aktuellManOppgave);
@@ -32,22 +34,25 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         setAktuellManOppgave(null);
     };
 
-    const oppdaterAktuellManOppgave = (manuellOppgave: ManuellOppgave): void => {
-        setAktuellManOppgave(manuellOppgave);
-    };
-
-    const oppdaterAktuellArsak = (arsak: RuleNames): void => {
-        setAktuellArsak(arsak);
-    };
+    useEffect(() => {
+        if (manOppgaver != null) {
+            setIsLoading(false);
+            setAktuellManOppgave(manOppgaver[0]);
+        }
+    }, [manOppgaver]);
 
     return {
         manOppgaver,
+        setManOppgaver,
         aktuellManOppgave,
+        setAktuellManOppgave,
         aktuellArsak,
-        oppdaterManOppgaver,
+        setAktuellArsak,
         oppdaterVurdering,
-        oppdaterAktuellManOppgave,
-        oppdaterAktuellArsak,
+        error,
+        setError,
+        isLoading,
+        setIsLoading,
     };
 };
 
