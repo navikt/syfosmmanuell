@@ -17,10 +17,8 @@ export const DataFetcher = (props: { children: any }) => {
                 'src/mock/sykmelding-flere-regler.json',
                 undefined,
                 (fetchState: FetchState<ManuellOppgave[]>) => {
-                    console.log(fetchState);
                     setManOppgaver(
                         fetchState.data.map(manOppgave => {
-                            console.log(fetchState.data);
                             return new ManuellOppgave(manOppgave);
                         }),
                     );

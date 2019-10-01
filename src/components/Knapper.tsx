@@ -59,17 +59,10 @@ const Knapper: React.FC = () => {
     const handterAvgjorelse = (): void => {
         if (kanSendeInn) {
             oppdaterVurdering(erGodkjent);
-            //const oppgave = new ManuellOppgave(aktuellManOppgave);
-            //oppgave.validationResult.behandlet.set(aktuellArsak, erGodkjent);
-            //console.log('ValidationResult : ' + oppgave.validationResult.behandlet);
-            //setAktuellManOppgave(oppgave);
-            //setAktuellArsak(null);
-            //console.log('Årsak etter large: ' + aktuellArsak);
         }
     };
 
     const handterAvbryt = (): void => {
-        //dette kommer bare til å fungere for flere årsaker. snakk med solveig om hva som skal skje ved avbrytelse av enårsaksoppgaver.
         if (aktuellManOppgave.validationResult.ruleHits.length > 1) {
             setAktuellArsak(null);
         }

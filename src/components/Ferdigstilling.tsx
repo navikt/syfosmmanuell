@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useEffect } from 'react';
 import { useAppStore } from '../store/AppStore';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { KnappeTekst } from './Knapper';
@@ -7,10 +6,7 @@ import { KnappeTekst } from './Knapper';
 const Ferdigstilling: React.FC = () => {
     const { aktuellManOppgave } = useAppStore();
 
-    //aktuellManOppgave.totalvurdering
-    const handterFerdigstill = (): void => {
-        console.log(aktuellManOppgave.validationResult.totalVurdering);
-    };
+    const handterFerdigstill = (): void => {};
 
     return (
         <>

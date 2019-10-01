@@ -33,9 +33,7 @@ export class ValidationResult {
     ruleHits: RuleInfo[];
     constructor(status: Status, rHits: RuleInfo[]) {
         this.status = status;
-        console.log(rHits);
         this.ruleHits = rHits.map(ruleHit => new RuleInfo(ruleHit));
-        console.log(this.ruleHits);
     }
 }
 

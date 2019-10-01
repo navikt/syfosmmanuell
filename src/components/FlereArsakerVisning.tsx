@@ -9,11 +9,6 @@ import Ferdigstilling from './Ferdigstilling';
 const FlereArsakerVisning: React.FC = () => {
     const { aktuellArsak, aktuellManOppgave, setAktuellArsak } = useAppStore();
 
-    React.useEffect(() => {
-        console.log('aktuell arsak: ' + aktuellArsak);
-        console.log(aktuellManOppgave);
-    }, [aktuellArsak]);
-
     const flerArsakVisning = (): JSX.Element => (
         <>
             <div className="arsak-visning">
