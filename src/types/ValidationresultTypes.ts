@@ -51,13 +51,16 @@ export class ValidationResultWithStatus extends ValidationResult {
         if (validationResult.behandlet) {
             this.behandlet = new Map<RuleNames, boolean>(validationResult.behandlet);
             this.antallBehandlet = validationResult.antallBehandlet;
+            this.totalVurdering = validationResult.totalVurdering;
         } else {
             const behandletMap = new Map<RuleNames, boolean>();
             validationResult.ruleHits.forEach(ruleHit => {
-                behandletMap.set(ruleHit.ruleName, null);
+                const rName = ruleHit.ruleName as keyof RuleNames;
+                behandletMap.set(RuleNames[rName], null);
             });
             this.behandlet = behandletMap;
             this.antallBehandlet = 0;
+            this.totalVurdering = null;
         }
     }
     setBehandlet = (arsak: RuleNames, vurdering: boolean): void => {

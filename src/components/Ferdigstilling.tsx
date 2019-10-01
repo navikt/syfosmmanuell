@@ -8,7 +8,9 @@ const Ferdigstilling: React.FC = () => {
     const { aktuellManOppgave } = useAppStore();
 
     //aktuellManOppgave.totalvurdering
-    const handterFerdigstill = () => {};
+    const handterFerdigstill = (): void => {
+        console.log(aktuellManOppgave.validationResult.totalVurdering);
+    };
 
     return (
         <>
@@ -19,7 +21,7 @@ const Ferdigstilling: React.FC = () => {
                         {KnappeTekst.FERDIGSTILL}
                     </Knapp>
                 ) : (
-                    <Knapp htmlType="button" onClick={(): void => console.log('ferdigstill')}>
+                    <Knapp htmlType="button" onClick={(): void => handterFerdigstill()}>
                         {KnappeTekst.FERDIGSTILL}
                     </Knapp>
                 )}
