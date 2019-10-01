@@ -13,18 +13,14 @@ export const DataFetcher = (props: { children: any }) => {
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {
             setIsLoading(true);
-            manOppgaver.fetch(
-                'src/mock/sykmelding-flere-regler.json',
-                undefined,
-                (fetchState: FetchState<ManuellOppgave[]>) => {
-                    setManOppgaver(
-                        fetchState.data.map(manOppgave => {
-                            return new ManuellOppgave(manOppgave);
-                        }),
-                    );
-                    setIsLoading(false);
-                },
-            );
+            manOppgaver.fetch('src/mock/sykmeld.json', undefined, (fetchState: FetchState<ManuellOppgave[]>) => {
+                setManOppgaver(
+                    fetchState.data.map(manOppgave => {
+                        return new ManuellOppgave(manOppgave);
+                    }),
+                );
+                setIsLoading(false);
+            });
         }
     }, []);
 

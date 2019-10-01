@@ -36,6 +36,9 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     useEffect(() => {
         if (manOppgaver != null) {
             setAktuellManOppgave(manOppgaver[0]);
+            if (manOppgaver[0].validationResult.ruleHits.length == 1) {
+                setAktuellArsak(manOppgaver[0].validationResult.ruleHits[0].ruleName);
+            }
         }
     }, [isLoading]);
 

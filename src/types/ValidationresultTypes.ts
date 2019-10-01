@@ -11,7 +11,6 @@ class RuleInfo {
     messageForUser: string;
     // eslint-disable-next-line prettier/prettier
     constructor(ruleInfo) {
-        console.log(typeof ruleInfo.ruleName);
         if (RuleNames[ruleInfo.ruleName as keyof RuleNames]) {
             this.ruleName = RuleNames[ruleInfo.ruleName as keyof RuleNames];
         } else {
@@ -43,9 +42,8 @@ export class ValidationResultWithStatus extends ValidationResult {
     totalVurdering: boolean | null;
 
     // eslint-disable-next-line prettier/prettier
-    constructor(validationResult: any) {
+    constructor(validationResult) {
         super(validationResult.status, validationResult.ruleHits);
-        //problem...
         if (validationResult.behandlet) {
             this.behandlet = new Map<RuleNames, boolean>(validationResult.behandlet);
             this.antallBehandlet = validationResult.antallBehandlet;

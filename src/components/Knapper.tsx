@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import './Knapper.less';
 import { RuleNames } from '../types/ValidationResultTypes';
 import { useAppStore } from '../store/AppStore';
+import './Knapper.less';
 
 export enum KnappeTekst {
     FERDIGSTILL = 'Ferdigstill',

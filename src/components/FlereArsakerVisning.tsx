@@ -3,8 +3,8 @@ import { useAppStore } from '../store/AppStore';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
 import EnArsakVisning from './EnArsakVisning';
-import './FlereArsakerVisning.less';
 import Ferdigstilling from './Ferdigstilling';
+import './FlereArsakerVisning.less';
 
 const FlereArsakerVisning: React.FC = () => {
     const { aktuellArsak, aktuellManOppgave, setAktuellArsak } = useAppStore();
