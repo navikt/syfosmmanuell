@@ -6,7 +6,6 @@ import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import './Knapper.less';
 import { RuleNames } from '../types/ValidationResultTypes';
 import { useAppStore } from '../store/AppStore';
-import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
 
 export enum KnappeTekst {
     FERDIGSTILL = 'Ferdigstill',
@@ -19,7 +18,7 @@ const Knapper: React.FC = () => {
     const [erGodkjent, setErGodkjent] = useState<boolean | null>(null);
     const [kanSendeInn, setKanSendeInn] = useState<boolean>(false);
 
-    const { aktuellArsak, setAktuellArsak, aktuellManOppgave, setAktuellManOppgave, oppdaterVurdering } = useAppStore();
+    const { aktuellArsak, setAktuellArsak, aktuellManOppgave, oppdaterVurdering } = useAppStore();
 
     useEffect(() => {
         switch (aktuellArsak) {
