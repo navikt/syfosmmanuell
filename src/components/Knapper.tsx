@@ -5,26 +5,24 @@ import { Radio } from 'nav-frontend-skjema';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import './Knapper.less';
 import { RuleNames } from '../types/ValidationResultTypes';
+import { useAppStore } from '../store/AppStore';
+import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
 
 export enum KnappeTekst {
     FERDIGSTILL = 'Ferdigstill',
     LAGRE = 'Lagre',
 }
 
-interface KnappeProps {
-    regel: RuleNames;
-    knappeTekst: KnappeTekst;
-    handterAvgjorelse(regel: RuleNames, erGodkjent: boolean): void;
-    handterAvbryt(): void;
-}
-
-const Knapper: React.FC<KnappeProps> = ({ regel, knappeTekst, handterAvgjorelse, handterAvbryt }: KnappeProps) => {
+const Knapper: React.FC = () => {
     const [begrunnelseTekst, setBegrunnelseTekst] = useState<string>('');
+    const [knappeTekst, setKnappeTekst] = useState<string>('');
     const [erGodkjent, setErGodkjent] = useState<boolean | null>(null);
     const [kanSendeInn, setKanSendeInn] = useState<boolean>(false);
 
+    const { aktuellArsak, setAktuellArsak, aktuellManOppgave, setAktuellManOppgave, oppdaterVurdering } = useAppStore();
+
     useEffect(() => {
-        switch (regel) {
+        switch (aktuellArsak) {
             case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING: {
                 setBegrunnelseTekst('tilbakedatering med begrunnelse');
                 break;
@@ -42,6 +40,10 @@ const Knapper: React.FC<KnappeProps> = ({ regel, knappeTekst, handterAvgjorelse,
                 break;
             }
         }
+
+        aktuellManOppgave.validationResult.ruleHits.length > 1
+            ? setKnappeTekst(KnappeTekst.LAGRE)
+            : setKnappeTekst(KnappeTekst.FERDIGSTILL);
     }, []);
 
     const radioEndring = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -54,9 +56,22 @@ const Knapper: React.FC<KnappeProps> = ({ regel, knappeTekst, handterAvgjorelse,
         }
     };
 
-    const sendAvgjorelseTilParent = (): void => {
+    const handterAvgjorelse = (): void => {
         if (kanSendeInn) {
-            handterAvgjorelse(regel, erGodkjent);
+            oppdaterVurdering(erGodkjent);
+            //const oppgave = new ManuellOppgave(aktuellManOppgave);
+            //oppgave.validationResult.behandlet.set(aktuellArsak, erGodkjent);
+            //console.log('ValidationResult : ' + oppgave.validationResult.behandlet);
+            //setAktuellManOppgave(oppgave);
+            //setAktuellArsak(null);
+            //console.log('Årsak etter large: ' + aktuellArsak);
+        }
+    };
+
+    const handterAvbryt = (): void => {
+        //dette kommer bare til å fungere for flere årsaker. snakk med solveig om hva som skal skje ved avbrytelse av enårsaksoppgaver.
+        if (aktuellManOppgave.validationResult.ruleHits.length > 1) {
+            setAktuellArsak(null);
         }
     };
 
@@ -83,7 +98,7 @@ const Knapper: React.FC<KnappeProps> = ({ regel, knappeTekst, handterAvgjorelse,
                     </Knapp>
                 )}
                 {kanSendeInn && (
-                    <Knapp htmlType="button" onClick={sendAvgjorelseTilParent} className="innsending__ferdigstill">
+                    <Knapp htmlType="button" onClick={handterAvgjorelse} className="innsending__ferdigstill">
                         {knappeTekst}
                     </Knapp>
                 )}

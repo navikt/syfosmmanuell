@@ -6,12 +6,13 @@ import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStart
 import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
 import Spinner from 'nav-frontend-spinner';
 
-export function DataFetcher(props: { children: any }) {
-    const { setManOppgaver, setError } = useAppStore();
+export const DataFetcher = (props: { children: any }) => {
+    const { setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
 
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {
+            setIsLoading(true);
             manOppgaver.fetch(
                 'src/mock/sykmelding-flere-regler.json',
                 undefined,
@@ -23,6 +24,7 @@ export function DataFetcher(props: { children: any }) {
                             return new ManuellOppgave(manOppgave);
                         }),
                     );
+                    setIsLoading(false);
                 },
             );
         }
@@ -44,4 +46,4 @@ export function DataFetcher(props: { children: any }) {
     }
 
     return props.children;
-}
+};

@@ -24,22 +24,26 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const oppdaterVurdering = (vurdering: boolean): void => {
+        console.log('før oppdatering');
+        console.log(aktuellManOppgave);
         const nyOppgave = new ManuellOppgave(aktuellManOppgave);
-        nyOppgave.valideringsResultat.setBehandlet(aktuellArsak, vurdering);
+        console.log('etter oppdatering');
+        console.log(nyOppgave);
+        nyOppgave.validationResult.setBehandlet(aktuellArsak, vurdering);
 
         const nyManOppgaver = manOppgaver.filter(manOppgave => manOppgave.manOppgId != aktuellManOppgave.manOppgId);
         nyManOppgaver.push(nyOppgave);
         setManOppgaver(nyManOppgaver);
-
-        setAktuellManOppgave(null);
+        setAktuellManOppgave(nyOppgave);
+        setAktuellArsak(null);
     };
 
     useEffect(() => {
         if (manOppgaver != null) {
-            setIsLoading(false);
+            //setIsLoading(false);
             setAktuellManOppgave(manOppgaver[0]);
         }
-    }, [manOppgaver]);
+    }, [isLoading]);
 
     return {
         manOppgaver,

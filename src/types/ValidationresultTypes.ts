@@ -9,9 +9,14 @@ class RuleInfo {
     ruleName: RuleNames;
     messageForSender: string;
     messageForUser: string;
+    // eslint-disable-next-line prettier/prettier
     constructor(ruleInfo) {
-        const rName = ruleInfo.ruleName as keyof RuleNames;
-        this.ruleName = RuleNames[rName];
+        console.log(typeof ruleInfo.ruleName);
+        if (RuleNames[ruleInfo.ruleName as keyof RuleNames]) {
+            this.ruleName = RuleNames[ruleInfo.ruleName as keyof RuleNames];
+        } else {
+            this.ruleName = ruleInfo.ruleName;
+        }
         this.messageForSender = ruleInfo.messageForSender;
         this.messageForUser = ruleInfo.messageForUser;
     }
@@ -26,23 +31,43 @@ enum Status {
 export class ValidationResult {
     status: Status;
     ruleHits: RuleInfo[];
-    constructor(validationResult) {
-        this.status = validationResult.status;
-        this.ruleHits = validationResult.ruleHits.map(ruleHit => new RuleInfo(ruleHit));
+    constructor(status: Status, rHits: RuleInfo[]) {
+        this.status = status;
+        console.log(rHits);
+        this.ruleHits = rHits.map(ruleHit => new RuleInfo(ruleHit));
+        console.log(this.ruleHits);
     }
 }
 
 export class ValidationResultWithStatus extends ValidationResult {
     behandlet: Map<RuleNames, boolean | null>;
-    constructor(validationResult) {
-        super(validationResult);
-        const behandletMap = new Map<RuleNames, boolean>();
-        validationResult.ruleHits.forEach(ruleHit => {
-            behandletMap.set(ruleHit.ruleName, false);
-        });
-        this.behandlet = behandletMap;
+    antallBehandlet: number;
+    totalVurdering: boolean | null;
+
+    // eslint-disable-next-line prettier/prettier
+    constructor(validationResult: any) {
+        super(validationResult.status, validationResult.ruleHits);
+        //problem...
+        if (validationResult.behandlet) {
+            this.behandlet = new Map<RuleNames, boolean>(validationResult.behandlet);
+            this.antallBehandlet = validationResult.antallBehandlet;
+        } else {
+            const behandletMap = new Map<RuleNames, boolean>();
+            validationResult.ruleHits.forEach(ruleHit => {
+                behandletMap.set(ruleHit.ruleName, null);
+            });
+            this.behandlet = behandletMap;
+            this.antallBehandlet = 0;
+        }
     }
     setBehandlet = (arsak: RuleNames, vurdering: boolean): void => {
         this.behandlet.set(arsak, vurdering);
+        this.antallBehandlet++;
+        if (vurdering == false) {
+            this.totalVurdering = vurdering;
+        }
+        if (this.antallBehandlet == this.ruleHits.length && this.totalVurdering == null) {
+            this.totalVurdering = true;
+        }
     };
 }
