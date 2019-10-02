@@ -6,6 +6,7 @@ COPY ./server/package.json .
 COPY ./server/server.js .
 COPY ./src/mock mock/
 
+RUN ls dist/
 RUN ls mock/
 RUN npm install
 
