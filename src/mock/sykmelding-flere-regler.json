@@ -1,4 +1,5 @@
-{
+[{
+    "manOppgId": 12345,
     "validationResult": {
       "status": "MANUAL_PROCESSING",
       "ruleHits": [
@@ -127,4 +128,4 @@
       "signaturDato": "2019-04-29T08:34:16.861476",
       "navnFastlege": "Doktor Legesen"
     }
-}
+}]
