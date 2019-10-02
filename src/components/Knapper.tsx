@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { RuleNames } from '../types/ValidationResultTypes';
+import { RuleNames } from '../types/ValidationresultTypes';
 import { useAppStore } from '../store/AppStore';
 import './Knapper.less';
 

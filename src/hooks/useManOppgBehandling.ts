@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
-import { RuleNames } from '../types/ValidationResultTypes';
+import { RuleNames } from '../types/ValidationresultTypes';
 
 interface UseManOppgBehandlingInterface {
     manOppgaver: ManuellOppgave[] | null;
