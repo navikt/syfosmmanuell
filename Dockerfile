@@ -1,9 +1,13 @@
 FROM node
 
-WORKDIR /server
+WORKDIR /src
 COPY ./dist dist
-COPY ./server .
+COPY ./server/package.json .
+COPY ./server/server.js .
+COPY ./src/mock mock/
 
-RUN echo "hello from container"
-RUN ls
+RUN ls mock/
 RUN npm install
+
+EXPOSE 3000
+CMD [ "node", "server.js" ]
