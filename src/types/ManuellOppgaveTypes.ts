@@ -1,4 +1,4 @@
-import { ValidationResultWithStatus } from './ValidationResultTypes';
+import { ValidationResultWithStatus } from './ValidationresultTypes';
 import { Sykmelding } from './SykmeldingTypes';
 
 export class ManuellOppgave {
