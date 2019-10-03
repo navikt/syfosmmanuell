@@ -98,3 +98,7 @@ dist/
 # OS generated files
 .DS_Store
 # End of https://www.gitignore.io/api/node
+
+# Idea project files
+*.iml
+.idea/
