@@ -9,6 +9,7 @@ class RuleInfo {
     ruleName: RuleNames;
     messageForSender: string;
     messageForUser: string;
+    ruleStatus: Status;
     // eslint-disable-next-line prettier/prettier
     constructor(ruleInfo) {
         if (RuleNames[ruleInfo.ruleName as keyof RuleNames]) {
@@ -18,6 +19,7 @@ class RuleInfo {
         }
         this.messageForSender = ruleInfo.messageForSender;
         this.messageForUser = ruleInfo.messageForUser;
+        this.ruleStatus = ruleInfo.ruleStatus;
     }
 }
 
