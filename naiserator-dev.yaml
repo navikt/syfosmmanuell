@@ -38,4 +38,3 @@ spec:
   webproxy: true
   ingresses:
     - "https://syfosmmanuell.nais.preprod.local"
-  env:
