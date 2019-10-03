@@ -7,10 +7,6 @@ const app = express();
 
 app.use(express.static('dist'));
 
-app.get('/test-seb', (req, res) => {
-    res.send('Hello world');
-});
-
 app.get('/is_alive', (req, res) => {
     res.sendStatus(200);
 });
