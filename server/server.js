@@ -11,11 +11,11 @@ app.get('/test-seb', (req, res) => {
     res.send('Hello world');
 });
 
-app.get('is_alive', (req, res) => {
+app.get('/is_alive', (req, res) => {
     res.sendStatus(200);
 });
 
-app.get('is_ready', (req, res) => {
+app.get('/is_ready', (req, res) => {
     res.sendStatus(200);
 });
 
