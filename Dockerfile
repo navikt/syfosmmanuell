@@ -1,4 +1,4 @@
-FROM navikt/node-express:12-common
+FROM navikt/node-express
 
 WORKDIR /src
 COPY ./dist dist
