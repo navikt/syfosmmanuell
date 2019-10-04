@@ -33,6 +33,6 @@ spec:
     requests:
       cpu: 100m
       memory: 128Mi
-  webproxy: true
+  webproxy: false
   ingresses:
     - "https://syfosmmanuell.nais.preprod.local"
