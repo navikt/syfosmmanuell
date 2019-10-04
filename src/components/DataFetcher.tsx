@@ -18,8 +18,7 @@ export const DataFetcher = (props: { children: any }) => {
     const manOppgaver = useFetch<ManuellOppgave[]>();
     let url = 'http://syfosmmanuell-backend/api/v1/hentManuellOppgave/?fnr=';
     try {
-        console.log(hentUrlParametre(window.location.href));
-        url.concat(hentUrlParametre(window.location.href).pnr);
+        url += hentUrlParametre(window.location.href).pnr;
         console.log('URL with parameter: ' + url);
     } catch (err) {
         console.error(err);
@@ -29,6 +28,7 @@ export const DataFetcher = (props: { children: any }) => {
         if (isNotStarted(manOppgaver)) {
             setIsLoading(true);
             manOppgaver.fetch(url, undefined, (fetchState: FetchState<ManuellOppgave[]>) => {
+                console.log(fetchState.data);
                 setManOppgaver(
                     fetchState.data.map(manOppgave => {
                         return new ManuellOppgave(manOppgave);
