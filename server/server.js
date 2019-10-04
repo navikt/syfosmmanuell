@@ -8,7 +8,7 @@ const HOST = '0.0.0.0';
 
 const app = express();
 
-app.use('/person', express.static('dist'));
+app.use('/person', express.static(__dirname + '/dist'));
 
 app.get('/is_alive', (req, res) => {
     res.sendStatus(200);
