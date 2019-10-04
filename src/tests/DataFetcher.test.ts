@@ -6,9 +6,9 @@ describe('DataFetcher', () => {
             const url = 'url.com/?pnr=123';
             expect(hentUrlParametre(url)).toHaveProperty('pnr');
         });
-        test('Skal returnere number for url="url.com/?pnr=123"', () => {
+        test('Skal returnere string for url="url.com/?pnr=123"', () => {
             const url = 'url.com/?pnr=123';
-            expect(typeof hentUrlParametre(url).pnr).toBe('number');
+            expect(typeof hentUrlParametre(url).pnr).toBe('string');
         });
         test('throws Error ved for url uten parametre', () => {
             const url = 'url.com/';
