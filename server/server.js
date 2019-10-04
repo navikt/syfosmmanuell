@@ -10,10 +10,6 @@ const app = express();
 
 app.use('/person', express.static('dist'));
 
-app.get('/person', (req, res) => {
-    res.sendFile(path.join(dist, 'index.html'));
-});
-
 app.get('/is_alive', (req, res) => {
     res.sendStatus(200);
 });

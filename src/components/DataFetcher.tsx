@@ -16,8 +16,9 @@ import Spinner from 'nav-frontend-spinner';
 export const DataFetcher = (props: { children: any }) => {
     const { setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
-    const url = 'http://syfosmmanuell-backend/api/v1/hentManuellOppgave/?fnr=';
+    let url = 'http://syfosmmanuell-backend/api/v1/hentManuellOppgave/?fnr=';
     try {
+        console.log(hentUrlParametre(window.location.href));
         url.concat(hentUrlParametre(window.location.href).pnr);
         console.log('URL with parameter: ' + url);
     } catch (err) {
