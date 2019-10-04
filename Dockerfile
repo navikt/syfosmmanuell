@@ -1,4 +1,4 @@
-FROM navikt/node-express
+FROM navikt/node-express:12.2.0-alpine
 
 WORKDIR /src
 COPY ./dist dist
