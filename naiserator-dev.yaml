@@ -36,3 +36,6 @@ spec:
   webproxy: false
   ingresses:
     - "https://syfosmmanuell.nais.preprod.local"
+  env:
+    - name: NODE_ENV
+      value: development

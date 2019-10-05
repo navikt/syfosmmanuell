@@ -17,6 +17,7 @@ export const DataFetcher = (props: { children: any }) => {
     const { setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
     let url = 'https://syfosmmanuell-backend/api/v1/hentManuellOppgave/?fnr=';
+    console.log(url);
     try {
         url += hentUrlParametre(window.location.href).pnr;
         console.log('URL with parameter: ' + url);
