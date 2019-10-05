@@ -36,3 +36,6 @@ spec:
   webproxy: true
   ingresses:
     - "https://syfosmmanuell.nais.adeo.no"
+  env:
+    - name: NODE_ENV
+      value: production
