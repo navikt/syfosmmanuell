@@ -17,16 +17,16 @@ export const DataFetcher = (props: { children: any }) => {
     const { setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
     let url = 'https://syfosmmanuell-backend/api/v1/hentManuellOppgave/?fnr=';
-    console.log(url);
-    try {
-        url += hentUrlParametre(window.location.href).pnr;
-        console.log('URL with parameter: ' + url);
-    } catch (err) {
-        console.error(err);
-    }
 
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {
+            try {
+                url += hentUrlParametre(window.location.href).pnr;
+                console.log('URL with parameter: ' + url);
+            } catch (err) {
+                setError(err);
+                console.error(err);
+            }
             setIsLoading(true);
             manOppgaver.fetch(url, undefined, (fetchState: FetchState<ManuellOppgave[]>) => {
                 console.log(fetchState.data);
@@ -52,7 +52,7 @@ export const DataFetcher = (props: { children: any }) => {
     }
 
     if (hasData(manOppgaver)) {
-        setError(false);
+        setError(null);
     }
 
     return props.children;

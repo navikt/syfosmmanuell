@@ -10,7 +10,7 @@ interface UseManOppgBehandlingInterface {
     aktuellArsak: RuleNames | null;
     setAktuellArsak: Function;
     oppdaterVurdering: Function;
-    error: Error;
+    error: Error | null;
     setError: Function;
     isLoading: boolean;
     setIsLoading: Function;

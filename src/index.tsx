@@ -7,8 +7,7 @@ import env from './utils/environments';
 
 dayjs.locale('nb');
 
-console.log('env: ' + env.nodeEnv);
-if (!env.isProduction) {
+if (!(env.isPreprod || env.isProduction)) {
     require('./mock');
 }
 
