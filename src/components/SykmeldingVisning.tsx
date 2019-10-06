@@ -1,10 +1,38 @@
 import * as React from 'react';
-import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Undertittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import './SykmeldingVisning.less';
 import { useAppStore } from '../store/AppStore';
 
 const SykmeldingVisning: React.FC = () => {
-    const { aktuellArsak, aktuellManOppgave } = useAppStore();
+    const {
+        aktuellArsak,
+        aktuellManOppgave: { sykmelding },
+    } = useAppStore();
+
+    const flerePerioderBuilder = (): JSX.Element => (
+        <>
+            <div className="grid-item grid-item__tittel">
+                <Element>Når startet det legemeldte sykefraværet?</Element>
+                <Normaltekst>{sykmelding.id}</Normaltekst>
+            </div>
+            <div className="grid-item grid-item--left">
+                <Element>Sykmledingsperiode</Element>
+                <Normaltekst>{sykmelding.id}</Normaltekst>
+            </div>
+            <div className="grid-item grid-item--right">
+                <Element>Grad</Element>
+                <Normaltekst>{sykmelding.id}</Normaltekst>
+            </div>
+            <div className="grid-item grid-item--left">
+                <Element>Hoveddiagnose</Element>
+                <Normaltekst>{sykmelding.id}</Normaltekst>
+            </div>
+            <div className="grid-item grid-item--right">
+                <Element>Kode</Element>
+                <Normaltekst>{sykmelding.id}</Normaltekst>
+            </div>
+        </>
+    );
 
     return (
         <>
@@ -13,21 +41,14 @@ const SykmeldingVisning: React.FC = () => {
                 <Normaltekst>{aktuellArsak}.</Normaltekst>
             </div>
             <div className="arbeidsgiver-sykmelder">
-                <Element>Arbeidsgiver: {aktuellManOppgave.sykmelding.arbeidsgiver.navn}</Element>
-                <Element>Sykmelder: {aktuellManOppgave.sykmelding.navnFastlege}</Element>
+                <Element>Arbeidsgiver: {sykmelding.arbeidsgiver.navn}</Element>
+                <Element>Sykmelder: {sykmelding.navnFastlege}</Element>
             </div>
-            <div className="sykmelding">
-                <Undertittel className="sykmelding-liste__tittel">Sykmelding</Undertittel>
-                <ul className="liste sykmelding-liste">
-                    <li className="liste__element sykmelding-liste__element">
-                        <Element>ID</Element>
-                        <Normaltekst>{aktuellManOppgave.sykmelding.id}</Normaltekst>
-                    </li>
-                    <li className="liste__element sykmelding-liste__element">
-                        <Element>Message ID</Element>
-                        <Normaltekst>{aktuellManOppgave.sykmelding.msgId}</Normaltekst>
-                    </li>
-                </ul>
+            <div className="sykmelding-grid">
+                <div className="grid-item grid-item__tittel">
+                    <Systemtittel>Sykmelding</Systemtittel>
+                </div>
+                {flerePerioderBuilder()}
             </div>
         </>
     );
