@@ -18,7 +18,13 @@ const Knapper: React.FC = () => {
     const [erGodkjent, setErGodkjent] = useState<boolean | null>(null);
     const [kanSendeInn, setKanSendeInn] = useState<boolean>(false);
 
-    const { aktuellArsak, setAktuellArsak, aktuellManOppgave, oppdaterVurdering } = useAppStore();
+    const {
+        aktuellArsak,
+        setAktuellArsak,
+        aktuellManOppgave,
+        oppdaterVurdering,
+        byttAktuellManOppgave,
+    } = useAppStore();
 
     useEffect(() => {
         switch (aktuellArsak) {
@@ -58,6 +64,10 @@ const Knapper: React.FC = () => {
     const handterAvgjorelse = (): void => {
         if (kanSendeInn) {
             oppdaterVurdering(erGodkjent);
+            if (aktuellManOppgave.validationResult.ruleHits.length == 1) {
+                //send inn totalresultat
+                byttAktuellManOppgave();
+            }
         }
     };
 

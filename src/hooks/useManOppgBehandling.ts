@@ -10,6 +10,8 @@ interface UseManOppgBehandlingInterface {
     aktuellArsak: RuleNames | null;
     setAktuellArsak: Function;
     oppdaterVurdering: Function;
+    byttAktuellManOppgave: Function;
+    resettVurdering: Function;
     error: Error | null;
     setError: Function;
     isLoading: boolean;
@@ -26,11 +28,22 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const oppdaterVurdering = (vurdering: boolean): void => {
         const nyOppgave = new ManuellOppgave(aktuellManOppgave);
         nyOppgave.validationResult.setBehandlet(aktuellArsak, vurdering);
-        const nyManOppgaver = manOppgaver.filter(manOppgave => manOppgave.manOppgId != aktuellManOppgave.manOppgId);
-        nyManOppgaver.push(nyOppgave);
-        setManOppgaver(nyManOppgaver);
         setAktuellManOppgave(nyOppgave);
         setAktuellArsak(null);
+    };
+
+    const byttAktuellManOppgave = (): void => {
+        const nyManOppgaver = manOppgaver.filter(manOppgave => manOppgave.manOppgId != aktuellManOppgave.manOppgId);
+        nyManOppgaver.push(new ManuellOppgave(aktuellManOppgave));
+        setManOppgaver(nyManOppgaver);
+    };
+
+    const resettVurdering = (): void => {
+        manOppgaver.forEach((oppg, index) => {
+            if (oppg.manOppgId == aktuellManOppgave.manOppgId) {
+                setAktuellManOppgave(manOppgaver[index]);
+            }
+        });
     };
 
     useEffect(() => {
@@ -42,6 +55,14 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         }
     }, [isLoading]);
 
+    useEffect(() => {
+        if (manOppgaver != null) {
+            manOppgaver[0].validationResult.totalVurdering == null
+                ? setAktuellManOppgave(manOppgaver[0])
+                : setAktuellManOppgave(null);
+        }
+    }, [manOppgaver]);
+
     return {
         manOppgaver,
         setManOppgaver,
@@ -50,6 +71,8 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         aktuellArsak,
         setAktuellArsak,
         oppdaterVurdering,
+        byttAktuellManOppgave,
+        resettVurdering,
         error,
         setError,
         isLoading,
