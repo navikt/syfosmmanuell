@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RuleNames } from '../types/ValidationresultTypes';
 import { Element, Undertittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import './SykmeldingVisning.less';
 import { useAppStore } from '../store/AppStore';
@@ -10,6 +11,18 @@ const SykmeldingVisning: React.FC = () => {
         aktuellManOppgave: { sykmelding },
     } = useAppStore();
 
+    const sykmeldingHeader = (): JSX.Element => (
+        <>
+            <div className="arsak-visning">
+                <Element>Årsak til manuell behandling</Element>
+                <Normaltekst>{aktuellArsak}.</Normaltekst>
+            </div>
+            <div className="arbeidsgiver-sykmelder">
+                <Element>Arbeidsgiver: {sykmelding.arbeidsgiver.navn}</Element>
+                <Element>Sykmelder: {sykmelding.navnFastlege}</Element>
+            </div>
+        </>
+    );
     const tilbakedatertLopendePeriodeBuilder = (): JSX.Element => (
         <>
             <div className="grid-item">
@@ -297,19 +310,16 @@ const SykmeldingVisning: React.FC = () => {
 
     return (
         <>
-            <div className="arsak-visning">
-                <Element>Årsak til manuell behandling</Element>
-                <Normaltekst>{aktuellArsak}.</Normaltekst>
-            </div>
-            <div className="arbeidsgiver-sykmelder">
-                <Element>Arbeidsgiver: {sykmelding.arbeidsgiver.navn}</Element>
-                <Element>Sykmelder: {sykmelding.navnFastlege}</Element>
-            </div>
+            {sykmeldingHeader()}
             <div className="sykmelding-grid">
                 <div className="grid-item grid-item__tittel">
                     <Systemtittel>Sykmelding</Systemtittel>
                 </div>
-                {tilbakedatertLopendePeriodeBuilder()}
+                {aktuellArsak == RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE &&
+                    tilbakedatertLopendePeriodeBuilder()}
+                {aktuellArsak == RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING && tilbakedatertBuilder()}
+                {aktuellArsak == RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT && flerePerioderBuilder()}
+                {aktuellArsak == RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L && kiropraktorBuilder()}
             </div>
         </>
     );
