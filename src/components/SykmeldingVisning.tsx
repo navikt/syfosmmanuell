@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Element, Undertittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import './SykmeldingVisning.less';
 import { useAppStore } from '../store/AppStore';
+import dayjs = require('dayjs');
 
 const SykmeldingVisning: React.FC = () => {
     const {
@@ -16,20 +17,26 @@ const SykmeldingVisning: React.FC = () => {
                 <Normaltekst>{sykmelding.id}</Normaltekst>
             </div>
             <div className="grid-item grid-item--left">
-                <Element>Sykmledingsperiode</Element>
-                <Normaltekst>{sykmelding.id}</Normaltekst>
+                <Element>Sykmeldingsperiode</Element>
+                {sykmelding.perioder.map((periode, index) => (
+                    <Normaltekst key={index}>
+                        {dayjs(periode.fom).format('DD.MM.YYYY') + ' - ' + dayjs(periode.tom).format('DD.MM.YYYY')}
+                    </Normaltekst>
+                ))}
             </div>
             <div className="grid-item grid-item--right">
                 <Element>Grad</Element>
-                <Normaltekst>{sykmelding.id}</Normaltekst>
+                {sykmelding.perioder.map((periode, index) => (
+                    <Normaltekst key={index}>{periode.gradert.grad + ' %'}</Normaltekst>
+                ))}
             </div>
             <div className="grid-item grid-item--left">
                 <Element>Hoveddiagnose</Element>
-                <Normaltekst>{sykmelding.id}</Normaltekst>
+                <Normaltekst>{'hvor finner man dette?'}</Normaltekst>
             </div>
             <div className="grid-item grid-item--right">
                 <Element>Kode</Element>
-                <Normaltekst>{sykmelding.id}</Normaltekst>
+                <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.kode}</Normaltekst>
             </div>
         </>
     );
