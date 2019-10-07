@@ -5,7 +5,6 @@ import { useAppStore } from '../store/AppStore';
 import FlereArsakerVisning from './FlereArsakerVisning';
 import EnArsakVisning from './EnArsakVisning';
 import Spinner from 'nav-frontend-spinner';
-import { useEffect } from 'react';
 
 const EkspanderbartPanel: React.FC = () => {
     const { aktuellManOppgave } = useAppStore();
