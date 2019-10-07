@@ -4,9 +4,12 @@ import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { KnappeTekst } from './Knapper';
 
 const Ferdigstilling: React.FC = () => {
-    const { aktuellManOppgave } = useAppStore();
+    const { aktuellManOppgave, byttAktuellManOppgave, resettVurdering } = useAppStore();
 
-    const handterFerdigstill = (): void => {};
+    const handterFerdigstill = (): void => {
+        //send inn totalresultat
+        byttAktuellManOppgave();
+    };
 
     return (
         <div className="innsending">
@@ -19,7 +22,7 @@ const Ferdigstilling: React.FC = () => {
                     {KnappeTekst.FERDIGSTILL}
                 </Knapp>
             )}
-            <Flatknapp onClick={(): void => console.log('avbryt')} className="innsending__avbryt">
+            <Flatknapp onClick={(): void => resettVurdering()} className="innsending__avbryt">
                 Avbryt
             </Flatknapp>
         </div>
