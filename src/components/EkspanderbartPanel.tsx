@@ -10,10 +10,6 @@ import { useEffect } from 'react';
 const EkspanderbartPanel: React.FC = () => {
     const { aktuellManOppgave } = useAppStore();
 
-    useEffect(() => {
-        console.log(aktuellManOppgave);
-    }, [aktuellManOppgave]);
-
     return (
         <>
             {!aktuellManOppgave && <Spinner />}
