@@ -10,12 +10,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
+      - name: Use Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install deps
+        run: |
+          npm install
       - name: Run tests
         run: |
-          ./gradlew test
-      - name: Build jar
+          npm run test
+      - name: Build
         run: |
-          ./gradlew shadowJar -x test
+          npm run build-prod
       - name: Create Docker tag
         env:
           NAME: syfosmmanuell
@@ -43,8 +50,8 @@ jobs:
           resources: naiserator-dev.yaml
       #- name: deploy to prod-fss
       #  uses: navikt/deployment-cli/action@0.4.0
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    env:
+      #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #  with:
       #    cluster: prod-fss
       #    team: teamsykefravr
