@@ -16,7 +16,7 @@ import Spinner from 'nav-frontend-spinner';
 export const DataFetcher = (props: { children: any }) => {
     const { setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
-    let url = 'https://syfosmmanuell-backend/api/v1/hentManuellOppgave/?fnr=';
+    let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
 
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {

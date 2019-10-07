@@ -6,4 +6,4 @@ const mock = FetchMock.configure({
     middleware: MiddlewareUtils.combine(MiddlewareUtils.delayMiddleware(1000), MiddlewareUtils.loggingMiddleware()),
 });
 
-mock.get('https://syfosmmanuell-backend/api/v1/hentManuellOppgave/', sykmeldingFlereRegler);
+mock.get('https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/', sykmeldingFlereRegler);
