@@ -135,7 +135,7 @@ export const sykmeldingFlereRegler = [
         },
     },
     {
-        manOppgId: 12346,
+        manuellOppgaveid: 12346,
         validationResult: {
             status: 'MANUAL_PROCESSING',
             ruleHits: [
@@ -151,7 +151,7 @@ export const sykmeldingFlereRegler = [
                 },
             ],
         },
-        sykmelding: {
+        receivedSykmelding: {
             id: 'detteerensykmeldingid',
             msgId: '123124334',
             pasientAktoerId: '41234123',
