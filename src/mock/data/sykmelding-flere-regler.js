@@ -16,7 +16,7 @@ export const sykmeldingFlereRegler = [
                 },
             ],
         },
-        sykmelding: {
+        receivedSykmelding: {
             id: 'detteerensykmeldingid',
             msgId: '123124334',
             pasientAktoerId: '41234123',
