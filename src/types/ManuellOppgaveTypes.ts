@@ -7,7 +7,7 @@ export class ManuellOppgave {
     sykmelding: Sykmelding;
 
     constructor(manuellOppgave) {
-        this.manOppgId = manuellOppgave.manOppgId;
+        this.manOppgId = manuellOppgave.manuellOppgaveid;
         this.validationResult = new ValidationResultWithStatus(manuellOppgave.validationResult);
         this.sykmelding = new Sykmelding(manuellOppgave.sykmelding);
     }

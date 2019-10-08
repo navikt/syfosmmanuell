@@ -1,6 +1,6 @@
 export const sykmeldingFlereRegler = [
     {
-        manOppgId: 12345,
+        manuellOppgaveid: 12345,
         validationResult: {
             status: 'MANUAL_PROCESSING',
             ruleHits: [
