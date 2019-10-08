@@ -4,11 +4,11 @@ import { Sykmelding } from './SykmeldingTypes';
 export class ManuellOppgave {
     manOppgId: string;
     validationResult: ValidationResultWithStatus;
-    receivedSykmelding: Sykmelding;
+    sykmelding: Sykmelding;
 
     constructor(manuellOppgave) {
         this.manOppgId = manuellOppgave.manuellOppgaveid;
         this.validationResult = new ValidationResultWithStatus(manuellOppgave.validationResult);
-        this.receivedSykmelding = new Sykmelding(manuellOppgave.receivedSykmelding);
+        this.sykmelding = new Sykmelding(manuellOppgave.receivedSykmelding);
     }
 }
