@@ -8,11 +8,13 @@ export const sykmeldingFlereRegler = [
                     ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING',
                     messageForSender: 'message for sender',
                     messageForUser: 'message for user',
+                    ruleStatus: 'MANUAL_PROCESSING',
                 },
                 {
                     ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE',
                     messageForSender: 'message for sender',
                     messageForUser: 'message for user',
+                    ruleStatus: 'MANUAL_PROCESSING',
                 },
             ],
         },
