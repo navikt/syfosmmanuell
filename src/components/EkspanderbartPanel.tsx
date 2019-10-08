@@ -1,39 +1,44 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Undertittel } from 'nav-frontend-typografi';
 import { useAppStore } from '../store/AppStore';
 import FlereArsakerVisning from './FlereArsakerVisning';
 import EnArsakVisning from './EnArsakVisning';
-import Spinner from 'nav-frontend-spinner';
+import './EkspanderbartPanel.less';
 
 const EkspanderbartPanel: React.FC = () => {
-    const { aktuellManOppgave } = useAppStore();
+    const [progresjon, setProgresjon] = useState<number | null>(null);
+    const { manOppgaver, aktuellManOppgave } = useAppStore();
+
+    useEffect(() => {
+        setProgresjon(manOppgaver.filter(oppgave => oppgave.validationResult.antallBehandlet != 0).length + 1);
+    }, [manOppgaver]);
 
     return (
         <>
-            {!aktuellManOppgave && <Spinner />}
-            {aktuellManOppgave && (
-                <div className="ekspanderbartpanel">
-                    <EkspanderbartpanelBase
-                        heading={
-                            <div className="ekspanderbartpanel__header">
-                                <img
-                                    src="src/img/report-problem-circle.svg"
-                                    alt="Varselikon"
-                                    className="ekspanderbartpanel__ikon"
-                                />
-                                <Undertittel>En sykmelding må vurderes manuelt</Undertittel>
-                            </div>
-                        }
-                    >
-                        {aktuellManOppgave.validationResult.ruleHits.length > 1 ? (
-                            <FlereArsakerVisning />
-                        ) : (
-                            <EnArsakVisning />
-                        )}
-                    </EkspanderbartpanelBase>
-                </div>
-            )}
+            <div className="ekspanderbartpanel">
+                <EkspanderbartpanelBase
+                    heading={
+                        <div className="ekspanderbartpanel__header">
+                            <img
+                                src="src/img/report-problem-circle.svg"
+                                alt="Varselikon"
+                                className="ekspanderbartpanel__ikon"
+                            />
+                            <Undertittel>
+                                Sykmelding {progresjon} av {manOppgaver.length}
+                            </Undertittel>
+                        </div>
+                    }
+                >
+                    {aktuellManOppgave.validationResult.ruleHits.length > 1 ? (
+                        <FlereArsakerVisning />
+                    ) : (
+                        <EnArsakVisning />
+                    )}
+                </EkspanderbartpanelBase>
+            </div>
         </>
     );
 };

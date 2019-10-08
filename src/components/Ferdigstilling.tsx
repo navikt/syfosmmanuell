@@ -23,7 +23,7 @@ const Ferdigstilling: React.FC = () => {
                 </Knapp>
             )}
             <Flatknapp onClick={(): void => resettVurdering()} className="innsending__avbryt">
-                Avbryt
+                Nullstill
             </Flatknapp>
         </div>
     );
