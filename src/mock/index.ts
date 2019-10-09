@@ -1,5 +1,6 @@
 import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock';
 import { sykmeldingFlereRegler } from './data/sykmelding-flere-regler';
+import { received } from './data/receivedOppg';
 
 const mock = FetchMock.configure({
     enableFallback: true,

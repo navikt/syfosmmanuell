@@ -3,8 +3,10 @@ import { useAppStore } from '../store/AppStore';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './Progresjon.less';
 
+const information = require('../img/information.svg');
+
 const Progresjon: React.FC = () => {
-    const { manOppgaver } = useAppStore();
+    const { manOppgaver, aktuellManOppgave } = useAppStore();
 
     const progresjonstekst = (): string => {
         return `Det er ${manOppgaver.length} ${
@@ -13,14 +15,19 @@ const Progresjon: React.FC = () => {
     };
 
     return (
-        <div className="progresjon">
-            <div className="progresjon__ikon">
-                <img src="src/img/information.svg" alt="information icon" />
-            </div>
-            <div className="progresjon__tekst">
-                <Normaltekst>{progresjonstekst()}</Normaltekst>
-            </div>
-        </div>
+        <>
+            {aktuellManOppgave && (
+                <div className="progresjon">
+                    <div className="progresjon__ikon">
+                        <img src={information} alt="information icon" />
+                    </div>
+                    <div className="progresjon__tekst">
+                        <Normaltekst>{progresjonstekst()}</Normaltekst>
+                    </div>
+                </div>
+            )}
+            {!aktuellManOppgave && <Normaltekst>Alle manuelle oppgaver er løst</Normaltekst>}
+        </>
     );
 };
 
