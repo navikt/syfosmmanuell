@@ -302,10 +302,10 @@ export class Sykmelding {
     constructor(sykmelding) {
         this.id = sykmelding.id;
         this.msgId = sykmelding.msgId;
-        (this.pasientAktoerId = sykmelding.pasientAktoerId),
-            (this.medisinskVurdering = new MedisinskVurdering(sykmelding.medisinskVurdering));
-        (this.skjermesForPasient = sykmelding.skjermesForPasient),
-            (this.arbeidsgiver = new Arbeidsgiver(sykmelding.arbeidsgiver));
+        this.pasientAktoerId = sykmelding.pasientAktoerId;
+        this.medisinskVurdering = new MedisinskVurdering(sykmelding.medisinskVurdering);
+        this.skjermesForPasient = sykmelding.skjermesForPasient;
+        this.arbeidsgiver = new Arbeidsgiver(sykmelding.arbeidsgiver);
         this.perioder = new Array<Periode>();
         sykmelding.perioder.forEach(periode => {
             this.perioder.push(new Periode(periode));

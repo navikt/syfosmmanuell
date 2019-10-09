@@ -236,7 +236,9 @@ const SykmeldingVisning: React.FC = () => {
         <>
             <div className="grid-item">
                 <Element>Grad</Element>
-                <Normaltekst>{sykmelding.perioder[0].gradert.grad}</Normaltekst>
+                <Normaltekst>
+                    {sykmelding.perioder[0].gradert.grad ? sykmelding.perioder[0].gradert.grad : ''}
+                </Normaltekst>
             </div>
             <div className="grid-item">
                 <Element>Når startet det legemeldte sykefraværet?</Element>
