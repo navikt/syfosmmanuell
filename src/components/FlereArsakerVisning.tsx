@@ -6,8 +6,6 @@ import EnArsakVisning from './EnArsakVisning';
 import Ferdigstilling from './Ferdigstilling';
 import './FlereArsakerVisning.less';
 
-import checkCircle from '../img/check-circle-2.svg';
-
 const FlereArsakerVisning: React.FC = () => {
     const { aktuellArsak, aktuellManOppgave, setAktuellArsak } = useAppStore();
 
@@ -22,7 +20,7 @@ const FlereArsakerVisning: React.FC = () => {
                         </span>
                         <div className="arsak-liste__element--hoyre">
                             {aktuellManOppgave.validationResult.behandlet.get(arsak.ruleName) == true && (
-                                <img src={checkCircle} alt="Declined icon" className="ikon" />
+                                <img src="src/img/check-circle-2.svg" alt="Declined icon" className="ikon" />
                             )}
                             {aktuellManOppgave.validationResult.behandlet.get(arsak.ruleName) == false && (
                                 <img src="src/img/cross-circle.svg" alt="Declined icon" className="ikon" />
