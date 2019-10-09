@@ -7,6 +7,8 @@ import FlereArsakerVisning from './FlereArsakerVisning';
 import EnArsakVisning from './EnArsakVisning';
 import './EkspanderbartPanel.less';
 
+import reportProblemCircle from '../img/report-problem-circle.svg';
+
 const EkspanderbartPanel: React.FC = () => {
     const [progresjon, setProgresjon] = useState<number | null>(null);
     const { manOppgaver, aktuellManOppgave } = useAppStore();
@@ -21,11 +23,7 @@ const EkspanderbartPanel: React.FC = () => {
                 <EkspanderbartpanelBase
                     heading={
                         <div className="ekspanderbartpanel__header">
-                            <img
-                                src="src/img/report-problem-circle.svg"
-                                alt="Varselikon"
-                                className="ekspanderbartpanel__ikon"
-                            />
+                            <img src={reportProblemCircle} alt="Varselikon" className="ekspanderbartpanel__ikon" />
                             <Undertittel>
                                 Sykmelding {progresjon} av {manOppgaver.length}
                             </Undertittel>
