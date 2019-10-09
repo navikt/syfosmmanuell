@@ -7,7 +7,7 @@ import FlereArsakerVisning from './FlereArsakerVisning';
 import EnArsakVisning from './EnArsakVisning';
 import './EkspanderbartPanel.less';
 
-import reportProblemCircle from '../img/report-problem-circle.svg';
+import reportProblemCircle from 'src/img/report-problem-circle.svg';
 
 const EkspanderbartPanel: React.FC = () => {
     const [progresjon, setProgresjon] = useState<number | null>(null);
