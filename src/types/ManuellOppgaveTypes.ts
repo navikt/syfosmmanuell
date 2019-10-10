@@ -10,7 +10,9 @@ export class ManuellOppgave {
     constructor(manuellOppgave) {
         this.manOppgId = manuellOppgave.manOppgId;
         this.validationResult = new ValidationResultWithStatus(manuellOppgave.validationResult);
-        this.sykmelding = new Sykmelding(manuellOppgave.sykmelding);
+        this.sykmelding = manuellOppgave.sykmelding
+            ? new Sykmelding(manuellOppgave.sykmelding)
+            : new Sykmelding(manuellOppgave.receivedSykmelding.sykmelding);
         this.sendInnValidering = manuellOppgave.sendInnValidering ? manuellOppgave.sendInnValidering : false;
     }
 
