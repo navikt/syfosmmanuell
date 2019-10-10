@@ -65,6 +65,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     }, [isLoading]);
 
     useEffect(() => {
+        console.log(manOppgaver);
         if (manOppgaver != null) {
             manOppgaver[0].validationResult.totalVurdering == null
                 ? setAktuellManOppgave(manOppgaver[0])

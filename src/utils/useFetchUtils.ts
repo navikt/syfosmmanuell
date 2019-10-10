@@ -23,6 +23,10 @@ export const isNotStartedOrPending = (fetch: FetchState): boolean => {
     return fetch.status === FetchStatus.NOT_STARTED || fetch.status === FetchStatus.PENDING;
 };
 
+export const isPending = (fetch: FetchState): boolean => {
+    return fetch.status == FetchStatus.PENDING;
+};
+
 export const hasFinished = (fetch: FetchState): boolean => {
     return fetch.status === FetchStatus.FINISHED;
 };

@@ -2,14 +2,21 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 import { useAppStore } from '../store/AppStore';
-import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from '../utils/useFetchUtils';
+import {
+    FetchState,
+    hasAnyFailed,
+    hasData,
+    isAnyNotStartedOrPending,
+    isNotStarted,
+    isPending,
+} from '../utils/useFetchUtils';
 import { hentUrlParameter } from '../utils/urlParameter';
 import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
 import { ValidationResult } from '../types/ValidationresultTypes';
 import Spinner from 'nav-frontend-spinner';
 
 export const DataFetcher = (props: { children: any }) => {
-    const { aktuellManOppgave, setManOppgaver, setIsLoading, setError } = useAppStore();
+    const { aktuellManOppgave, byttAktuellManOppgave, setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
     let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
 
@@ -39,11 +46,10 @@ export const DataFetcher = (props: { children: any }) => {
     }, []);
 
     useEffect(() => {
-        console.log(aktuellManOppgave);
         if (aktuellManOppgave && aktuellManOppgave.sendInnValidering) {
             if (isNotStarted(postValidering)) {
                 postValidering.fetch(
-                    url2 + aktuellManOppgave.manuellOppgaveid,
+                    url2,
                     {
                         method: 'POST',
                         body: JSON.stringify(
@@ -54,15 +60,14 @@ export const DataFetcher = (props: { children: any }) => {
                         ),
                     },
                     (fetchState: FetchState<any>) => {
-                        console.log(aktuellManOppgave);
-                        console.log(fetchState);
+                        byttAktuellManOppgave();
                     },
                 );
             }
         }
     }, [aktuellManOppgave]);
 
-    if (isAnyNotStartedOrPending([manOppgaver])) {
+    if (isAnyNotStartedOrPending([manOppgaver]) || isPending(postValidering)) {
         return <Spinner />;
     } else if (hasAnyFailed([manOppgaver])) {
         return (

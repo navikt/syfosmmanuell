@@ -9,7 +9,7 @@ const Ferdigstilling: React.FC = () => {
     const handterFerdigstill = (): void => {
         //send inn totalresultat
         oppdaterSendInnValidering(true);
-        byttAktuellManOppgave();
+        //byttAktuellManOppgave();
     };
 
     return (
