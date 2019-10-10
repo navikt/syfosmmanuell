@@ -29,15 +29,12 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const oppdaterVurdering = (vurdering: boolean): void => {
         const nyOppgave = new ManuellOppgave(aktuellManOppgave);
         nyOppgave.validationResult.setBehandlet(aktuellArsak, vurdering);
-        console.log(nyOppgave);
         if (
             nyOppgave.validationResult.antallBehandlet == 1 &&
             nyOppgave.validationResult.antallBehandlet == nyOppgave.validationResult.ruleHits.length
         ) {
-            console.log('here');
             nyOppgave.setSendInnValidering(true);
         }
-        console.log(nyOppgave);
         setAktuellManOppgave(nyOppgave);
         setAktuellArsak(null);
     };
@@ -82,9 +79,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     }, [manOppgaver]);
 
     useEffect(() => {
-        console.log(aktuellManOppgave);
         if (aktuellManOppgave && aktuellManOppgave.sendInnValidering) {
-            console.log('before fetch');
             fetch(
                 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/' +
                     aktuellManOppgave.manuellOppgaveid,
@@ -102,7 +97,10 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
                 },
             ).then(res => {
                 console.log(res);
+                console.log('aktuellmanoppgave som ble sendt inn');
                 console.log(aktuellManOppgave);
+                byttAktuellManOppgave();
+                //console.log(aktuellManOppgave);
             });
         }
     }, [aktuellManOppgave]);
