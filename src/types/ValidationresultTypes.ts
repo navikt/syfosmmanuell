@@ -32,9 +32,9 @@ enum Status {
 export class ValidationResult {
     status: Status;
     ruleHits: RuleInfo[];
-    constructor(status: Status, rHits: RuleInfo[]) {
-        this.status = status;
-        this.ruleHits = rHits.map(ruleHit => new RuleInfo(ruleHit));
+    constructor(validationResult) {
+        this.status = validationResult.status;
+        this.ruleHits = validationResult.ruleHits.map(ruleHit => new RuleInfo(ruleHit));
     }
 }
 
@@ -45,7 +45,7 @@ export class ValidationResultWithStatus extends ValidationResult {
 
     // eslint-disable-next-line prettier/prettier
     constructor(validationResult) {
-        super(validationResult.status, validationResult.ruleHits);
+        super(validationResult);
         if (validationResult.behandlet) {
             this.behandlet = new Map<RuleNames, boolean>(validationResult.behandlet);
             this.antallBehandlet = validationResult.antallBehandlet;

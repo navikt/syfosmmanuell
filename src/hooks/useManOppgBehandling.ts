@@ -10,6 +10,7 @@ interface UseManOppgBehandlingInterface {
     aktuellArsak: RuleNames | null;
     setAktuellArsak: Function;
     oppdaterVurdering: Function;
+    oppdaterSendInnValidering: Function;
     byttAktuellManOppgave: Function;
     resettVurdering: Function;
     error: Error | null;
@@ -30,6 +31,12 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         nyOppgave.validationResult.setBehandlet(aktuellArsak, vurdering);
         setAktuellManOppgave(nyOppgave);
         setAktuellArsak(null);
+    };
+
+    const oppdaterSendInnValidering = (status: boolean): void => {
+        const nyOppgave = new ManuellOppgave(aktuellManOppgave);
+        nyOppgave.setSendInnValidering(status);
+        setAktuellManOppgave(nyOppgave);
     };
 
     const byttAktuellManOppgave = (): void => {
@@ -71,6 +78,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         aktuellArsak,
         setAktuellArsak,
         oppdaterVurdering,
+        oppdaterSendInnValidering,
         byttAktuellManOppgave,
         resettVurdering,
         error,

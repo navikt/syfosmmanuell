@@ -4,10 +4,11 @@ import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { KnappeTekst } from './Knapper';
 
 const Ferdigstilling: React.FC = () => {
-    const { aktuellManOppgave, byttAktuellManOppgave, resettVurdering } = useAppStore();
+    const { aktuellManOppgave, oppdaterSendInnValidering, byttAktuellManOppgave, resettVurdering } = useAppStore();
 
     const handterFerdigstill = (): void => {
         //send inn totalresultat
+        oppdaterSendInnValidering(true);
         byttAktuellManOppgave();
     };
 
