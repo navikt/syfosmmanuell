@@ -25,6 +25,10 @@ module.exports = {
                     'less-loader?{"globalVars":{"nodeModulesPath":"\'~\'", "coreModulePath":"\'~\'"}}',
                 ],
             },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loader: 'url-loader?name=src/img/[name].[ext]',
+            },
         ],
     },
     plugins: [

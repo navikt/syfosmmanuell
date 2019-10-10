@@ -2,17 +2,17 @@ import { ValidationResultWithStatus } from './ValidationresultTypes';
 import { Sykmelding } from './SykmeldingTypes';
 
 export class ManuellOppgave {
-    manOppgId: string;
+    manuellOppgaveid: string;
     validationResult: ValidationResultWithStatus;
     sykmelding: Sykmelding;
     sendInnValidering: boolean;
 
     constructor(manuellOppgave) {
-        this.manOppgId = manuellOppgave.manOppgId;
+        this.manuellOppgaveid = manuellOppgave.manuellOppgaveid;
         this.validationResult = new ValidationResultWithStatus(manuellOppgave.validationResult);
-        this.sykmelding = manuellOppgave.sykmelding
-            ? new Sykmelding(manuellOppgave.sykmelding)
-            : new Sykmelding(manuellOppgave.receivedSykmelding.sykmelding);
+        this.sykmelding = manuellOppgave.receivedSykmelding
+            ? new Sykmelding(manuellOppgave.receivedSykmelding.sykmelding)
+            : new Sykmelding(manuellOppgave.sykmelding);
         this.sendInnValidering = manuellOppgave.sendInnValidering ? manuellOppgave.sendInnValidering : false;
     }
 

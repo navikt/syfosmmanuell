@@ -43,7 +43,7 @@ export const DataFetcher = (props: { children: any }) => {
         if (aktuellManOppgave && aktuellManOppgave.sendInnValidering) {
             if (isNotStarted(postValidering)) {
                 postValidering.fetch(
-                    url2 + aktuellManOppgave.manOppgId,
+                    url2 + aktuellManOppgave.manuellOppgaveid,
                     {
                         method: 'POST',
                         body: JSON.stringify(

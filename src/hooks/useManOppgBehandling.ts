@@ -40,14 +40,16 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     };
 
     const byttAktuellManOppgave = (): void => {
-        const nyManOppgaver = manOppgaver.filter(manOppgave => manOppgave.manOppgId != aktuellManOppgave.manOppgId);
+        const nyManOppgaver = manOppgaver.filter(
+            manOppgave => manOppgave.manuellOppgaveid != aktuellManOppgave.manuellOppgaveid,
+        );
         nyManOppgaver.push(new ManuellOppgave(aktuellManOppgave));
         setManOppgaver(nyManOppgaver);
     };
 
     const resettVurdering = (): void => {
         manOppgaver.forEach((oppg, index) => {
-            if (oppg.manOppgId == aktuellManOppgave.manOppgId) {
+            if (oppg.manuellOppgaveid == aktuellManOppgave.manuellOppgaveid) {
                 setAktuellManOppgave(manOppgaver[index]);
             }
         });

@@ -1,6 +1,6 @@
 export const sykmeldingFlereRegler = [
     {
-        manOppgId: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
+        manuellOppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
         validationResult: {
             status: 'MANUAL_PROCESSING',
             ruleHits: [
@@ -8,11 +8,13 @@ export const sykmeldingFlereRegler = [
                     ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING',
                     messageForSender: 'message for sender',
                     messageForUser: 'message for user',
+                    ruleStatus: 'MANUAL_PROCESSING',
                 },
                 {
                     ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE',
                     messageForSender: 'message for sender',
                     messageForUser: 'message for user',
+                    ruleStatus: 'MANUAL_PROCESSING',
                 },
             ],
         },
@@ -135,7 +137,7 @@ export const sykmeldingFlereRegler = [
         },
     },
     {
-        manOppgId: 'd973d170-3db1-4902-a10f-b64b50f9cc7f',
+        manuellOppgaveid: 'd973d170-3db1-4902-a10f-b64b50f9cc7f',
         validationResult: {
             status: 'MANUAL_PROCESSING',
             ruleHits: [

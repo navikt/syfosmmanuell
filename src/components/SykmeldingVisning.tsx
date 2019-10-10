@@ -5,6 +5,8 @@ import './SykmeldingVisning.less';
 import { useAppStore } from '../store/AppStore';
 import dayjs = require('dayjs');
 
+const checkBox = require('../img/check-box.svg');
+
 const SykmeldingVisning: React.FC = () => {
     const {
         aktuellArsak,
@@ -65,7 +67,7 @@ const SykmeldingVisning: React.FC = () => {
                 <Undertittel>Friskmelding/prognose</Undertittel>
             </div>
             <div className="grid-item checkbox">
-                <img src="src/img/check-box.svg" alt="Checkbox icon" className="checkbox__ikon" />
+                <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
                 <div className="checkbox__tekst">
                     <Normaltekst>Pasienten er 100% arbeidsfør etter denne perioden</Normaltekst>
                 </div>
@@ -77,7 +79,7 @@ const SykmeldingVisning: React.FC = () => {
             <div className="grid-item">
                 <Element>Pasient med arbeidsgiver: ...</Element>
                 <div className="checkbox">
-                    <img src="src/img/check-box.svg" alt="Checkbox icon" className="checkbox__ikon" />
+                    <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
                     <div className="checkbox__tekst">
                         <Normaltekst>
                             Jeg antar at pasienten på sikt kan komme tilbake til samme arbeidsgiver
@@ -90,7 +92,7 @@ const SykmeldingVisning: React.FC = () => {
                 <Normaltekst>{dayjs(sykmelding.prognose.erIArbeid.arbeidFOM).format('DD.MM.YYYY')}</Normaltekst>
             </div>
             <div className="grid-item checkbox">
-                <img src="src/img/check-box.svg" alt="Checkbox icon" className="checkbox__ikon" />
+                <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
                 <div className="checkbox__tekst">
                     <Normaltekst>Jeg antar at pasienten på sikt kan komme i arbeid hos annen arbeidsgiver</Normaltekst>
                 </div>
@@ -178,7 +180,7 @@ const SykmeldingVisning: React.FC = () => {
                 <Undertittel>Friskmelding/prognose</Undertittel>
             </div>
             <div className="grid-item checkbox">
-                <img src="src/img/check-box.svg" alt="Checkbox icon" className="checkbox__ikon" />
+                <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
                 <div className="checkbox__tekst">
                     <Normaltekst>Pasienten er 100% arbeidsfør etter denne perioden</Normaltekst>
                 </div>
@@ -190,7 +192,7 @@ const SykmeldingVisning: React.FC = () => {
             <div className="grid-item">
                 <Element>Pasient med arbeidsgiver: ...</Element>
                 <div className="checkbox">
-                    <img src="src/img/check-box.svg" alt="Checkbox icon" className="checkbox__ikon" />
+                    <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
                     <div className="checkbox__tekst">
                         <Normaltekst>
                             Jeg antar at pasienten på sikt kan komme tilbake til samme arbeidsgiver
@@ -203,7 +205,7 @@ const SykmeldingVisning: React.FC = () => {
                 <Normaltekst>{dayjs(sykmelding.prognose.erIArbeid.arbeidFOM).format('DD.MM.YYYY')}</Normaltekst>
             </div>
             <div className="grid-item checkbox">
-                <img src="src/img/check-box.svg" alt="Checkbox icon" className="checkbox__ikon" />
+                <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
                 <div className="checkbox__tekst">
                     <Normaltekst>Jeg antar at pasienten på sikt kan komme i arbeid hos annen arbeidsgiver</Normaltekst>
                 </div>
@@ -236,7 +238,7 @@ const SykmeldingVisning: React.FC = () => {
         <>
             <div className="grid-item">
                 <Element>Grad</Element>
-                <Normaltekst>{sykmelding.perioder[0].gradert.grad}</Normaltekst>
+                <Normaltekst>{sykmelding.perioder[0].gradert ? sykmelding.perioder[0].gradert.grad : ''}</Normaltekst>
             </div>
             <div className="grid-item">
                 <Element>Når startet det legemeldte sykefraværet?</Element>
