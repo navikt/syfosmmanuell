@@ -84,18 +84,23 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     useEffect(() => {
         console.log(aktuellManOppgave);
         if (aktuellManOppgave && aktuellManOppgave.sendInnValidering) {
-            fetch('https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/', {
-                method: 'POST',
-                body: JSON.stringify(
-                    new ValidationResult({
-                        status: aktuellManOppgave.validationResult.status,
-                        ruleHits: aktuellManOppgave.validationResult.ruleHits,
-                    }),
-                ),
-                headers: {
-                    'Content-Type': 'application/json',
+            console.log('before fetch');
+            fetch(
+                'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/' +
+                    aktuellManOppgave.manuellOppgaveid,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(
+                        new ValidationResult({
+                            status: aktuellManOppgave.validationResult.status,
+                            ruleHits: aktuellManOppgave.validationResult.ruleHits,
+                        }),
+                    ),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 },
-            }).then(res => {
+            ).then(res => {
                 console.log(res);
                 console.log(aktuellManOppgave);
             });
