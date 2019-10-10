@@ -1,6 +1,6 @@
 export const sykmeldingFlereRegler = [
     {
-        manOppgId: 12345,
+        manOppgId: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
         validationResult: {
             status: 'MANUAL_PROCESSING',
             ruleHits: [
@@ -133,7 +133,7 @@ export const sykmeldingFlereRegler = [
         },
     },
     {
-        manOppgId: 12346,
+        manOppgId: 'd973d170-3db1-4902-a10f-b64b50f9cc7f',
         validationResult: {
             status: 'MANUAL_PROCESSING',
             ruleHits: [
