@@ -2,13 +2,32 @@ import * as React from 'react';
 import { useAppStore } from '../store/AppStore';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { KnappeTekst } from './Knapper';
+import { ValidationResult } from '../types/ValidationresultTypes';
 
 const Ferdigstilling: React.FC = () => {
     const { aktuellManOppgave, oppdaterSendInnValidering, byttAktuellManOppgave, resettVurdering } = useAppStore();
 
     const handterFerdigstill = (): void => {
         //send inn totalresultat
+        console.log('ferdigstill');
+        console.log(aktuellManOppgave);
         oppdaterSendInnValidering(true);
+        /*
+        fetch('https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/', {
+            method: 'POST',
+            body: JSON.stringify(
+                new ValidationResult({
+                    status: aktuellManOppgave.validationResult.status,
+                    ruleHits: aktuellManOppgave.validationResult.ruleHits,
+                }),
+            ),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then(res => {
+            console.log(res);
+        });
+        */
         //byttAktuellManOppgave();
     };
 

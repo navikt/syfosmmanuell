@@ -18,10 +18,6 @@ const EkspanderbartPanel: React.FC = () => {
     }, [manOppgaver]);
 
     useEffect(() => {
-        console.log('progresjon');
-        console.log(progresjon);
-        console.log('aktuellmanoppgave');
-        console.log(aktuellManOppgave);
         if (progresjon - 1 == manOppgaver.length) {
             setAktuellManOppgave(null);
         }

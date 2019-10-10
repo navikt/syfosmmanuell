@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
-import { RuleNames } from '../types/ValidationresultTypes';
+import { RuleNames, ValidationResult } from '../types/ValidationresultTypes';
 
 interface UseManOppgBehandlingInterface {
     manOppgaver: ManuellOppgave[] | null;
@@ -29,6 +29,15 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const oppdaterVurdering = (vurdering: boolean): void => {
         const nyOppgave = new ManuellOppgave(aktuellManOppgave);
         nyOppgave.validationResult.setBehandlet(aktuellArsak, vurdering);
+        console.log(nyOppgave);
+        if (
+            nyOppgave.validationResult.antallBehandlet == 1 &&
+            nyOppgave.validationResult.antallBehandlet == nyOppgave.validationResult.ruleHits.length
+        ) {
+            console.log('here');
+            nyOppgave.setSendInnValidering(true);
+        }
+        console.log(nyOppgave);
         setAktuellManOppgave(nyOppgave);
         setAktuellArsak(null);
     };
@@ -65,13 +74,33 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     }, [isLoading]);
 
     useEffect(() => {
-        console.log(manOppgaver);
         if (manOppgaver != null) {
             manOppgaver[0].validationResult.totalVurdering == null
                 ? setAktuellManOppgave(manOppgaver[0])
                 : setAktuellManOppgave(null);
         }
     }, [manOppgaver]);
+
+    useEffect(() => {
+        console.log(aktuellManOppgave);
+        if (aktuellManOppgave && aktuellManOppgave.sendInnValidering) {
+            fetch('https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/', {
+                method: 'POST',
+                body: JSON.stringify(
+                    new ValidationResult({
+                        status: aktuellManOppgave.validationResult.status,
+                        ruleHits: aktuellManOppgave.validationResult.ruleHits,
+                    }),
+                ),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then(res => {
+                console.log(res);
+                console.log(aktuellManOppgave);
+            });
+        }
+    }, [aktuellManOppgave]);
 
     return {
         manOppgaver,

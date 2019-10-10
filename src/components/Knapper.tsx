@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { RuleNames } from '../types/ValidationresultTypes';
+import { RuleNames, ValidationResult } from '../types/ValidationresultTypes';
 import { useAppStore } from '../store/AppStore';
 import './Knapper.less';
 
@@ -66,11 +66,30 @@ const Knapper: React.FC = () => {
     const handterAvgjorelse = (): void => {
         if (kanSendeInn) {
             oppdaterVurdering(erGodkjent);
+            /*
             if (knappeTekst == KnappeTekst.FERDIGSTILL) {
-                oppdaterSendInnValidering(true);
+                console.log('aktuellmanoppgave rett før fetch');
+                console.log(aktuellManOppgave);
+                fetch('https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/', {
+                    method: 'POST',
+                    body: JSON.stringify(
+                        new ValidationResult({
+                            status: aktuellManOppgave.validationResult.status,
+                            ruleHits: aktuellManOppgave.validationResult.ruleHits,
+                        }),
+                    ),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }).then(res => {
+                    console.log(res);
+                    console.log(aktuellManOppgave);
+                });
+                //oppdaterSendInnValidering(true);
                 //byttAktuellManOppgave();
                 //setAktuellManOppgave(null);
             }
+            */
         }
     };
 
