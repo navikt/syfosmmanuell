@@ -1,15 +1,9 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import useFetch from '../rest/useFetch';
+import useFetch from '../hooks/useFetch';
 import { useAppStore } from '../store/AppStore';
-import {
-    FetchState,
-    hasAnyFailed,
-    hasData,
-    isAnyNotStartedOrPending,
-    isNotStarted,
-    hentUrlParametre,
-} from '../rest/utils';
+import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from '../utils/useFetchUtils';
+import { hentUrlParameter } from '../utils/urlParameter';
 import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
 import Spinner from 'nav-frontend-spinner';
 
@@ -21,7 +15,7 @@ export const DataFetcher = (props: { children: any }) => {
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {
             try {
-                url += hentUrlParametre(window.location.href).pnr;
+                url += hentUrlParameter(window.location.href).pnr;
                 console.log('URL with parameter: ' + url);
             } catch (err) {
                 setError(err);
