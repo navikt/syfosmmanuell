@@ -58,6 +58,9 @@ export const DataFetcher = (props: { children: any }) => {
                                 ruleHits: aktuellManOppgave.validationResult.ruleHits,
                             }),
                         ),
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
                     },
                     (fetchState: FetchState<any>) => {
                         byttAktuellManOppgave();
