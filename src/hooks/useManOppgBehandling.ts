@@ -81,7 +81,8 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
 
     useEffect(() => {
         if (aktuellManOppgave && aktuellManOppgave.sendInnValidering) {
-            let url: string = env.postManuellVurderingUrl;
+            let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/';
+            //let url: string = env.postManuellVurderingUrl;
             url += env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '';
             console.log(
                 `Posting validationResult for manuellOppgaveid: ${aktuellManOppgave.manuellOppgaveid} to URL: ${url}`,
