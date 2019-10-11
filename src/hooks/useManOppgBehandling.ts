@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
 import { RuleNames, ValidationResult } from '../types/ValidationresultTypes';
+import env from '../utils/environments';
 
 interface UseManOppgBehandlingInterface {
     manOppgaver: ManuellOppgave[] | null;
@@ -80,30 +81,26 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
 
     useEffect(() => {
         if (aktuellManOppgave && aktuellManOppgave.sendInnValidering) {
+            let url: string = env.postManuellVurderingUrl;
+            url += env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '';
             console.log(
-                'fetcher fra: ' +
-                    'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/' +
-                    aktuellManOppgave.manuellOppgaveid,
+                `Posting validationResult for manuellOppgaveid: ${aktuellManOppgave.manuellOppgaveid} to URL: ${url}`,
             );
-            fetch(
-                'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/' +
-                    aktuellManOppgave.manuellOppgaveid,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(
-                        new ValidationResult({
-                            status: aktuellManOppgave.validationResult.status,
-                            ruleHits: aktuellManOppgave.validationResult.ruleHits,
-                        }),
-                    ),
-                },
-            ).then(res => {
-                console.log(res);
-                console.log('aktuellmanoppgave som ble sendt inn');
-                console.log(aktuellManOppgave);
-                byttAktuellManOppgave();
-                //console.log(aktuellManOppgave);
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(
+                    new ValidationResult({
+                        status: aktuellManOppgave.validationResult.status,
+                        ruleHits: aktuellManOppgave.validationResult.ruleHits,
+                    }),
+                ),
+            }).then(res => {
+                if (res.status == 200) {
+                    byttAktuellManOppgave();
+                } else {
+                    setError(new Error('Fetch failed with status code: ' + res.status));
+                }
             });
         }
     }, [aktuellManOppgave]);

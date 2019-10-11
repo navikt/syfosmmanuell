@@ -14,6 +14,18 @@ class Environment {
     get isDevelopment() {
         return this.nodeEnv === 'development';
     }
+
+    get hentManuelleOppgaverUrl() {
+        return this.isProduction || this.isPreprod
+            ? process.env.GET_MANUELLE_OPPGAVER_URL
+            : 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
+    }
+
+    get postManuellVurderingUrl() {
+        return this.isProduction || this.isPreprod
+            ? process.env.POST_MANUELL_VURDERING_URL
+            : 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/';
+    }
 }
 
 const env = new Environment();
