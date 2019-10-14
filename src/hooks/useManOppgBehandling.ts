@@ -85,10 +85,10 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
             //let url: string = env.postManuellVurderingUrl;
             url += env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '';
             console.log(
-                `Posting validationResult for manuellOppgaveid: ${aktuellManOppgave.manuellOppgaveid} to URL: ${url}`,
+                `Putting validationResult for manuellOppgaveid: ${aktuellManOppgave.manuellOppgaveid} to URL: ${url}`,
             );
             fetch(url, {
-                method: 'POST',
+                method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(
                     new ValidationResult({
