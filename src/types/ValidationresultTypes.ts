@@ -23,7 +23,7 @@ class RuleInfo {
     }
 }
 
-enum Status {
+export enum Status {
     OK,
     MANUAL_PROCESSING,
     INVALID,

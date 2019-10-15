@@ -2,10 +2,9 @@ import * as React from 'react';
 import { useAppStore } from '../store/AppStore';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { KnappeTekst } from './Knapper';
-import { ValidationResult } from '../types/ValidationresultTypes';
 
 const Ferdigstilling: React.FC = () => {
-    const { aktuellManOppgave, oppdaterSendInnValidering, byttAktuellManOppgave, resettVurdering } = useAppStore();
+    const { aktuellManOppgave, oppdaterSendInnValidering, resettVurdering } = useAppStore();
 
     const handterFerdigstill = (): void => {
         //send inn totalresultat

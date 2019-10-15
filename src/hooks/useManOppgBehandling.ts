@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
-import { RuleNames, ValidationResult } from '../types/ValidationresultTypes';
+import { RuleNames, Status, ValidationResult } from '../types/ValidationresultTypes';
 import env from '../utils/environments';
 
 interface UseManOppgBehandlingInterface {
+    oppgaverLoest: number;
+    setOppgaverLoest: Function;
     manOppgaver: ManuellOppgave[] | null;
     setManOppgaver: Function;
     aktuellManOppgave: ManuellOppgave | null;
@@ -26,6 +28,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const [aktuellArsak, setAktuellArsak] = useState<RuleNames | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [oppgaverLoest, setOppgaverLoest] = useState<number>(0);
 
     const oppdaterVurdering = (vurdering: boolean): void => {
         const nyOppgave = new ManuellOppgave(aktuellManOppgave);
@@ -87,12 +90,13 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
             console.log(
                 `Putting validationResult for manuellOppgaveid: ${aktuellManOppgave.manuellOppgaveid} to URL: ${url}`,
             );
+            console.log(aktuellManOppgave);
             fetch(url, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(
                     new ValidationResult({
-                        status: aktuellManOppgave.validationResult.status,
+                        status: aktuellManOppgave.validationResult.totalVurdering ? Status.OK : Status.INVALID,
                         ruleHits: aktuellManOppgave.validationResult.ruleHits,
                     }),
                 ),
@@ -107,6 +111,8 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     }, [aktuellManOppgave]);
 
     return {
+        oppgaverLoest,
+        setOppgaverLoest,
         manOppgaver,
         setManOppgaver,
         aktuellManOppgave,
