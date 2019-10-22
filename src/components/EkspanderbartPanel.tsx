@@ -12,7 +12,7 @@ const reportProblemCircle = require('../img/report-problem-circle.svg');
 
 const EkspanderbartPanel: React.FC = () => {
     const [progresjon, setProgresjon] = useState<number | null>(null);
-    const { manOppgaver, aktuellManOppgave, setAktuellManOppgave, isLoading } = useAppStore();
+    const { manOppgaver, aktuellManOppgave, setAktuellManOppgave, isLoading, error } = useAppStore();
 
     useEffect(() => {
         setProgresjon(manOppgaver.filter(oppgave => oppgave.validationResult.antallBehandlet != 0).length + 1);
@@ -23,6 +23,10 @@ const EkspanderbartPanel: React.FC = () => {
             setAktuellManOppgave(null);
         }
     }, [progresjon]);
+
+    if (error) {
+        return <p>Det har oppstått en feil</p>;
+    }
 
     if (isLoading) {
         return <Spinner />;

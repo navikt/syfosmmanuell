@@ -31,16 +31,20 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const [oppgaverLoest, setOppgaverLoest] = useState<number>(0);
 
     const oppdaterVurdering = (vurdering: boolean): void => {
-        const nyOppgave = new ManuellOppgave(aktuellManOppgave);
-        nyOppgave.validationResult.setBehandlet(aktuellArsak, vurdering);
-        if (
-            nyOppgave.validationResult.antallBehandlet == 1 &&
-            nyOppgave.validationResult.antallBehandlet == nyOppgave.validationResult.ruleHits.length
-        ) {
-            nyOppgave.setSendInnValidering(true);
+        if (aktuellManOppgave) {
+            const nyOppgave = new ManuellOppgave(aktuellManOppgave);
+            nyOppgave.validationResult.setBehandlet(aktuellArsak, vurdering);
+            if (
+                nyOppgave.validationResult.antallBehandlet == 1 &&
+                nyOppgave.validationResult.antallBehandlet == nyOppgave.validationResult.ruleHits.length
+            ) {
+                nyOppgave.setSendInnValidering(true);
+            }
+            setAktuellManOppgave(nyOppgave);
+            setAktuellArsak(null);
+        } else {
+            setError(new Error('Ingen Oppgave er satt'));
         }
-        setAktuellManOppgave(nyOppgave);
-        setAktuellArsak(null);
     };
 
     const oppdaterSendInnValidering = (status: boolean): void => {
@@ -55,6 +59,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         );
         nyManOppgaver.push(new ManuellOppgave(aktuellManOppgave));
         setManOppgaver(nyManOppgaver);
+        setOppgaverLoest(forrigeAntall => forrigeAntall + 1);
     };
 
     const resettVurdering = (): void => {
@@ -66,8 +71,6 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     };
 
     const putValidation = (validationResult: ValidationResult): void => {
-        console.log('sending: ');
-        console.log(validationResult);
         const url =
             env.putManuellVurderingUrl + (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
         setIsLoading(true);
@@ -105,7 +108,6 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
                 }),
             );
         }
-        console.log(aktuellManOppgave);
     }, [aktuellManOppgave]);
 
     return {

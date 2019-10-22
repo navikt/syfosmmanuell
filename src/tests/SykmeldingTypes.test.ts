@@ -9,8 +9,6 @@ describe('SykmeldingTypes', () => {
 
     test('Burde parse alle properties', () => {
         expect(JSON.stringify(sykmelding)).toBe(JSON.stringify(mockSykmeldingParset));
-        expect(sykmelding.id).toBe('detteerensykmeldingid');
-        expect(sykmelding.msgId).toBe('123124334');
     });
 
     test('Burde returnere "null" for manglende ikke-påkrevd property', () => {

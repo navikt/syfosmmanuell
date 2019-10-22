@@ -1,13 +1,23 @@
-import { ValidationResult, ValidationResultWithStatus } from '../types/ValidationresultTypes';
+import { ValidationResult, ValidationResultWithStatus, RuleNames } from '../types/ValidationresultTypes';
 
 describe('ValidationresultTypes', () => {
-    let validationResult;
+    let validationResult: ValidationResultWithStatus;
     beforeEach(() => {
         validationResult = new ValidationResultWithStatus(mockValidationResult);
     });
 
     it('Skal parse alle felt', () => {
         expect(JSON.stringify(validationResult)).toBe(JSON.stringify(mockValidationResultParset));
+    });
+
+    it('Skal sette behandlet-flagg for arsak til true', () => {
+        validationResult.setBehandlet(RuleNames[validationResult.ruleHits[0].ruleName], true);
+        expect(validationResult.behandlet.get(RuleNames[validationResult.ruleHits[0].ruleName])).toBeTruthy();
+    });
+
+    it('Skal sette behandlet-flagg for arsak til false', () => {
+        validationResult.setBehandlet(RuleNames[validationResult.ruleHits[0].ruleName], false);
+        expect(validationResult.behandlet.get(RuleNames[validationResult.ruleHits[0].ruleName])).toBeFalsy();
     });
 });
 
