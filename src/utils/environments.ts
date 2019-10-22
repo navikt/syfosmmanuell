@@ -21,7 +21,7 @@ class Environment {
             : 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
     }
 
-    get postManuellVurderingUrl() {
+    get putManuellVurderingUrl() {
         return this.isProduction || this.isPreprod
             ? process.env.POST_MANUELL_VURDERING_URL
             : 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/';

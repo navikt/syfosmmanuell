@@ -10,6 +10,12 @@ export const sykmeldingFlereRegler = [
                     messageForUser: 'message for user',
                     ruleStatus: 'MANUAL_PROCESSING',
                 },
+                {
+                    ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE',
+                    messageForSender: 'message for sender',
+                    messageForUser: 'message for user',
+                    ruleStatus: 'MANUAL_PROCESSING',
+                },
             ],
         },
         receivedSykmelding: {

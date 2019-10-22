@@ -64,6 +64,24 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
             }
         });
     };
+
+    const putValidation = (validationResult: ValidationResult): void => {
+        const url =
+            env.putManuellVurderingUrl + (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
+        setIsLoading(true);
+        fetch(url, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(validationResult),
+        }).then(res => {
+            setIsLoading(false);
+            if (res.status == 200) {
+                byttAktuellManOppgave();
+            } else {
+                setError(new Error('Fetch failed with status code: ' + res.status));
+            }
+        });
+    };
     /*
     useEffect(() => {
         if (manOppgaver != null) {
@@ -87,31 +105,12 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
 
     useEffect(() => {
         if (aktuellManOppgave && aktuellManOppgave.sendInnValidering) {
-            let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/';
-            //let url: string = env.postManuellVurderingUrl;
-            url += env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '';
-            console.log(
-                `Putting validationResult for manuellOppgaveid: ${aktuellManOppgave.manuellOppgaveid} to URL: ${url}`,
+            putValidation(
+                new ValidationResult({
+                    status: aktuellManOppgave.validationResult.totalVurdering ? Status.OK : Status.INVALID,
+                    ruleHits: aktuellManOppgave.validationResult.ruleHits,
+                }),
             );
-            console.log(aktuellManOppgave);
-            setIsLoading(true);
-            fetch(url, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(
-                    new ValidationResult({
-                        status: aktuellManOppgave.validationResult.totalVurdering ? Status.OK : Status.INVALID,
-                        ruleHits: aktuellManOppgave.validationResult.ruleHits,
-                    }),
-                ),
-            }).then(res => {
-                setIsLoading(false);
-                if (res.status == 200) {
-                    byttAktuellManOppgave();
-                } else {
-                    setError(new Error('Fetch failed with status code: ' + res.status));
-                }
-            });
         }
     }, [aktuellManOppgave]);
 
