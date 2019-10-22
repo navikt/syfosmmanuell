@@ -73,6 +73,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const putValidation = (validationResult: ValidationResult): void => {
         const url =
             env.putManuellVurderingUrl + (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
+        console.log('putting to: ' + url);
         setIsLoading(true);
         fetch(url, {
             method: 'PUT',

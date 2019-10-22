@@ -45,6 +45,7 @@ jobs:
         uses: navikt/deployment-cli/action@0.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_ENV: preprod
         with:
           cluster: dev-fss
           team: teamsykefravr
