@@ -66,6 +66,8 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     };
 
     const putValidation = (validationResult: ValidationResult): void => {
+        console.log('sending: ');
+        console.log(validationResult);
         const url =
             env.putManuellVurderingUrl + (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
         setIsLoading(true);
@@ -82,16 +84,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
             }
         });
     };
-    /*
-    useEffect(() => {
-        if (manOppgaver != null) {
-            setAktuellManOppgave(manOppgaver[0]);
-            if (manOppgaver[0].validationResult.ruleHits.length == 1) {
-                setAktuellArsak(manOppgaver[0].validationResult.ruleHits[0].ruleName);
-            }
-        }
-    }, [isLoading]);
-*/
+
     useEffect(() => {
         if (manOppgaver != null) {
             manOppgaver[0].validationResult.totalVurdering == null
@@ -112,6 +105,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
                 }),
             );
         }
+        console.log(aktuellManOppgave);
     }, [aktuellManOppgave]);
 
     return {

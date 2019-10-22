@@ -7,27 +7,7 @@ const Ferdigstilling: React.FC = () => {
     const { aktuellManOppgave, oppdaterSendInnValidering, resettVurdering } = useAppStore();
 
     const handterFerdigstill = (): void => {
-        //send inn totalresultat
-        console.log('ferdigstill');
-        console.log(aktuellManOppgave);
         oppdaterSendInnValidering(true);
-        /*
-        fetch('https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/', {
-            method: 'POST',
-            body: JSON.stringify(
-                new ValidationResult({
-                    status: aktuellManOppgave.validationResult.status,
-                    ruleHits: aktuellManOppgave.validationResult.ruleHits,
-                }),
-            ),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then(res => {
-            console.log(res);
-        });
-        */
-        //byttAktuellManOppgave();
     };
 
     return (

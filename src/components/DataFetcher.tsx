@@ -22,9 +22,6 @@ export const DataFetcher = (props: { children: any }) => {
     const manOppgaver = useFetch<ManuellOppgave[]>();
     let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
 
-    const postValidering = useFetch<any>();
-    const url2 = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/';
-
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {
             try {
@@ -46,34 +43,8 @@ export const DataFetcher = (props: { children: any }) => {
             });
         }
     }, []);
-    /*
-    useEffect(() => {
-        if (aktuellManOppgave && aktuellManOppgave.sendInnValidering) {
-            if (isNotStarted(postValidering)) {
-                postValidering.fetch(
-                    url2,
-                    {
-                        method: 'POST',
-                        body: JSON.stringify(
-                            new ValidationResult({
-                                status: aktuellManOppgave.validationResult.status,
-                                ruleHits: aktuellManOppgave.validationResult.ruleHits,
-                            }),
-                        ),
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    },
-                    (fetchState: FetchState<any>) => {
-                        console.log('post response');
-                        byttAktuellManOppgave();
-                    },
-                );
-            }
-        }
-    }, [aktuellManOppgave]);
-*/
-    if (isAnyNotStartedOrPending([manOppgaver]) || isPending(postValidering)) {
+
+    if (isAnyNotStartedOrPending([manOppgaver])) {
         return <Spinner />;
     } else if (hasAnyFailed([manOppgaver])) {
         return (

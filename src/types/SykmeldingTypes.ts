@@ -313,10 +313,11 @@ export class Sykmelding {
         this.prognose = sykmelding.prognose ? new Prognose(sykmelding.prognose) : null;
         this.utdypendeOpplysninger = new Map<string, Map<string, SporsmalSvar>>();
         Object.keys(sykmelding.utdypendeOpplysninger).forEach(key => {
+            const opplysning = new Map<string, SporsmalSvar>();
             Object.keys(sykmelding.utdypendeOpplysninger[key]).forEach(key2 => {
-                const opplysning = new Map<string, SporsmalSvar>().set(key2, sykmelding.utdypendeOpplysninger[key]);
-                this.utdypendeOpplysninger.set(key, opplysning);
+                opplysning.set(key2, new SporsmalSvar(sykmelding.utdypendeOpplysninger[key][key2]));
             });
+            this.utdypendeOpplysninger.set(key, opplysning);
         });
         this.tiltakArbeidsplassen = sykmelding.tiltakArbeidsplassen ? sykmelding.tiltakArbeidsplassen : null;
         this.tiltakNAV = sykmelding.tiltakNAV ? sykmelding.tiltakNAV : null;
