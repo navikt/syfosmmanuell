@@ -6,12 +6,13 @@ import { useAppStore } from '../store/AppStore';
 import FlereArsakerVisning from './FlereArsakerVisning';
 import EnArsakVisning from './EnArsakVisning';
 import './EkspanderbartPanel.less';
+import Spinner from 'nav-frontend-spinner';
 
 const reportProblemCircle = require('../img/report-problem-circle.svg');
 
 const EkspanderbartPanel: React.FC = () => {
     const [progresjon, setProgresjon] = useState<number | null>(null);
-    const { manOppgaver, aktuellManOppgave, setAktuellManOppgave } = useAppStore();
+    const { manOppgaver, aktuellManOppgave, setAktuellManOppgave, isLoading } = useAppStore();
 
     useEffect(() => {
         setProgresjon(manOppgaver.filter(oppgave => oppgave.validationResult.antallBehandlet != 0).length + 1);
@@ -22,6 +23,10 @@ const EkspanderbartPanel: React.FC = () => {
             setAktuellManOppgave(null);
         }
     }, [progresjon]);
+
+    if (isLoading) {
+        return <Spinner />;
+    }
 
     return (
         <>

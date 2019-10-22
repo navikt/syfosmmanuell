@@ -64,7 +64,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
             }
         });
     };
-
+    /*
     useEffect(() => {
         if (manOppgaver != null) {
             setAktuellManOppgave(manOppgaver[0]);
@@ -73,12 +73,15 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
             }
         }
     }, [isLoading]);
-
+*/
     useEffect(() => {
         if (manOppgaver != null) {
             manOppgaver[0].validationResult.totalVurdering == null
                 ? setAktuellManOppgave(manOppgaver[0])
                 : setAktuellManOppgave(null);
+            manOppgaver[0].validationResult.ruleHits.length == 1
+                ? setAktuellArsak(manOppgaver[0].validationResult.ruleHits[0].ruleName)
+                : setAktuellArsak(null);
         }
     }, [manOppgaver]);
 
@@ -91,6 +94,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
                 `Putting validationResult for manuellOppgaveid: ${aktuellManOppgave.manuellOppgaveid} to URL: ${url}`,
             );
             console.log(aktuellManOppgave);
+            setIsLoading(true);
             fetch(url, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -101,6 +105,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
                     }),
                 ),
             }).then(res => {
+                setIsLoading(false);
                 if (res.status == 200) {
                     byttAktuellManOppgave();
                 } else {
