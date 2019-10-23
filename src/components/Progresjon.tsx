@@ -14,6 +14,10 @@ const Progresjon: React.FC = () => {
         } som må vurderes manuelt.`;
     };
 
+    if (manOppgaver === null) {
+        return <p>Oppgaven(e) er enten løst, eller så finnes det ikke noen oppgave på denne personen.</p>;
+    }
+
     return (
         <>
             {aktuellManOppgave && (
