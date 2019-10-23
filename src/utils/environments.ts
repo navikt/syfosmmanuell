@@ -17,13 +17,13 @@ class Environment {
 
     get hentManuelleOppgaverUrl() {
         return this.isProduction || this.isPreprod
-            ? process.env.GET_MANUELLE_OPPGAVER_URL
+            ? process.env.REACT_APP_GET_MANUELLE_OPPGAVER_URL
             : 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
     }
 
     get putManuellVurderingUrl() {
         return this.isProduction || this.isPreprod
-            ? process.env.PUT_MANUELL_VURDERING_URL
+            ? process.env.REACT_APP_PUT_MANUELL_VURDERING_URL
             : 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/';
     }
 }
