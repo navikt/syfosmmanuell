@@ -41,6 +41,6 @@ spec:
       value: preprod
     - name: GET_MANUELLE_OPPGAVER_URL
       value: 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr='
-    - name: POST_MANUELL_VURDERING_URL
+    - name: PUT_MANUELL_VURDERING_URL
       value: 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/'
       
