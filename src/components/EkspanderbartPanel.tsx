@@ -11,18 +11,7 @@ import Spinner from 'nav-frontend-spinner';
 const reportProblemCircle = require('../img/report-problem-circle.svg');
 
 const EkspanderbartPanel: React.FC = () => {
-    const [progresjon, setProgresjon] = useState<number | null>(null);
-    const { manOppgaver, aktuellManOppgave, setAktuellManOppgave, isLoading, error } = useAppStore();
-
-    useEffect(() => {
-        setProgresjon(manOppgaver.filter(oppgave => oppgave.validationResult.antallBehandlet != 0).length + 1);
-    }, [manOppgaver]);
-
-    useEffect(() => {
-        if (progresjon - 1 == manOppgaver.length) {
-            setAktuellManOppgave(null);
-        }
-    }, [progresjon]);
+    const { manOppgaver, aktuellManOppgave, isLoading, error, oppgaverLoest } = useAppStore();
 
     if (error) {
         return <p>Det har oppstått en feil</p>;
@@ -41,7 +30,7 @@ const EkspanderbartPanel: React.FC = () => {
                             <div className="ekspanderbartpanel__header">
                                 <img src={reportProblemCircle} alt="Varselikon" className="ekspanderbartpanel__ikon" />
                                 <Undertittel>
-                                    Sykmelding {progresjon} av {manOppgaver.length}
+                                    Sykmelding {oppgaverLoest + 1} av {manOppgaver.length}
                                 </Undertittel>
                             </div>
                         }

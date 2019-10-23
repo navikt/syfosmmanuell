@@ -115,6 +115,12 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         }
     }, [aktuellManOppgave]);
 
+    useEffect(() => {
+        if (manOppgaver && oppgaverLoest == manOppgaver.length) {
+            setAktuellManOppgave(null);
+        }
+    }, [oppgaverLoest]);
+
     return {
         oppgaverLoest,
         setOppgaverLoest,
