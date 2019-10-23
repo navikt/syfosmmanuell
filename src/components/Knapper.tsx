@@ -18,15 +18,7 @@ const Knapper: React.FC = () => {
     const [erGodkjent, setErGodkjent] = useState<boolean | null>(null);
     const [kanSendeInn, setKanSendeInn] = useState<boolean>(false);
 
-    const {
-        aktuellArsak,
-        setAktuellArsak,
-        aktuellManOppgave,
-        setAktuellManOppgave,
-        byttAktuellManOppgave,
-        oppdaterVurdering,
-        oppdaterSendInnValidering,
-    } = useAppStore();
+    const { aktuellArsak, setAktuellArsak, aktuellManOppgave, oppdaterVurdering } = useAppStore();
 
     useEffect(() => {
         switch (aktuellArsak) {
@@ -66,30 +58,6 @@ const Knapper: React.FC = () => {
     const handterAvgjorelse = (): void => {
         if (kanSendeInn) {
             oppdaterVurdering(erGodkjent);
-            /*
-            if (knappeTekst == KnappeTekst.FERDIGSTILL) {
-                console.log('aktuellmanoppgave rett før fetch');
-                console.log(aktuellManOppgave);
-                fetch('https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/', {
-                    method: 'POST',
-                    body: JSON.stringify(
-                        new ValidationResult({
-                            status: aktuellManOppgave.validationResult.status,
-                            ruleHits: aktuellManOppgave.validationResult.ruleHits,
-                        }),
-                    ),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }).then(res => {
-                    console.log(res);
-                    console.log(aktuellManOppgave);
-                });
-                //oppdaterSendInnValidering(true);
-                //byttAktuellManOppgave();
-                //setAktuellManOppgave(null);
-            }
-            */
         }
     };
 
