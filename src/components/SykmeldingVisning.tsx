@@ -27,11 +27,11 @@ const SykmeldingVisning: React.FC = () => {
     );
     const tilbakedatertLopendePeriodeBuilder = (): JSX.Element => (
         <>
-            <div className="grid-item">
+            <div className="js-grad grid-item">
                 <Element>Grad</Element>
                 <Normaltekst>{sykmelding.perioder[0].gradert.grad + ' %'}</Normaltekst>
             </div>
-            <div className="grid-item">
+            <div className="js-startsykefrv grid-item">
                 <Element>Når startet det legemeldte sykefraværet?</Element>
                 <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
             </div>

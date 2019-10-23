@@ -85,7 +85,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
             body: JSON.stringify(validationResult),
         }).then(res => {
             setIsLoading(false);
-            if (res.status == 200) {
+            if (res.status === 200 || res.status === 204) {
                 byttAktuellManOppgave();
             } else {
                 setError(new Error('Fetch failed with status code: ' + res.status));
