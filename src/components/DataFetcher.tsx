@@ -34,11 +34,15 @@ export const DataFetcher = (props: { children: any }) => {
             setIsLoading(true);
             manOppgaver.fetch(url, undefined, (fetchState: FetchState<ManuellOppgave[]>) => {
                 console.log(fetchState.data);
-                setManOppgaver(
-                    fetchState.data.map(manOppgave => {
-                        return new ManuellOppgave(manOppgave);
-                    }),
-                );
+                if (fetchState.data.length === 0) {
+                    setError(new Error('Ingen oppgaver ble funnet'));
+                } else {
+                    setManOppgaver(
+                        fetchState.data.map(manOppgave => {
+                            return new ManuellOppgave(manOppgave);
+                        }),
+                    );
+                }
                 setIsLoading(false);
             });
         }
