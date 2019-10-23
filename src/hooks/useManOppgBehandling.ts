@@ -75,6 +75,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
             env.putManuellVurderingUrl + (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
         console.log('putting to: ' + url);
         console.log('putManuellVurderingUrl ' + env.putManuellVurderingUrl);
+        console.log('process.env.NODE_ENV ' + process.env.NODE_ENV);
         console.log('process.env.putmanuellvurderingur: ' + process.env.PUT_MANUELL_VURDERING_URL);
         setIsLoading(true);
         fetch(url, {
