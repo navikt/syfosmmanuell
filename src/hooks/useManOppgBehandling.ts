@@ -72,7 +72,8 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
 
     const putValidation = (validationResult: ValidationResult): void => {
         const url =
-            env.putManuellVurderingUrl + (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
+            'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/' +
+            (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
         console.log('putting to: ' + url);
         console.log('putManuellVurderingUrl ' + env.putManuellVurderingUrl);
         console.log('process.env.NODE_ENV ' + process.env.NODE_ENV);
@@ -87,7 +88,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
             if (res.status === 200 || res.status === 204) {
                 byttAktuellManOppgave();
             } else {
-                setError(new Error('Fetch failed with status code: ' + res.status));
+                setError(new Error('Updating validation result failed with status code: ' + res.status));
             }
         });
     };

@@ -25,6 +25,7 @@ const SykmeldingVisning: React.FC = () => {
             </div>
         </>
     );
+
     const tilbakedatertLopendePeriodeBuilder = (): JSX.Element => (
         <>
             <div className="js-grad grid-item">

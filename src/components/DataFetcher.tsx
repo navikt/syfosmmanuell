@@ -21,7 +21,8 @@ import env from '../utils/environments';
 export const DataFetcher = (props: { children: any }) => {
     const { aktuellManOppgave, byttAktuellManOppgave, setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
-    let url = env.hentManuelleOppgaverUrl;
+    let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
+    //let url = env.hentManuelleOppgaverUrl;
 
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {
