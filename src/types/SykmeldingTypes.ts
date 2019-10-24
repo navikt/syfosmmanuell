@@ -145,7 +145,7 @@ export enum ArbeidsrelatertArsakType {
 
 class Gradert {
     reisetilskudd: boolean;
-    grad: number;
+    grad?: number;
     constructor(gradert) {
         this.reisetilskudd = gradert.reisetilskudd;
         this.grad = gradert.grad;

@@ -28,14 +28,18 @@ const SykmeldingVisning: React.FC = () => {
 
     const tilbakedatertLopendePeriodeBuilder = (): JSX.Element => (
         <>
-            <div className="js-grad grid-item">
-                <Element>Grad</Element>
-                <Normaltekst>{sykmelding.perioder[0].gradert.grad + ' %'}</Normaltekst>
-            </div>
-            <div className="js-startsykefrv grid-item">
-                <Element>Når startet det legemeldte sykefraværet?</Element>
-                <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
-            </div>
+            {sykmelding.perioder[0].gradert.grad && (
+                <div className="grid-item">
+                    <Element>Grad</Element>
+                    <Normaltekst>{sykmelding.perioder[0].gradert.grad + ' %'}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.syketilfelleStartDato && (
+                <div className="grid-item">
+                    <Element>Når startet det legemeldte sykefraværet?</Element>
+                    <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
+                </div>
+            )}
             <div className="grid-item grid-item--left">
                 <Element>Sykmeldingsperiode</Element>
                 <Normaltekst>
@@ -48,22 +52,29 @@ const SykmeldingVisning: React.FC = () => {
                 <Element>Sykmeldingsdato</Element>
                 <Normaltekst>{dayjs(sykmelding.signaturDato).format('DD.MM.YYYY')}</Normaltekst>
             </div>
-            <div className="grid-item">
-                <Element>Dato for dokumenterbar kontakt med pasienten</Element>
-                <Normaltekst>{dayjs(sykmelding.kontaktMedPasient.kontaktDato).format('DD.MM.YYYY')}</Normaltekst>
-            </div>
-            <div className="grid-item">
-                <Element>Pasienten har ikke kunne ivareta egne interesser. Begrunn</Element>
-                <Normaltekst>{sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}</Normaltekst>
-            </div>
-            <div className="grid-item grid-item--left">
-                <Element>Hoveddiagnose</Element>
-                <Normaltekst>{'hvor finner man dette?'}</Normaltekst>
-            </div>
-            <div className="grid-item grid-item--right">
-                <Element>Kode</Element>
-                <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.kode}</Normaltekst>
-            </div>
+            {sykmelding.kontaktMedPasient.kontaktDato && (
+                <div className="grid-item">
+                    <Element>Dato for dokumenterbar kontakt med pasienten</Element>
+                    <Normaltekst>{dayjs(sykmelding.kontaktMedPasient.kontaktDato).format('DD.MM.YYYY')}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt && (
+                <div className="grid-item">
+                    <Element>Pasienten har ikke kunne ivareta egne interesser. Begrunn</Element>
+                    <Normaltekst>{sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.medisinskVurdering.hovedDiagnose && (
+                    <div className="grid-item grid-item--left">
+                        <Element>Hoveddiagnose</Element>
+                        <Normaltekst>{'hvor finner man dette?'}</Normaltekst>
+                    </div>
+                ) && (
+                    <div className="grid-item grid-item--right">
+                        <Element>Kode</Element>
+                        <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.kode}</Normaltekst>
+                    </div>
+                )}
             <div className="grid-item grid-item-tittel">
                 <Undertittel>Friskmelding/prognose</Undertittel>
             </div>
@@ -141,14 +152,18 @@ const SykmeldingVisning: React.FC = () => {
 
     const tilbakedatertBuilder = (): JSX.Element => (
         <>
-            <div className="grid-item">
-                <Element>Grad</Element>
-                <Normaltekst>{sykmelding.perioder[0].gradert.grad + ' %'}</Normaltekst>
-            </div>
-            <div className="grid-item">
-                <Element>Når startet det legemeldte sykefraværet?</Element>
-                <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
-            </div>
+            {sykmelding.perioder[0].gradert.grad && (
+                <div className="grid-item">
+                    <Element>Grad</Element>
+                    <Normaltekst>{sykmelding.perioder[0].gradert.grad + ' %'}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.syketilfelleStartDato && (
+                <div className="grid-item">
+                    <Element>Når startet det legemeldte sykefraværet?</Element>
+                    <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
+                </div>
+            )}
             <div className="grid-item grid-item--left">
                 <Element>Sykmeldingsperiode</Element>
                 <Normaltekst>
@@ -161,22 +176,29 @@ const SykmeldingVisning: React.FC = () => {
                 <Element>Sykmeldingsdato</Element>
                 <Normaltekst>{dayjs(sykmelding.signaturDato).format('DD.MM.YYYY')}</Normaltekst>
             </div>
-            <div className="grid-item">
-                <Element>Dato for dokumenterbar kontakt med pasienten</Element>
-                <Normaltekst>{dayjs(sykmelding.kontaktMedPasient.kontaktDato).format('DD.MM.YYYY')}</Normaltekst>
-            </div>
-            <div className="grid-item">
-                <Element>Pasienten har ikke kunne ivareta egne interesser. Begrunn</Element>
-                <Normaltekst>{sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}</Normaltekst>
-            </div>
-            <div className="grid-item grid-item--left">
-                <Element>Hoveddiagnose</Element>
-                <Normaltekst>{'hvor finner man dette?'}</Normaltekst>
-            </div>
-            <div className="grid-item grid-item--right">
-                <Element>Kode</Element>
-                <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.kode}</Normaltekst>
-            </div>
+            {sykmelding.kontaktMedPasient.kontaktDato && (
+                <div className="grid-item">
+                    <Element>Dato for dokumenterbar kontakt med pasienten</Element>
+                    <Normaltekst>{dayjs(sykmelding.kontaktMedPasient.kontaktDato).format('DD.MM.YYYY')}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt && (
+                <div className="grid-item">
+                    <Element>Pasienten har ikke kunne ivareta egne interesser. Begrunn</Element>
+                    <Normaltekst>{sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.medisinskVurdering.hovedDiagnose && (
+                    <div className="grid-item grid-item--left">
+                        <Element>Hoveddiagnose</Element>
+                        <Normaltekst>{'hvor finner man dette?'}</Normaltekst>
+                    </div>
+                ) && (
+                    <div className="grid-item grid-item--right">
+                        <Element>Kode</Element>
+                        <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.kode}</Normaltekst>
+                    </div>
+                )}
             <div className="grid-item grid-item-tittel">
                 <Undertittel>Friskmelding/prognose</Undertittel>
             </div>
@@ -237,14 +259,18 @@ const SykmeldingVisning: React.FC = () => {
 
     const kiropraktorBuilder = (): JSX.Element => (
         <>
-            <div className="grid-item">
-                <Element>Grad</Element>
-                <Normaltekst>{sykmelding.perioder[0].gradert ? sykmelding.perioder[0].gradert.grad : ''}</Normaltekst>
-            </div>
-            <div className="grid-item">
-                <Element>Når startet det legemeldte sykefraværet?</Element>
-                <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
-            </div>
+            {sykmelding.perioder[0].gradert.grad && (
+                <div className="grid-item">
+                    <Element>Grad</Element>
+                    <Normaltekst>{sykmelding.perioder[0].gradert.grad + ' %'}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.syketilfelleStartDato && (
+                <div className="grid-item">
+                    <Element>Når startet det legemeldte sykefraværet?</Element>
+                    <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
+                </div>
+            )}
             <div className="grid-item grid-item--left">
                 <Element>Sykmeldingsperiode</Element>
                 <Normaltekst>
@@ -257,35 +283,43 @@ const SykmeldingVisning: React.FC = () => {
                 <Element>Sykmeldingsdato</Element>
                 <Normaltekst>{dayjs(sykmelding.signaturDato).format('DD.MM.YYYY')}</Normaltekst>
             </div>
-            <div className="grid-item grid-item--left">
-                <Element>Hoveddiagnose</Element>
-                <Normaltekst>{'hvor finner man dette?'}</Normaltekst>
-            </div>
-            <div className="grid-item grid-item--right">
-                <Element>Kode</Element>
-                <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.kode}</Normaltekst>
-            </div>
-            <div className="grid-item grid-item--left">
-                <Element>Bidiagnose</Element>
-                {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
-                    <Normaltekst key={index}>{'hvor finner man dette?'}</Normaltekst>
-                ))}
-            </div>
-            <div className="grid-item grid-item--right">
-                <Element>Kode</Element>
-                {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
-                    <Normaltekst key={index}>{diagnose.kode}</Normaltekst>
-                ))}
-            </div>
+            {sykmelding.medisinskVurdering.hovedDiagnose && (
+                    <div className="grid-item grid-item--left">
+                        <Element>Hoveddiagnose</Element>
+                        <Normaltekst>{'hvor finner man dette?'}</Normaltekst>
+                    </div>
+                ) && (
+                    <div className="grid-item grid-item--right">
+                        <Element>Kode</Element>
+                        <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.kode}</Normaltekst>
+                    </div>
+                )}
+            {sykmelding.medisinskVurdering.biDiagnoser.length > 0 && (
+                    <div className="grid-item grid-item--left">
+                        <Element>Bidiagnose</Element>
+                        {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
+                            <Normaltekst key={index}>{'hvor finner man dette?'}</Normaltekst>
+                        ))}
+                    </div>
+                ) && (
+                    <div className="grid-item grid-item--right">
+                        <Element>Kode</Element>
+                        {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
+                            <Normaltekst key={index}>{diagnose.kode}</Normaltekst>
+                        ))}
+                    </div>
+                )}
         </>
     );
 
     const flerePerioderBuilder = (): JSX.Element => (
         <>
-            <div className="grid-item">
-                <Element>Når startet det legemeldte sykefraværet?</Element>
-                <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
-            </div>
+            {sykmelding.syketilfelleStartDato && (
+                <div className="grid-item">
+                    <Element>Når startet det legemeldte sykefraværet?</Element>
+                    <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
+                </div>
+            )}
             <div className="grid-item grid-item--left">
                 <Element>Sykmeldingsperiode</Element>
                 {sykmelding.perioder.map((periode, index) => (
