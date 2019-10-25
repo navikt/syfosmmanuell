@@ -35,10 +35,7 @@ class AnnenFraversArsak {
     grunn: AnnenFraverGrunn[];
     constructor(annenFraversArsak) {
         this.beskrivelse = annenFraversArsak.beskrivelse ? annenFraversArsak.beskrivelse : null;
-        const grunnTemp = annenFraversArsak.grunn.map(
-            grunn => AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn],
-        );
-        this.grunn = grunnTemp;
+        this.grunn = annenFraversArsak.grunn.map(grunn => AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn]);
     }
 }
 
