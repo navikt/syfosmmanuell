@@ -5,6 +5,7 @@ export class ManuellOppgave {
     manuellOppgaveid: string;
     validationResult: ValidationResultWithStatus;
     sykmelding: Sykmelding;
+    sendInnValidering: boolean;
 
     constructor(manuellOppgave) {
         this.manuellOppgaveid = manuellOppgave.manuellOppgaveid;
@@ -12,5 +13,10 @@ export class ManuellOppgave {
         this.sykmelding = manuellOppgave.receivedSykmelding
             ? new Sykmelding(manuellOppgave.receivedSykmelding.sykmelding)
             : new Sykmelding(manuellOppgave.sykmelding);
+        this.sendInnValidering = manuellOppgave.sendInnValidering ? manuellOppgave.sendInnValidering : false;
     }
+
+    setSendInnValidering = (status: boolean): void => {
+        this.sendInnValidering = status;
+    };
 }

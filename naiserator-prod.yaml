@@ -39,3 +39,7 @@ spec:
   env:
     - name: NODE_ENV
       value: production
+    - name: REACT_APP_GET_MANUELLE_OPPGAVER_URL
+      value: 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr='
+    - name: REACT_APP_PUT_MANUELL_VURDERING_URL
+      value: 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/'

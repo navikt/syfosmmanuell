@@ -8,3 +8,4 @@ const mock = FetchMock.configure({
 });
 
 mock.get('https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/', sykmeldingFlereRegler);
+mock.put('https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/', { key: 'okey' });

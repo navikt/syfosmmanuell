@@ -6,22 +6,20 @@ import { useAppStore } from '../store/AppStore';
 import FlereArsakerVisning from './FlereArsakerVisning';
 import EnArsakVisning from './EnArsakVisning';
 import './EkspanderbartPanel.less';
+import Spinner from 'nav-frontend-spinner';
 
 const reportProblemCircle = require('../img/report-problem-circle.svg');
 
 const EkspanderbartPanel: React.FC = () => {
-    const [progresjon, setProgresjon] = useState<number | null>(null);
-    const { manOppgaver, aktuellManOppgave, setAktuellManOppgave } = useAppStore();
+    const { manOppgaver, aktuellManOppgave, isLoading, error, oppgaverLoest } = useAppStore();
 
-    useEffect(() => {
-        setProgresjon(manOppgaver.filter(oppgave => oppgave.validationResult.antallBehandlet != 0).length + 1);
-    }, [manOppgaver]);
+    if (error) {
+        return <p>Det har oppstått en feil</p>;
+    }
 
-    useEffect(() => {
-        if (progresjon - 1 == manOppgaver.length) {
-            setAktuellManOppgave(null);
-        }
-    }, [progresjon]);
+    if (isLoading) {
+        return <Spinner />;
+    }
 
     return (
         <>
@@ -32,7 +30,7 @@ const EkspanderbartPanel: React.FC = () => {
                             <div className="ekspanderbartpanel__header">
                                 <img src={reportProblemCircle} alt="Varselikon" className="ekspanderbartpanel__ikon" />
                                 <Undertittel>
-                                    Sykmelding {progresjon} av {manOppgaver.length}
+                                    Sykmelding {oppgaverLoest + 1} av {manOppgaver.length}
                                 </Undertittel>
                             </div>
                         }

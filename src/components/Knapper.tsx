@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { RuleNames } from '../types/ValidationresultTypes';
+import { RuleNames, ValidationResult } from '../types/ValidationresultTypes';
 import { useAppStore } from '../store/AppStore';
 import './Knapper.less';
 
@@ -18,7 +18,7 @@ const Knapper: React.FC = () => {
     const [erGodkjent, setErGodkjent] = useState<boolean | null>(null);
     const [kanSendeInn, setKanSendeInn] = useState<boolean>(false);
 
-    const { aktuellArsak, setAktuellArsak, aktuellManOppgave, setAktuellManOppgave, oppdaterVurdering } = useAppStore();
+    const { aktuellArsak, setAktuellArsak, aktuellManOppgave, oppdaterVurdering } = useAppStore();
 
     useEffect(() => {
         switch (aktuellArsak) {
@@ -58,9 +58,6 @@ const Knapper: React.FC = () => {
     const handterAvgjorelse = (): void => {
         if (kanSendeInn) {
             oppdaterVurdering(erGodkjent);
-            if (knappeTekst == KnappeTekst.FERDIGSTILL) {
-                setAktuellManOppgave(null);
-            }
         }
     };
 

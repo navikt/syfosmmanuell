@@ -16,6 +16,13 @@ const Progresjon: React.FC = () => {
 
     return (
         <>
+            {(!manOppgaver || manOppgaver.length === 0) && (
+                <div className="progressjon--ingen-oppgaver">
+                    <Normaltekst>
+                        Oppgaven(e) er enten løst, eller så finnes det ikke noen oppgave på denne personen.
+                    </Normaltekst>
+                </div>
+            )}
             {aktuellManOppgave && (
                 <div className="progresjon">
                     <div className="progresjon__ikon">
