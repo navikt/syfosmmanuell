@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { RuleNames } from '../types/ValidationresultTypes';
 import { Element, Undertittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import 'nav-frontend-lenker-style';
 import './SykmeldingVisning.less';
 import { useAppStore } from '../store/AppStore';
 import dayjs = require('dayjs');
@@ -13,6 +15,7 @@ const SykmeldingVisning: React.FC = () => {
         aktuellArsak,
         aktuellManOppgave: { sykmelding },
     } = useAppStore();
+    const [visHeleSm, setVisHeleSm] = useState(false);
 
     const sykmeldingHeader = (): JSX.Element => (
         <>
@@ -438,11 +441,22 @@ const SykmeldingVisning: React.FC = () => {
                 <div className="grid-item grid-item__tittel">
                     <Systemtittel>Sykmelding</Systemtittel>
                 </div>
-                {aktuellArsak == RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE &&
+                {visHeleSm && <p>Hele sykmeldingen placeholder</p>}
+                {!visHeleSm &&
+                    aktuellArsak == RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE &&
                     tilbakedatertLopendePeriodeBuilder()}
-                {aktuellArsak == RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING && tilbakedatertBuilder()}
-                {aktuellArsak == RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT && flerePerioderBuilder()}
-                {aktuellArsak == RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L && kiropraktorBuilder()}
+                {!visHeleSm &&
+                    aktuellArsak == RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING &&
+                    tilbakedatertBuilder()}
+                {!visHeleSm && aktuellArsak == RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT && flerePerioderBuilder()}
+                {!visHeleSm &&
+                    aktuellArsak == RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L &&
+                    kiropraktorBuilder()}
+                <div className="grid-item grid-item__vis-hele-sm">
+                    <p className="lenke" onClick={(): void => setVisHeleSm(vises => !vises)}>
+                        {visHeleSm ? 'Vis komprimert sykmelding' : 'Vis hele sykmeldingingen'}
+                    </p>
+                </div>
             </div>
         </>
     );
