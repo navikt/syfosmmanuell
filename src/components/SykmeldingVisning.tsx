@@ -35,7 +35,7 @@ const SykmeldingVisning: React.FC = () => {
 
     const tilbakedatertLopendePeriodeBuilder = (): JSX.Element => (
         <>
-            {sykmelding.perioder[0].gradert.grad && (
+            {!!sykmelding.perioder[0].gradert && !!sykmelding.perioder[0].gradert.grad && (
                 <div className="grid-item">
                     <Element>Grad</Element>
                     <Normaltekst>{sykmelding.perioder[0].gradert.grad + ' %'}</Normaltekst>
@@ -197,7 +197,7 @@ const SykmeldingVisning: React.FC = () => {
 
     const tilbakedatertBuilder = (): JSX.Element => (
         <>
-            {!!sykmelding.perioder[0].gradert.grad && (
+            {!!sykmelding.perioder[0].gradert && !!sykmelding.perioder[0].gradert.grad && (
                 <div className="grid-item">
                     <Element>Grad</Element>
                     <Normaltekst>{sykmelding.perioder[0].gradert.grad + ' %'}</Normaltekst>
@@ -338,7 +338,7 @@ const SykmeldingVisning: React.FC = () => {
 
     const kiropraktorBuilder = (): JSX.Element => (
         <>
-            {sykmelding.perioder[0].gradert.grad && (
+            {!!sykmelding.perioder[0].gradert && !!sykmelding.perioder[0].gradert.grad && (
                 <div className="grid-item">
                     <Element>Grad</Element>
                     <Normaltekst>{sykmelding.perioder[0].gradert.grad + ' %'}</Normaltekst>
