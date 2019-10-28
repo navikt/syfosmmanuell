@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { useAppStore } from '../store/AppStore';
 import { Normaltekst } from 'nav-frontend-typografi';
-import './Progresjon.less';
+import './InfoHeader.less';
 
 const information = require('../img/information.svg');
 
-const Progresjon: React.FC = () => {
+const InfoHeader: React.FC = () => {
     const { manOppgaver, aktuellManOppgave } = useAppStore();
 
-    const progresjonstekst = (): string => {
+    const infoTekst = (): string => {
         return `Det er ${manOppgaver.length} ${
             manOppgaver.length == 1 ? 'sykmelding' : 'sykmeldinger'
         } som må vurderes manuelt.`;
@@ -29,7 +29,7 @@ const Progresjon: React.FC = () => {
                         <img src={information} alt="information icon" />
                     </div>
                     <div className="progresjon__tekst">
-                        <Normaltekst>{progresjonstekst()}</Normaltekst>
+                        <Normaltekst>{infoTekst()}</Normaltekst>
                     </div>
                 </div>
             )}
@@ -38,4 +38,4 @@ const Progresjon: React.FC = () => {
     );
 };
 
-export default Progresjon;
+export default InfoHeader;
