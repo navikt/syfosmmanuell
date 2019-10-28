@@ -182,7 +182,7 @@ const SykmeldingVisning: React.FC = () => {
             )}
             {!!sykmelding.tiltakNAV && (
                 <div className="grid-item">
-                    <Element>Tiltak i regi av NAV. Beskriv. (Hvis der er behov fra NAV nå, bruk felt 8.)</Element>
+                    <Element>Tiltak i regi av NAV. Beskriv. (Hvis det er behov fra NAV nå, bruk felt 8.)</Element>
                     <Normaltekst>{sykmelding.tiltakNAV}</Normaltekst>
                 </div>
             )}
@@ -323,7 +323,7 @@ const SykmeldingVisning: React.FC = () => {
             )}
             {!!sykmelding.tiltakNAV && (
                 <div className="grid-item">
-                    <Element>Tiltak i regi av NAV. Beskriv. (Hvis der er behov fra NAV nå, bruk felt 8.)</Element>
+                    <Element>Tiltak i regi av NAV. Beskriv. (Hvis det er behov fra NAV nå, bruk felt 8.)</Element>
                     <Normaltekst>{sykmelding.tiltakNAV}</Normaltekst>
                 </div>
             )}
