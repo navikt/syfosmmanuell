@@ -24,9 +24,11 @@ class MedisinskVurdering {
 class Diagnose {
     system: string;
     kode: string;
+    tekst: string;
     constructor(diagnose) {
         this.system = diagnose.system;
         this.kode = diagnose.kode;
+        this.tekst = diagnose.tekst;
     }
 }
 

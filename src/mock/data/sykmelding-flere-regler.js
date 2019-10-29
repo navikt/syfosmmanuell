@@ -27,11 +27,13 @@ export const sykmeldingFlereRegler = [
                     hovedDiagnose: {
                         system: '2.16.578.1.12.4.1.1.7170',
                         kode: 'K24',
+                        tekst: 'Rar sykdom',
                     },
                     biDiagnoser: [
                         {
                             system: '2.16.578.1.12.4.1.1.7170',
                             kode: '-57',
+                            tekst: 'Rar sykdom',
                         },
                         {
                             system: '3.16.578.1.12.4.1.1.7170',
