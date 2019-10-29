@@ -78,7 +78,7 @@ const SykmeldingVisning: React.FC = () => {
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (
                 <div className="grid-item grid-item--left">
                     <Element>Hoveddiagnose</Element>
-                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.system}</Normaltekst>
+                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.tekst}</Normaltekst>
                 </div>
             )}
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (
@@ -91,7 +91,7 @@ const SykmeldingVisning: React.FC = () => {
                 <div className="grid-item grid-item--left">
                     <Element>Bidiagnose</Element>
                     {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
-                        <Normaltekst key={index}>{diagnose.system}</Normaltekst>
+                        <Normaltekst key={index}>{diagnose.tekst}</Normaltekst>
                     ))}
                 </div>
             )}
@@ -330,7 +330,7 @@ const SykmeldingVisning: React.FC = () => {
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (
                 <div className="grid-item grid-item--left">
                     <Element>Hoveddiagnose</Element>
-                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.system}</Normaltekst>
+                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.tekst}</Normaltekst>
                 </div>
             )}
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (
@@ -492,7 +492,7 @@ const SykmeldingVisning: React.FC = () => {
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (
                 <div className="grid-item grid-item--left">
                     <Element>Hoveddiagnose</Element>
-                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.system}</Normaltekst>
+                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.tekst}</Normaltekst>
                 </div>
             )}
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (
@@ -621,7 +621,7 @@ const SykmeldingVisning: React.FC = () => {
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (
                 <div className="grid-item grid-item--left">
                     <Element>Hoveddiagnose</Element>
-                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.system}</Normaltekst>
+                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.tekst}</Normaltekst>
                 </div>
             )}
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (
@@ -678,7 +678,7 @@ const SykmeldingVisning: React.FC = () => {
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (
                 <div className="grid-item grid-item--left">
                     <Element>Hoveddiagnose</Element>
-                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.system}</Normaltekst>
+                    <Normaltekst>{sykmelding.medisinskVurdering.hovedDiagnose.tekst}</Normaltekst>
                 </div>
             )}
             {!!sykmelding.medisinskVurdering.hovedDiagnose && (

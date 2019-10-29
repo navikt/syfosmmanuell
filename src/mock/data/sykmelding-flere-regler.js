@@ -38,6 +38,7 @@ export const sykmeldingFlereRegler = [
                         {
                             system: '3.16.578.1.12.4.1.1.7170',
                             kode: '-59',
+                            tekst: 'Sykdom0',
                         },
                     ],
                     svangerskap: true,
@@ -168,15 +169,18 @@ export const sykmeldingFlereRegler = [
                     hovedDiagnose: {
                         system: '2.16.578.1.12.4.1.1.7170',
                         kode: 'K24',
+                        tekst: 'Sykdom0',
                     },
                     biDiagnoser: [
                         {
                             system: '2.16.578.1.12.4.1.1.7170',
                             kode: '-57',
+                            tekst: 'Sykdom0',
                         },
                         {
                             system: '3.16.578.1.12.4.1.1.7170',
                             kode: '-59',
+                            tekst: 'Sykdom0',
                         },
                     ],
                     svangerskap: true,
