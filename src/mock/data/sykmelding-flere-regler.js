@@ -33,21 +33,25 @@ export const sykmeldingFlereRegler = [
                             system: '2.16.578.1.12.4.1.1.7170',
                             kode: '-57',
                         },
+                        {
+                            system: '3.16.578.1.12.4.1.1.7170',
+                            kode: '-59',
+                        },
                     ],
                     svangerskap: true,
-                    yrkesskade: false,
-                    yrkesskadeDato: null,
+                    yrkesskade: true,
+                    yrkesskadeDato: '2018-10-18',
                     annenFraversArsak: {
                         beskrivelse:
                             'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
-                        grunn: ['NODVENDIG_KONTROLLUNDENRSOKELSE'],
+                        grunn: ['NODVENDIG_KONTROLLUNDENRSOKELSE', 'ABORT'],
                     },
                 },
-                skjermesForPasient: false,
+                skjermesForPasient: true,
                 arbeidsgiver: {
                     harArbeidsgiver: 'EN_ARBEIDSGIVER',
                     navn: 'Selskap AS',
-                    yrkesbetegnelse: 'TODO',
+                    yrkesbetegnelse: 'Kul jobb',
                     stillingsprosent: 100,
                 },
                 perioder: [
@@ -167,6 +171,10 @@ export const sykmeldingFlereRegler = [
                         {
                             system: '2.16.578.1.12.4.1.1.7170',
                             kode: '-57',
+                        },
+                        {
+                            system: '3.16.578.1.12.4.1.1.7170',
+                            kode: '-59',
                         },
                     ],
                     svangerskap: true,
