@@ -30,18 +30,18 @@ const HeleSykmeldingen: React.FC = () => {
         <>
             <div className="grid-item linje-vannrett"></div>
 
-            <div className="grid-item">
-                <Element>Periode</Element>
-                {sykmelding.perioder.map((periode, index) => (
-                    <div key={index}>
-                        <Normaltekst>
-                            {dayjs(periode.fom).format('DD.MM.YYYY') + ' - ' + dayjs(periode.tom).format('DD.MM.YYYY')}
-                        </Normaltekst>
-                        <Normaltekst>{dayjs(periode.tom).diff(dayjs(periode.fom), 'day')} dager</Normaltekst>
-                        <Normaltekst>{!!periode.gradert ? periode.gradert.grad : '100'}% sykmeldt</Normaltekst>
-                    </div>
-                ))}
+            <div className="grid-item grid-item-tittel">
+                <Element>Perioder</Element>
             </div>
+            {sykmelding.perioder.map((periode, index) => (
+                <div key={index} className="grid-item">
+                    <Normaltekst>
+                        {dayjs(periode.fom).format('DD.MM.YYYY') + ' - ' + dayjs(periode.tom).format('DD.MM.YYYY')}
+                    </Normaltekst>
+                    <Normaltekst>{dayjs(periode.tom).diff(dayjs(periode.fom), 'day')} dager</Normaltekst>
+                    <Normaltekst>{!!periode.gradert ? periode.gradert.grad : '100'}% sykmeldt</Normaltekst>
+                </div>
+            ))}
             {!!sykmelding.medisinskVurdering.annenFraversArsak &&
                 !!sykmelding.medisinskVurdering.annenFraversArsak.beskrivelse && (
                     <div className="grid-item">
@@ -107,37 +107,87 @@ const HeleSykmeldingen: React.FC = () => {
             </div>
 
             <div className="grid-item linje-vannrett"></div>
-
             <div className="grid-item grid-item-tittel">
                 <Undertittel>Mulighet for arbeid</Undertittel>
             </div>
 
-            {!!sykmelding.syketilfelleStartDato && (
-                <div className="grid-item">
-                    <Element>Når startet det legemeldte sykefraværet?</Element>
-                    <Normaltekst>{dayjs(sykmelding.syketilfelleStartDato).format('DD.MM.YYYY')}</Normaltekst>
-                </div>
-            )}
-            {!!sykmelding.perioder.some(
-                periode => !!periode.aktivitetIkkeMulig && !!periode.aktivitetIkkeMulig.medisinskArsak,
-            ) && (
-                <>
-                    <div className="grid-item checkbox">
-                        <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
-                        <div className="checkbox__tekst">
-                            <Normaltekst>
-                                Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet.
-                                <br />
-                                Hvis ja:
-                            </Normaltekst>
-                        </div>
+            {sykmelding.perioder.map((periode, index) => {
+                return (
+                    <div key={index}>
+                        {!!periode.aktivitetIkkeMulig && (
+                            <>
+                                <div className="grid-item">
+                                    <Element>Periode</Element>
+                                    <Normaltekst>
+                                        {dayjs(periode.fom).format('DD.MM.YYYY')} -{' '}
+                                        {dayjs(periode.tom).format('DD.MM.YYYY')}
+                                    </Normaltekst>
+                                </div>
+                                {!!periode.aktivitetIkkeMulig.medisinskArsak && (
+                                    <>
+                                        <div className="grid-item checkbox">
+                                            <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                                            <div className="checkbox__tekst">
+                                                <Normaltekst>
+                                                    Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet.
+                                                </Normaltekst>
+                                            </div>
+                                        </div>
+                                        {!!periode.aktivitetIkkeMulig.medisinskArsak.arsak.length && (
+                                            <div className="grid-item grid-item--shift-hoyre">
+                                                <Element>Angi hva som er årsaken</Element>
+                                                {periode.aktivitetIkkeMulig.medisinskArsak.arsak.map((arsak, index) => (
+                                                    <Normaltekst key={index}>- {arsak}</Normaltekst>
+                                                ))}
+                                            </div>
+                                        )}
+                                        {!!periode.aktivitetIkkeMulig.medisinskArsak.beskrivelse && (
+                                            <div className="grid-item grid-item--shift-hoyre">
+                                                <Element>Beskriv nærmere</Element>
+                                                <Normaltekst>
+                                                    {periode.aktivitetIkkeMulig.medisinskArsak.beskrivelse}
+                                                </Normaltekst>
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                                {!!periode.aktivitetIkkeMulig.arbeidsrelatertArsak && (
+                                    <>
+                                        <div className="grid-item checkbox">
+                                            <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                                            <div className="checkbox__tekst">
+                                                <Normaltekst>
+                                                    Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet
+                                                </Normaltekst>
+                                            </div>
+                                        </div>
+                                        {!!periode.aktivitetIkkeMulig.arbeidsrelatertArsak.arsak.length && (
+                                            <div className="grid-item grid-item--shift-hoyre">
+                                                <Element>Angi hva som er årsaken</Element>
+                                                {periode.aktivitetIkkeMulig.arbeidsrelatertArsak.arsak.map(
+                                                    (arsak, index) => (
+                                                        <Normaltekst key={index}>- {arsak}</Normaltekst>
+                                                    ),
+                                                )}
+                                            </div>
+                                        )}
+                                        {!!periode.aktivitetIkkeMulig.arbeidsrelatertArsak.beskrivelse && (
+                                            <div className="grid-item grid-item--shift-hoyre">
+                                                <Element>Beskriv nærmere</Element>
+                                                <Normaltekst>
+                                                    {periode.aktivitetIkkeMulig.arbeidsrelatertArsak.beskrivelse}
+                                                </Normaltekst>
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                            </>
+                        )}
                     </div>
-                    {/* mangler årsaker. */}
-                </>
-            )}
+                );
+            })}
 
             <div className="grid-item linje-vannrett"></div>
-
             <div className="grid-item grid-item-tittel">
                 <Undertittel>Friskmelding/prognose</Undertittel>
             </div>

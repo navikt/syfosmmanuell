@@ -115,8 +115,7 @@ class MedisinskArsak {
     arsak: MedisinskArsakType[];
     constructor(medisinskArsak) {
         this.beskrivelse = medisinskArsak.beskrivelse ? medisinskArsak.beskrivelse : null;
-        const arsakTemp = medisinskArsak.arsak.map(arsak => MedisinskArsak[arsak as keyof typeof MedisinskArsak]);
-        this.arsak = arsakTemp;
+        this.arsak = medisinskArsak.arsak.map(arsak => MedisinskArsakType[arsak as keyof typeof MedisinskArsak]);
     }
 }
 
@@ -132,8 +131,9 @@ class ArbeidsrelatertArsak {
     arsak: ArbeidsrelatertArsakType[];
     constructor(arbeidsrelatertArsak) {
         this.beskrivelse = arbeidsrelatertArsak.beskrivelse ? arbeidsrelatertArsak.beskrivelse : null;
-        const arsakTemp = arbeidsrelatertArsak.arsak.map(arsak => MedisinskArsak[arsak as keyof typeof MedisinskArsak]);
-        this.arsak = arsakTemp;
+        this.arsak = arbeidsrelatertArsak.arsak.map(
+            arsak => ArbeidsrelatertArsakType[arsak as keyof typeof ArbeidsrelatertArsakType],
+        );
     }
 }
 

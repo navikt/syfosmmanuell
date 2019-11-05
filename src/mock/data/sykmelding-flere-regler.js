@@ -64,7 +64,32 @@ export const sykmeldingFlereRegler = [
                         aktivitetIkkeMulig: {
                             medisinskArsak: {
                                 beskrivelse: 'dette er en beskrivelse',
-                                arsak: ['TILSTAND_HINDRER_AKTIVITET', 'Aktivitet vil forverre helsetilstanden'],
+                                arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
+                            },
+                            arbeidsrelatertArsak: {
+                                beskrivelse: 'dette er en beskrivelse',
+                                arsak: ['MANGLENDE_TILRETTELEGGING'],
+                            },
+                        },
+                        avventendeInnspillTilArbeidsgiver: null,
+                        behandlingsdager: null,
+                        gradert: {
+                            reisetilskudd: true,
+                            grad: 56,
+                        },
+                        reisetilskudd: false,
+                    },
+                    {
+                        fom: '2018-10-18',
+                        tom: '2018-11-12',
+                        aktivitetIkkeMulig: {
+                            medisinskArsak: {
+                                beskrivelse: 'dette er en beskrivelse',
+                                arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
+                            },
+                            arbeidsrelatertArsak: {
+                                beskrivelse: 'dette er en beskrivelse',
+                                arsak: ['MANGLENDE_TILRETTELEGGING'],
                             },
                         },
                         avventendeInnspillTilArbeidsgiver: null,
