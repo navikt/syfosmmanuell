@@ -81,7 +81,7 @@ export const sykmeldingFlereRegler = [
                     hensynArbeidsplassen:
                         'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
                     erIArbeid: {
-                        egetArbeidPaSikt: false,
+                        egetArbeidPaSikt: true,
                         annetArbeidPaSikt: true,
                         arbeidFOM: '2018-11-21',
                         vurderingsdato: '2018-10-30',
@@ -111,10 +111,10 @@ export const sykmeldingFlereRegler = [
                 andreTiltak:
                     'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
                 meldingTilNAV: {
-                    bistandUmiddelbart: false,
-                    beskrivBistand: null,
+                    bistandUmiddelbart: true,
+                    beskrivBistand: 'trenger hjelp',
                 },
-                meldingTilArbeidsgiver: null,
+                meldingTilArbeidsgiver: 'dett er en melding til arbeidsgiver',
                 kontaktMedPasient: {
                     kontaktDato: '2018-10-04',
                     begrunnelseIkkeKontakt:
