@@ -12,6 +12,8 @@ interface UseManOppgBehandlingInterface {
     setAktuellManOppgave: Function;
     aktuellArsak: RuleNames | null;
     setAktuellArsak: Function;
+    aktuellVurdering: boolean;
+    setAktuellVurdering: Function;
     oppdaterVurdering: Function;
     oppdaterSendInnValidering: Function;
     byttAktuellManOppgave: Function;
@@ -26,6 +28,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const [manOppgaver, setManOppgaver] = useState<ManuellOppgave[] | null>(null);
     const [aktuellManOppgave, setAktuellManOppgave] = useState<ManuellOppgave | null>(null);
     const [aktuellArsak, setAktuellArsak] = useState<RuleNames | null>(null);
+    const [aktuellVurdering, setAktuellVurdering] = useState<boolean | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [oppgaverLoest, setOppgaverLoest] = useState<number>(0);
@@ -126,6 +129,8 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         setAktuellManOppgave,
         aktuellArsak,
         setAktuellArsak,
+        aktuellVurdering,
+        setAktuellVurdering,
         oppdaterVurdering,
         oppdaterSendInnValidering,
         byttAktuellManOppgave,

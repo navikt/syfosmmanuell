@@ -5,9 +5,10 @@ import dayjs = require('dayjs');
 import { useState, useEffect, useRef } from 'react';
 import './SykmeldingVisning.less';
 import './HeleSykmeldingen.less';
+import Knapper from './Knapper';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const checkBox = require('../img/check-box-2.svg');
-const crossBox = require('../img/cross-box.svg');
 
 const HeleSykmeldingen: React.FC = () => {
     const {
@@ -225,17 +226,50 @@ const HeleSykmeldingen: React.FC = () => {
                     </div>
                 )}
 
-            {sykmelding.utdypendeOpplysninger.size > 0 && (
+            {!!sykmelding.utdypendeOpplysninger.size && (
                 <>
                     <div className="grid-item linje-vannrett"></div>
                     <div className="grid-item grid-item-tittel">
                         <Undertittel>Utdypende opplysninger</Undertittel>
+                        <Element>Helseopplysninger ved vurdering av aktivitetskravet</Element>
                     </div>
                 </>
             )}
+            {sykmelding.utdypendeOpplysninger.has('6.1') && sykmelding.utdypendeOpplysninger.get('6.1').has('6.1.1') && (
+                <div className="grid-item">
+                    <Element>
+                        Er det sykdommen, utredningen og/eller behandlingen som hindrer økt aktivitet? Beskriv.
+                    </Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.1').get('6.1.1').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.1') && sykmelding.utdypendeOpplysninger.get('6.1').has('6.1.2') && (
+                <div className="grid-item">
+                    <Element>Har behandlingen frem til nå bedret arbeidsevnen?</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.1').get('6.1.2').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.1') && sykmelding.utdypendeOpplysninger.get('6.1').has('6.1.3') && (
+                <div className="grid-item">
+                    <Element>Hva er videre plan for behandling?</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.1').get('6.1.3').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.1') && sykmelding.utdypendeOpplysninger.get('6.1').has('6.1.4') && (
+                <div className="grid-item">
+                    <Element>Er det arbeidsforholdet som hindrer (økt) aktivitet? Beskriv.</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.1').get('6.1.4').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.1') && sykmelding.utdypendeOpplysninger.get('6.1').has('6.1.5') && (
+                <div className="grid-item">
+                    <Element>Er det andre forhold som hindrer (økt) aktivitet?</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.1').get('6.1.5').svar}</Normaltekst>
+                </div>
+            )}
             {sykmelding.utdypendeOpplysninger.has('6.2') && sykmelding.utdypendeOpplysninger.get('6.2').has('6.2.1') && (
                 <div className="grid-item">
-                    <Element>Beskriv kort sykehistorie, symptomer og funn i dagens situasjon</Element>
+                    <Element>Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.</Element>
                     <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.2').get('6.2.1').svar}</Normaltekst>
                 </div>
             )}
@@ -247,7 +281,7 @@ const HeleSykmeldingen: React.FC = () => {
             )}
             {sykmelding.utdypendeOpplysninger.has('6.2') && sykmelding.utdypendeOpplysninger.get('6.2').has('6.2.3') && (
                 <div className="grid-item">
-                    <Element>Har behandlingen fre mtil nå bedret arbeidsevnen?</Element>
+                    <Element>Har behandlingen frem til nå bedret arbeidsevnen?</Element>
                     <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.2').get('6.2.3').svar}</Normaltekst>
                 </div>
             )}
@@ -270,6 +304,76 @@ const HeleSykmeldingen: React.FC = () => {
                         med delvis arbeid?
                     </Element>
                     <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.3').get('6.3.2').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.4') && sykmelding.utdypendeOpplysninger.get('6.4').has('6.4.1') && (
+                <div className="grid-item">
+                    <Element>Beskriv kort sykehistorie, symptomer og funn i dagens situasjon</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.4').get('6.4.1').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.4') && sykmelding.utdypendeOpplysninger.get('6.4').has('6.4.2') && (
+                <div className="grid-item">
+                    <Element>Beskriv pågående og planlagt henvisning, utredning og/eller behandling</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.4').get('6.4.2').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.4') && sykmelding.utdypendeOpplysninger.get('6.4').has('6.4.3') && (
+                <div className="grid-item">
+                    <Element>
+                        Hva mener du skal til for at pasienten kan komme tilbake i eget eller annet arbeid?
+                    </Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.4').get('6.4.3').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.5') && sykmelding.utdypendeOpplysninger.get('6.5').has('6.5.1') && (
+                <div className="grid-item">
+                    <Element>Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.5').get('6.5.1').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.5') && sykmelding.utdypendeOpplysninger.get('6.5').has('6.5.2') && (
+                <div className="grid-item">
+                    <Element>Hvordan påvirker dette funksjons-/arbeidsevnen?</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.5').get('6.5.2').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.5') && sykmelding.utdypendeOpplysninger.get('6.5').has('6.5.3') && (
+                <div className="grid-item">
+                    <Element>Beskriv pågående og planlagt henvisning, utredning og/eller medisinsk behandling</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.5').get('6.5.3').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.5') && sykmelding.utdypendeOpplysninger.get('6.5').has('6.5.4') && (
+                <div className="grid-item">
+                    <Element>
+                        Kan arbeidsevnen bedres gjennom medisinsk behandling og/eller arbeidsrelatert aktivitet? I så
+                        fall hvordan? Angi tidsperspektiv
+                    </Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.5').get('6.5.4').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.6') && sykmelding.utdypendeOpplysninger.get('6.6').has('6.6.1') && (
+                <div className="grid-item">
+                    <Element>
+                        Hva antar du at pasienten kan utføre av eget arbeid/arbeidsoppgaver i dag eller i nær framtid?
+                    </Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.6').get('6.6.1').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.6') && sykmelding.utdypendeOpplysninger.get('6.6').has('6.6.2') && (
+                <div className="grid-item">
+                    <Element>
+                        Hvis pasienten ikke kan gå tilbake til eget arbeid, hva antar du at pasienten kan utføre av
+                        annet arbeid/arbeidsoppgaver?
+                    </Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.6').get('6.6.2').svar}</Normaltekst>
+                </div>
+            )}
+            {sykmelding.utdypendeOpplysninger.has('6.6') && sykmelding.utdypendeOpplysninger.get('6.6').has('6.6.3') && (
+                <div className="grid-item">
+                    <Element>Hvilken betydning har denne sykdommen for den nedsatte arbeidsevnen?</Element>
+                    <Normaltekst>{sykmelding.utdypendeOpplysninger.get('6.6').get('6.6.3').svar}</Normaltekst>
                 </div>
             )}
 
@@ -377,6 +481,8 @@ const HeleSykmeldingen: React.FC = () => {
                 <Element>Dato sykmeldingen ble skrevet</Element>
                 <Normaltekst>{dayjs(sykmelding.signaturDato).format('DD.MM.YYYY')}</Normaltekst>
             </div>
+
+            <div className="grid-item linje-vannrett"></div>
         </>
     );
 
@@ -388,6 +494,7 @@ const HeleSykmeldingen: React.FC = () => {
             {visHeleSm && (
                 <div ref={sykmeldingRef} className="hele-sykmeldingen">
                     {heleSykmeldingenBuilder()}
+                    <Knapper />
                 </div>
             )}
         </>
