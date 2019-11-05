@@ -74,10 +74,6 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         const url =
             'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/' +
             (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
-        console.log('putting to: ' + url);
-        console.log('putManuellVurderingUrl ' + env.putManuellVurderingUrl);
-        console.log('process.env.NODE_ENV ' + process.env.NODE_ENV);
-        console.log('process.env.putmanuellvurderingur: ' + process.env.REACT_APP_PUT_MANUELL_VURDERING_URL);
         setIsLoading(true);
         fetch(url, {
             method: 'PUT',

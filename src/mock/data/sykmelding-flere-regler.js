@@ -61,7 +61,12 @@ export const sykmeldingFlereRegler = [
                     {
                         fom: '2018-10-18',
                         tom: '2018-11-12',
-                        aktivitetIkkeMulig: null,
+                        aktivitetIkkeMulig: {
+                            medisinskArsak: {
+                                beskrivelse: 'dette er en beskrivelse',
+                                arsak: ['TILSTAND_HINDRER_AKTIVITET', 'Aktivitet vil forverre helsetilstanden'],
+                            },
+                        },
                         avventendeInnspillTilArbeidsgiver: null,
                         behandlingsdager: null,
                         gradert: {
