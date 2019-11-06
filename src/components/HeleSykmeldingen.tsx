@@ -24,7 +24,6 @@ const HeleSykmeldingen: React.FC = () => {
                 window.scrollTo({ top: sykmeldingRef.current.offsetTop, behavior: 'smooth' });
             }, 300);
         }
-        console.log(sykmelding);
     }, [visHeleSm]);
 
     const heleSykmeldingenBuilder = (): JSX.Element => (
@@ -549,7 +548,7 @@ const HeleSykmeldingen: React.FC = () => {
             {visHeleSm && (
                 <div ref={sykmeldingRef} className="hele-sykmeldingen">
                     {heleSykmeldingenBuilder()}
-                    <Knapper />
+                    <Knapper radioNavn="hele-sykmeldingen" />
                 </div>
             )}
         </>

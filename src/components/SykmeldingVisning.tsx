@@ -577,7 +577,7 @@ const SykmeldingVisning: React.FC = () => {
                         kiropraktorBuilder()}
                 </div>
                 <div className="linje-vannrett"></div>
-                <Knapper />
+                <Knapper radioNavn="sykmelding-visning" />
             </div>
         </>
     );
