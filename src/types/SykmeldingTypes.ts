@@ -105,7 +105,7 @@ class AktivitetIkkeMulig {
             ? new MedisinskArsak(aktivitetIkkeMulig.medisinskArsak)
             : null;
         this.arbeidsrelatertArsak = aktivitetIkkeMulig.arbeidsrelatertArsak
-            ? aktivitetIkkeMulig.arbeidsrelatertArsak
+            ? new ArbeidsrelatertArsak(aktivitetIkkeMulig.arbeidsrelatertArsak)
             : null;
     }
 }
