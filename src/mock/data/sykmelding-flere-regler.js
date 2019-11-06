@@ -68,7 +68,7 @@ export const sykmeldingFlereRegler = [
                             },
                             arbeidsrelatertArsak: {
                                 beskrivelse: 'dette er en beskrivelse',
-                                arsak: ['MANGLENDE_TILRETTELEGGING'],
+                                arsak: ['MANGLENDE_TILRETTELEGGING', 'ANNET'],
                             },
                         },
                         avventendeInnspillTilArbeidsgiver: null,
@@ -89,7 +89,7 @@ export const sykmeldingFlereRegler = [
                             },
                             arbeidsrelatertArsak: {
                                 beskrivelse: 'dette er en beskrivelse',
-                                arsak: ['MANGLENDE_TILRETTELEGGING'],
+                                arsak: ['ANNET'],
                             },
                         },
                         avventendeInnspillTilArbeidsgiver: null,

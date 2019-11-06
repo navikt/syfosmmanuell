@@ -24,11 +24,16 @@ const HeleSykmeldingen: React.FC = () => {
                 window.scrollTo({ top: sykmeldingRef.current.offsetTop, behavior: 'smooth' });
             }, 300);
         }
+        console.log(sykmelding);
     }, [visHeleSm]);
 
     const heleSykmeldingenBuilder = (): JSX.Element => (
         <>
             <div className="grid-item linje-vannrett"></div>
+
+            <div className="grid-item grid-item-tittel">
+                <Systemtittel>Hele Sykmeldingen</Systemtittel>
+            </div>
 
             <div className="grid-item grid-item-tittel">
                 <Element>Perioder</Element>
