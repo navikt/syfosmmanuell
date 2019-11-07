@@ -12,7 +12,11 @@ export enum KnappeTekst {
     LAGRE = 'Lagre',
 }
 
-const Knapper: React.FC = () => {
+interface KnapperProps {
+    radioNavn: string;
+}
+
+const Knapper: React.FC<KnapperProps> = ({ radioNavn }: KnapperProps) => {
     const [begrunnelseTekst, setBegrunnelseTekst] = useState<string>('');
     const [knappeTekst, setKnappeTekst] = useState<string>('');
     const [erGodkjent, setErGodkjent] = useState<boolean | null>(null);
@@ -73,14 +77,16 @@ const Knapper: React.FC = () => {
                 <Radio
                     value="godkjenn"
                     label={'Godkjenn ' + begrunnelseTekst}
-                    name="godkjenn-avvis-radioknapper"
+                    name={radioNavn}
                     onChange={radioEndring}
+                    checked={erGodkjent === true}
                 />
                 <Radio
                     value="avvis"
                     label={'Avvis ' + begrunnelseTekst}
-                    name="godkjenn-avvis-radioknapper"
+                    name={radioNavn}
                     onChange={radioEndring}
+                    checked={erGodkjent === false}
                 />
             </div>
             <div className="innsending">

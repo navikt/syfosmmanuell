@@ -12,6 +12,8 @@ interface UseManOppgBehandlingInterface {
     setAktuellManOppgave: Function;
     aktuellArsak: RuleNames | null;
     setAktuellArsak: Function;
+    aktuellVurdering: boolean;
+    setAktuellVurdering: Function;
     oppdaterVurdering: Function;
     oppdaterSendInnValidering: Function;
     byttAktuellManOppgave: Function;
@@ -26,6 +28,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const [manOppgaver, setManOppgaver] = useState<ManuellOppgave[] | null>(null);
     const [aktuellManOppgave, setAktuellManOppgave] = useState<ManuellOppgave | null>(null);
     const [aktuellArsak, setAktuellArsak] = useState<RuleNames | null>(null);
+    const [aktuellVurdering, setAktuellVurdering] = useState<boolean | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [oppgaverLoest, setOppgaverLoest] = useState<number>(0);
@@ -74,10 +77,6 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         const url =
             'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/' +
             (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
-        console.log('putting to: ' + url);
-        console.log('putManuellVurderingUrl ' + env.putManuellVurderingUrl);
-        console.log('process.env.NODE_ENV ' + process.env.NODE_ENV);
-        console.log('process.env.putmanuellvurderingur: ' + process.env.REACT_APP_PUT_MANUELL_VURDERING_URL);
         setIsLoading(true);
         fetch(url, {
             method: 'PUT',
@@ -130,6 +129,8 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
         setAktuellManOppgave,
         aktuellArsak,
         setAktuellArsak,
+        aktuellVurdering,
+        setAktuellVurdering,
         oppdaterVurdering,
         oppdaterSendInnValidering,
         byttAktuellManOppgave,

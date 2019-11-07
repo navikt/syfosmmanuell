@@ -35,28 +35,63 @@ export const sykmeldingFlereRegler = [
                             kode: '-57',
                             tekst: 'Rar sykdom',
                         },
+                        {
+                            system: '3.16.578.1.12.4.1.1.7170',
+                            kode: '-59',
+                            tekst: 'Sykdom0',
+                        },
                     ],
                     svangerskap: true,
-                    yrkesskade: false,
-                    yrkesskadeDato: null,
+                    yrkesskade: true,
+                    yrkesskadeDato: '2018-10-18',
                     annenFraversArsak: {
                         beskrivelse:
                             'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
-                        grunn: ['NODVENDIG_KONTROLLUNDENRSOKELSE'],
+                        grunn: ['NODVENDIG_KONTROLLUNDENRSOKELSE', 'ABORT'],
                     },
                 },
-                skjermesForPasient: false,
+                skjermesForPasient: true,
                 arbeidsgiver: {
                     harArbeidsgiver: 'EN_ARBEIDSGIVER',
                     navn: 'Selskap AS',
-                    yrkesbetegnelse: 'TODO',
+                    yrkesbetegnelse: 'Kul jobb',
                     stillingsprosent: 100,
                 },
                 perioder: [
                     {
                         fom: '2018-10-18',
                         tom: '2018-11-12',
-                        aktivitetIkkeMulig: null,
+                        aktivitetIkkeMulig: {
+                            medisinskArsak: {
+                                beskrivelse: 'dette er en beskrivelse',
+                                arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
+                            },
+                            arbeidsrelatertArsak: {
+                                beskrivelse: 'dette er en beskrivelse',
+                                arsak: ['MANGLENDE_TILRETTELEGGING', 'ANNET'],
+                            },
+                        },
+                        avventendeInnspillTilArbeidsgiver: null,
+                        behandlingsdager: null,
+                        gradert: {
+                            reisetilskudd: true,
+                            grad: 56,
+                        },
+                        reisetilskudd: false,
+                    },
+                    {
+                        fom: '2018-10-18',
+                        tom: '2018-11-12',
+                        aktivitetIkkeMulig: {
+                            medisinskArsak: {
+                                beskrivelse: 'dette er en beskrivelse',
+                                arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
+                            },
+                            arbeidsrelatertArsak: {
+                                beskrivelse: 'dette er en beskrivelse',
+                                arsak: ['ANNET'],
+                            },
+                        },
                         avventendeInnspillTilArbeidsgiver: null,
                         behandlingsdager: null,
                         gradert: {
@@ -71,7 +106,7 @@ export const sykmeldingFlereRegler = [
                     hensynArbeidsplassen:
                         'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
                     erIArbeid: {
-                        egetArbeidPaSikt: false,
+                        egetArbeidPaSikt: true,
                         annetArbeidPaSikt: true,
                         arbeidFOM: '2018-11-21',
                         vurderingsdato: '2018-10-30',
@@ -101,10 +136,10 @@ export const sykmeldingFlereRegler = [
                 andreTiltak:
                     'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
                 meldingTilNAV: {
-                    bistandUmiddelbart: false,
-                    beskrivBistand: null,
+                    bistandUmiddelbart: true,
+                    beskrivBistand: 'trenger hjelp',
                 },
-                meldingTilArbeidsgiver: null,
+                meldingTilArbeidsgiver: 'dett er en melding til arbeidsgiver',
                 kontaktMedPasient: {
                     kontaktDato: '2018-10-04',
                     begrunnelseIkkeKontakt:
@@ -164,11 +199,18 @@ export const sykmeldingFlereRegler = [
                     hovedDiagnose: {
                         system: '2.16.578.1.12.4.1.1.7170',
                         kode: 'K24',
+                        tekst: 'Sykdom0',
                     },
                     biDiagnoser: [
                         {
                             system: '2.16.578.1.12.4.1.1.7170',
                             kode: '-57',
+                            tekst: 'Sykdom0',
+                        },
+                        {
+                            system: '3.16.578.1.12.4.1.1.7170',
+                            kode: '-59',
+                            tekst: 'Sykdom0',
                         },
                     ],
                     svangerskap: true,
