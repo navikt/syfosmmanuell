@@ -3,7 +3,9 @@ import { useAppStore } from '../store/AppStore';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './InfoHeader.less';
 
-const information = require('../img/information.svg');
+import Information from '../img/information.svg';
+//import Information from '../img/Information';
+// const information = require('../img/information.svg');
 
 const InfoHeader: React.FC = () => {
     const { manOppgaver, aktuellManOppgave } = useAppStore();
@@ -26,7 +28,7 @@ const InfoHeader: React.FC = () => {
             {aktuellManOppgave && (
                 <div className="progresjon">
                     <div className="progresjon__ikon">
-                        <img src={information} alt="information icon" />
+                        <Information />
                     </div>
                     <div className="progresjon__tekst">
                         <Normaltekst>{infoTekst()}</Normaltekst>

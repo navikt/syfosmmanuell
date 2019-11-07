@@ -9,6 +9,7 @@ import './EkspanderbartPanel.less';
 import Spinner from 'nav-frontend-spinner';
 
 const reportProblemCircle = require('../img/report-problem-circle.svg');
+import ReportProblemCircle from '../img/report-problem-circle.svg';
 
 const EkspanderbartPanel: React.FC = () => {
     const { manOppgaver, aktuellManOppgave, isLoading, error, oppgaverLoest } = useAppStore();
@@ -28,7 +29,7 @@ const EkspanderbartPanel: React.FC = () => {
                     <EkspanderbartpanelBase
                         heading={
                             <div className="ekspanderbartpanel__header">
-                                <img src={reportProblemCircle} alt="Varselikon" className="ekspanderbartpanel__ikon" />
+                                <ReportProblemCircle className="ekspanderbartpanel__ikon" />
                                 <Undertittel>
                                     Sykmelding {oppgaverLoest + 1} av {manOppgaver.length}
                                 </Undertittel>

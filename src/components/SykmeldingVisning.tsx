@@ -504,7 +504,7 @@ const SykmeldingVisning: React.FC = () => {
                 <div className="grid-item grid-item--left">
                     <Element>Bidiagnose</Element>
                     {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
-                        <Normaltekst key={index}>{'hvor finner man dette?'}</Normaltekst>
+                        <Normaltekst key={index}>{diagnose.tekst}</Normaltekst>
                     ))}
                 </div>
             )}
