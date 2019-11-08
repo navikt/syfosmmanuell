@@ -8,7 +8,7 @@ import Information from '../img/information.svg';
 // const information = require('../img/information.svg');
 
 const InfoHeader: React.FC = () => {
-    const { manOppgaver, aktuellManOppgave } = useAppStore();
+    const { manOppgaver, aktuellManOppgave, oppgaverLoest } = useAppStore();
 
     const infoTekst = (): string => {
         return `Det er ${manOppgaver.length} ${
@@ -18,24 +18,26 @@ const InfoHeader: React.FC = () => {
 
     return (
         <>
-            {(!manOppgaver || manOppgaver.length === 0) && (
-                <div className="progressjon--ingen-oppgaver">
+            {(!!!manOppgaver || manOppgaver.length === 0) && (
+                <div className="info-header--ingen-oppgaver">
                     <Normaltekst>
                         Oppgaven(e) er enten løst, eller så finnes det ikke noen oppgave på denne personen.
                     </Normaltekst>
                 </div>
             )}
-            {aktuellManOppgave && (
-                <div className="progresjon">
-                    <div className="progresjon__ikon">
+            {!!manOppgaver && !!aktuellManOppgave && (
+                <div className="info-header">
+                    <div className="info-header__ikon">
                         <Information />
                     </div>
-                    <div className="progresjon__tekst">
+                    <div className="info-header__tekst">
                         <Normaltekst>{infoTekst()}</Normaltekst>
                     </div>
                 </div>
             )}
-            {!aktuellManOppgave && <Normaltekst>Alle manuelle oppgaver er løst</Normaltekst>}
+            {!!manOppgaver && !!!aktuellManOppgave && oppgaverLoest === manOppgaver.length && (
+                <Normaltekst>Alle manuelle oppgaver er løst</Normaltekst>
+            )}
         </>
     );
 };

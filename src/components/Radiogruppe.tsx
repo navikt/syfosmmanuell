@@ -3,20 +3,20 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { RuleNames, ValidationResult } from '../types/ValidationresultTypes';
+import { RuleNames } from '../types/ValidationresultTypes';
 import { useAppStore } from '../store/AppStore';
-import './Knapper.less';
+import './Radiogruppe.less';
 
 export enum KnappeTekst {
     FERDIGSTILL = 'Ferdigstill',
     LAGRE = 'Lagre',
 }
 
-interface KnapperProps {
+interface RadiogruppeProps {
     radioNavn: string;
 }
 
-const Knapper: React.FC<KnapperProps> = ({ radioNavn }: KnapperProps) => {
+const Radiogruppe: React.FC<RadiogruppeProps> = ({ radioNavn }: RadiogruppeProps) => {
     const [begrunnelseTekst, setBegrunnelseTekst] = useState<string>('');
     const [knappeTekst, setKnappeTekst] = useState<string>('');
     const [erGodkjent, setErGodkjent] = useState<boolean | null>(null);
@@ -108,4 +108,4 @@ const Knapper: React.FC<KnapperProps> = ({ radioNavn }: KnapperProps) => {
     );
 };
 
-export default Knapper;
+export default Radiogruppe;

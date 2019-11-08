@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useAppStore } from '../store/AppStore';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { KnappeTekst } from './Knapper';
+import { KnappeTekst } from './Radiogruppe';
 
-const Ferdigstilling: React.FC = () => {
+const FerdigstillingFlereArsaker: React.FC = () => {
     const { aktuellManOppgave, oppdaterSendInnValidering, resettVurdering } = useAppStore();
 
     const handterFerdigstill = (): void => {
@@ -28,4 +28,4 @@ const Ferdigstilling: React.FC = () => {
     );
 };
 
-export default Ferdigstilling;
+export default FerdigstillingFlereArsaker;

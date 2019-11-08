@@ -3,9 +3,9 @@ import { useAppStore } from '../store/AppStore';
 import { Element, Undertittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import dayjs = require('dayjs');
 import { useState, useEffect, useRef } from 'react';
-import './SykmeldingVisning.less';
+import './Sykmeldingen.less';
 import './HeleSykmeldingen.less';
-import Knapper from './Knapper';
+import Radiogruppe from './Radiogruppe';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const checkBox = require('../img/check-box-2.svg');
@@ -548,7 +548,7 @@ const HeleSykmeldingen: React.FC = () => {
             {visHeleSm && (
                 <div ref={sykmeldingRef} className="hele-sykmeldingen">
                     {heleSykmeldingenBuilder()}
-                    <Knapper radioNavn="hele-sykmeldingen" />
+                    <Radiogruppe radioNavn="hele-sykmeldingen" />
                 </div>
             )}
         </>
