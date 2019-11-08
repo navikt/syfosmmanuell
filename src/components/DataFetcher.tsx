@@ -3,23 +3,14 @@ import { useEffect } from 'react';
 import { useAppStore } from '../store/AppStore';
 import useFetch from '../hooks/useFetch';
 
-import {
-    FetchState,
-    hasAnyFailed,
-    hasData,
-    isAnyNotStartedOrPending,
-    isNotStarted,
-    isPending,
-    hasFinished,
-} from '../utils/useFetchUtils';
+import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from '../utils/useFetchUtils';
 import { hentUrlParameter } from '../utils/urlParameter';
 import { ManuellOppgave } from '../types/ManuellOppgaveTypes';
-import { ValidationResult } from '../types/ValidationresultTypes';
 import Spinner from 'nav-frontend-spinner';
 import env from '../utils/environments';
 
 export const DataFetcher = (props: { children: any }) => {
-    const { aktuellManOppgave, byttAktuellManOppgave, setManOppgaver, setIsLoading, setError } = useAppStore();
+    const { setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
     let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
     //let url = env.hentManuelleOppgaverUrl;

@@ -1,11 +1,10 @@
 import * as React from 'react';
-import SykmeldingVisning from './SykmeldingVisning';
-import Knapper from './Knapper';
+import Sykmeldingen from './Sykmeldingen';
 import HeleSykmeldingen from './HeleSykmeldingen';
 
 const EnArsakVisning: React.FC = () => (
     <>
-        <SykmeldingVisning />
+        <Sykmeldingen />
         <HeleSykmeldingen />
     </>
 );

@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Undertittel } from 'nav-frontend-typografi';
 import { useAppStore } from '../store/AppStore';
 import FlereArsakerVisning from './FlereArsakerVisning';
 import EnArsakVisning from './EnArsakVisning';
-import './EkspanderbartPanel.less';
+import './Ekspanderbar.less';
 import Spinner from 'nav-frontend-spinner';
 
-const reportProblemCircle = require('../img/report-problem-circle.svg');
+//const reportProblemCircle = require('../img/report-problem-circle.svg');
+import ReportProblemCircle from '../img/report-problem-circle.svg';
 
-const EkspanderbartPanel: React.FC = () => {
+const Ekspanderbar: React.FC = () => {
     const { manOppgaver, aktuellManOppgave, isLoading, error, oppgaverLoest } = useAppStore();
 
     if (error) {
@@ -28,7 +28,7 @@ const EkspanderbartPanel: React.FC = () => {
                     <EkspanderbartpanelBase
                         heading={
                             <div className="ekspanderbartpanel__header">
-                                <img src={reportProblemCircle} alt="Varselikon" className="ekspanderbartpanel__ikon" />
+                                <ReportProblemCircle className="ekspanderbartpanel__ikon" />
                                 <Undertittel>
                                     Sykmelding {oppgaverLoest + 1} av {manOppgaver.length}
                                 </Undertittel>
@@ -47,4 +47,4 @@ const EkspanderbartPanel: React.FC = () => {
     );
 };
 
-export default EkspanderbartPanel;
+export default Ekspanderbar;

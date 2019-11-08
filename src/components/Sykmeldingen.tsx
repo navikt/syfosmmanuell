@@ -1,17 +1,16 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { RuleNames } from '../types/ValidationresultTypes';
 import { Element, Undertittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import 'nav-frontend-lenker-style';
-import './SykmeldingVisning.less';
+import './Sykmeldingen.less';
 import { useAppStore } from '../store/AppStore';
 import dayjs = require('dayjs');
-import Knapper from './Knapper';
+import Radiogruppe from './Radiogruppe';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const checkBox = require('../img/check-box.svg');
 
-const SykmeldingVisning: React.FC = () => {
+const Sykmeldingen: React.FC = () => {
     const {
         aktuellArsak,
         aktuellManOppgave: { sykmelding },
@@ -504,7 +503,7 @@ const SykmeldingVisning: React.FC = () => {
                 <div className="grid-item grid-item--left">
                     <Element>Bidiagnose</Element>
                     {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
-                        <Normaltekst key={index}>{'hvor finner man dette?'}</Normaltekst>
+                        <Normaltekst key={index}>{diagnose.tekst}</Normaltekst>
                     ))}
                 </div>
             )}
@@ -577,10 +576,10 @@ const SykmeldingVisning: React.FC = () => {
                         kiropraktorBuilder()}
                 </div>
                 <div className="linje-vannrett"></div>
-                <Knapper radioNavn="sykmelding-visning" />
+                <Radiogruppe radioNavn="sykmelding-visning" />
             </div>
         </>
     );
 };
 
-export default SykmeldingVisning;
+export default Sykmeldingen;
