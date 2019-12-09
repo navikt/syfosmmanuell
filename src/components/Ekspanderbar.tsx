@@ -14,7 +14,7 @@ const Ekspanderbar: React.FC = () => {
     const { manOppgaver, aktuellManOppgave, isLoading, error, oppgaverLoest } = useAppStore();
 
     if (error) {
-        return <p>Det har oppstått en feil</p>;
+        return <p>{error.message}</p>;
     }
 
     if (isLoading) {

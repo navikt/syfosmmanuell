@@ -22,7 +22,7 @@ const Radiogruppe: React.FC<RadiogruppeProps> = ({ radioNavn }: RadiogruppeProps
     const [erGodkjent, setErGodkjent] = useState<boolean | null>(null);
     const [kanSendeInn, setKanSendeInn] = useState<boolean>(false);
 
-    const { aktuellArsak, setAktuellArsak, aktuellManOppgave, oppdaterVurdering } = useAppStore();
+    const { aktuellArsak, setAktuellArsak, aktuellManOppgave, oppdaterVurdering, setError } = useAppStore();
 
     useEffect(() => {
         switch (aktuellArsak) {
@@ -68,6 +68,8 @@ const Radiogruppe: React.FC<RadiogruppeProps> = ({ radioNavn }: RadiogruppeProps
     const handterAvbryt = (): void => {
         if (aktuellManOppgave.validationResult.ruleHits.length > 1) {
             setAktuellArsak(null);
+        } else {
+            setError(new Error('Du har avbrutt oppgaven. Last inn siden på nytt for å gjenoppprette oppgaven'));
         }
     };
 

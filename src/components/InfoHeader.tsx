@@ -4,8 +4,6 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import './InfoHeader.less';
 
 import Information from '../img/information.svg';
-//import Information from '../img/Information';
-// const information = require('../img/information.svg');
 
 const InfoHeader: React.FC = () => {
     const { manOppgaver, aktuellManOppgave, oppgaverLoest } = useAppStore();
