@@ -7,8 +7,7 @@ import { useAppStore } from '../store/AppStore';
 import dayjs = require('dayjs');
 import Radiogruppe from './Radiogruppe';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const checkBox = require('../img/check-box.svg');
+import Checkbox from '../img/check-box-2.svg';
 
 const Sykmeldingen: React.FC = () => {
     const {
@@ -89,7 +88,7 @@ const Sykmeldingen: React.FC = () => {
             )}
             {!!sykmelding.prognose && !!sykmelding.prognose.arbeidsforEtterPeriode && (
                 <div className="grid-item checkbox">
-                    <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                    <Checkbox className="checkbox__ikon" />
                     <div className="checkbox__tekst">
                         <Normaltekst>Pasienten er 100% arbeidsfør etter denne perioden</Normaltekst>
                     </div>
@@ -107,7 +106,7 @@ const Sykmeldingen: React.FC = () => {
                     <div className="grid-item">
                         <Element>Pasient med arbeidsgiver: Utdypende opplysninger</Element>
                         <div className="checkbox">
-                            <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                            <Checkbox className="checkbox__ikon" />
                             <div className="checkbox__tekst">
                                 <Normaltekst>
                                     Jeg antar at pasienten på sikt kan komme tilbake til samme arbeidsgiver
@@ -129,7 +128,7 @@ const Sykmeldingen: React.FC = () => {
                 !!sykmelding.prognose.erIArbeid &&
                 sykmelding.prognose.erIArbeid.annetArbeidPaSikt && (
                     <div className="grid-item checkbox">
-                        <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                        <Checkbox className="checkbox__ikon" />
                         <div className="checkbox__tekst">
                             <Normaltekst>
                                 Jeg antar at pasienten på sikt kan komme i arbeid hos annen arbeidsgiver
@@ -377,7 +376,7 @@ const Sykmeldingen: React.FC = () => {
             )}
             {!!sykmelding.prognose && !!sykmelding.prognose.arbeidsforEtterPeriode && (
                 <div className="grid-item checkbox">
-                    <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                    <Checkbox className="checkbox__ikon" />
                     <div className="checkbox__tekst">
                         <Normaltekst>Pasienten er 100% arbeidsfør etter denne perioden</Normaltekst>
                     </div>
@@ -395,7 +394,7 @@ const Sykmeldingen: React.FC = () => {
                     <div className="grid-item">
                         <Element>Pasient med arbeidsgiver: Utdypende opplysninger</Element>
                         <div className="checkbox">
-                            <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                            <Checkbox className="checkbox__ikon" />
                             <div className="checkbox__tekst">
                                 <Normaltekst>
                                     Jeg antar at pasienten på sikt kan komme tilbake til samme arbeidsgiver
@@ -417,7 +416,7 @@ const Sykmeldingen: React.FC = () => {
                 !!sykmelding.prognose.erIArbeid &&
                 sykmelding.prognose.erIArbeid.annetArbeidPaSikt && (
                     <div className="grid-item checkbox">
-                        <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                        <Checkbox className="checkbox__ikon" />
                         <div className="checkbox__tekst">
                             <Normaltekst>
                                 Jeg antar at pasienten på sikt kan komme i arbeid hos annen arbeidsgiver

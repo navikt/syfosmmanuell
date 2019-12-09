@@ -7,8 +7,7 @@ import './Sykmeldingen.less';
 import './HeleSykmeldingen.less';
 import Radiogruppe from './Radiogruppe';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const checkBox = require('../img/check-box-2.svg');
+import Checkbox from '../img/check-box-2.svg';
 
 const HeleSykmeldingen: React.FC = () => {
     const {
@@ -55,7 +54,7 @@ const HeleSykmeldingen: React.FC = () => {
                 )}
             {sykmelding.medisinskVurdering.svangerskap && (
                 <div className="grid-item checkbox">
-                    <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                    <Checkbox className="checkbox__ikon" />
                     <div className="checkbox__tekst">
                         <Normaltekst>Sykdommen er svangerskapsrelatert</Normaltekst>
                     </div>
@@ -63,7 +62,7 @@ const HeleSykmeldingen: React.FC = () => {
             )}
             {sykmelding.medisinskVurdering.yrkesskade && (
                 <div className="grid-item checkbox">
-                    <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                    <Checkbox className="checkbox__ikon" />
                     <div className="checkbox__tekst">
                         <Normaltekst>Sykdommen kan skyldes en skade/yrkessykdom</Normaltekst>
                     </div>
@@ -71,7 +70,7 @@ const HeleSykmeldingen: React.FC = () => {
             )}
             {!!sykmelding.prognose && !!sykmelding.prognose.arbeidsforEtterPeriode && (
                 <div className="grid-item checkbox">
-                    <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                    <Checkbox className="checkbox__ikon" />
                     <div className="checkbox__tekst">
                         <Normaltekst>Pasienten er 100% arbeidsfør etter denne perioden</Normaltekst>
                     </div>
@@ -79,7 +78,7 @@ const HeleSykmeldingen: React.FC = () => {
             )}
             {!!sykmelding.skjermesForPasient && (
                 <div className="grid-item checkbox">
-                    <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                    <Checkbox className="checkbox__ikon" />
                     <div className="checkbox__tekst">
                         <Normaltekst>
                             Det er påtrengende nødvendig å skjerme pasienten for medisinske opplysninger, jf. pasient-
@@ -130,7 +129,7 @@ const HeleSykmeldingen: React.FC = () => {
                                 {!!periode.aktivitetIkkeMulig.medisinskArsak && (
                                     <>
                                         <div className="grid-item checkbox">
-                                            <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                                            <Checkbox className="checkbox__ikon" />
                                             <div className="checkbox__tekst">
                                                 <Normaltekst>
                                                     Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet.
@@ -158,7 +157,7 @@ const HeleSykmeldingen: React.FC = () => {
                                 {!!periode.aktivitetIkkeMulig.arbeidsrelatertArsak && (
                                     <>
                                         <div className="grid-item checkbox">
-                                            <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                                            <Checkbox className="checkbox__ikon" />
                                             <div className="checkbox__tekst">
                                                 <Normaltekst>
                                                     Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet
@@ -200,7 +199,7 @@ const HeleSykmeldingen: React.FC = () => {
                 !!sykmelding.prognose.erIArbeid &&
                 sykmelding.prognose.erIArbeid.egetArbeidPaSikt && (
                     <div className="grid-item checkbox">
-                        <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                        <Checkbox className="checkbox__ikon" />
                         <div className="checkbox__tekst">
                             <Element>Jeg antar at pasienten på sikt kan komme tilbake til samme arbeidsgiver</Element>
                         </div>
@@ -219,7 +218,7 @@ const HeleSykmeldingen: React.FC = () => {
                 !!sykmelding.prognose.erIArbeid &&
                 sykmelding.prognose.erIArbeid.annetArbeidPaSikt && (
                     <div className="grid-item checkbox">
-                        <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                        <Checkbox className="checkbox__ikon" />
                         <div className="checkbox__tekst">
                             <Element>Jeg antar at pasienten på sikt kan komme i arbeid hos annen arbeidsgiver</Element>
                         </div>
@@ -230,7 +229,7 @@ const HeleSykmeldingen: React.FC = () => {
                 (!sykmelding.prognose.erIArbeid.annetArbeidPaSikt ||
                     !sykmelding.prognose.erIArbeid.egetArbeidPaSikt) && (
                     <div className="grid-item checkbox">
-                        <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                        <Checkbox className="checkbox__ikon" />
                         <div className="checkbox__tekst">
                             <Element>
                                 Jeg er usikker på om pasienten kan komme tilbake i arbeid hos egen eller annen
@@ -243,7 +242,7 @@ const HeleSykmeldingen: React.FC = () => {
                 !!sykmelding.prognose.erIkkeIArbeid &&
                 sykmelding.prognose.erIkkeIArbeid.arbeidsforPaSikt && (
                     <div className="grid-item checkbox">
-                        <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                        <Checkbox className="checkbox__ikon" />
                         <div className="checkbox__tekst">
                             <Element>Jeg antar at pasienten på sikt kan komme tilbake i arbeid</Element>
                         </div>
@@ -263,7 +262,7 @@ const HeleSykmeldingen: React.FC = () => {
                 !!sykmelding.prognose.erIkkeIArbeid &&
                 sykmelding.prognose.erIkkeIArbeid.vurderingsdato && (
                     <div className="grid-item checkbox">
-                        <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                        <Checkbox className="checkbox__ikon" />
                         <div className="checkbox__tekst">
                             <Element>Jeg er usikker på om pasienten kan komme tilbake i arbeid</Element>
                         </div>
@@ -468,7 +467,7 @@ const HeleSykmeldingen: React.FC = () => {
 
             {!!sykmelding.meldingTilNAV && sykmelding.meldingTilNAV.bistandUmiddelbart && (
                 <div className="grid-item checkbox">
-                    <img src={checkBox} alt="Checkbox icon" className="checkbox__ikon" />
+                    <Checkbox className="checkbox__ikon" />
                     <div className="checkbox__tekst">
                         <Normaltekst>Ønskes bistand fra NAV nå?</Normaltekst>
                     </div>
