@@ -17,6 +17,6 @@ export const hentUrlParameter = (url: string): { fnr: string } => {
     if (param[0] == 'fnr') {
         return { fnr: param[1] };
     } else {
-        throw new Error('The parameter given is not pnr');
+        throw new Error('The parameter given is not fnr');
     }
 };
