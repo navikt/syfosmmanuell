@@ -26,6 +26,7 @@ const Ekspanderbar: React.FC = () => {
             {aktuellManOppgave && (
                 <div className="ekspanderbartpanel">
                     <EkspanderbartpanelBase
+                        apen
                         heading={
                             <div className="ekspanderbartpanel__header">
                                 <ReportProblemCircle className="ekspanderbartpanel__ikon" />

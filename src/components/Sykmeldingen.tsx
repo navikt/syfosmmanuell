@@ -558,6 +558,10 @@ const Sykmeldingen: React.FC = () => {
         </>
     );
 
+    if (!Object.values(RuleNames).includes(aktuellArsak)) {
+        return <Normaltekst>Ugyldig regel: {`"` + aktuellArsak + `"`}</Normaltekst>;
+    }
+
     return (
         <>
             {sykmeldingHeader()}
@@ -566,12 +570,12 @@ const Sykmeldingen: React.FC = () => {
                     <div className="grid-item grid-item__tittel">
                         <Systemtittel>Sykmelding</Systemtittel>
                     </div>
-                    {aktuellArsak == RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE &&
+                    {aktuellArsak === RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE &&
                         tilbakedatertLopendePeriodeBuilder()}
-                    {aktuellArsak == RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING &&
+                    {aktuellArsak === RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING &&
                         tilbakedatertBuilder()}
-                    {aktuellArsak == RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT && flerePerioderBuilder()}
-                    {aktuellArsak == RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L &&
+                    {aktuellArsak === RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT && flerePerioderBuilder()}
+                    {aktuellArsak === RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L &&
                         kiropraktorBuilder()}
                 </div>
                 <div className="linje-vannrett"></div>
