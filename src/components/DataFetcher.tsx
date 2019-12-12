@@ -18,10 +18,9 @@ export const DataFetcher = (props: { children: any }) => {
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {
             try {
-                url += hentUrlParameter(window.location.href).pnr;
+                url += hentUrlParameter(window.location.href).fnr;
                 console.log('Henter oppgaver fra: ' + url);
             } catch (err) {
-                setError(err);
                 console.error(err);
             }
             setIsLoading(true);
@@ -50,10 +49,6 @@ export const DataFetcher = (props: { children: any }) => {
                 senere.
             </>
         );
-    }
-
-    if (hasData(manOppgaver)) {
-        setError(null);
     }
 
     return props.children;

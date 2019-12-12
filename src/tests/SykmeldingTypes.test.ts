@@ -1,5 +1,4 @@
 import { Sykmelding } from '../types/SykmeldingTypes';
-import dayjs = require('dayjs');
 
 describe('SykmeldingTypes', () => {
     let sykmelding;

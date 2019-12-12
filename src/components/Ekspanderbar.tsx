@@ -14,7 +14,7 @@ const Ekspanderbar: React.FC = () => {
     const { manOppgaver, aktuellManOppgave, isLoading, error, oppgaverLoest } = useAppStore();
 
     if (error) {
-        return <p>Det har oppstått en feil</p>;
+        return <p>{error.message}</p>;
     }
 
     if (isLoading) {
@@ -26,6 +26,7 @@ const Ekspanderbar: React.FC = () => {
             {aktuellManOppgave && (
                 <div className="ekspanderbartpanel">
                     <EkspanderbartpanelBase
+                        apen
                         heading={
                             <div className="ekspanderbartpanel__header">
                                 <ReportProblemCircle className="ekspanderbartpanel__ikon" />
