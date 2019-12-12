@@ -388,7 +388,7 @@ const manuellOppgaveToArsaker = {
                 ruleStatus: 'MANUAL_PROCESSING',
             },
             {
-                ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING',
+                ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
                 messageForSender:
                     'Manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapittel L (muskel- og skjelettsykdommer)',
                 messageForUser:
@@ -532,7 +532,7 @@ const toManuellOppgaveToArsaker = [
                     ruleStatus: 'MANUAL_PROCESSING',
                 },
                 {
-                    ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING',
+                    ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
                     messageForSender:
                         'Manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapittel L (muskel- og skjelettsykdommer)',
                     messageForUser:
@@ -674,7 +674,7 @@ const toManuellOppgaveToArsaker = [
                     ruleStatus: 'MANUAL_PROCESSING',
                 },
                 {
-                    ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING',
+                    ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
                     messageForSender:
                         'Manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapittel L (muskel- og skjelettsykdommer)',
                     messageForUser:

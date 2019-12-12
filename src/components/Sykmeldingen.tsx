@@ -572,7 +572,7 @@ const Sykmeldingen: React.FC = () => {
                     </div>
                     {aktuellArsak === RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE &&
                         tilbakedatertLopendePeriodeBuilder()}
-                    {aktuellArsak === RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING &&
+                    {aktuellArsak === RuleNames.TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE &&
                         tilbakedatertBuilder()}
                     {aktuellArsak === RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT && flerePerioderBuilder()}
                     {aktuellArsak === RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L &&

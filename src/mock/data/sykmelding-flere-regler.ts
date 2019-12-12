@@ -5,7 +5,7 @@ export const sykmeldingFlereRegler = [
             status: 'MANUAL_PROCESSING',
             ruleHits: [
                 {
-                    ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING',
+                    ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
                     messageForSender: 'message for sender',
                     messageForUser: 'message for user',
                     ruleStatus: 'MANUAL_PROCESSING',
@@ -173,7 +173,7 @@ export const sykmeldingFlereRegler = [
             status: 'MANUAL_PROCESSING',
             ruleHits: [
                 {
-                    ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING',
+                    ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
                     messageForSender: 'message for sender',
                     messageForUser: 'message for user',
                 },

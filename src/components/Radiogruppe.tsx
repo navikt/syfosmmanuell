@@ -26,7 +26,7 @@ const Radiogruppe: React.FC<RadiogruppeProps> = ({ radioNavn }: RadiogruppeProps
 
     useEffect(() => {
         switch (aktuellArsak) {
-            case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORSTE_SYKMELDING: {
+            case RuleNames.TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE: {
                 setBegrunnelseTekst('tilbakedatering med begrunnelse');
                 break;
             }
