@@ -12,7 +12,7 @@ import env from '../utils/environments';
 export const DataFetcher = (props: { children: any }) => {
     const { setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
-    let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
+    let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?manOppgId=';
     //let url = env.hentManuelleOppgaverUrl;
 
     useEffect(() => {
