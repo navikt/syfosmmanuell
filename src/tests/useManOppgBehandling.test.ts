@@ -105,7 +105,7 @@ describe('useManOppgBehandling', () => {
             result.current.setIsLoading(false);
         });
         const nyAktuellOppgave = result.current.aktuellManOppgave;
-        expect(nyAktuellOppgave.manuellOppgaveid).not.toBe(aktuellOppgave.manuellOppgaveid);
+        expect(nyAktuellOppgave.oppgaveid).not.toBe(aktuellOppgave.oppgaveid);
     });
 
     it('skal oppdatere oppgaverLoest når oppgave byttes', () => {
@@ -543,7 +543,7 @@ const toManuellOppgaveToArsaker = [
         },
     },
     {
-        manuellOppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
+        oppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
         receivedSykmelding: {
             sykmelding: {
                 id: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',

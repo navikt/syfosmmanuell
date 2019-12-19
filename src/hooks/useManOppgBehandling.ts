@@ -54,9 +54,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     };
 
     const byttAktuellManOppgave = (): void => {
-        const nyManOppgaver = manOppgaver.filter(
-            manOppgave => manOppgave.manuellOppgaveid != aktuellManOppgave.manuellOppgaveid,
-        );
+        const nyManOppgaver = manOppgaver.filter(manOppgave => manOppgave.oppgaveid != aktuellManOppgave.oppgaveid);
         nyManOppgaver.push(new ManuellOppgave(aktuellManOppgave));
         setManOppgaver(nyManOppgaver);
         setOppgaverLoest(forrigeAntall => forrigeAntall + 1);
@@ -64,7 +62,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
 
     const resettVurdering = (): void => {
         manOppgaver.forEach((oppg, index) => {
-            if (oppg.manuellOppgaveid == aktuellManOppgave.manuellOppgaveid) {
+            if (oppg.oppgaveid == aktuellManOppgave.oppgaveid) {
                 setAktuellManOppgave(manOppgaver[index]);
             }
         });
@@ -73,7 +71,7 @@ const useManOppgBehandling = (): UseManOppgBehandlingInterface => {
     const putValidation = (validationResult: ValidationResult): void => {
         const url =
             'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/' +
-            (env.isProduction || env.isPreprod ? aktuellManOppgave.manuellOppgaveid : '');
+            (env.isProduction || env.isPreprod ? aktuellManOppgave.oppgaveid : '');
         setIsLoading(true);
         fetch(url, {
             method: 'PUT',
