@@ -1,4 +1,4 @@
-export const hentUrlParameter = (url: string): { fnr: string } => {
+export const hentUrlParameter = (url: string): { oppgaveid: string } => {
     const splitter = url.split('?');
     if (splitter.length == 1) {
         throw new Error('Url does not contain any parameters');
@@ -14,9 +14,9 @@ export const hentUrlParameter = (url: string): { fnr: string } => {
     if (param.length == 1 || param[1] == '') {
         throw new Error('Parameter does not contain any value');
     }
-    if (param[0] == 'fnr') {
-        return { fnr: param[1] };
+    if (param[0] == 'oppgaveid') {
+        return { oppgaveid: param[1] };
     } else {
-        throw new Error('The parameter given is not fnr');
+        throw new Error('The parameter given is not oppgaveid');
     }
 };

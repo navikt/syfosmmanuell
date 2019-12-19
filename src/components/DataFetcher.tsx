@@ -18,7 +18,7 @@ export const DataFetcher = (props: { children: any }) => {
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {
             try {
-                url += hentUrlParameter(window.location.href).fnr;
+                url += hentUrlParameter(window.location.href).oppgaveid;
                 console.log('Henter oppgaver fra: ' + url);
             } catch (err) {
                 console.error(err);
