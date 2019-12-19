@@ -8,7 +8,7 @@ export class ManuellOppgave {
     sendInnValidering: boolean;
 
     constructor(manuellOppgave) {
-        this.manuellOppgaveid = manuellOppgave.manuellOppgaveid;
+        this.manuellOppgaveid = manuellOppgave.oppgaveid;
         this.validationResult = new ValidationResultWithStatus(manuellOppgave.validationResult);
         this.sykmelding = manuellOppgave.receivedSykmelding
             ? new Sykmelding(manuellOppgave.receivedSykmelding.sykmelding)
