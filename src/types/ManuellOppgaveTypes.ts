@@ -2,7 +2,7 @@ import { ValidationResultWithStatus } from './ValidationresultTypes';
 import { Sykmelding } from './SykmeldingTypes';
 
 export class ManuellOppgave {
-    manuellOppgaveid: string;
+    manuellOppgaveid: number;
     validationResult: ValidationResultWithStatus;
     sykmelding: Sykmelding;
     sendInnValidering: boolean;
