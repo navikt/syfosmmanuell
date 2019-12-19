@@ -122,7 +122,7 @@ describe('useManOppgBehandling', () => {
 });
 
 const manuellOppgave = {
-    manuellOppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
+    oppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
     receivedSykmelding: {
         sykmelding: {
             id: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
@@ -257,7 +257,7 @@ const manuellOppgave = {
 };
 
 const manuellOppgaveToArsaker = {
-    manuellOppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
+    oppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
     receivedSykmelding: {
         sykmelding: {
             id: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
@@ -401,7 +401,7 @@ const manuellOppgaveToArsaker = {
 
 const toManuellOppgaveToArsaker = [
     {
-        manuellOppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7g',
+        oppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7g',
         receivedSykmelding: {
             sykmelding: {
                 id: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
