@@ -23,7 +23,7 @@ jobs:
           npm run test
       - name: Build
         run: |
-          npm run build-prod
+          npm run build
       - name: Create Docker tag
         env:
           NAME: syfosmmanuell
