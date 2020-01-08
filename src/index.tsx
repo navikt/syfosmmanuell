@@ -1,14 +1,16 @@
-import * as ReactDOM from 'react-dom';
-import * as React from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.less';
 import App from './App';
-import * as dayjs from 'dayjs';
-import 'dayjs/locale/nb';
-import env from './utils/environments';
+import * as serviceWorker from './serviceWorker';
 
-dayjs.locale('nb');
-
-if (!(env.isPreprod || env.isProduction)) {
+if (process.env.NODE_ENV === 'development') {
     require('./mock');
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

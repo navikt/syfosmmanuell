@@ -1,9 +1,7 @@
 # syfosmmanuell
 
 ## Om syfosmmanuell
-Frontend til manuell behandling av sykemelding for saksbehandlere. Laget med React og Typescript. Figuren under viser systemarkitektur og tilknytning til Modia.
-
-<img src="system-arkitektur.svg">
+Frontend til manuell behandling av sykemelding for saksbehandlere. Laget med React og Typescript. 
 
 ## Installering
 Klon bibliotek og last ned avhengigheter

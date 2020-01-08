@@ -1,7 +1,7 @@
 FROM navikt/node-express:12.2.0-alpine
 
 WORKDIR /src
-COPY ./dist dist
+COPY ./build build
 COPY ./server/package.json .
 COPY ./server/server.js .
 

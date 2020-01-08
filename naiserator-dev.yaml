@@ -43,4 +43,3 @@ spec:
       value: 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr='
     - name: REACT_APP_PUT_MANUELL_VURDERING_URL
       value: 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/'
-      

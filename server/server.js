@@ -12,6 +12,6 @@ const corsOptions = {
     origin: '*',
 };
 app.use(cors(corsOptions));
-app.use(express.static(path.resolve(__dirname, 'dist')));
+app.use(express.static(path.resolve(__dirname, 'build')));
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
