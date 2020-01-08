@@ -29,13 +29,13 @@ const App = () => {
         if (!fetchState.data) {
           setFeilmelding('Ingen oppgaver funnet');
           console.error('Ingen oppgave funnet');
-        }
-        try {
-          console.log(fetchState);
-          setManOppgave(new ManuellOppgave(fetchState.data?.pop));
-        } catch (error) {
-          setFeilmelding('Kunne ikke formattere manuell oppgave.');
-          console.error(error);
+        } else {
+            try {
+              setManOppgave(new ManuellOppgave(fetchState.data.shift()));
+            } catch (error) {
+              setFeilmelding('Kunne ikke formattere manuell oppgave.');
+              console.error(error);
+            }
         }
       });
     }

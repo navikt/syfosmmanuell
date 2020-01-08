@@ -23,9 +23,9 @@ class RuleInfo {
 }
 
 export enum Status {
-  OK,
-  MANUAL_PROCESSING,
-  INVALID,
+  OK = 'OK',
+  MANUAL_PROCESSING = 'MANUAL_PROCESSING',
+  INVALID = 'INVALID',
 }
 
 export class ValidationResult {
@@ -33,7 +33,7 @@ export class ValidationResult {
   ruleHits: RuleInfo[];
 
   constructor(validationResult: any) {
-    this.status = validationResult.status;
+    this.status = Status[validationResult.status as keyof typeof Status];
     this.ruleHits = validationResult.ruleHits.map((ruleHit: any) => new RuleInfo(ruleHit));
   }
 }
