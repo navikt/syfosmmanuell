@@ -10,7 +10,7 @@ const handterAvgjorelse = jest.fn();
 const flereRegler = new ManuellOppgave(oppgaveFlereRegler);
 
 describe('flereRegler', () => {
-    it('Rendrer alle årsaker til manuell vurdering', () => {
+    it.skip('Rendrer alle årsaker til manuell vurdering', () => {
         const { getByText, getAllByText } = render(
             <FlereRegler manOppgave={flereRegler} handterAvgjorelse={handterAvgjorelse} />,
         );
@@ -20,7 +20,7 @@ describe('flereRegler', () => {
         expect(getAllByText('Vurder').length).toBe(3);
     });
 
-    it('Rendrer sykmelding når "vurder" trykkes', () => {
+    it.skip('Rendrer sykmelding når "vurder" trykkes', () => {
         const { getAllByText, getByText } = render(
             <FlereRegler manOppgave={flereRegler} handterAvgjorelse={handterAvgjorelse} />,
         );
