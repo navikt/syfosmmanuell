@@ -31,6 +31,7 @@ const App = () => {
           console.error('Ingen oppgave funnet');
         }
         try {
+          console.log(fetchState);
           setManOppgave(new ManuellOppgave(fetchState.data?.pop));
         } catch (error) {
           setFeilmelding('Kunne ikke formattere manuell oppgave.');
