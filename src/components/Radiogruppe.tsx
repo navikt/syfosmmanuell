@@ -38,8 +38,12 @@ const Radiogruppe: React.FC<RadiogruppeProps> = ({ radioNavn }: RadiogruppeProps
                 setBegrunnelseTekst('knytning til muskel- og skjelettlidelser');
                 break;
             }
-            case RuleNames.AVVENTENDE_SYKMELDING_KOMBINERT: {
-                setBegrunnelseTekst('avventende sykmelding med flere perioder');
+            case RuleNames.UGYLDIG_KODEVERK_FOR_BIDIAGNOSE: {
+                setBegrunnelseTekst('Ugyldig kodeverk for bidiagnose');
+                break;
+            }
+            case RuleNames.PASIENTEN_HAR_KODE_6: {
+                setBegrunnelseTekst('Pasient har kode 6');
                 break;
             }
         }

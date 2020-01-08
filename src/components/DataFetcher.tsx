@@ -12,13 +12,13 @@ import env from '../utils/environments';
 export const DataFetcher = (props: { children: any }) => {
     const { setManOppgaver, setIsLoading, setError } = useAppStore();
     const manOppgaver = useFetch<ManuellOppgave[]>();
-    let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr=';
+    let url = 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?oppgaveid=';
     //let url = env.hentManuelleOppgaverUrl;
 
     useEffect(() => {
         if (isNotStarted(manOppgaver)) {
             try {
-                url += hentUrlParameter(window.location.href).fnr;
+                url += hentUrlParameter(window.location.href).oppgaveid;
                 console.log('Henter oppgaver fra: ' + url);
             } catch (err) {
                 console.error(err);

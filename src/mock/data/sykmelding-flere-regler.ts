@@ -1,6 +1,6 @@
 export const sykmeldingFlereRegler = [
     {
-        manuellOppgaveid: 'c973d170-3db1-4902-a10f-b64b50f9cc7f',
+        oppgaveid: 123456,
         validationResult: {
             status: 'MANUAL_PROCESSING',
             ruleHits: [
@@ -168,7 +168,7 @@ export const sykmeldingFlereRegler = [
         },
     },
     {
-        manuellOppgaveid: 'd973d170-3db1-4902-a10f-b64b50f9cc7f',
+        oppgaveid: 3454894,
         validationResult: {
             status: 'MANUAL_PROCESSING',
             ruleHits: [

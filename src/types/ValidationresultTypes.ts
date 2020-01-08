@@ -2,7 +2,8 @@ export enum RuleNames {
     BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L = 'Manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapittel L (muskel- og skjelettsykdommer)',
     TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Sykmeldingen er tilbakedatert med begrunnelse',
     TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmelding i løpende sykefravær er tilbakedatert med begrunnelse',
-    AVVENTENDE_SYKMELDING_KOMBINERT = 'To perioder',
+    UGYLDIG_KODEVERK_FOR_BIDIAGNOSE = 'Ugyldig kodeverk for bidiagnose',
+    PASIENTEN_HAR_KODE_6 = 'Pasienten har kode 6',
 }
 
 class RuleInfo {
