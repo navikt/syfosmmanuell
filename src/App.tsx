@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './App.less';
 import useFetch, { isNotStarted, FetchState, isNotStartedOrPending, isAnyPending } from './hooks/useFetch';
 import { ManuellOppgave } from './types/manuellOppgaveTypes';
-import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut } from './utils/urlUtils';
+import {
+  hentOppgaveidFraUrlParameter,
+  hentOppgaveUrl,
+  hentOppgaveUrlPut,
+  UrlError,
+  hentLoginUrl,
+} from './utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
 import EnRegel from './components/EnRegel';
 import FlereRegler from './components/FlereRegler';
@@ -13,29 +19,49 @@ const App = () => {
   const [manOppgave, setManOppgave] = useState<ManuellOppgave | null>();
   const [feilMelding, setFeilmelding] = useState<string | null>(null);
   const manOppgaveFetcher = useFetch<ManuellOppgave[]>();
-  const manOppgavePutter = useFetch<ManuellOppgave>();
+  const manOppgavePutter = useFetch<any>();
 
   useEffect(() => {
     if (isNotStarted(manOppgaveFetcher)) {
       let OPPGAVE_ID = '';
       try {
         OPPGAVE_ID = hentOppgaveidFraUrlParameter(window.location.href);
-      } catch (error) {
-        console.error(error);
+        // Lagre oppgaveid i sessionStorage
+        sessionStorage.setItem('OPPGAVE_ID', OPPGAVE_ID);
+      } catch (e) {
+        if (e instanceof UrlError) {
+          // Prøv og hent oppgaveid fra sessionStorage
+          const OPPGAVE_ID_FRA_STORAGE = sessionStorage.getItem('OPPGAVE_ID');
+          if (OPPGAVE_ID_FRA_STORAGE === null) {
+            // Hvis oppgaveid ikke finnes har det skjedd noe feil
+            setFeilmelding(
+              'Kunne ikke finne oppgaveid i URL eller sessionStorage. Lukk vinduet/fanen og forsøk å åpne oppgaven på nytt fra Gosys.',
+            );
+          } else {
+            OPPGAVE_ID = OPPGAVE_ID_FRA_STORAGE;
+          }
+        } else {
+          setFeilmelding('Ukjent feil');
+          console.error(e);
+        }
       }
+
       const URL = hentOppgaveUrl(OPPGAVE_ID);
-      console.log(URL);
-      manOppgaveFetcher.fetch(URL, undefined, (fetchState: FetchState<ManuellOppgave[]>) => {
+      console.log('Henter manuell oppgave fra: ' + URL);
+      manOppgaveFetcher.fetch(URL, { credentials: 'include' }, (fetchState: FetchState<ManuellOppgave[]>) => {
+        if (fetchState.httpCode === 401) {
+          window.location.href = hentLoginUrl();
+        }
         if (!fetchState.data) {
           setFeilmelding('Ingen oppgaver funnet');
           console.error('Ingen oppgave funnet');
         } else {
-            try {
-              setManOppgave(new ManuellOppgave(fetchState.data.shift()));
-            } catch (error) {
-              setFeilmelding('Kunne ikke formattere manuell oppgave.');
-              console.error(error);
-            }
+          try {
+            setManOppgave(new ManuellOppgave(fetchState.data.shift()));
+          } catch (error) {
+            setFeilmelding('Kunne ikke formattere manuell oppgave.');
+            console.error(error);
+          }
         }
       });
     }
@@ -57,10 +83,14 @@ const App = () => {
           URL,
           {
             method: 'PUT',
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(resultat),
           },
-          () => {
+          (fetchState: FetchState) => {
+            if (fetchState.httpCode === 401) {
+              window.location.href = hentLoginUrl();
+            }
             setManOppgave(null);
           },
         );
