@@ -27,11 +27,11 @@ const App = () => {
       try {
         OPPGAVE_ID = hentOppgaveidFraUrlParameter(window.location.href);
         // Lagre oppgaveid i sessionStorage
-        sessionStorage.setItem('OPPGAVE_ID', OPPGAVE_ID);
+        localStorage.setItem('OPPGAVE_ID', OPPGAVE_ID);
       } catch (e) {
         if (e instanceof UrlError) {
           // Prøv og hent oppgaveid fra sessionStorage
-          const OPPGAVE_ID_FRA_STORAGE = sessionStorage.getItem('OPPGAVE_ID');
+          const OPPGAVE_ID_FRA_STORAGE = localStorage.getItem('OPPGAVE_ID');
           if (OPPGAVE_ID_FRA_STORAGE === null) {
             // Hvis oppgaveid ikke finnes har det skjedd noe feil
             setFeilmelding(
