@@ -21,6 +21,9 @@ jobs:
         run: |
           npm run test
       - name: Build
+        env:
+          name: NODE_ENV
+          value: production
         run: |
           npm run build
       - name: Create Docker tag
