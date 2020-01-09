@@ -1,8 +1,9 @@
 export class UrlError extends Error {}
 
 export const hentOppgaveidFraUrlParameter = (url: string): string => {
+  console.log('NODE_ENV fra hentoppgavefraurl-func: ' + process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'development' || 'test') {
-    console.info('Du befinner deg i development og vil derfor motta mock-data')
+    console.info('Du befinner deg i development og vil derfor motta mock-data');
     return '';
   }
   const splitter = url.split('?');
