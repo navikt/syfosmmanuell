@@ -1,6 +1,9 @@
-export class UrlError extends Error {};
+export class UrlError extends Error {}
 
 export const hentOppgaveidFraUrlParameter = (url: string): string => {
+  if (process.env.NODE_ENV === 'development') {
+    return '';
+  }
   const splitter = url.split('?');
   if (splitter.length === 1) {
     throw new UrlError('Url does not contain any parameters');
