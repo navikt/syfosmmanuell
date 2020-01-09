@@ -53,8 +53,12 @@ export const hentOppgaveUrlPut = (oppgaveid: number): string => {
 };
 
 export const hentLoginUrl = (): string => {
-  if (process.env.NODE_ENV === 'development' || 'test') {
-    return 'https://loginservice.nais.preprod.local/login/?redirect=https://syfosmmanuell.nais.preprod.local';
+  switch (process.env.REACT_APP_NODE_ENV) {
+    case 'preprod':
+      return 'https://loginservice.nais.preprod.local/login/?redirect=https://syfosmmanuell.nais.preprod.local';
+    case 'production':
+      return 'https://loginservice.nais.adeo.no/login/?redirect=https://syfosmmanuell.nais.adeo.no';
+    default:
+      return 'localhost:3000';
   }
-  return 'https://loginservice.nais.adeo.no/login/?redirect=https://syfosmmanuell.nais.adeo.no';
 };
