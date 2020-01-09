@@ -2,6 +2,7 @@ export class UrlError extends Error {}
 
 export const hentOppgaveidFraUrlParameter = (url: string): string => {
   if (process.env.NODE_ENV === 'development' || 'test') {
+    console.info('Du befinner deg i development og vil derfor motta mock-data')
     return '';
   }
   const splitter = url.split('?');
@@ -36,7 +37,7 @@ export const hentOppgaveUrl = (oppgaveid: string): string => {
     console.error(error);
     throw error;
   }
-  return `${GET_MAN_OPPGAVE}${oppgaveid}`;
+  return `${GET_MAN_OPPGAVE + oppgaveid}`;
 };
 
 export const hentOppgaveUrlPut = (oppgaveid: number): string => {
@@ -49,7 +50,7 @@ export const hentOppgaveUrlPut = (oppgaveid: number): string => {
     console.error(error);
     throw error;
   }
-  return `${PUT_MAN_VURDERING}${oppgaveid}`;
+  return `${PUT_MAN_VURDERING + oppgaveid}`;
 };
 
 export const hentLoginUrl = (): string => {
