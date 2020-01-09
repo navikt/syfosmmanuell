@@ -2,7 +2,7 @@ export class UrlError extends Error {}
 
 export const hentOppgaveidFraUrlParameter = (url: string): string => {
   console.log('NODE_ENV fra hentoppgavefraurl-func: ' + process.env.NODE_ENV);
-  if (process.env.NODE_ENV === 'development' || 'test') {
+  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     console.info('Du befinner deg i development og vil derfor motta mock-data');
     return '';
   }
@@ -29,29 +29,29 @@ export const hentOppgaveidFraUrlParameter = (url: string): string => {
 };
 
 export const hentOppgaveUrl = (oppgaveid: string): string => {
-  if (process.env.NODE_ENV === 'development' || 'test') {
-    return 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/';
+  if (process.env.NODE_ENV === 'production') {
+    const GET_MAN_OPPGAVE = process.env.REACT_APP_GET_MANUELLE_OPPGAVER_URL;
+    if (!GET_MAN_OPPGAVE) {
+      const error = new Error('Kunne ikke finne url for henting av oppgave');
+      console.error(error);
+      throw error;
+    }
+    return `${GET_MAN_OPPGAVE + oppgaveid}`;
   }
-  const GET_MAN_OPPGAVE = process.env.REACT_APP_GET_MANUELLE_OPPGAVER_URL;
-  if (!GET_MAN_OPPGAVE) {
-    const error = new Error('Kunne ikke finne url for henting av oppgave');
-    console.error(error);
-    throw error;
-  }
-  return `${GET_MAN_OPPGAVE + oppgaveid}`;
+  return 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/';
 };
 
 export const hentOppgaveUrlPut = (oppgaveid: number): string => {
-  if (process.env.NODE_ENV === 'development' || 'test') {
-    return 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/';
+  if (process.env.NODE_ENV === 'production') {
+    const PUT_MAN_VURDERING = process.env.REACT_APP_PUT_MANUELL_VURDERING_URL;
+    if (!PUT_MAN_VURDERING) {
+      const error = new Error('Kunne ikke finne url for vurdering av oppgave');
+      console.error(error);
+      throw error;
+    }
+    return `${PUT_MAN_VURDERING + oppgaveid}`;
   }
-  const PUT_MAN_VURDERING = process.env.REACT_APP_PUT_MANUELL_VURDERING_URL;
-  if (!PUT_MAN_VURDERING) {
-    const error = new Error('Kunne ikke finne url for vurdering av oppgave');
-    console.error(error);
-    throw error;
-  }
-  return `${PUT_MAN_VURDERING + oppgaveid}`;
+  return 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/';
 };
 
 export const hentLoginUrl = (): string => {
