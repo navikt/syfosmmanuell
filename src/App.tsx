@@ -28,6 +28,7 @@ const App = () => {
         OPPGAVE_ID = hentOppgaveidFraUrlParameter(window.location.href);
         // Lagre oppgaveid i sessionStorage
         localStorage.setItem('OPPGAVE_ID', OPPGAVE_ID);
+        window.location.href = hentLoginUrl();
       } catch (e) {
         if (e instanceof UrlError) {
           // Prøv og hent oppgaveid fra sessionStorage
@@ -50,7 +51,7 @@ const App = () => {
       console.log('Henter manuell oppgave fra: ' + URL);
       manOppgaveFetcher.fetch(URL, undefined, (fetchState: FetchState<ManuellOppgave[]>) => {
         if (fetchState.httpCode === 401) {
-          window.location.href = hentLoginUrl();
+          //window.location.href = hentLoginUrl();
         }
         if (!fetchState.data) {
           setFeilmelding('Ingen oppgaver funnet');
