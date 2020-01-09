@@ -4,6 +4,9 @@ import './index.less';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+console.log('NODE_ENV: ' + process.env.NODE_ENV);
+console.log('REACT_APP_NODE_ENV: ' + process.env.REACT_APP_NODE_ENV);
+
 if (process.env.NODE_ENV === 'development') {
     require('./mock');
 }
