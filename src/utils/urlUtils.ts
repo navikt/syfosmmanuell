@@ -1,7 +1,7 @@
 export class UrlError extends Error {}
 
 export const hentOppgaveidFraUrlParameter = (url: string): string => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development' || 'test') {
     return '';
   }
   const splitter = url.split('?');
@@ -27,21 +27,33 @@ export const hentOppgaveidFraUrlParameter = (url: string): string => {
 };
 
 export const hentOppgaveUrl = (oppgaveid: string): string => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development' || 'test') {
     return 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/';
   }
-  return `https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?oppgaveid=${oppgaveid}`;
+  const GET_MAN_OPPGAVE = process.env.REACT_APP_GET_MANUELLE_OPPGAVER_URL;
+  if (!GET_MAN_OPPGAVE) {
+    const error = new Error('Kunne ikke finne url for henting av oppgave');
+    console.error(error);
+    throw error;
+  }
+  return `${GET_MAN_OPPGAVE}${oppgaveid}`;
 };
 
 export const hentOppgaveUrlPut = (oppgaveid: number): string => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development' || 'test') {
     return 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/';
   }
-  return `https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/${oppgaveid}`;
+  const PUT_MAN_VURDERING = process.env.REACT_APP_PUT_MANUELL_VURDERING_URL;
+  if (!PUT_MAN_VURDERING) {
+    const error = new Error('Kunne ikke finne url for vurdering av oppgave');
+    console.error(error);
+    throw error;
+  }
+  return `${PUT_MAN_VURDERING}${oppgaveid}`;
 };
 
 export const hentLoginUrl = (): string => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development' || 'test') {
     return 'https://loginservice.nais.preprod.local/login/?redirect=https://syfosmmanuell.nais.preprod.local';
   }
   return 'https://loginservice.nais.adeo.no/login/?redirect=https://syfosmmanuell.nais.adeo.no';

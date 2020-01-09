@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - '*'
-      - '!master'
 jobs:
   build-push-deploy:
     name: Checkout code and create docker tag
@@ -23,8 +22,9 @@ jobs:
       #          npm run test
       - name: Build
         env:
-          NODE_ENV: preprod
           REACT_APP_NODE_ENV: preprod
+          REACT_APP_GET_MANUELLE_OPPGAVER_URL: https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?oppgaveid=
+          REACT_APP_PUT_MANUELL_VURDERING_URL: https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/
         run: |
           npm run build
       - name: Create Docker tag
