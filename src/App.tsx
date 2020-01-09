@@ -48,7 +48,7 @@ const App = () => {
 
       const URL = hentOppgaveUrl(OPPGAVE_ID);
       console.log('Henter manuell oppgave fra: ' + URL);
-      manOppgaveFetcher.fetch(URL, { credentials: 'include' }, (fetchState: FetchState<ManuellOppgave[]>) => {
+      manOppgaveFetcher.fetch(URL, undefined, (fetchState: FetchState<ManuellOppgave[]>) => {
         if (fetchState.httpCode === 401) {
           window.location.href = hentLoginUrl();
         }
@@ -83,7 +83,6 @@ const App = () => {
           URL,
           {
             method: 'PUT',
-            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(resultat),
           },
