@@ -23,6 +23,7 @@ jobs:
       - name: Build
         env:
           NODE_ENV: production
+          REACT_APP_NODE_ENV: production
         run: |
           npm run build
       - name: Create Docker tag
