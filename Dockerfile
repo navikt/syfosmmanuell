@@ -10,4 +10,4 @@ RUN npm install
 COPY ./server/setEnvVars.sh .
 RUN ls -al
 
-CMD ["ls", "&&", "./setEnvVars.sh", "&&", "source", "envFile", "&&", "node", "server.js" ]
+CMD ["zsh", "-c", "ls", "&&", "./setEnvVars.sh", "&&", "source", "envFile", "&&", "node", "server.js" ]
