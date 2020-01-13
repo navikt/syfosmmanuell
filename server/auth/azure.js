@@ -13,7 +13,7 @@ const metadata = {
 const client = async () => {
   // see https://github.com/panva/node-openid-client/blob/master/docs/README.md#customizing-individual-http-requests
   try {
-    proxy.setup(Issuer);
+    //proxy.setup(Issuer);
     const issuer = await Issuer.discover(config.azureAd.discoveryUrl);
     proxy.setup(issuer);
     console.log(`Discovered issuer ${issuer.issuer}`);
