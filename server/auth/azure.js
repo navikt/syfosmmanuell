@@ -17,6 +17,7 @@ const client = async () => {
     const issuer = await Issuer.discover(config.azureAd.discoveryUrl);
     proxy.setup(issuer);
     console.log(`Discovered issuer ${issuer.issuer}`);
+    console.log('Metadata: ' + JSON.stringify(metadata));
     const openIdClient = new issuer.Client(metadata);
     proxy.setup(openIdClient);
 

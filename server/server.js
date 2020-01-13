@@ -22,7 +22,7 @@ async function startApp() {
     setupVault();
     console.log('CLIENT_ID: ' + process.env.CLIENT_ID);
     console.log('CLIENT_SECRET: ' + process.env.CLIENT_SECRET);
-    console.log('BACKEND_CLIENT_ID: ' + process.env.DOWNSTREAM_API_HOST);
+    console.log('DOWNSTREAM_API_HOST: ' + process.env.DOWNSTREAM_API_HOST);
     console.log('AAD_DISCOVERY_URL: ' + process.env.AAD_DISCOVERY_URL);
     // TODO: set up redis
     server.use(
