@@ -21,8 +21,8 @@ const ensureAuthenticated = async (req, res, next) => {
 
 const setup = authClient => {
     // Unprotected
-    router.get('/isAlive', (req, res) => res.send('Alive'));
-    router.get('/isReady', (req, res) => res.send('Ready'));
+    router.get('/is_alive', (req, res) => res.send('Alive'));
+    router.get('/is_ready', (req, res) => res.send('Ready'));
 
     router.get('/login', passport.authenticate('azureOidc', { failureRedirect: '/login'}));
     router.use('/callback', passport.authenticate('azureOidc', { failureRedirect: '/login'}), (req, res) => {
