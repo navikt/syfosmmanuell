@@ -7,4 +7,7 @@ COPY ./server/server.js .
 
 RUN npm install
 
-CMD [ "node", "server.js" ]
+COPY ./server/setEnvVars.sh .
+RUN ["./setEnvVars.sh"]
+
+CMD ["source", "envFile", "&&", "node", "server.js" ]
