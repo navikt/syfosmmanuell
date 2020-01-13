@@ -11,4 +11,4 @@ COPY start.sh .
 RUN chmod +x start.sh
 RUN ls -al
 
-CMD ["/start.sh"]
+CMD ["start.sh"]
