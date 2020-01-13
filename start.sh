@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 client_id_file="/secrets/azuread/syfosmmanuell/client_id"
 while IFS= read -r line
 do
