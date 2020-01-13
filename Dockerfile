@@ -7,7 +7,8 @@ COPY ./server/server.js .
 
 RUN npm install
 
-COPY ./server/setEnvVars.sh .
+COPY ./start.sh .
+RUN chmod +x /start.sh
 RUN ls -al
 
-CMD ["zsh", "-c", "ls", "&&", "./setEnvVars.sh", "&&", "source", "envFile", "&&", "node", "server.js" ]
+CMD ["/start.sh" ]
