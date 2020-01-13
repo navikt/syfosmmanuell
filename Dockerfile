@@ -8,6 +8,8 @@ COPY ./server/server.js .
 RUN npm install
 
 COPY ./server/setEnvVars.sh .
+RUN ls "/secrets/azuread/syfosmmanuell"
+RUN ls -al
 RUN ["./setEnvVars.sh"]
 
 CMD ["source", "envFile", "&&", "node", "server.js" ]
