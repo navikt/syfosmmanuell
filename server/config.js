@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const server = {
   host: process.env.HOST || 'localhost',
-  port: process.env.PORT || 4000,
+  port: process.env.PORT || 8080,
   proxy: process.env.HTTP_PROXY,
 };
 
