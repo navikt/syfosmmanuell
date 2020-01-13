@@ -8,7 +8,7 @@ COPY ./server/server.js .
 RUN npm install
 
 COPY start.sh .
-RUN chmod +x /start.sh
+RUN chmod +x start.sh
 RUN ls -al
 
 CMD ["/start.sh"]
