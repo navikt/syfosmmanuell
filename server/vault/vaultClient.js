@@ -1,19 +1,17 @@
-import vault from 'node-vault';
+import fs from 'fs';
 
 const setupVault = () => {
-    ['VAULT_ADDR', 'VAULT_TOKEN'].forEach(env => {
-        if (!process.env[env]) {
-            throw new Error(`The environment variable ${env} is not set.`);
-        }
-    });
+  const CLIENT_ID = fs.readFileSync('/secrets/azuread/syfosmmanuell/client_id');
+  const CLIENT_SECRET = fs.readFileSync('/secrets/azuread/syfosmmanuell/client_secret');
+  const BACKEND_CLIENT_ID = fs.readFileSync('/secrets/azuread/syfosmmanuell-backend/client_id');
 
-    const options = {
-        apiVersion: 'v1',
-        endpoint: process.env.VAULT_ADDR,
-        token: process.env.VAULT_TOKEN
-    };
-
-    return vault(options);
-}
+  try {
+    process.env['CLIENT_ID'] = CLIENT_ID;
+    process.env['CLIENT_SECRET'] = CLIENT_SECRET;
+    process.env['DOWNSTREAM_API_CLIENT_ID'] = BACKEND_CLIENT_ID;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export default setupVault;

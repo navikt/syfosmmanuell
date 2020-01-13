@@ -10,6 +10,7 @@ import session from 'express-session';
 // for debugging during development
 import morganBody from 'morgan-body';
 import morgan from 'morgan';
+import setupVault from './vault/vaultClient';
 
 const server = express();
 const port = config.server.port;
@@ -18,9 +19,10 @@ async function startApp() {
   try {
     morganBody(server);
     morgan('dev');
+    setupVault();
     console.log('CLIENT_ID: ' + process.env.CLIENT_ID);
     console.log('CLIENT_SECRET: ' + process.env.CLIENT_SECRET);
-    console.log('BACKEND_CLIENT_ID: ' + process.env.DOWNSTREAM_API_ACLIENT_ID);
+    console.log('BACKEND_CLIENT_ID: ' + process.env.DOWNSTREAM_API_HOST);
     console.log('AAD_DISCOVERY_URL: ' + process.env.AAD_DISCOVERY_URL);
     // TODO: set up redis
     server.use(
