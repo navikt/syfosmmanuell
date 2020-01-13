@@ -19,7 +19,6 @@ async function startApp() {
   try {
     morganBody(server);
     morgan('dev');
-    setupVault();
     console.log('CLIENT_ID: ' + process.env.CLIENT_ID);
     console.log('CLIENT_SECRET: ' + process.env.CLIENT_SECRET);
     console.log('DOWNSTREAM_API_HOST: ' + process.env.DOWNSTREAM_API_HOST);
