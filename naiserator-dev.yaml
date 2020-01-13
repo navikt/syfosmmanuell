@@ -40,7 +40,7 @@ spec:
         mountPath: /secrets/azuread/syfosmmanuell
       - kvPath: /azureas/data/dev/creds/syfosmmanuell-backend
         mountPath: /secrets/azuread/syfosmmanuell-backend
-  webproxy: false
+  webproxy: true
   ingresses:
     - "https://syfosmmanuell.nais.preprod.local"
   env:
