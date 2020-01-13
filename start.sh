@@ -20,4 +20,4 @@ do
     echo "export DOWNSTREAM_API_CLIENT_ID=$line" >> envFile
 done <"$backend_client_id_file"
 
-nodemon server.js
+npm start
