@@ -38,7 +38,7 @@ spec:
     paths:
       - kvPath: /azuread/data/dev/creds/syfosmmanuell
         mountPath: /secrets/azuread/syfosmmanuell
-      - kvPath: /azureas/data/dev/creds/syfosmmanuell-backend
+      - kvPath: /azuread/data/dev/creds/syfosmmanuell-backend
         mountPath: /secrets/azuread/syfosmmanuell-backend
   webproxy: true
   ingresses:
