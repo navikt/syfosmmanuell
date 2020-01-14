@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - '*'
-      - '!master'
 jobs:
   build-push-deploy:
     name: Checkout code and create docker tag
@@ -13,15 +12,19 @@ jobs:
         uses: actions/checkout@v1
       - name: Use Node
         uses: actions/setup-node@v1
-        with: 
+        with:
           node-version: '12.x'
       - name: Install deps
         run: |
           npm install
-#      - name: Run tests
-#        run: |
-#          npm run test
+      #      - name: Run tests
+      #        run: |
+      #          npm run test
       - name: Build
+        env:
+          REACT_APP_NODE_ENV: preprod
+          REACT_APP_GET_MANUELLE_OPPGAVER_URL: https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/?oppgaveid=
+          REACT_APP_PUT_MANUELL_VURDERING_URL: https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/
         run: |
           npm run build
       - name: Create Docker tag
@@ -40,7 +43,7 @@ jobs:
         run: |
           echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin docker.pkg.github.com
       - name: Push Docker image
-        run: "docker push $(cat .docker_image):$(cat .docker_tag)"
+        run: 'docker push $(cat .docker_image):$(cat .docker_tag)'
       - name: deploy to dev-fss
         uses: navikt/deployment-cli/action@0.4.0
         env:

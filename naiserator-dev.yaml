@@ -8,8 +8,8 @@ metadata:
 spec:
   image: "docker.pkg.github.com/navikt/syfosmmanuell:{{tag}}"
   replicas:
-    min: 2
-    max: 4
+    min: 1
+    max: 1
     cpuThresholdPercentage: 90
   port: 8080
   liveness:
@@ -33,13 +33,22 @@ spec:
     requests:
       cpu: 100m
       memory: 128Mi
-  webproxy: false
+  vault:
+    enabled: true
+    paths:
+      - kvPath: /azuread/data/dev/creds/syfosmmanuell
+        mountPath: /secrets/azuread/syfosmmanuell
+      - kvPath: /azuread/data/dev/creds/syfosmmanuell-backend
+        mountPath: /secrets/azuread/syfosmmanuell-backend
+  webproxy: true
   ingresses:
     - "https://syfosmmanuell.nais.preprod.local"
   env:
-    - name: NODE_ENV
-      value: preprod
-    - name: REACT_APP_GET_MANUELLE_OPPGAVER_URL
-      value: 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/hentManuellOppgave/?fnr='
-    - name: REACT_APP_PUT_MANUELL_VURDERING_URL
-      value: 'https://syfosmmanuell-backend.nais.preprod.local/api/v1/vurderingmanuelloppgave/'
+    - name: AAD_DISCOVERY_URL
+      value: https://login.microsoftonline.com/966ac572-f5b7-4bbe-aa88-c76419c0f851/v2.0/.well-known/openid-configuration
+    - name: AAD_REDIRECT_URL
+      value: https://syfosmmanuell.nais.preprod.local/callback
+    - name: DOWNSTREAM_API_PREFIX
+      value: backend
+    - name: DOWNSTREAM_API_HOST
+      value: http://syfosmmanuell-backend/

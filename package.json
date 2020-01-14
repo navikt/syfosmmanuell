@@ -1,5 +1,5 @@
 {
-  "name": "syfosmmanuell-ny",
+  "name": "syfosmmanuell",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -37,6 +37,7 @@
     "nav-frontend-spinner-style": "^0.2.5",
     "nav-frontend-typografi": "^2.0.16",
     "nav-frontend-typografi-style": "^1.0.17",
+    "node-vault": "^0.9.12",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-collapse": "^5.0.1",

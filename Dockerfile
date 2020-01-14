@@ -2,9 +2,12 @@ FROM navikt/node-express:12.2.0-alpine
 
 WORKDIR /src
 COPY ./build build
-COPY ./server/package.json .
-COPY ./server/server.js .
+COPY ./server .
 
 RUN npm install
 
-CMD [ "node", "server.js" ]
+COPY start.sh .
+RUN chmod +x start.sh
+RUN ls -al
+
+CMD ["/bin/sh", "-c", "./start.sh"]

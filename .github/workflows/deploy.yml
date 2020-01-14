@@ -1,4 +1,4 @@
-name: Deploy to dev and prod
+name: Deploy to prod
 on:
   push:
     branches:
@@ -17,10 +17,14 @@ jobs:
       - name: Install deps
         run: |
           npm install
-      - name: Run tests
-        run: |
-          npm run test
+      #- name: Run tests
+      #  run: |
+      #    npm run test
       - name: Build
+        env:
+          REACT_APP_NODE_ENV: production
+          REACT_APP_GET_MANUELLE_OPPGAVER_URL: https://syfosmmanuell.nais.adeo.no/backend/api/v1/hentManuellOppgave/?oppgaveid=
+          REACT_APP_PUT_MANUELL_VURDERING_URL: https://syfosmmanuell.nais.adeo.no/backend/api/v1/vurderingmanuelloppgave/
         run: |
           npm run build
       - name: Create Docker tag
@@ -39,15 +43,7 @@ jobs:
         run: |
           echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin docker.pkg.github.com
       - name: Push Docker image
-        run: "docker push $(cat .docker_image):$(cat .docker_tag)"
-      - name: deploy to dev-fss
-        uses: navikt/deployment-cli/action@0.4.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          cluster: dev-fss
-          team: teamsykefravr
-          resources: naiserator-dev.yaml
+        run: 'docker push $(cat .docker_image):$(cat .docker_tag)'
       #- name: deploy to prod-fss
       #  uses: navikt/deployment-cli/action@0.4.0
       #    env:
