@@ -15,7 +15,8 @@ const ensureAuthenticated = async (req, res, next) => {
     await authUtils.renewTokenSets();
     next();
   } else {
-    if (req.params.oppgaveid) {
+    console.log(req.query)
+    if (req.query.oppgaveid) {
       session.redirectTo = req.url;
     }
     console.log(session);
@@ -31,6 +32,7 @@ const setup = authClient => {
   router.get('/login', passport.authenticate('azureOidc', { failureRedirect: '/login' }));
   router.use('/callback', passport.authenticate('azureOidc', { failureRedirect: '/login' }), (req, res) => {
     if (session.redirectTo) {
+      console.log(session);
       res.redirect(session.redirectTo);
     } else {
       res.redirect('/');
