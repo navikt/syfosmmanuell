@@ -31,6 +31,7 @@ export const hentOppgaveidFraUrlParameter = (url: string): string => {
 export const hentOppgaveUrl = (oppgaveid: string): string => {
   if (process.env.REACT_APP_NODE_ENV === 'production' || process.env.REACT_APP_NODE_ENV === 'preprod') {
     const GET_MAN_OPPGAVE = process.env.REACT_APP_GET_MANUELLE_OPPGAVER_URL;
+    console.log('url for henting av oppgave: ' + GET_MAN_OPPGAVE);
     if (!GET_MAN_OPPGAVE) {
       const error = new Error('Kunne ikke finne url for henting av oppgave');
       console.error(error);
@@ -52,15 +53,4 @@ export const hentOppgaveUrlPut = (oppgaveid: number): string => {
     return `${PUT_MAN_VURDERING + oppgaveid}`;
   }
   return 'https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/';
-};
-
-export const hentLoginUrl = (): string => {
-  switch (process.env.REACT_APP_NODE_ENV) {
-    case 'preprod':
-      return 'https://loginservice.nais.preprod.local/login?redirect=https://syfosmmanuell.nais.preprod.local';
-    case 'production':
-      return 'https://loginservice.nais.adeo.no/login?redirect=https://syfosmmanuell.nais.preprod.local';
-    default:
-      return 'localhost:3000';
-  }
 };

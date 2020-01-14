@@ -2,13 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.less';
 import useFetch, { isNotStarted, FetchState, isNotStartedOrPending, isAnyPending } from './hooks/useFetch';
 import { ManuellOppgave } from './types/manuellOppgaveTypes';
-import {
-  hentOppgaveidFraUrlParameter,
-  hentOppgaveUrl,
-  hentOppgaveUrlPut,
-  UrlError,
-  hentLoginUrl,
-} from './utils/urlUtils';
+import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from './utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
 import EnRegel from './components/EnRegel';
 import FlereRegler from './components/FlereRegler';
@@ -95,7 +89,7 @@ const App = () => {
           },
           (fetchState: FetchState) => {
             if (fetchState.httpCode === 401) {
-              window.location.href = hentLoginUrl();
+              // redirect to login
             }
             setManOppgave(null);
           },
