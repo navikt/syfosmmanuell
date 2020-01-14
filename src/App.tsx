@@ -28,7 +28,7 @@ const App = () => {
         OPPGAVE_ID = hentOppgaveidFraUrlParameter(window.location.href);
         // Lagre oppgaveid i sessionStorage
         localStorage.setItem('OPPGAVE_ID', OPPGAVE_ID);
-        window.location.href = hentLoginUrl();
+        //window.location.href = hentLoginUrl();
       } catch (e) {
         if (e instanceof UrlError) {
           // Prøv og hent oppgaveid fra sessionStorage
