@@ -18,15 +18,13 @@ async function startApp() {
   try {
     morganBody(server);
     morgan('dev');
-    console.log('CLIENT_ID: ' + process.env.CLIENT_ID);
-    console.log('CLIENT_SECRET: ' + process.env.CLIENT_SECRET);
-    console.log('DOWNSTREAM_API_HOST: ' + process.env.DOWNSTREAM_API_HOST);
-    console.log('AAD_DISCOVERY_URL: ' + process.env.AAD_DISCOVERY_URL);
+
+    // Sets up session storage. A unique id is automatically added to the session by the uid-safe library (default)
     // TODO: set up redis
     server.use(
       session({
         secret: 'awesome secret',
-        name: 'awesome name',
+        name: 'syfosmmanuell_session',
         resave: false,
         saveUninitialized: true,
       }),

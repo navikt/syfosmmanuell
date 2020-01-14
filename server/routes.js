@@ -16,6 +16,7 @@ const ensureAuthenticated = async (req, res, next) => {
     next();
   } else {
     session.redirectTo = req.url;
+    console.log(session);
     res.redirect('/login');
   }
 };
@@ -37,7 +38,6 @@ const setup = authClient => {
   router.use(ensureAuthenticated);
 
   // Protected
-
   router.use('/', express.static(path.join(__dirname, 'build')));
 
   router.get('/logout', (req, res) => {
