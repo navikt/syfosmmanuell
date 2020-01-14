@@ -29,7 +29,7 @@ export const hentOppgaveidFraUrlParameter = (url: string): string => {
 };
 
 export const hentOppgaveUrl = (oppgaveid: string): string => {
-  if (process.env.REACT_APP_NODE_ENV === 'production' || process.env.RAECT_APP_NODE_ENV === 'preprod') {
+  if (process.env.REACT_APP_NODE_ENV === 'production' || process.env.REACT_APP_NODE_ENV === 'preprod') {
     const GET_MAN_OPPGAVE = process.env.REACT_APP_GET_MANUELLE_OPPGAVER_URL;
     if (!GET_MAN_OPPGAVE) {
       const error = new Error('Kunne ikke finne url for henting av oppgave');
@@ -42,7 +42,7 @@ export const hentOppgaveUrl = (oppgaveid: string): string => {
 };
 
 export const hentOppgaveUrlPut = (oppgaveid: number): string => {
-  if (process.env.REACT_APP_NODE_ENV === 'production' || process.env.RAECT_APP_NODE_ENV === 'preprod') {
+  if (process.env.REACT_APP_NODE_ENV === 'production' || process.env.REACT_APP_NODE_ENV === 'preprod') {
     const PUT_MAN_VURDERING = process.env.REACT_APP_PUT_MANUELL_VURDERING_URL;
     if (!PUT_MAN_VURDERING) {
       const error = new Error('Kunne ikke finne url for vurdering av oppgave');
