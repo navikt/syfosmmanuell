@@ -15,11 +15,9 @@ const ensureAuthenticated = async (req, res, next) => {
     await authUtils.renewTokenSets();
     next();
   } else {
-    console.log(req.query)
     if (req.query.oppgaveid) {
       session.redirectTo = req.url;
     }
-    console.log(session);
     res.redirect('/login');
   }
 };

@@ -2,22 +2,6 @@ import fs from 'fs';
 
 if (process.env.NODE_ENV === 'development') {
   require('dotenv/config');
-} else {
-  const CLIENT_ID = fs.readFileSync('/secrets/azuread/syfosmmanuell/client_id', 'utf8');
-  const CLIENT_SECRET = fs.readFileSync('/secrets/azuread/syfosmmanuell/client_secret', 'utf8');
-  const DOWNSTREAM_API_CLIENT_ID = fs.readFileSync('/secrets/azuread/syfosmmanuell-backend/client_id', 'utf8');
-  console.log('CLIENT_ID: ' + CLIENT_ID);
-  console.log('CLIENT_SECRET: ' + CLIENT_SECRET);
-  console.log('DOWNSTREAM_API_CLIENT_ID: ' + CLIENT_ID);
-
-  
-  try {
-    process.env['CLIENT_ID'] = CLIENT_ID;
-    process.env['CLIENT_SECRET'] = CLIENT_SECRET;
-    process.env['DOWNSTREAM_API_CLIENT_ID'] = DOWNSTREAM_API_CLIENT_ID;
-  } catch (e) {
-    console.log(e);
-  }
 }
 
 const server = {
@@ -28,8 +12,8 @@ const server = {
 
 const azureAd = {
   discoveryUrl: process.env.AAD_DISCOVERY_URL,
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
+  clientId: process.env.CLIENT_ID || fs.readFileSync('/secrets/azuread/syfosmmanuell/client_id', 'utf8'),
+  clientSecret: process.env.CLIENT_SECRET || fs.readFileSync('/secrets/azuread/syfosmmanuell/client_secret', 'utf8'),
   redirectUri: process.env.AAD_REDIRECT_URL,
   tokenEndpointAuthMethod: 'client_secret_post',
   responseTypes: ['code'],
@@ -37,7 +21,8 @@ const azureAd = {
 };
 
 const downstreamApi = {
-  clientId: process.env.DOWNSTREAM_API_CLIENT_ID,
+  clientId:
+    process.env.DOWNSTREAM_API_CLIENT_ID || fs.readFileSync('/secrets/azuread/syfosmmanuell-backend/client_id', 'utf8'),
   prefix: process.env.DOWNSTREAM_API_PREFIX || 'downstream',
   host: process.env.DOWNSTREAM_API_HOST,
 };

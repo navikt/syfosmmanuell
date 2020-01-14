@@ -33,6 +33,22 @@ spec:
     requests:
       cpu: 100m
       memory: 128Mi
+  vault:
+    enabled: true
+    paths:
+      - kvPath: /azuread/data/prod/creds/syfosmmanuell
+        mountPath: /secrets/azuread/syfosmmanuell
+      - kvPath: /azuread/data/prod/creds/syfosmmanuell-backend
+        mountPath: /secrets/azuread/syfosmmanuell-backend
   webproxy: true
   ingresses:
     - "https://syfosmmanuell.nais.adeo.no"
+  env:
+    - name: AAD_DISCOVERY_URL
+      value: https://login.microsoftonline.com/62366534-1ec3-4962-8869-9b5535279d0b/v2.0/.well-known/openid-configuration
+    - name: AAD_REDIRECT_URL
+      value: https://syfosmmanuell.nais.adeo.no/callback
+    - name: DOWNSTREAM_API_PREFIX
+      value: backend
+    - name: DOWNSTREAM_API_HOST
+      value: http://syfosmmanuell-backend/
