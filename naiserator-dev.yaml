@@ -51,4 +51,4 @@ spec:
     - name: DOWNSTREAM_API_PREFIX
       value: backend
     - name: DOWNSTREAM_API_HOST
-      value: https://syfosmmanuell-backend.nais.preprod.local/
+      value: http://syfosmmanuell-backend/

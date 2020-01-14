@@ -10,7 +10,6 @@ const options = authClient => ({
         .then(
           ({ access_token }) => {
             options.headers.Authorization = `Bearer ${access_token}`;
-            options.rejectUnauthorized = false;
             resolve(options);
           },
           error => reject(error),

@@ -31,7 +31,6 @@ export const hentOppgaveidFraUrlParameter = (url: string): string => {
 export const hentOppgaveUrl = (oppgaveid: string): string => {
   if (process.env.REACT_APP_NODE_ENV === 'production' || process.env.REACT_APP_NODE_ENV === 'preprod') {
     const GET_MAN_OPPGAVE = process.env.REACT_APP_GET_MANUELLE_OPPGAVER_URL;
-    console.log('url for henting av oppgave: ' + GET_MAN_OPPGAVE);
     if (!GET_MAN_OPPGAVE) {
       const error = new Error('Kunne ikke finne url for henting av oppgave');
       console.error(error);
