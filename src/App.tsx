@@ -46,7 +46,7 @@ const App = () => {
           console.error(e);
         }
       }
-
+      console.log('Oppgaveid: ' + OPPGAVE_ID);
       const URL = hentOppgaveUrl(OPPGAVE_ID);
       console.log('Henter manuell oppgave fra: ' + URL);
       manOppgaveFetcher.fetch(URL, { credentials: 'include' }, (fetchState: FetchState<ManuellOppgave[]>) => {
