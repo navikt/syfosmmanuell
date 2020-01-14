@@ -19,6 +19,7 @@ async function startApp() {
     morganBody(server);
     morgan('dev');
 
+    
     // Sets up session storage. A unique id is automatically added to the session by the uid-safe library (default)
     // TODO: set up redis
     server.use(
