@@ -23,8 +23,8 @@ jobs:
       - name: Build
         env:
           REACT_APP_NODE_ENV: production
-          REACT_APP_GET_MANUELLE_OPPGAVER_URL: https://syfosmmanuell.nais.adeo.no/api/v1/hentManuellOppgave/?oppgaveid=
-          REACT_APP_PUT_MANUELL_VURDERING_URL: https://syfosmmanuell.nais.adeo.no/api/v1/vurderingmanuelloppgave/
+          REACT_APP_GET_MANUELLE_OPPGAVER_URL: https://syfosmmanuell.nais.adeo.no/backend/api/v1/hentManuellOppgave/?oppgaveid=
+          REACT_APP_PUT_MANUELL_VURDERING_URL: https://syfosmmanuell.nais.adeo.no/backend/api/v1/vurderingmanuelloppgave/
         run: |
           npm run build
       - name: Create Docker tag
