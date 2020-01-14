@@ -65,11 +65,19 @@ export class ValidationResultWithStatus extends ValidationResult {
   setBehandlet = (arsak: RuleNames, vurdering: boolean): ValidationResultWithStatus => {
     this.behandlet.set(arsak, vurdering);
     this.antallBehandlet++;
-    if (vurdering === false) {
-      this.totalVurdering = vurdering;
-    }
+    
     if (this.antallBehandlet === this.ruleHits.length && this.totalVurdering == null) {
-      this.totalVurdering = true;
+      let antallTrue = 0;
+      this.behandlet.forEach((value, key) => {
+        if (value === false) {
+          this.totalVurdering = false;
+          return this;
+        } else if (value === true) {
+          antallTrue++;
+        }
+      });
+
+      if (antallTrue === this.ruleHits.length) this.totalVurdering = true;
     }
     return this;
   };
