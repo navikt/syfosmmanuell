@@ -10,7 +10,6 @@ import session from 'express-session';
 // for debugging during development
 import morganBody from 'morgan-body';
 import morgan from 'morgan';
-import setupVault from './vault/vaultClient';
 
 const server = express();
 const port = config.server.port;
