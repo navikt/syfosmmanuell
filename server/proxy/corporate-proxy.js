@@ -12,8 +12,7 @@ const agent = proxyUri => {
       proxy: {
         host: hostPort[0],
         port: hostPort[1],
-      },
-      rejectUnauthorized: false,
+      }
     });
   } else {
     return null;
