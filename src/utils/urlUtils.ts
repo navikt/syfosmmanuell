@@ -38,7 +38,7 @@ export const hentOppgaveUrl = (oppgaveid: string): string => {
     }
     return `${GET_MAN_OPPGAVE + oppgaveid}`;
   }
-  return 'https://syfosmmanuell-backend.nais.preprod.local/backend/api/v1/hentManuellOppgave/';
+  return 'https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/';
 };
 
 export const hentOppgaveUrlPut = (oppgaveid: number): string => {
@@ -51,7 +51,7 @@ export const hentOppgaveUrlPut = (oppgaveid: number): string => {
     }
     return `${PUT_MAN_VURDERING + oppgaveid}`;
   }
-  return 'https://syfosmmanuell-backend.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/';
+  return 'https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/';
 };
 
 export const hentLoginUrl = (): string => {
