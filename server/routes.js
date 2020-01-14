@@ -15,7 +15,9 @@ const ensureAuthenticated = async (req, res, next) => {
     await authUtils.renewTokenSets();
     next();
   } else {
-    session.redirectTo = req.url;
+    if (req.params.oppgaveid) {
+      session.redirectTo = req.url;
+    }
     console.log(session);
     res.redirect('/login');
   }
