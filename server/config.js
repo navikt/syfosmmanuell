@@ -5,11 +5,11 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   const CLIENT_ID = fs.readFileSync('/secrets/azuread/syfosmmanuell/client_id', 'utf8');
   const CLIENT_SECRET = fs.readFileSync('/secrets/azuread/syfosmmanuell/client_secret', 'utf8');
-  const DOWNSTREAM_API_HOST = fs.readFileSync('/secrets/azuread/syfosmmanuell-backend/client_id', 'utf8');
+  const DOWNSTREAM_API_CLIENT_ID = fs.readFileSync('/secrets/azuread/syfosmmanuell-backend/client_id', 'utf8');
   try {
     process.env['CLIENT_ID'] = CLIENT_ID;
     process.env['CLIENT_SECRET'] = CLIENT_SECRET;
-    process.env['DOWNSTREAM_API_HOST'] = DOWNSTREAM_API_HOST;
+    process.env['DOWNSTREAM_API_CLIENT_ID'] = DOWNSTREAM_API_CLIENT_ID;
   } catch (e) {
     console.log(e);
   }
