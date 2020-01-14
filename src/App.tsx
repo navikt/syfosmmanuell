@@ -6,6 +6,7 @@ import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlErr
 import Spinner from 'nav-frontend-spinner';
 import EnRegel from './components/EnRegel';
 import FlereRegler from './components/FlereRegler';
+import Navbar from './components/Navbar';
 import { ValidationResult, Status } from './types/validationresultTypes';
 import { Undertittel } from 'nav-frontend-typografi';
 
@@ -43,7 +44,7 @@ const App = () => {
 
       const URL = hentOppgaveUrl(OPPGAVE_ID);
       console.log('Henter manuell oppgave fra: ' + URL);
-      
+
       manOppgaveFetcher.fetch(URL, { credentials: 'include' }, (fetchState: FetchState<ManuellOppgave[]>) => {
         if (fetchState.httpCode === 401) {
           //window.location.href = hentLoginUrl();
@@ -106,30 +107,41 @@ const App = () => {
 
   if (isAnyPending([manOppgaveFetcher, manOppgavePutter])) {
     return (
-      <div style={{ marginLeft: '2rem', marginTop: '2rem' }}>
-        <Spinner />
+      <div>
+        <Navbar />
+        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+          <Spinner />
+        </div>
       </div>
     );
   }
 
   if (manOppgave?.validationResult.ruleHits.length === 1) {
     return (
-      <EnRegel
-        sykmelding={manOppgave.sykmelding}
-        regel={manOppgave.validationResult.ruleHits[0].ruleName}
-        handterAvgjorelse={handterAvgjorelse}
-        handterAvbryt={() =>
-          setFeilmelding(
-            'Du har avbrutt oppgaven. Du kan enten lukke vinduet, eller laste inn siden på nytt for hente oppgaven tilbake.',
-          )
-        }
-      />
+      <>
+        <Navbar />
+        <EnRegel
+          sykmelding={manOppgave.sykmelding}
+          regel={manOppgave.validationResult.ruleHits[0].ruleName}
+          handterAvgjorelse={handterAvgjorelse}
+          handterAvbryt={() =>
+            setFeilmelding(
+              'Du har avbrutt oppgaven. Du kan enten lukke vinduet, eller laste inn siden på nytt for hente oppgaven tilbake.',
+            )
+          }
+        />
+      </>
     );
   }
 
   if (manOppgave) {
     if (manOppgave.validationResult.ruleHits.length > 1) {
-      return <FlereRegler manOppgave={manOppgave} handterAvgjorelse={handterAvgjorelse} />;
+      return (
+        <>
+          <Navbar />
+          <FlereRegler manOppgave={manOppgave} handterAvgjorelse={handterAvgjorelse} />
+        </>
+      );
     }
   }
 
