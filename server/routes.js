@@ -9,6 +9,9 @@ import reverseProxy from './proxy/reverse-proxy';
 const router = express.Router();
 
 const ensureAuthenticated = async (req, res, next) => {
+  if (req.user) {
+    console.log(req.user);
+  }
   if (req.isAuthenticated()) {
     next();
   } else if (req.isAuthenticated() && authUtils.hasExpiredTokenSets(req)) {

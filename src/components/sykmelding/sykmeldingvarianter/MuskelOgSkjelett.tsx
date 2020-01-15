@@ -6,20 +6,23 @@ import SykmeldingPerioder from '../../infopanel/panelelementer/periode/Sykmeldin
 import BehandlingsDatoer from '../../infopanel/utdypendeelementer/BehandlingsDatoer';
 
 interface MuskelOgSkjelettProps {
-    sykmelding: Sykmelding;
+  sykmelding: Sykmelding;
 }
 
 const MuskelOgSkjelett = ({ sykmelding }: MuskelOgSkjelettProps) => {
-    return (
-        <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
-            <BehandlingsDatoer
-                behandletTidspunkt={sykmelding.behandletTidspunkt}
-                syketilfelleStartDato={sykmelding.syketilfelleStartDato}
-            />
-            <SykmeldingPerioder perioder={sykmelding.perioder} />
-            <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
-        </InfoPanel>
-    );
+  return (
+    <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
+      <BehandlingsDatoer
+        behandletTidspunkt={}
+        syketilfelleStartDato={sykmelding.syketilfelleStartDato}
+      />
+      <SykmeldingPerioder perioder={sykmelding.perioder} />
+      <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
+      {sykmelding.medisinskVurdering.biDiagnoser.map((biDiagnose, index) => (
+        <DiagnoseSeksjon key={index} diagnose={biDiagnose} bidiagnose />
+      ))}
+    </InfoPanel>
+  );
 };
 
 export default MuskelOgSkjelett;
