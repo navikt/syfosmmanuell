@@ -13,7 +13,6 @@ const MuskelOgSkjelett = ({ sykmelding }: MuskelOgSkjelettProps) => {
   return (
     <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
       <BehandlingsDatoer
-        behandletTidspunkt={}
         syketilfelleStartDato={sykmelding.syketilfelleStartDato}
       />
       <SykmeldingPerioder perioder={sykmelding.perioder} />
