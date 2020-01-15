@@ -38,13 +38,15 @@ const setup = authClient => {
   });
 
   router.use(ensureAuthenticated);
+  // add middleware for hooking up cookie with user data.
 
   // Protected
   router.use('/', express.static(path.join(__dirname, 'build')));
 
   router.get('/logout', (req, res) => {
     req.logOut();
-    res.redirect('/');
+    //res.redirect('/');
+    res.status(200).send('logged out');
   });
 
   router.get('/refresh', (req, res) => {

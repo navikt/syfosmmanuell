@@ -1,7 +1,36 @@
-import React from 'react';
-import { Knapp } from 'nav-frontend-knapper';
+import React, { useState } from 'react';
+import { Flatknapp } from 'nav-frontend-knapper';
+import { hentLogOutUrl, hentLogInUrl } from '../utils/urlUtils';
+import { EtikettLiten } from 'nav-frontend-typografi';
 
-const Navbar = () => {
+type Knappetekst = 'Logg ut' | 'Logg inn';
+
+interface NavbarProps {
+  visInnhold: (vis: boolean) => void;
+}
+
+const Navbar = ({ visInnhold }: NavbarProps) => {
+  const [text, setText] = useState<string | undefined>('Logget inn som: Ola Norman');
+  const [knappetekst, setKnappetekst] = useState<Knappetekst>('Logg ut');
+
+  const loggUt = () => {
+    fetch(hentLogOutUrl())
+      .then(res => {
+        if (res.status === 200) {
+          setText(undefined);
+          setKnappetekst('Logg inn');
+          visInnhold(false);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const loggInn = () => {
+    window.location.href = hentLogInUrl();
+  };
+
   return (
     <div
       className="navbar"
@@ -14,8 +43,16 @@ const Navbar = () => {
         border: '1px solid grey',
       }}
     >
-      <p>Logget inn som: Ola Norman</p>
-      <Knapp style={{ margin: '1rem' }}>Logg ut</Knapp>
+      <EtikettLiten>{text}</EtikettLiten>
+      {knappetekst === 'Logg ut' ? (
+        <Flatknapp style={{ margin: '0.5rem' }} onClick={() => loggUt()}>
+          Logg ut
+        </Flatknapp>
+      ) : (
+        <Flatknapp style={{ margin: '0.5rem' }} onClick={() => loggInn()}>
+          Logg inn
+        </Flatknapp>
+      )}
     </div>
   );
 };

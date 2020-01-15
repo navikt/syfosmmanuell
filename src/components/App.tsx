@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './App.less';
-import useFetch, { isNotStarted, FetchState, isNotStartedOrPending, isAnyPending } from './hooks/useFetch';
-import { ManuellOppgave } from './types/manuellOppgaveTypes';
-import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from './utils/urlUtils';
+import useFetch, { isNotStarted, FetchState, isNotStartedOrPending, isAnyPending } from '../hooks/useFetch';
+import { ManuellOppgave } from '../types/manuellOppgaveTypes';
+import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
-import EnRegel from './components/EnRegel';
-import FlereRegler from './components/FlereRegler';
-import Navbar from './components/Navbar';
-import { ValidationResult, Status } from './types/validationresultTypes';
+import EnRegel from './EnRegel';
+import FlereRegler from './FlereRegler';
+import { ValidationResult, Status } from '../types/validationresultTypes';
 import { Undertittel } from 'nav-frontend-typografi';
 
 const App = () => {
@@ -107,41 +105,30 @@ const App = () => {
 
   if (isAnyPending([manOppgaveFetcher, manOppgavePutter])) {
     return (
-      <div>
-        <Navbar />
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <Spinner />
-        </div>
+      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+        <Spinner />
       </div>
     );
   }
 
   if (manOppgave?.validationResult.ruleHits.length === 1) {
     return (
-      <>
-        <Navbar />
-        <EnRegel
-          sykmelding={manOppgave.sykmelding}
-          regel={manOppgave.validationResult.ruleHits[0].ruleName}
-          handterAvgjorelse={handterAvgjorelse}
-          handterAvbryt={() =>
-            setFeilmelding(
-              'Du har avbrutt oppgaven. Du kan enten lukke vinduet, eller laste inn siden på nytt for hente oppgaven tilbake.',
-            )
-          }
-        />
-      </>
+      <EnRegel
+        sykmelding={manOppgave.sykmelding}
+        regel={manOppgave.validationResult.ruleHits[0].ruleName}
+        handterAvgjorelse={handterAvgjorelse}
+        handterAvbryt={() =>
+          setFeilmelding(
+            'Du har avbrutt oppgaven. Du kan enten lukke vinduet, eller laste inn siden på nytt for hente oppgaven tilbake.',
+          )
+        }
+      />
     );
   }
 
   if (manOppgave) {
     if (manOppgave.validationResult.ruleHits.length > 1) {
-      return (
-        <>
-          <Navbar />
-          <FlereRegler manOppgave={manOppgave} handterAvgjorelse={handterAvgjorelse} />
-        </>
-      );
+      return <FlereRegler manOppgave={manOppgave} handterAvgjorelse={handterAvgjorelse} />;
     }
   }
 
