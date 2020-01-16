@@ -51,7 +51,7 @@ const setup = authClient => {
     }
     try {
       const user = decode(req.user.tokenSet.access_token);
-      res.status(200).json(user.name);
+      res.status(200).send(user.name);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

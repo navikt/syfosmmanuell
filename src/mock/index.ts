@@ -8,5 +8,5 @@ const mock = FetchMock.configure({
 
 mock.get('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/', oppgaveFlereRegler);
 mock.get('https://syfosmmanuell.nais.preprod.local/logout', { body: 'logged out' });
-mock.get('https://syfosmmanuell.nais.preprod.local/user', { body: 'Bruker Navn' });
+mock.get('https://syfosmmanuell.nais.preprod.local/user', 'Bruker Navn');
 mock.put('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/', { key: 'okey' });

@@ -20,7 +20,7 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
     fetch(URL)
       .then(res => {
         console.log(res);
-        res.text();
+        return res.text();
       })
       .then(text => {
         console.log(text);
