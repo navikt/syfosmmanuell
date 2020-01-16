@@ -19,7 +19,7 @@ jobs:
           npm install
       - name: Run tests
         run: |
-          npm run test
+          npm run test -- --watchAll=false
       - name: Build
         env:
           REACT_APP_NODE_ENV: preprod
