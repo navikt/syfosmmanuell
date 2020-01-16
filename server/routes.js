@@ -45,11 +45,15 @@ const setup = authClient => {
   router.use('/', express.static(path.join(__dirname, 'build')));
 
   router.get('/user', (req, res) => {
-    if (!req.user && !req.user.tokenSet && !req.user.tokenSet.id_token) {
+    if (!req.user && !req.user.tokenSet && !req.user.tokenSet.access_token) {
       res.status(500).send();
     }
-    const user = decode(req.user.tokenSet.id_token);
-    res.status(200).send(JSON.stringify(user));
+    try {
+      res.status(200).send(JSON.static(decode(req.user.tokenSet.access_token).payload.name));
+    } catch (error) {
+      console.log(error);
+      res.status(500).send();
+    }
   });
 
   router.get('/logout', (req, res) => {
