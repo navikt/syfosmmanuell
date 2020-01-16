@@ -5,6 +5,7 @@ import path from 'path';
 import passport from 'passport';
 import session from 'express-session';
 import reverseProxy from './proxy/reverse-proxy';
+import { decode } from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -47,8 +48,8 @@ const setup = authClient => {
     if (!req.user && !req.user.tokenSet && !req.user.tokenSet.id_token) {
       res.status(500).send();
     }
-    res.cookie('user', JSON.stringify(req.user));
-    res.status(200).send();
+    const user = decode(req.user.tokenSet.id_token);
+    res.status(200).send(JSON.stringify(user));
   });
 
   router.get('/logout', (req, res) => {

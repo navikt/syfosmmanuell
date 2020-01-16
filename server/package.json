@@ -16,6 +16,7 @@
         "express-http-proxy": "^1.6.0",
         "express-session": "^1.17.0",
         "helmet": "^3.21.2",
+        "jsonwebtoken": "^8.5.1",
         "openid-client": "^3.10.1",
         "passport": "^0.4.1",
         "path": "^0.12.7",
