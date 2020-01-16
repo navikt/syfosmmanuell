@@ -45,6 +45,7 @@ const setup = authClient => {
   router.use('/', express.static(path.join(__dirname, 'build')));
 
   router.get('/user', (req, res) => {
+    console.log(req.user);
     if (!req.user && !req.user.tokenSet && !req.user.tokenSet.access_token) {
       res.status(500).send();
     }
