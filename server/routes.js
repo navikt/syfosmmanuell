@@ -47,13 +47,14 @@ const setup = authClient => {
   router.get('/user', (req, res) => {
     console.log(req.user);
     if (!req.user && !req.user.tokenSet && !req.user.tokenSet.access_token) {
-      res.status(500).send();
+      res.status(500).send('Fant ikke access_token');
     }
     try {
-      res.status(200).send(JSON.stringify(decode(req.user.tokenSet.access_token).payload.name));
+      const user = decode(req.user.tokenSet.access_token);
+      res.status(200).send(JSON.stringify(user));
     } catch (error) {
       console.log(error);
-      res.status(500).send();
+      res.status(500).send(JSON.stringify(error));
     }
   });
 
