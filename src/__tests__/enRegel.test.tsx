@@ -9,14 +9,14 @@ import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 const handterAvgjorelse = jest.fn();
 const handterAvbryt = jest.fn();
 
-const enRegel = new ManuellOppgave(oppgaveEnRegel);
+const enRegel = new ManuellOppgave(oppgaveEnRegel[0]);
 
 beforeEach(() => {
     jest.clearAllMocks();
 });
 
 describe('enRegel', () => {
-    it.skip('Rendrer riktig årsak', () => {
+    it('Rendrer riktig årsak', () => {
         const { getByText } = render(
             <EnRegel
                 sykmelding={enRegel.sykmelding}
@@ -29,7 +29,7 @@ describe('enRegel', () => {
         expect(getByText(enRegel.validationResult.ruleHits[0].ruleName, { exact: false })).toBeInTheDocument();
     });
 
-    it.skip('Kaller handterAvbryt når "avbryt" trykkes', () => {
+    it('Kaller handterAvbryt når "avbryt" trykkes', () => {
         const { getByText } = render(
             <EnRegel
                 sykmelding={enRegel.sykmelding}
@@ -43,7 +43,7 @@ describe('enRegel', () => {
         expect(handterAvbryt).toHaveBeenCalledTimes(1);
     });
 
-    it.skip('Kaller handterAvgjorelse med argument "true" når oppgaven godkjennes', () => {
+    it('Kaller handterAvgjorelse med argument "true" når oppgaven godkjennes', () => {
         const { getByText, getByLabelText } = render(
             <EnRegel
                 sykmelding={enRegel.sykmelding}
@@ -60,7 +60,7 @@ describe('enRegel', () => {
         expect(handterAvgjorelse).toHaveBeenCalledWith(true);
     });
 
-    it.skip('Kaller handterAvgjorelse med argument "false" når oppgaven avvises', () => {
+    it('Kaller handterAvgjorelse med argument "false" når oppgaven avvises', () => {
         const { getByText, getByLabelText } = render(
             <EnRegel
                 sykmelding={enRegel.sykmelding}
@@ -77,7 +77,7 @@ describe('enRegel', () => {
         expect(handterAvgjorelse).toHaveBeenCalledWith(false);
     });
 
-    it.skip('Viser hele sykmeldingen når "vis hele sykmeldingen" trykkes', () => {
+    it('Viser hele sykmeldingen når "vis hele sykmeldingen" trykkes', () => {
         const { getByText, getAllByText } = render(
             <EnRegel
                 sykmelding={enRegel.sykmelding}
