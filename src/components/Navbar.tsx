@@ -17,6 +17,11 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
     fetch(process.env.REACT_APP_WEB_SERVER_URL + 'user')
       .then(res => {
         console.log(res);
+        res.text();
+      })
+      .then((text: any)=> {
+        console.log(text);
+        setText(text);
       })
       .catch(error => console.log(error));
   }, [visInnhold]);
