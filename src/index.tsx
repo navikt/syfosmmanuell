@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.less';
-import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import AppWrapper from './AppWrapper';
 

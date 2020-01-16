@@ -40,7 +40,7 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
         alignItems: 'center',
         backgroundColor: 'white',
         marginBottom: '2rem',
-        border: '1px solid grey',
+        borderBottom: '1px solid #C6C2BF',
       }}
     >
       <EtikettLiten>{text}</EtikettLiten>

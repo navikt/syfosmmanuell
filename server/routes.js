@@ -29,6 +29,7 @@ const setup = authClient => {
 
   router.get('/login', passport.authenticate('azureOidc', { failureRedirect: '/login' }));
   router.use('/callback', passport.authenticate('azureOidc', { failureRedirect: '/login' }), (req, res) => {
+    res.cookie('user', JSON.stringify(req.user));
     if (session.redirectTo) {
       console.log(session);
       res.redirect(session.redirectTo);
