@@ -29,7 +29,6 @@ const setup = authClient => {
 
   router.get('/login', passport.authenticate('azureOidc', { failureRedirect: '/login' }));
   router.use('/callback', passport.authenticate('azureOidc', { failureRedirect: '/login' }), (req, res) => {
-    res.cookie('user', JSON.stringify(req.user));
     if (session.redirectTo) {
       console.log(session);
       res.redirect(session.redirectTo);
@@ -43,6 +42,14 @@ const setup = authClient => {
 
   // Protected
   router.use('/', express.static(path.join(__dirname, 'build')));
+
+  router.get('/user', (req, res) => {
+    if (!req.user && !req.user.tokenSet && !req.user.tokenSet.id_token) {
+      res.status(500).send();
+    }
+    res.cookie('user', JSON.stringify(req.user.tokenSet.id_token));
+    res.status(200).send();
+  });
 
   router.get('/logout', (req, res) => {
     req.logOut();

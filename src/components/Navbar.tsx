@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { hentLogOutUrl, hentLogInUrl } from '../utils/urlUtils';
 import { EtikettLiten } from 'nav-frontend-typografi';
@@ -12,6 +12,14 @@ interface NavbarProps {
 const Navbar = ({ visInnhold }: NavbarProps) => {
   const [text, setText] = useState<string | undefined>('Logget inn som: Ola Norman');
   const [knappetekst, setKnappetekst] = useState<Knappetekst>('Logg ut');
+
+  useEffect(() => {
+    fetch(process.env.REACT_APP_WEB_SERVER_URL + 'user')
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => console.log(error));
+  }, [visInnhold]);
 
   const loggUt = () => {
     fetch(hentLogOutUrl())
