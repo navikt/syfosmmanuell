@@ -47,7 +47,7 @@ const setup = authClient => {
     if (!req.user && !req.user.tokenSet && !req.user.tokenSet.id_token) {
       res.status(500).send();
     }
-    res.cookie('user', JSON.stringify(req.user.tokenSet.id_token));
+    res.cookie('user', JSON.stringify(req.user));
     res.status(200).send();
   });
 
