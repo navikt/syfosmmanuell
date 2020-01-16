@@ -9,9 +9,6 @@ import reverseProxy from './proxy/reverse-proxy';
 const router = express.Router();
 
 const ensureAuthenticated = async (req, res, next) => {
-  if (req.user) {
-    console.log(req.user);
-  }
   if (req.isAuthenticated()) {
     next();
   } else if (req.isAuthenticated() && authUtils.hasExpiredTokenSets(req)) {
@@ -33,7 +30,6 @@ const setup = authClient => {
   router.get('/login', passport.authenticate('azureOidc', { failureRedirect: '/login' }));
   router.use('/callback', passport.authenticate('azureOidc', { failureRedirect: '/login' }), (req, res) => {
     if (session.redirectTo) {
-      console.log(session);
       res.redirect(session.redirectTo);
     } else {
       res.redirect('/');

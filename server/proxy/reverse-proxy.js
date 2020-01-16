@@ -9,10 +9,6 @@ const options = authClient => ({
         .getOnBehalfOfTokenSet(authClient, req.user.tokenSet.access_token_self || req.user.tokenSet.access_token)
         .then(
           tokenSet => {
-            console.log('BEHALF_OF_TOKENSET_RECEIVED: ');
-            console.log(tokenSet);
-            console.log('ACCESS_TOKEN: ' + JSON.stringify(tokenSet.access_token));
-            console.log('ID_TOKEN: ' + JSON.stringify(tokenSet.id_token));
             options.headers.Authorization = `Bearer ${tokenSet.access_token}`;
             resolve(options);
           },
