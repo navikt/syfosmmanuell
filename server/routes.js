@@ -50,7 +50,7 @@ const setup = authClient => {
       res.status(500).send();
     }
     try {
-      res.status(200).send(JSON.static(decode(req.user.tokenSet.access_token).payload.name));
+      res.status(200).send(JSON.stringify(decode(req.user.tokenSet.access_token).payload.name));
     } catch (error) {
       console.log(error);
       res.status(500).send();
