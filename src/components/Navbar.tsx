@@ -10,18 +10,21 @@ interface NavbarProps {
 }
 
 const Navbar = ({ visInnhold }: NavbarProps) => {
-  const [text, setText] = useState<string | undefined>('Logget inn som: Ola Norman');
+  const [text, setText] = useState<string | undefined>();
   const [knappetekst, setKnappetekst] = useState<Knappetekst>('Logg ut');
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_WEB_SERVER_URL + 'user')
+    const URL = process.env.REACT_APP_WEB_SERVER_URL
+      ? process.env.REACT_APP_WEB_SERVER_URL + 'user'
+      : 'https://syfosmmanuell.nais.preprod.local/user';
+    fetch(URL)
       .then(res => {
         console.log(res);
         res.text();
       })
-      .then((text: any)=> {
+      .then(text => {
         console.log(text);
-        setText(text);
+        setText(`Logget inn som: ${text}`);
       })
       .catch(error => console.log(error));
   }, [visInnhold]);
