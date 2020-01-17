@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './App.less';
-import useFetch, { isNotStarted, FetchState, isNotStartedOrPending, isAnyPending } from './hooks/useFetch';
-import { ManuellOppgave } from './types/manuellOppgaveTypes';
-import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from './utils/urlUtils';
+import useFetch, { isNotStarted, FetchState, isNotStartedOrPending, isAnyPending } from '../hooks/useFetch';
+import { ManuellOppgave } from '../types/manuellOppgaveTypes';
+import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
-import EnRegel from './components/EnRegel';
-import FlereRegler from './components/FlereRegler';
-import { ValidationResult, Status } from './types/validationresultTypes';
+import EnRegel from './EnRegel';
+import FlereRegler from './FlereRegler';
+import { ValidationResult, Status } from '../types/validationresultTypes';
 import { Undertittel } from 'nav-frontend-typografi';
 
 const App = () => {
@@ -21,12 +20,12 @@ const App = () => {
       try {
         OPPGAVE_ID = hentOppgaveidFraUrlParameter(window.location.href);
         // Lagre oppgaveid i sessionStorage
-        localStorage.setItem('OPPGAVE_ID', OPPGAVE_ID);
+        sessionStorage.setItem('OPPGAVE_ID', OPPGAVE_ID);
         //window.location.href = hentLoginUrl();
       } catch (e) {
         if (e instanceof UrlError) {
           // Prøv og hent oppgaveid fra sessionStorage
-          const OPPGAVE_ID_FRA_STORAGE = localStorage.getItem('OPPGAVE_ID');
+          const OPPGAVE_ID_FRA_STORAGE = sessionStorage.getItem('OPPGAVE_ID');
           if (OPPGAVE_ID_FRA_STORAGE === null) {
             // Hvis oppgaveid ikke finnes har det skjedd noe feil
             setFeilmelding(
@@ -43,7 +42,7 @@ const App = () => {
 
       const URL = hentOppgaveUrl(OPPGAVE_ID);
       console.log('Henter manuell oppgave fra: ' + URL);
-      
+
       manOppgaveFetcher.fetch(URL, { credentials: 'include' }, (fetchState: FetchState<ManuellOppgave[]>) => {
         if (fetchState.httpCode === 401) {
           //window.location.href = hentLoginUrl();
@@ -88,6 +87,7 @@ const App = () => {
               // redirect to login
             }
             setManOppgave(null);
+            sessionStorage.clear();
           },
         );
       }
@@ -106,7 +106,7 @@ const App = () => {
 
   if (isAnyPending([manOppgaveFetcher, manOppgavePutter])) {
     return (
-      <div style={{ marginLeft: '2rem', marginTop: '2rem' }}>
+      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
         <Spinner />
       </div>
     );
