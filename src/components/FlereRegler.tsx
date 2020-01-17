@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
-import { RuleNames, ValidationResultWithStatus } from '../types/validationresultTypes';
+import { RuleNames, ValidationResultWithStatus, RuleNamesDescription } from '../types/validationresultTypes';
 import EnRegel from './EnRegel';
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { Panel } from 'nav-frontend-paneler';
@@ -50,7 +50,7 @@ const FlereRegler = ({ manOppgave, handterAvgjorelse }: FlereReglerProps) => {
               }}
             >
               <Normaltekst>
-                {index + 1}. {regel.ruleName}
+                {index + 1}. {RuleNamesDescription[regel.ruleName]}
               </Normaltekst>
               {valideringsresultat.behandlet.get(regel.ruleName) === undefined ? (
                 <Knapp form="kompakt" style={{ marginLeft: '2rem' }} onClick={() => setAktuellRegel(regel.ruleName)}>
