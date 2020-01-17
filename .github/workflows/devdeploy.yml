@@ -25,6 +25,8 @@ jobs:
           REACT_APP_NODE_ENV: preprod
           REACT_APP_GET_MANUELLE_OPPGAVER_URL: https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/?oppgaveid=
           REACT_APP_PUT_MANUELL_VURDERING_URL: https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/
+          REACT_APP_GET_LOG_OUT_URL: https://syfosmmanuell.nais.preprod.local/logout
+          REACT_APP_WEB_SERVER_URL: https://syfosmmanuell.nais.preprod.local/
         run: |
           npm run build
       - name: Create Docker tag

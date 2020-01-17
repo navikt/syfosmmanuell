@@ -52,3 +52,38 @@ export const hentOppgaveUrlPut = (oppgaveid: number): string => {
   }
   return 'https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/';
 };
+
+export const hentLogOutUrl = (): string => {
+  if (process.env.NODE_ENV === 'development') {
+    return 'https://syfosmmanuell.nais.preprod.local/logout';
+  }
+  try {
+    const url = process.env.REACT_APP_GET_LOG_OUT_URL;
+    if (url) {
+      return url;
+    } else {
+      throw new Error('Kunne ikke finne logout url');
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const hentLogInUrl = (): string => {
+  if (process.env.NODE_ENV === 'development') {
+    return 'localhost:3000';
+  }
+  try {
+    const OPPGAVE_ID = localStorage.getItem('OPPGAVE_ID');
+    if (!OPPGAVE_ID) {
+      throw new Error('Kunne ikke finne OPPGAVE_ID i localStorage');
+    }
+    const url = process.env.REACT_APP_WEB_SERVER_URL;
+    if (!url) {
+      throw new Error('Kunne ikke finne url til å logge inn');
+    }
+    return `${url}?oppgaveid=${OPPGAVE_ID}`;
+  } catch (error) {
+    throw error;
+  }
+};

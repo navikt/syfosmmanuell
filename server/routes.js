@@ -5,6 +5,7 @@ import path from 'path';
 import passport from 'passport';
 import session from 'express-session';
 import reverseProxy from './proxy/reverse-proxy';
+import { decode } from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -37,13 +38,32 @@ const setup = authClient => {
   });
 
   router.use(ensureAuthenticated);
+  // add middleware for hooking up cookie with user data.
 
   // Protected
   router.use('/', express.static(path.join(__dirname, 'build')));
 
+  router.get('/user', (req, res) => {
+    console.log(req.user);
+    if (!req.user && !req.user.tokenSet && !req.user.tokenSet.access_token) {
+      res.status(500).send('Fant ikke token');
+    }
+    try {
+      const user = decode(req.user.tokenSet.access_token);
+      if (!user) {
+        throw new Error('Kunne ikke hente ut brukerinformasjon');
+      }
+      res.status(200).send(user.name);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  });
+
   router.get('/logout', (req, res) => {
     req.logOut();
-    res.redirect('/');
+    //res.redirect('/');
+    res.status(200).send('logged out');
   });
 
   router.get('/refresh', (req, res) => {

@@ -29,9 +29,10 @@ async function startApp() {
         saveUninitialized: true,
       }),
     );
-
+    
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
+    //server.use(cookieParser());
 
     // setup sane defaults for CORS and HTTP headers
     server.use(helmet());
