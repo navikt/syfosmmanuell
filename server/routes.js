@@ -38,7 +38,6 @@ const setup = authClient => {
   });
 
   router.use(ensureAuthenticated);
-  // add middleware for hooking up cookie with user data.
 
   // Protected
   router.use('/', express.static(path.join(__dirname, 'build')));
