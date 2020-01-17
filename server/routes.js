@@ -47,10 +47,13 @@ const setup = authClient => {
   router.get('/user', (req, res) => {
     console.log(req.user);
     if (!req.user && !req.user.tokenSet && !req.user.tokenSet.access_token) {
-      res.status(500).send('Fant ikke access_token');
+      res.status(500).send('Fant ikke token');
     }
     try {
       const user = decode(req.user.tokenSet.access_token);
+      if (!user) {
+        throw new Error('Kunne ikke hente ut brukerinformasjon');
+      }
       res.status(200).send(user.name);
     } catch (error) {
       console.log(error);

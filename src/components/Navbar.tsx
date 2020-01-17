@@ -19,14 +19,15 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
       : 'https://syfosmmanuell.nais.preprod.local/user';
     fetch(URL)
       .then(res => {
-        console.log(res);
         return res.text();
       })
       .then(text => {
-        console.log(text);
+        if (!text) {
+          throw new Error('Kunne ikke hente brukernavn fra server')
+        }
         setText(`Logget inn som: ${text}`);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   }, [visInnhold]);
 
   const loggUt = () => {
@@ -39,7 +40,7 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
         }
       })
       .catch(error => {
-        console.log(error);
+        console.error(error);
       });
   };
 
