@@ -18,7 +18,7 @@ jobs:
         run: |
           npm install
       - name: Run tests
-      run: |
+        run: |
         npm run test -- --watchAll=false
       - name: Build
         env:
