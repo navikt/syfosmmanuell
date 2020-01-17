@@ -5,11 +5,11 @@ import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
 const hentRegelTekst = (regel: RuleNames): string => {
     switch (regel) {
-        case RuleNames.BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L:
+        case 'BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L':
             return 'knytning til muskel- og skjelettlidelser';
-        case RuleNames.TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE:
+        case 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE':
             return 'tilbakedatering';
-        case RuleNames.TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE:
+        case 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE':
             return 'tilbakedatering';
         default:
             return 'ukjent regel';

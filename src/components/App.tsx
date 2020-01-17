@@ -5,7 +5,7 @@ import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlErr
 import Spinner from 'nav-frontend-spinner';
 import EnRegel from './EnRegel';
 import FlereRegler from './FlereRegler';
-import { ValidationResult, Status } from '../types/validationresultTypes';
+import { ValidationResult } from '../types/validationresultTypes';
 import { Undertittel } from 'nav-frontend-typografi';
 
 const App = () => {
@@ -19,15 +19,11 @@ const App = () => {
       let OPPGAVE_ID = '';
       try {
         OPPGAVE_ID = hentOppgaveidFraUrlParameter(window.location.href);
-        // Lagre oppgaveid i sessionStorage
         sessionStorage.setItem('OPPGAVE_ID', OPPGAVE_ID);
-        //window.location.href = hentLoginUrl();
       } catch (e) {
         if (e instanceof UrlError) {
-          // Prøv og hent oppgaveid fra sessionStorage
           const OPPGAVE_ID_FRA_STORAGE = sessionStorage.getItem('OPPGAVE_ID');
           if (OPPGAVE_ID_FRA_STORAGE === null) {
-            // Hvis oppgaveid ikke finnes har det skjedd noe feil
             setFeilmelding(
               'Kunne ikke finne oppgaveid i URL eller sessionStorage. Lukk vinduet/fanen og forsøk å åpne oppgaven på nytt fra Gosys.',
             );
@@ -39,22 +35,22 @@ const App = () => {
           console.error(e);
         }
       }
-
       const URL = hentOppgaveUrl(OPPGAVE_ID);
       console.log('Henter manuell oppgave fra: ' + URL);
-
       manOppgaveFetcher.fetch(URL, { credentials: 'include' }, (fetchState: FetchState<ManuellOppgave[]>) => {
         if (fetchState.httpCode === 401) {
-          //window.location.href = hentLoginUrl();
+          setFeilmelding(
+            'Kunne ikke hente oppgave på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
+          );
         }
         if (!fetchState.data) {
-          setFeilmelding('Ingen oppgaver funnet');
+          setFeilmelding('Ingen oppgave funnet');
           console.error('Ingen oppgave funnet');
         } else {
           try {
             setManOppgave(new ManuellOppgave(fetchState.data.shift()));
           } catch (error) {
-            setFeilmelding('Kunne ikke formattere manuell oppgave.');
+            setFeilmelding('Kunne ikke formattere manuell oppgave');
             console.error(error);
           }
         }
@@ -65,34 +61,36 @@ const App = () => {
   const handterAvgjorelse = (avgjorelse: boolean | undefined): void => {
     if (avgjorelse === undefined) {
       // Skal ikke kunne skje
-      console.error('Avgjørelse ble satt til "undefined"');
-    }
-    if (manOppgave) {
-      if (isNotStartedOrPending(manOppgavePutter)) {
-        const URL = hentOppgaveUrlPut(manOppgave.oppgaveid);
-        const resultat = new ValidationResult({
-          status: avgjorelse ? Status.OK : Status.INVALID,
-          ruleHits: manOppgave.validationResult.ruleHits,
-        });
-        manOppgavePutter.fetch(
-          URL,
-          {
-            method: 'PUT',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(resultat),
-          },
-          (fetchState: FetchState) => {
-            if (fetchState.httpCode === 401) {
-              // redirect to login
-            }
-            setManOppgave(null);
-            sessionStorage.clear();
-          },
-        );
-      }
+      const error = new Error('Avgjørelse ble satt til "undefined"');
+      setFeilmelding(error.message);
+      console.error(error);
     } else {
-      console.error('Manuell oppgave ble ikke funnet');
+      if (manOppgave) {
+        if (isNotStartedOrPending(manOppgavePutter)) {
+          const URL = hentOppgaveUrlPut(manOppgave.oppgaveid);
+          const valideringsresultat = new ValidationResult(manOppgave.validationResult);
+          valideringsresultat.setStatus(avgjorelse);
+          valideringsresultat.setTilbakemeldinger();
+          manOppgavePutter.fetch(
+            URL,
+            {
+              method: 'PUT',
+              credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(valideringsresultat),
+            },
+            (fetchState: FetchState) => {
+              if (fetchState.httpCode === 401) {
+                // redirect to login
+              }
+              setManOppgave(null);
+              sessionStorage.clear();
+            },
+          );
+        }
+      } else {
+        console.error('Manuell oppgave ble ikke funnet');
+      }
     }
   };
 

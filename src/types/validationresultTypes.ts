@@ -1,8 +1,25 @@
-export enum RuleNames {
+export enum RuleNamesDescription {
   BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L = 'Manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapittel L (muskel- og skjelettsykdommer)',
   TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Sykmeldingen er tilbakedatert med begrunnelse',
   TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmelding i løpende sykefravær er tilbakedatert med begrunnelse',
 }
+
+export enum MessageForSender {
+  BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L = 'Behandler er manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapitel L (muskel og skjelettsykdommer)',
+  TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Første sykmelding er tilbakedatert og felt 11.2 (begrunnelseIkkeKontakt) er utfylt',
+  TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmeldingen er tilbakedatert og felt 11.2 (begrunnelseIkkeKontakt) er utfylt',
+}
+
+export enum MessageForUser {
+  BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L = 'Behandler er manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapitel L (muskel og skjelettsykdommer)',
+  TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Første sykmelding er tilbakedatert og årsak for tilbakedatering er angitt.',
+  TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmeldingen er tilbakedatert og årsak for tilbakedatering er angitt',
+}
+
+export type RuleNames =
+  | 'BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L'
+  | 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE'
+  | 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE';
 
 class RuleInfo {
   ruleName: RuleNames;
@@ -11,31 +28,35 @@ class RuleInfo {
   ruleStatus: Status;
 
   constructor(ruleInfo: any) {
-    if (RuleNames[ruleInfo.ruleName as keyof typeof RuleNames]) {
-      this.ruleName = RuleNames[ruleInfo.ruleName as keyof typeof RuleNames];
-    } else {
-      this.ruleName = ruleInfo.ruleName;
-    }
+    this.ruleName = ruleInfo.ruleName;
     this.messageForSender = ruleInfo.messageForSender;
     this.messageForUser = ruleInfo.messageForUser;
     this.ruleStatus = ruleInfo.ruleStatus;
   }
 }
 
-export enum Status {
-  OK = 'OK',
-  MANUAL_PROCESSING = 'MANUAL_PROCESSING',
-  INVALID = 'INVALID',
-}
+export type Status = 'OK' | 'MANUAL_PROCESSING' | 'INVALID';
 
 export class ValidationResult {
   status: Status;
   ruleHits: RuleInfo[];
 
   constructor(validationResult: any) {
-    this.status = Status[validationResult.status as keyof typeof Status];
+    this.status = validationResult.status;
     this.ruleHits = validationResult.ruleHits.map((ruleHit: any) => new RuleInfo(ruleHit));
   }
+
+  setStatus = (vurdering: boolean) => {
+    this.status = vurdering ? 'OK' : 'INVALID';
+  }
+
+  setTilbakemeldinger = () => {
+    this.ruleHits = this.ruleHits.map(regel => {
+      regel.messageForSender = MessageForSender[regel.ruleName];
+      regel.messageForUser = MessageForUser[regel.ruleName];
+      return regel;
+    });
+  };
 }
 
 export class ValidationResultWithStatus extends ValidationResult {
@@ -51,9 +72,8 @@ export class ValidationResultWithStatus extends ValidationResult {
       this.totalVurdering = validationResult.totalVurdering;
     } else {
       const behandletMap = new Map<RuleNames, boolean | undefined>();
-      validationResult.ruleHits.forEach((ruleHit: any) => {
-        const rName = ruleHit.ruleName as keyof typeof RuleNames;
-        behandletMap.set(RuleNames[rName], undefined);
+      validationResult.ruleHits.forEach((ruleHit: RuleNames) => {
+        behandletMap.set(ruleHit, undefined);
       });
       this.behandlet = behandletMap;
       this.antallBehandlet = 0;
@@ -65,7 +85,7 @@ export class ValidationResultWithStatus extends ValidationResult {
   setBehandlet = (arsak: RuleNames, vurdering: boolean): ValidationResultWithStatus => {
     this.behandlet.set(arsak, vurdering);
     this.antallBehandlet++;
-    
+
     if (this.antallBehandlet === this.ruleHits.length && this.totalVurdering == null) {
       let antallTrue = 0;
       this.behandlet.forEach((value, key) => {
