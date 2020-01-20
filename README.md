@@ -1,5 +1,4 @@
 # syfosmmanuell
-![Alt text](./flytgiagram.svg)
 <img src="./src/svg/flytdiagram.svg">
 
 ## Om syfosmmanuell
