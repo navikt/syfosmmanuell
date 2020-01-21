@@ -31,7 +31,6 @@ const setup = authClient => {
   router.get('/login', passport.authenticate('azureOidc', { failureRedirect: '/login' }));
   router.use('/callback', passport.authenticate('azureOidc', { failureRedirect: '/login' }), (req, res) => {
     if (session.redirectTo) {
-      console.log(session);
       res.redirect(session.redirectTo);
     } else {
       res.redirect('/');
@@ -39,7 +38,6 @@ const setup = authClient => {
   });
 
   router.use(ensureAuthenticated);
-  // add middleware for hooking up cookie with user data.
 
   // Protected
   router.use('/', express.static(path.join(__dirname, 'build')));

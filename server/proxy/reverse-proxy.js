@@ -8,8 +8,8 @@ const options = authClient => ({
       authUtils
         .getOnBehalfOfTokenSet(authClient, req.user.tokenSet.access_token_self || req.user.tokenSet.access_token)
         .then(
-          ({ access_token }) => {
-            options.headers.Authorization = `Bearer ${access_token}`;
+          tokenSet => {
+            options.headers.Authorization = `Bearer ${tokenSet.access_token}`;
             resolve(options);
           },
           error => reject(error),

@@ -6,28 +6,33 @@ import SykmeldingPerioder from '../../infopanel/panelelementer/periode/Sykmeldin
 import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding';
 import BehandlingsDatoer from '../../infopanel/utdypendeelementer/BehandlingsDatoer';
 import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
+import Tilbakedateringsinfo from '../../infopanel/utdypendeelementer/Tilbakedateringsinfo';
+import SeksjonMedTittel from '../../infopanel/layout/SeksjonMedTittel';
 
 interface TilbakedatertProps {
-    sykmelding: Sykmelding;
+  sykmelding: Sykmelding;
 }
 
 const Tilbakedatert = ({ sykmelding }: TilbakedatertProps) => {
-    return (
-        <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
-            <BehandlingsDatoer
-                behandletTidspunkt={sykmelding.behandletTidspunkt}
-                syketilfelleStartDato={sykmelding.syketilfelleStartDato}
-            />
-            <SykmeldingPerioder perioder={sykmelding.perioder} />
-            <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
-            <Friskmelding prognose={sykmelding.prognose} />
-            <Arbeidsevne
-                tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen}
-                tiltakNAV={sykmelding.tiltakNAV}
-                andreTiltak={sykmelding.andreTiltak}
-            />
-        </InfoPanel>
-    );
+  return (
+    <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
+      <SeksjonMedTittel understrek>
+        <BehandlingsDatoer syketilfelleStartDato={sykmelding.syketilfelleStartDato} />
+        <Tilbakedateringsinfo
+          dokumenterbarKontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
+          kanIkkeIvaretaEgneInteresser={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
+        />
+        <SykmeldingPerioder perioder={sykmelding.perioder} />
+        <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
+      </SeksjonMedTittel>
+      <Friskmelding prognose={sykmelding.prognose} />
+      <Arbeidsevne
+        tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen}
+        tiltakNAV={sykmelding.tiltakNAV}
+        andreTiltak={sykmelding.andreTiltak}
+      />
+    </InfoPanel>
+  );
 };
 
 export default Tilbakedatert;

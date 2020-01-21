@@ -7,29 +7,34 @@ import BehandlingsDatoer from '../../infopanel/utdypendeelementer/BehandlingsDat
 import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding';
 import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
 import UtdypendeOpplysninger from '../../infopanel/utdypendeelementer/UtdypendeOpplysninger';
+import Tilbakedateringsinfo from '../../infopanel/utdypendeelementer/Tilbakedateringsinfo';
+import SeksjonMedTittel from '../../infopanel/layout/SeksjonMedTittel';
 
 interface TilbakedatertForlengelseProps {
-    sykmelding: Sykmelding;
+  sykmelding: Sykmelding;
 }
 
 const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps) => {
-    return (
-        <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
-            <BehandlingsDatoer
-                behandletTidspunkt={sykmelding.behandletTidspunkt}
-                syketilfelleStartDato={sykmelding.syketilfelleStartDato}
-            />
-            <SykmeldingPerioder perioder={sykmelding.perioder} />
-            <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
-            <Friskmelding prognose={sykmelding.prognose} />
-            <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
-            <Arbeidsevne
-                tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen}
-                tiltakNAV={sykmelding.tiltakNAV}
-                andreTiltak={sykmelding.andreTiltak}
-            />
-        </InfoPanel>
-    );
+  return (
+    <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
+      <SeksjonMedTittel understrek>
+        <BehandlingsDatoer syketilfelleStartDato={sykmelding.syketilfelleStartDato} />
+        <Tilbakedateringsinfo
+          dokumenterbarKontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
+          kanIkkeIvaretaEgneInteresser={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
+        />
+        <SykmeldingPerioder perioder={sykmelding.perioder} />
+        <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
+      </SeksjonMedTittel>
+      <Friskmelding prognose={sykmelding.prognose} />
+      <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
+      <Arbeidsevne
+        tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen}
+        tiltakNAV={sykmelding.tiltakNAV}
+        andreTiltak={sykmelding.andreTiltak}
+      />
+    </InfoPanel>
+  );
 };
 
 export default TilbakedatertForlengelse;

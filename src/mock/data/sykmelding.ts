@@ -279,9 +279,9 @@ export const oppgaveFlereRegler = [
           },
         ],
         prognose: {
-          arbeidsforEtterPeriode: false,
+          arbeidsforEtterPeriode: true,
           hensynArbeidsplassen:
-            'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
+            'Pasienten må ta det rolig',
           erIArbeid: {
             egetArbeidPaSikt: true,
             annetArbeidPaSikt: true,
@@ -307,11 +307,11 @@ export const oppgaveFlereRegler = [
           },
         },
         tiltakArbeidsplassen:
-          'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
+          'Jeg, legen, oppfortrer arbeidsplassen til å anskaffe hev-senk pult for å forhindre utvikling av pasientens ryggproblemer. Pasienten må også ta det rolig på arbeidsplassen og unngå å løfte tungt',
         tiltakNAV:
-          'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
+          'Jeg mener at Nav gjør en ypperlig jobb. Godt jobbet. Her kan det utdypes om ting Nav burde gjøre for å at pasienten skal kunne bedre arbeidsevnen sin. Det kan godt stå en del tekst her',
         andreTiltak:
-          'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
+          'Pasienten burde begynne å trene på egenhånd, og endre sitt kosthold.',
         meldingTilNAV: {
           bistandUmiddelbart: true,
           beskrivBistand: 'trenger hjelp',
@@ -320,7 +320,7 @@ export const oppgaveFlereRegler = [
         kontaktMedPasient: {
           kontaktDato: '2018-10-04',
           begrunnelseIkkeKontakt:
-            'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
+            'Har ikke kunnet ha kontakt med pasient siden pasient har vært hjemmeliggende med omgangssyke',
         },
         behandletTidspunkt: '2018-10-14T14:52:35',
         behandler: {

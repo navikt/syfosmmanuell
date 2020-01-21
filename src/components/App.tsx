@@ -37,7 +37,7 @@ const App = () => {
       }
       const URL = hentOppgaveUrl(OPPGAVE_ID);
       console.log('Henter manuell oppgave fra: ' + URL);
-      manOppgaveFetcher.fetch(URL, { credentials: 'include' }, (fetchState: FetchState<ManuellOppgave[]>) => {
+      manOppgaveFetcher.fetch(URL, { credentials: 'same-origin' }, (fetchState: FetchState<ManuellOppgave[]>) => {
         if (fetchState.httpCode === 401) {
           setFeilmelding(
             'Kunne ikke hente oppgave på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
@@ -75,7 +75,7 @@ const App = () => {
             URL,
             {
               method: 'PUT',
-              credentials: 'include',
+              credentials: 'same-origin',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(valideringsresultat),
             },
