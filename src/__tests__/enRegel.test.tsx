@@ -11,11 +11,12 @@ const handterAvbryt = jest.fn();
 
 const enRegel = new ManuellOppgave(oppgaveEnRegel[0]);
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('enRegel', () => {
+  afterEach(() => {
+    handterAvgjorelse.mockReset();
+    handterAvbryt.mockReset();
+  });
+
   it('Rendrer riktig årsak', () => {
     const { getByText } = render(
       <EnRegel
