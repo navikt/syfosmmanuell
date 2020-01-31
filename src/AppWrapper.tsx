@@ -7,6 +7,7 @@ const AppWrapper = () => {
 
   return (
     <>
+      <Navbar visInnhold={setVisInnhold} />
       {visInnhold && (
         <span style={{ display: 'flex', justifyContent: 'center' }}>
           <App />
