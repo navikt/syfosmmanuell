@@ -52,3 +52,7 @@ spec:
       value: backend
     - name: DOWNSTREAM_API_HOST
       value: http://syfosmmanuell-backend/
+    - name: REDIS_HOST
+      value: syfosmmanuell-redis.default.svc.nais.local
+    - name: REDIS_PORT
+      value: 6379

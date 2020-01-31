@@ -1,31 +1,42 @@
 import authUtils from '../auth/utils';
 import config from '../config';
 import proxy from 'express-http-proxy';
+import url from 'url';
 
-const options = authClient => ({
-  proxyReqOptDecorator: (options, req) => {
-    return new Promise((resolve, reject) =>
-      authUtils
-        .getOnBehalfOfTokenSet(authClient, req.user.tokenSet.access_token_self || req.user.tokenSet.access_token)
-        .then(
-          tokenSet => {
-            options.headers.Authorization = `Bearer ${tokenSet.access_token}`;
-            resolve(options);
-          },
-          error => reject(error),
-        ),
-    );
-  },
-  proxyReqPathResolver: req => {
-    const parts = req.originalUrl.split('?');
-    const path = parts[0].replace(`/${config.downstreamApi.prefix}/`, '/');
-    const query = parts[1];
-    const pathWithQuery = path + (query ? '?' + query : '');
-    console.log('proxy url:', pathWithQuery);
-    return pathWithQuery;
-  },
+const options = (api, authClient) => ({
+    parseReqBody: false,
+    proxyReqOptDecorator: (options, req) => {
+        return new Promise(((resolve, reject) =>
+            authUtils.getOnBehalfOfAccessToken(
+                authClient, req, api
+            ).then(access_token => {
+                options.headers.Authorization = `Bearer ${access_token}`;
+                resolve(options)
+            },
+            error => reject(error))
+        ))
+    },
+    proxyReqPathResolver: req => {
+        const urlFromApi = url.parse(api.url);
+        const pathFromApi = (urlFromApi.pathname === '/' ? '' : urlFromApi.pathname);
+
+        const urlFromRequest = url.parse(req.originalUrl);
+        const pathFromRequest = urlFromRequest.pathname.replace(`/${api.path}/`, '/');
+
+        const queryString = urlFromRequest.query;
+        const newPath = (pathFromApi ? pathFromApi : '') + (pathFromRequest ? pathFromRequest : '') + (queryString ? '?' + queryString : '');
+
+        console.log(`Proxying request from '${req.originalUrl}' to '${stripTrailingSlash(urlFromApi.href)}${newPath}'`);
+        return newPath;
+    }
 });
 
-const setup = authClient => proxy(config.downstreamApi.host, options(authClient));
+const stripTrailingSlash = (str) => str.endsWith('/') ? str.slice(0, -1) : str;
 
-export default { setup };
+const setup = (router, authClient) => {
+    config.reverseProxy.apis.forEach(api =>
+        router.use(`/${api.path}/*`, proxy(api.url, options(api, authClient)))
+    );
+};
+
+export default { setup }
