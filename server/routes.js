@@ -9,6 +9,7 @@ import { decode } from 'jsonwebtoken';
 const router = express.Router();
 
 const ensureAuthenticated = async (req, res, next) => {
+  console.log(req);
   if (req.isAuthenticated() && authUtils.hasValidAccessToken(req)) {
     next();
   } else {

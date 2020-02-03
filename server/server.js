@@ -29,17 +29,17 @@ async function startApp() {
     server.use(helmet());
     server.use(cors);
 
-    // initialize passport and restore authentication state, if any, from the session
-    server.use(passport.initialize());
-    server.use(passport.session());
-
+    
     const azureAuthClient = await azure.client();
     const azureOidcStrategy = azure.strategy(azureAuthClient);
-
+    
     passport.use('azureOidc', azureOidcStrategy);
     passport.serializeUser((user, done) => done(null, user));
     passport.deserializeUser((user, done) => done(null, user));
-
+    
+    // initialize passport and restore authentication state, if any, from the session
+    server.use(passport.initialize());
+    server.use(passport.session());
     // setup routes
     server.use('/', routes.setup(azureAuthClient));
 
