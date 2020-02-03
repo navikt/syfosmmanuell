@@ -13,7 +13,7 @@ const envVar = ({ name, required = true }) => {
   return process.env[name];
 };
 
-const getVaultCredentialsForSyfosmmanuell = name => {
+const getVaultCredentialForSyfosmmanuell = name => {
   let credentail;
   try {
     credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell/${name}`, 'utf8');
@@ -24,7 +24,7 @@ const getVaultCredentialsForSyfosmmanuell = name => {
   }
 };
 
-const getVaultCredentialsForSyfosmmanuellBackend = name => {
+const getVaultCredentialForSyfosmmanuellBackend = name => {
   let credentail;
   try {
     credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell-backend/${name}`, 'utf8');
@@ -38,14 +38,14 @@ const server = {
   host: envVar({ name: 'HOST', required: false }) || 'localhost',
   port: envVar({ name: 'PORT', required: false }) || 3000,
   proxy: envVar({ name: 'HTTP_PROXY', required: false }), // optional, only set if requests to Azure AD must be performed through a corporate proxy (i.e. traffic to login.microsoftonline.com is blocked by the firewall)
-  sessionKey: envVar({ name: 'SESSION_KEY', required: false }), // should be set to a random key of significant length for signing session ID cookies
+  sessionKey: getVaultCredentialForSyfosmmanuell('session_key'), // should be set to a random key of significant length for signing session ID cookies
   cookieName: 'syfosmmanuell',
 };
 
 const azureAd = {
   discoveryUrl: envVar({ name: 'AAD_DISCOVERY_URL' }),
-  clientId: getVaultCredentialsForSyfosmmanuell('client_id') || envVar({ name: 'CLIENT_ID' }),
-  clientSecret: getVaultCredentialsForSyfosmmanuell('client_secret') || envVar({ name: 'CLIENT_SECRET' }),
+  clientId: getVaultCredentialForSyfosmmanuell('client_id') || envVar({ name: 'CLIENT_ID' }),
+  clientSecret: getVaultCredentialForSyfosmmanuell('client_secret') || envVar({ name: 'CLIENT_SECRET' }),
   redirectUri: envVar({ name: 'AAD_REDIRECT_URL' }),
   tokenEndpointAuthMethod: 'client_secret_post',
   responseTypes: ['code'],
@@ -100,7 +100,7 @@ const loadReverseProxyConfig = () => {
         apis: [
           {
             clientId:
-              getVaultCredentialsForSyfosmmanuellBackend('client_id') || envVar({ name: 'DOWNSTREAM_API_CLIENT_ID' }),
+              getVaultCredentialForSyfosmmanuellBackend('client_id') || envVar({ name: 'DOWNSTREAM_API_CLIENT_ID' }),
             path: envVar({ name: 'DOWNSTREAM_API_PATH', required: false }) || 'backend',
             url: envVar({ name: 'DOWNSTREAM_API_URL' }),
             scopes: scopes ? scopes.split(',') : [],
