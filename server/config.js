@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'development') {
 const envVar = ({ name, required = true }) => {
   if (!process.env[name] && required) {
     console.error(`Missing required environment variable '${name}'`);
-    return;
+    process.exit(1);
   }
   return process.env[name];
 };
@@ -42,8 +42,8 @@ const azureAd = {
 };
 
 const redis = {
-  host: envVar({ name: 'REDIS_HOST' }) || 'syfosmmanuell-redis.default.svc.nais.local',
-  port: envVar({ name: 'REDIS_PORT' }) || 6379,
+  host: envVar({ name: 'REDIS_HOST', required: false }) || 'syfosmmanuell-redis.default.svc.nais.local',
+  port: envVar({ name: 'REDIS_PORT', required: false }) || 6379,
 };
 
 const reverseProxyConfig = () => {
