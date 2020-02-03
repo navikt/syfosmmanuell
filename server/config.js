@@ -19,7 +19,7 @@ const getVaultCredentialForSyfosmmanuell = name => {
     credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell/${name}`, 'utf8');
     return credentail;
   } catch (error) {
-    console.error(`Could not get Azure credentials for variable: '${name}'`);
+    console.error(`Could not get vault credentials for variable: '${name}'`);
     process.exit(1);
   }
 };
@@ -30,7 +30,7 @@ const getVaultCredentialForSyfosmmanuellBackend = name => {
     credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell-backend/${name}`, 'utf8');
     return credentail;
   } catch (error) {
-    console.error(`Could not get Azure credentials for variable: '${name}'`);
+    console.error(`Could not get vault credentials for variable: '${name}'`);
   }
 };
 
