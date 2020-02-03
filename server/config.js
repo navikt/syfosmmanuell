@@ -54,6 +54,7 @@ const azureAd = {
 const redis = {
   host: envVar({ name: 'REDIS_HOST', required: false }) || 'syfosmmanuell-redis.default.svc.nais.local',
   port: envVar({ name: 'REDIS_PORT', required: false }) || 6379,
+  password: envVar({name: "REDIS_PASSWORD", required: false}),
 };
 
 const reverseProxyConfig = () => {
