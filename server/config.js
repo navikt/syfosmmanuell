@@ -13,10 +13,20 @@ const envVar = ({ name, required = true }) => {
   return process.env[name];
 };
 
-const getAzureCredentialsFromVault = name => {
+const getAzureCredentialsForSyfosmmanuell = name => {
   let credentail;
   try {
     credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell/${name}`, 'utf8');
+    return credentail;
+  } catch (error) {
+    console.error(`Could not get Azure credentials for variable: '${name}'`);
+  }
+};
+
+const getAzureCredentialsForSyfosmmanuellBackend = name => {
+  let credentail;
+  try {
+    credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell-backend/${name}`, 'utf8');
     return credentail;
   } catch (error) {
     console.error(`Could not get Azure credentials for variable: '${name}'`);
@@ -33,8 +43,8 @@ const server = {
 
 const azureAd = {
   discoveryUrl: envVar({ name: 'AAD_DISCOVERY_URL' }),
-  clientId: getAzureCredentialsFromVault('client_id') || envVar({ name: 'CLIENT_ID' }),
-  clientSecret: getAzureCredentialsFromVault('client_secret') || envVar({ name: 'CLIENT_SECRET' }),
+  clientId: getAzureCredentialsForSyfosmmanuell('client_id') || envVar({ name: 'CLIENT_ID' }),
+  clientSecret: getAzureCredentialsForSyfosmmanuell('client_secret') || envVar({ name: 'CLIENT_SECRET' }),
   redirectUri: envVar({ name: 'AAD_REDIRECT_URL' }),
   tokenEndpointAuthMethod: 'client_secret_post',
   responseTypes: ['code'],
@@ -87,8 +97,9 @@ const loadReverseProxyConfig = () => {
       config = {
         apis: [
           {
-            clientId: envVar({ name: 'DOWNSTREAM_API_CLIENT_ID' }),
-            path: envVar({ name: 'DOWNSTREAM_API_PATH', required: false }) || 'downstream',
+            clientId:
+              getAzureCredentialsForSyfosmmanuellBackend('client_id') || envVar({ name: 'DOWNSTREAM_API_CLIENT_ID' }),
+            path: envVar({ name: 'DOWNSTREAM_API_PATH', required: false }) || 'backend',
             url: envVar({ name: 'DOWNSTREAM_API_URL' }),
             scopes: scopes ? scopes.split(',') : [],
           },
