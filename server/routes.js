@@ -9,6 +9,7 @@ import { decode } from 'jsonwebtoken';
 const router = express.Router();
 
 const ensureAuthenticated = async (req, res, next) => {
+  console.log('req.isAuthenticated(): ' + req.isAuthenticated());
   if (req.isAuthenticated()) {
     next();
   } else if (req.isAuthenticated() && authUtils.hasValidAccessToken(req)) {
@@ -42,12 +43,11 @@ const setup = authClient => {
   router.use('/', express.static(path.join(__dirname, 'build')));
 
   router.get('/user', (req, res) => {
-    console.log(req.user);
     if (!req.user && !req.user.tokenSet && !req.user.tokenSet.access_token) {
       res.status(500).send('Fant ikke token');
     }
     try {
-      const user = decode(req.user.tokenSet.access_token);
+      const user = decode(req.user.tokenSet.self.access_token);
       if (!user) {
         throw new Error('Kunne ikke hente ut brukerinformasjon');
       }
