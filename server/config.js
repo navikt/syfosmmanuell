@@ -13,17 +13,18 @@ const envVar = ({ name, required = true }) => {
   return process.env[name];
 };
 
-const getAzureCredentialsForSyfosmmanuell = name => {
+const getVaultCredentialsForSyfosmmanuell = name => {
   let credentail;
   try {
     credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell/${name}`, 'utf8');
     return credentail;
   } catch (error) {
     console.error(`Could not get Azure credentials for variable: '${name}'`);
+    process.exit(1);
   }
 };
 
-const getAzureCredentialsForSyfosmmanuellBackend = name => {
+const getVaultCredentialsForSyfosmmanuellBackend = name => {
   let credentail;
   try {
     credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell-backend/${name}`, 'utf8');
@@ -43,8 +44,8 @@ const server = {
 
 const azureAd = {
   discoveryUrl: envVar({ name: 'AAD_DISCOVERY_URL' }),
-  clientId: getAzureCredentialsForSyfosmmanuell('client_id') || envVar({ name: 'CLIENT_ID' }),
-  clientSecret: getAzureCredentialsForSyfosmmanuell('client_secret') || envVar({ name: 'CLIENT_SECRET' }),
+  clientId: getVaultCredentialsForSyfosmmanuell('client_id') || envVar({ name: 'CLIENT_ID' }),
+  clientSecret: getVaultCredentialsForSyfosmmanuell('client_secret') || envVar({ name: 'CLIENT_SECRET' }),
   redirectUri: envVar({ name: 'AAD_REDIRECT_URL' }),
   tokenEndpointAuthMethod: 'client_secret_post',
   responseTypes: ['code'],
@@ -54,7 +55,7 @@ const azureAd = {
 const redis = {
   host: envVar({ name: 'REDIS_HOST', required: false }) || 'syfosmmanuell-redis.default.svc.nais.local',
   port: envVar({ name: 'REDIS_PORT', required: false }) || 6379,
-  password: envVar({name: "REDIS_PASSWORD", required: false}),
+  password: envVar({ name: 'REDIS_PASSWORD', required: false }),
 };
 
 const reverseProxyConfig = () => {
@@ -99,7 +100,7 @@ const loadReverseProxyConfig = () => {
         apis: [
           {
             clientId:
-              getAzureCredentialsForSyfosmmanuellBackend('client_id') || envVar({ name: 'DOWNSTREAM_API_CLIENT_ID' }),
+              getVaultCredentialsForSyfosmmanuellBackend('client_id') || envVar({ name: 'DOWNSTREAM_API_CLIENT_ID' }),
             path: envVar({ name: 'DOWNSTREAM_API_PATH', required: false }) || 'backend',
             url: envVar({ name: 'DOWNSTREAM_API_URL' }),
             scopes: scopes ? scopes.split(',') : [],
