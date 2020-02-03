@@ -39,11 +39,11 @@ const setup = authClient => {
   router.use('/', express.static(path.join(__dirname, 'build')));
 
   router.get('/user', (req, res) => {
-    if (!req.user && !req.user.tokenSet && !req.user.tokenSet.self.access_token) {
+    if (!req.user && !req.user.tokenSets && !req.user.tokenSets.self) {
       res.status(500).send('Fant ikke token');
     }
     try {
-      const user = decode(req.user.tokenSet.self.access_token);
+      const user = decode(req.user.tokenSets.self.access_token);
       if (!user) {
         throw new Error('Kunne ikke hente ut brukerinformasjon');
       }
