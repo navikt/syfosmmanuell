@@ -40,6 +40,8 @@ spec:
         mountPath: /secrets/azuread/syfosmmanuell
       - kvPath: /azuread/data/dev/creds/syfosmmanuell-backend
         mountPath: /secrets/azuread/syfosmmanuell-backend
+      - kvPath: /kv/preprod/fss/syfosmmanuell/default
+        mountPath: /secrets/default/syfosmmanuell
   webproxy: true
   ingresses:
     - "https://syfosmmanuell.nais.preprod.local"

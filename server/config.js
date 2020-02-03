@@ -13,24 +13,14 @@ const envVar = ({ name, required = true }) => {
   return process.env[name];
 };
 
-const getVaultCredentialForSyfosmmanuell = name => {
+const getVaultCredential = path => {
   let credentail;
   try {
-    credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell/${name}`, 'utf8');
+    credentail = fs.readFileSync(path, 'utf8');
     return credentail;
   } catch (error) {
-    console.error(`Could not get vault credentials for variable: '${name}'`);
+    console.error(`Could not get vault credentials for path: '${path}'`);
     process.exit(1);
-  }
-};
-
-const getVaultCredentialForSyfosmmanuellBackend = name => {
-  let credentail;
-  try {
-    credentail = fs.readFileSync(`/secrets/azuread/syfosmmanuell-backend/${name}`, 'utf8');
-    return credentail;
-  } catch (error) {
-    console.error(`Could not get vault credentials for variable: '${name}'`);
   }
 };
 
@@ -38,14 +28,14 @@ const server = {
   host: envVar({ name: 'HOST', required: false }) || 'localhost',
   port: envVar({ name: 'PORT', required: false }) || 3000,
   proxy: envVar({ name: 'HTTP_PROXY', required: false }), // optional, only set if requests to Azure AD must be performed through a corporate proxy (i.e. traffic to login.microsoftonline.com is blocked by the firewall)
-  sessionKey: 'test124', //getVaultCredentialForSyfosmmanuell('session_key'), // should be set to a random key of significant length for signing session ID cookies
+  sessionKey: getVaultCredential('/secrets/default/syfosmmanuell/session_key'), // should be set to a random key of significant length for signing session ID cookies
   cookieName: 'syfosmmanuell',
 };
 
 const azureAd = {
   discoveryUrl: envVar({ name: 'AAD_DISCOVERY_URL' }),
-  clientId: getVaultCredentialForSyfosmmanuell('client_id') || envVar({ name: 'CLIENT_ID' }),
-  clientSecret: getVaultCredentialForSyfosmmanuell('client_secret') || envVar({ name: 'CLIENT_SECRET' }),
+  clientId: getVaultCredential('/secrets/azuread/syfosmmanuell/client_id'),
+  clientSecret: getVaultCredential('/secrets/azuread/syfosmmanuell/client_secret'),
   redirectUri: envVar({ name: 'AAD_REDIRECT_URL' }),
   tokenEndpointAuthMethod: 'client_secret_post',
   responseTypes: ['code'],
@@ -100,7 +90,8 @@ const loadReverseProxyConfig = () => {
         apis: [
           {
             clientId:
-              getVaultCredentialForSyfosmmanuellBackend('client_id') || envVar({ name: 'DOWNSTREAM_API_CLIENT_ID' }),
+              fs.readFileSync('/secrets/azuread/syfosmmanuell-backend/client_id', 'utf8') ||
+              envVar({ name: 'DOWNSTREAM_API_CLIENT_ID' }),
             path: envVar({ name: 'DOWNSTREAM_API_PATH', required: false }) || 'backend',
             url: envVar({ name: 'DOWNSTREAM_API_URL' }),
             scopes: scopes ? scopes.split(',') : [],
