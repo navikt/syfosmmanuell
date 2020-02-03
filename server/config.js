@@ -38,7 +38,7 @@ const server = {
   host: envVar({ name: 'HOST', required: false }) || 'localhost',
   port: envVar({ name: 'PORT', required: false }) || 3000,
   proxy: envVar({ name: 'HTTP_PROXY', required: false }), // optional, only set if requests to Azure AD must be performed through a corporate proxy (i.e. traffic to login.microsoftonline.com is blocked by the firewall)
-  sessionKey: getVaultCredentialForSyfosmmanuell('session_key'), // should be set to a random key of significant length for signing session ID cookies
+  sessionKey: 'test124', //getVaultCredentialForSyfosmmanuell('session_key'), // should be set to a random key of significant length for signing session ID cookies
   cookieName: 'syfosmmanuell',
 };
 
