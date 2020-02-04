@@ -60,11 +60,17 @@ const setup = authClient => {
     req.logOut();
     req.session.destroy(error => {
       if (!error) {
-        res.status(200).send('logged out');
+        if (config.azureAd.logoutRedirectUri) {
+          res
+            .status(200)
+            .send('logged out')
+            .redirect(config.azureAd.logoutRedirectUri);
+        } else {
+          res.status(200).send('logged out');
+        }
       } else {
-        res.status(500).send('Could not log out due to a server error')
+        res.status(500).send('Could not log out due to a server error');
       }
-
     });
   });
 
