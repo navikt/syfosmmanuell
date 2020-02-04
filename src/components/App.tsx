@@ -85,7 +85,12 @@ const App = () => {
               } else {
                 setManOppgave(null);
                 sessionStorage.clear();
-                setTimeout(() => (window.location.href = 'https://www.google.com'), 2000);
+                const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
+                if (GOSYS_URL) {
+                  setTimeout(() => (window.location.href = GOSYS_URL), 2000);
+                } else {
+                  setFeilmelding('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
+                }
               }
             },
           );
