@@ -4,7 +4,7 @@ import proxy from 'express-http-proxy';
 import url from 'url';
 
 const options = (api, authClient) => ({
-    parseReqBody: false,
+    parseReqBody: true,
     proxyReqOptDecorator: (options, req) => {
         return new Promise(((resolve, reject) =>
             authUtils.getOnBehalfOfAccessToken(
