@@ -10,10 +10,7 @@ import { decode } from 'jsonwebtoken';
 const router = express.Router();
 
 const ensureAuthenticated = async (req, res, next) => {
-  if (req.isAuthenticated()) {
-    next();
-  } else if (req.isAuthenticated() && authUtils.hasExpiredTokenSets(req)) {
-    await authUtils.renewTokenSets();
+  if (req.isAuthenticated() && authUtils.hasValidAccessToken(req)) {
     next();
   } else {
     if (req.query.oppgaveid) {
@@ -43,12 +40,11 @@ const setup = authClient => {
   router.use('/', express.static(path.join(__dirname, 'build')));
 
   router.get('/user', (req, res) => {
-    console.log(req.user);
-    if (!req.user && !req.user.tokenSet && !req.user.tokenSet.access_token) {
+    if (!req.user && !req.user.tokenSets && !req.user.tokenSets.self) {
       res.status(500).send('Fant ikke token');
     }
     try {
-      const user = decode(req.user.tokenSet.access_token);
+      const user = decode(req.user.tokenSets.self.access_token);
       if (!user) {
         throw new Error('Kunne ikke hente ut brukerinformasjon');
       }
@@ -61,53 +57,29 @@ const setup = authClient => {
 
   router.get('/logout', (req, res) => {
     req.logOut();
-    //res.redirect('/');
-    res.status(200).send('logged out');
-  });
-
-  router.get('/refresh', (req, res) => {
-    authUtils
-      .renewTokenSets(authClient, req.user.tokenSet.refresh_token)
-      .then(tokenSet => {
-        updateUserTokenSet(tokenSet, req);
-        res.json(req.user);
-      })
-      .catch(err => {
-        console.error(err);
-        res.redirect('/logout');
-      });
-  });
-
-  router.get('/obo', (req, res) => {
-    authUtils
-      .getOnBehalfOfTokenSet(authClient, req.user.tokenSet.access_token_self || req.user.tokenSet.access_token)
-      .then(tokenSet => {
-        if (!req.user.tokenSet.access_token_self) {
-          req.user.tokenSet.access_token_self = req.user.tokenSet.access_token;
+    req.session.destroy(error => {
+      if (!error) {
+        if (config.azureAd.logoutRedirectUri) {
+          res
+            .status(200)
+            .send('logged out')
+            .redirect(config.azureAd.logoutRedirectUri);
+        } else {
+          res.status(200).send('logged out');
         }
-        updateUserTokenSet(tokenSet, req);
-        res.json(req.user);
-      })
-      .catch(err => {
-        console.error(err);
-        res.json({ error: err });
-      });
+      } else {
+        res.status(500).send('Could not log out due to a server error');
+      }
+    });
   });
 
-  // Set up reverse proxy for a given prefix that proxies matching requests to the downstream API
-  router.use(`/${config.downstreamApi.prefix}/*`, reverseProxy.setup(authClient));
+  reverseProxy.setup(router, authClient);
 
   router.use('/*', (req, res) => {
     res.status(404).send('Not found');
   });
 
   return router;
-};
-
-const updateUserTokenSet = (tokenSet, req) => {
-  req.user.tokenSet.access_token = tokenSet.access_token || req.user.tokenSet.access_token;
-  req.user.tokenSet.refresh_token = tokenSet.refresh_token || req.user.tokenSet.refresh_token;
-  req.user.tokenSet.id_token = tokenSet.id_token || req.user.tokenSet.id_token;
 };
 
 export default { setup };

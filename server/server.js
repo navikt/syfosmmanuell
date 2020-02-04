@@ -5,7 +5,7 @@ import cors from './cors';
 import express from 'express';
 import helmet from 'helmet';
 import passport from 'passport';
-import session from 'express-session';
+import session from './session';
 
 // for debugging during development
 import morganBody from 'morgan-body';
@@ -19,17 +19,8 @@ async function startApp() {
     morganBody(server);
     morgan('dev');
 
-    // Sets up session storage. A unique id is automatically added to the session by the uid-safe library (default)
-    // TODO: set up redis
-    server.use(
-      session({
-        secret: 'awesome secret',
-        name: 'syfosmmanuell_session',
-        resave: false,
-        saveUninitialized: true,
-      }),
-    );
-    
+    session.setup(server);
+
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
     //server.use(cookieParser());
@@ -41,14 +32,14 @@ async function startApp() {
     // initialize passport and restore authentication state, if any, from the session
     server.use(passport.initialize());
     server.use(passport.session());
-
+    
     const azureAuthClient = await azure.client();
     const azureOidcStrategy = azure.strategy(azureAuthClient);
-
+    
     passport.use('azureOidc', azureOidcStrategy);
     passport.serializeUser((user, done) => done(null, user));
     passport.deserializeUser((user, done) => done(null, user));
-
+    
     // setup routes
     server.use('/', routes.setup(azureAuthClient));
 

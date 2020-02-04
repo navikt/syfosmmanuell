@@ -20,6 +20,8 @@
         "openid-client": "^3.10.1",
         "passport": "^0.4.1",
         "path": "^0.12.7",
+        "connect-redis": "^4.0.3",
+        "redis": "^2.8.0",
         "tunnel": "0.0.6"
     },
     "devDependencies": {
