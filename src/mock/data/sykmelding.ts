@@ -5,10 +5,10 @@ export const oppgaveEnRegel = [
       status: 'MANUAL_PROCESSING',
       ruleHits: [
         {
-          ruleName: 'BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L',
-          messageForSender: 'message for sender',
-          messageForUser: 'message for user',
+          ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
           ruleStatus: 'MANUAL_PROCESSING',
+          messageForUser: 'message for user',
+          messageForSender: 'message for sender',
         },
       ],
     },
@@ -176,22 +176,16 @@ export const oppgaveFlereRegler = [
       status: 'MANUAL_PROCESSING',
       ruleHits: [
         {
-          ruleName: 'BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L',
-          messageForSender: 'message for sender',
-          messageForUser: 'message for user',
-          ruleStatus: 'MANUAL_PROCESSING',
-        },
-        {
           ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
-          messageForSender: 'message for sender',
-          messageForUser: 'message for user',
           ruleStatus: 'MANUAL_PROCESSING',
+          messageForUser: 'message for user',
+          messageForSender: 'message for sender',
         },
         {
           ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE',
-          messageForSender: 'message for sender',
-          messageForUser: 'message for user',
           ruleStatus: 'MANUAL_PROCESSING',
+          messageForUser: 'message for user',
+          messageForSender: 'message for sender',
         },
       ],
     },

@@ -23,15 +23,15 @@ export type RuleNames =
 
 class RuleInfo {
   ruleName: RuleNames;
-  messageForSender: string;
-  messageForUser: string;
   ruleStatus: Status;
+  messageForUser: string;
+  messageForSender: string;
 
   constructor(ruleInfo: any) {
     this.ruleName = ruleInfo.ruleName;
-    this.messageForSender = ruleInfo.messageForSender;
-    this.messageForUser = ruleInfo.messageForUser;
     this.ruleStatus = ruleInfo.ruleStatus;
+    this.messageForUser = ruleInfo.messageForUser;
+    this.messageForSender = ruleInfo.messageForSender;
   }
 }
 
