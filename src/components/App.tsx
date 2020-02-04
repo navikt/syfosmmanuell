@@ -6,7 +6,7 @@ import Spinner from 'nav-frontend-spinner';
 import EnRegel from './EnRegel';
 import FlereRegler from './FlereRegler';
 import { ValidationResult } from '../types/validationresultTypes';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 
 const App = () => {
   const [manOppgave, setManOppgave] = useState<ManuellOppgave | null>();
@@ -80,11 +80,13 @@ const App = () => {
               body: JSON.stringify(valideringsresultat),
             },
             (fetchState: FetchState) => {
-              if (fetchState.httpCode === 401) {
-                // redirect to login
+              if (fetchState.httpCode >= 401) {
+                setFeilmelding(`Det har oppstått en feil med feilkode: ${fetchState.httpCode}`);
+              } else {
+                setManOppgave(null);
+                sessionStorage.clear();
+                setTimeout(() => (window.location.href = 'https://www.google.com'), 2000);
               }
-              setManOppgave(null);
-              sessionStorage.clear();
             },
           );
         }
@@ -95,11 +97,11 @@ const App = () => {
   };
 
   if (feilMelding) {
-    return <p>{feilMelding}</p>;
+    return <Normaltekst>{feilMelding}</Normaltekst>;
   }
 
   if (manOppgave === null) {
-    return <Undertittel>Oppgaven er løst</Undertittel>;
+    return <Undertittel>Oppgaven er løst... Du videresendes til GOSYS</Undertittel>;
   }
 
   if (isAnyPending([manOppgaveFetcher, manOppgavePutter])) {

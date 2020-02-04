@@ -5,7 +5,7 @@ export const oppgaveEnRegel = [
       status: 'MANUAL_PROCESSING',
       ruleHits: [
         {
-          ruleName: 'BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L',
+          ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
           messageForSender: 'message for sender',
           messageForUser: 'message for user',
           ruleStatus: 'MANUAL_PROCESSING',
@@ -175,12 +175,6 @@ export const oppgaveFlereRegler = [
     validationResult: {
       status: 'MANUAL_PROCESSING',
       ruleHits: [
-        {
-          ruleName: 'BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L',
-          messageForSender: 'message for sender',
-          messageForUser: 'message for user',
-          ruleStatus: 'MANUAL_PROCESSING',
-        },
         {
           ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
           messageForSender: 'message for sender',
