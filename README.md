@@ -1,4 +1,6 @@
 # syfosmmanuell
+![Deploy to dev](https://github.com/navikt/syfosmmanuell/workflows/Deploy%20to%20dev/badge.svg?branch=master)
+
 <img src="./src/svg/flytdiagram.svg">
 
 ## Om syfosmmanuell
