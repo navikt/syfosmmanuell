@@ -10,4 +10,4 @@ COPY start.sh .
 RUN chmod +x start.sh
 RUN ls -al
 
-CMD ["/bin/sh", "-c", "./start.sh"]
+CMD ["npm", "start"]
