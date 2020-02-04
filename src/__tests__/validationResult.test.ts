@@ -93,11 +93,6 @@ describe('validationResultWithStatus', () => {
         valideringsresultatFlereReglerMedStatus.ruleHits[1].ruleName,
         true,
       );
-      expect(valideringsresultatFlereReglerMedStatus.totalVurdering).toBe(undefined);
-      valideringsresultatFlereReglerMedStatus.setBehandlet(
-        valideringsresultatFlereReglerMedStatus.ruleHits[2].ruleName,
-        true,
-      );
       expect(valideringsresultatFlereReglerMedStatus.totalVurdering).toBe(true);
     });
 
@@ -113,11 +108,6 @@ describe('validationResultWithStatus', () => {
       expect(valideringsresultatFlereReglerMedStatus.totalVurdering).toBe(undefined);
       valideringsresultatFlereReglerMedStatus.setBehandlet(
         valideringsresultatFlereReglerMedStatus.ruleHits[1].ruleName,
-        true,
-      );
-      expect(valideringsresultatFlereReglerMedStatus.totalVurdering).toBe(undefined);
-      valideringsresultatFlereReglerMedStatus.setBehandlet(
-        valideringsresultatFlereReglerMedStatus.ruleHits[2].ruleName,
         true,
       );
       expect(valideringsresultatFlereReglerMedStatus.totalVurdering).toBe(false);

@@ -24,10 +24,7 @@ describe('flereRegler', () => {
     expect(
       getByText(RuleNamesDescription[flereRegler.validationResult.ruleHits[1].ruleName], { exact: false }),
     ).toBeInTheDocument();
-    expect(
-      getByText(RuleNamesDescription[flereRegler.validationResult.ruleHits[2].ruleName], { exact: false }),
-    ).toBeInTheDocument();
-    expect(getAllByText('Vurder').length).toBe(3);
+    expect(getAllByText('Vurder').length).toBe(2);
   });
 
   it('Rendrer sykmelding når "vurder" trykkes', () => {
@@ -48,18 +45,8 @@ describe('flereRegler', () => {
     );
     expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
     let vurderingsknapper = getAllByText('Vurder');
-    expect(vurderingsknapper).toHaveLength(3);
+    expect(vurderingsknapper).toHaveLength(2);
     await act(async () => {
-      fireEvent.click(vurderingsknapper[0]);
-      await wait(() => getByLabelText('Godkjenn', { exact: false }));
-      fireEvent.click(getByLabelText('Godkjenn', { exact: false }));
-      await wait(() => getByText('Lagre'));
-      fireEvent.click(getByText('Lagre'));
-    });
-    expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
-    await act(async () => {
-      vurderingsknapper = getAllByText('Vurder');
-      expect(vurderingsknapper).toHaveLength(2);
       fireEvent.click(vurderingsknapper[0]);
       await wait(() => getByLabelText('Godkjenn', { exact: false }));
       fireEvent.click(getByLabelText('Godkjenn', { exact: false }));
@@ -85,18 +72,8 @@ describe('flereRegler', () => {
     );
     expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
     let vurderingsknapper = getAllByText('Vurder');
-    expect(vurderingsknapper).toHaveLength(3);
+    expect(vurderingsknapper).toHaveLength(2);
     await act(async () => {
-      fireEvent.click(vurderingsknapper[0]);
-      await wait(() => getByLabelText('Godkjenn', { exact: false }));
-      fireEvent.click(getByLabelText('Godkjenn', { exact: false }));
-      await wait(() => getByText('Lagre'));
-      fireEvent.click(getByText('Lagre'));
-    });
-    expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
-    await act(async () => {
-      vurderingsknapper = getAllByText('Vurder');
-      expect(vurderingsknapper).toHaveLength(2);
       fireEvent.click(vurderingsknapper[0]);
       await wait(() => getByLabelText('Godkjenn', { exact: false }));
       fireEvent.click(getByLabelText('Godkjenn', { exact: false }));
@@ -127,21 +104,11 @@ describe('flereRegler', () => {
     );
     expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
     let vurderingsknapper = getAllByText('Vurder');
-    expect(vurderingsknapper).toHaveLength(3);
+    expect(vurderingsknapper).toHaveLength(2);
     await act(async () => {
       fireEvent.click(vurderingsknapper[0]);
       await wait(() => getByLabelText('Avvis', { exact: false }));
       fireEvent.click(getByLabelText('Avvis', { exact: false }));
-      await wait(() => getByText('Lagre'));
-      fireEvent.click(getByText('Lagre'));
-    });
-    expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
-    await act(async () => {
-      vurderingsknapper = getAllByText('Vurder');
-      expect(vurderingsknapper).toHaveLength(2);
-      fireEvent.click(vurderingsknapper[0]);
-      await wait(() => getByLabelText('Godkjenn', { exact: false }));
-      fireEvent.click(getByLabelText('Godkjenn', { exact: false }));
       await wait(() => getByText('Lagre'));
       fireEvent.click(getByText('Lagre'));
     });
@@ -169,21 +136,11 @@ describe('flereRegler', () => {
     );
     expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
     let vurderingsknapper = getAllByText('Vurder');
-    expect(vurderingsknapper).toHaveLength(3);
+    expect(vurderingsknapper).toHaveLength(2);
     await act(async () => {
       fireEvent.click(vurderingsknapper[0]);
       await wait(() => getByLabelText('Avvis', { exact: false }));
       fireEvent.click(getByLabelText('Avvis', { exact: false }));
-      await wait(() => getByText('Lagre'));
-      fireEvent.click(getByText('Lagre'));
-    });
-    expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
-    await act(async () => {
-      vurderingsknapper = getAllByText('Vurder');
-      expect(vurderingsknapper).toHaveLength(2);
-      fireEvent.click(vurderingsknapper[0]);
-      await wait(() => getByLabelText('Godkjenn', { exact: false }));
-      fireEvent.click(getByLabelText('Godkjenn', { exact: false }));
       await wait(() => getByText('Lagre'));
       fireEvent.click(getByText('Lagre'));
     });
@@ -200,6 +157,6 @@ describe('flereRegler', () => {
     act(() => {
       fireEvent.click(getByText('Nullstill vurderinger'));
     });
-    expect(getAllByText('Vurder')).toHaveLength(3);
+    expect(getAllByText('Vurder')).toHaveLength(2);
   });
 });
