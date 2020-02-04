@@ -37,6 +37,7 @@ const azureAd = {
   clientId: getVaultCredential('/secrets/azuread/syfosmmanuell/client_id'),
   clientSecret: getVaultCredential('/secrets/azuread/syfosmmanuell/client_secret'),
   redirectUri: envVar({ name: 'AAD_REDIRECT_URL' }),
+  logoutRedirectUri: envVar({ name: 'AAD_LOGOUT_REDIRECT_URL' }),
   tokenEndpointAuthMethod: 'client_secret_post',
   responseTypes: ['code'],
   responseMode: 'query',

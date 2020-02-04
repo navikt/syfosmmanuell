@@ -1,4 +1,5 @@
 import authUtils from './auth/utils';
+import config from './config';
 import express from 'express';
 import path from 'path';
 import passport from 'passport';
@@ -57,8 +58,14 @@ const setup = authClient => {
 
   router.get('/logout', (req, res) => {
     req.logOut();
-    //res.redirect('/');
-    res.status(200).send('logged out');
+    req.session.destroy(error => {
+      if (!error) {
+        res.status(200).send('logged out');
+      } else {
+        res.status(500).send('Could not log out due to a server error')
+      }
+
+    });
   });
 
   reverseProxy.setup(router, authClient);
