@@ -10,7 +10,9 @@ Frontend for manuell behandling av sykemeldinger. Laget med React og Typescript.
 
 ### Environment-variable
 
-Frontend-appen bruker en pakke som er bakt inn i react-scripts til å "injekte" environment-variable i de statiske filene som bygges. Alle environment-variable som skal være tilgjengelige client-side må derfor defineres i [/.github/workflows/deploy](deploy.yml) / [/.github/workflows/devdeploy](devdeploy.yml)
+Frontend-appen bruker en pakke som er bakt inn i react-scripts til å "inject'e" environment-variable i de statiske filene som bygges. Alle environment-variable som skal være tilgjengelige client-side må derfor defineres i `/.github/workflows/deploy` / `/.github/workflows/devdeploy`, og må prefixes med `REACT_APP_`.
+
+Alle variable som skal være tilgjengelige server-side må defineres i `/naiserator-prod` / `/naiserator-dev`.
 
 ## Installering
 
