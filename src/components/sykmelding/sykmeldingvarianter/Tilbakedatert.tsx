@@ -17,7 +17,7 @@ const Tilbakedatert = ({ sykmelding }: TilbakedatertProps) => {
   return (
     <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
       <SeksjonMedTittel understrek>
-        <BehandlingsDatoer syketilfelleStartDato={sykmelding.syketilfelleStartDato} />
+        <BehandlingsDatoer behandletTidspunkt={sykmelding.signaturDato} />
         <Tilbakedateringsinfo
           dokumenterbarKontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
           kanIkkeIvaretaEgneInteresser={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
