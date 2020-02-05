@@ -1,7 +1,7 @@
 export enum RuleNamesDescription {
   BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L = 'Manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapittel L (muskel- og skjelettsykdommer)',
-  TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Sykmeldingen er tilbakedatert med begrunnelse',
-  TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmelding i løpende sykefravær er tilbakedatert med begrunnelse',
+  TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Sykmeldingen er tilbakedatert',
+  TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmelding i løpende sykefravær er tilbakedatert',
 }
 
 export enum MessageForSender {
@@ -48,7 +48,7 @@ export class ValidationResult {
 
   setStatus = (vurdering: boolean) => {
     this.status = vurdering ? 'OK' : 'INVALID';
-  }
+  };
 
   setTilbakemeldinger = () => {
     this.ruleHits = this.ruleHits.map(regel => {

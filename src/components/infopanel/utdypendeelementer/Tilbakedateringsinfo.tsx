@@ -21,7 +21,7 @@ const Tilbakedateringsinfo = ({
       />
       <ElementMedTekst
         vis={!!kanIkkeIvaretaEgneInteresser}
-        tittel="Pasienten har ikke kunnet ivareta egne interesser. Begrunn"
+        tittel="Begrunnelse for tilbakedatering"
         tekst={kanIkkeIvaretaEgneInteresser}
         margin
       />
