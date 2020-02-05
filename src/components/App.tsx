@@ -36,7 +36,6 @@ const App = () => {
         }
       }
       const URL = hentOppgaveUrl(OPPGAVE_ID);
-      console.log('Henter manuell oppgave fra: ' + URL);
       manOppgaveFetcher.fetch(URL, { credentials: 'same-origin' }, (fetchState: FetchState<ManuellOppgave[]>) => {
         if (fetchState.httpCode === 401) {
           setFeilmelding(
