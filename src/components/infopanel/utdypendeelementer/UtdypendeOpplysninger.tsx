@@ -25,7 +25,8 @@ interface UtdypendeOpplysningerProps {
 
 const UtdypendeOpplysninger = ({ opplysninger }: UtdypendeOpplysningerProps) => {
     // TODO: legg til logikk for visning av seksjon
-    /*
+    /* 
+    //
     const visSeksjon = sykmelding.utdypendeOpplysninger.sykehistorie ||
         sykmelding.utdypendeOpplysninger.paavirkningArbeidsevne ||
         sykmelding.utdypendeOpplysninger.resultatAvBehandling ||
