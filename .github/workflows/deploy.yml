@@ -45,7 +45,7 @@ jobs:
         uses: nais/deploy/actions/deploy@master
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-fss
+          CLUSTER: prod-fss
           RESOURCE: redis.yaml
       - name: Deploy app to prod
         uses: nais/deploy/actions/deploy@master
