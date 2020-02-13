@@ -12,9 +12,10 @@ import crossCircle from '../svg/cross-circle.svg';
 interface FlereReglerProps {
   manOppgave: ManuellOppgave;
   handterAvgjorelse: (avgjorelse: boolean | undefined) => void;
+  setManOppgave: (value: React.SetStateAction<ManuellOppgave | null | undefined>) => void;
 }
 
-const FlereRegler = ({ manOppgave, handterAvgjorelse }: FlereReglerProps) => {
+const FlereRegler = ({ manOppgave, handterAvgjorelse, setManOppgave }: FlereReglerProps) => {
   const [aktuellRegel, setAktuellRegel] = useState<RuleNames | undefined>();
   const [valideringsresultat, setValideringsresultat] = useState<ValidationResultWithStatus>(
     new ValidationResultWithStatus(manOppgave.validationResult),
@@ -22,8 +23,24 @@ const FlereRegler = ({ manOppgave, handterAvgjorelse }: FlereReglerProps) => {
 
   const handterVurdering = (vurdering: boolean) => {
     if (aktuellRegel) {
-      setValideringsresultat(new ValidationResultWithStatus(valideringsresultat.setBehandlet(aktuellRegel, vurdering)));
+      const vurdertRegel = new ValidationResultWithStatus(valideringsresultat);
+      vurdertRegel.setBehandlet(aktuellRegel, vurdering);
+      vurdertRegel.setRuleHitStatus(aktuellRegel, vurdering);
+      setValideringsresultat(vurdertRegel);
       setAktuellRegel(undefined);
+    }
+  };
+
+  const handterFerdigstill = () => {
+    //console.log(valideringsresultat);
+    //console.log(manOppgave)
+    if (valideringsresultat.totalVurdering !== undefined) {
+      const vurdertOppgave = new ManuellOppgave(manOppgave);
+      vurdertOppgave.validationResult = valideringsresultat;
+      vurdertOppgave.validationResult.setStatus(valideringsresultat.totalVurdering);
+      setManOppgave(vurdertOppgave);
+    } else {
+      throw new Error('Oppgaven ble forsøkt ferdigstillt uten totalvurdering');
     }
   };
 
@@ -69,7 +86,7 @@ const FlereRegler = ({ manOppgave, handterAvgjorelse }: FlereReglerProps) => {
             <Knapp
               disabled={valideringsresultat.totalVurdering === undefined}
               style={{ marginRight: '1rem' }}
-              onClick={() => handterAvgjorelse(valideringsresultat.totalVurdering)}
+              onClick={() => handterFerdigstill()}
             >
               Ferdigstill
             </Knapp>

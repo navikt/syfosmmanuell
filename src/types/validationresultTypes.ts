@@ -6,14 +6,14 @@ export enum RuleNamesDescription {
 
 export enum MessageForSender {
   BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L = 'Behandler er manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapitel L (muskel og skjelettsykdommer)',
-  TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Første sykmelding er tilbakedatert og felt 11.2 (begrunnelseIkkeKontakt) er utfylt',
-  TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmeldingen er tilbakedatert og felt 11.2 (begrunnelseIkkeKontakt) er utfylt',
+  TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
+  TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
 }
 
 export enum MessageForUser {
   BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L = 'Behandler er manuellterapeut/kiropraktor eller fysioterapeut med autorisasjon har angitt annen diagnose enn kapitel L (muskel og skjelettsykdommer)',
-  TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Første sykmelding er tilbakedatert og årsak for tilbakedatering er angitt.',
-  TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmeldingen er tilbakedatert og årsak for tilbakedatering er angitt',
+  TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE = 'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
+  TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE = 'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
 }
 
 export type RuleNames =

@@ -3,10 +3,10 @@ import useFetch, { isNotStarted, FetchState, isNotStartedOrPending, isAnyPending
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
-import EnRegel from './EnRegel';
 import FlereRegler from './FlereRegler';
 import { ValidationResult } from '../types/validationresultTypes';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import EnRegelController from './EnRegelController';
 
 const App = () => {
   const [manOppgave, setManOppgave] = useState<ManuellOppgave | null>();
@@ -56,6 +56,38 @@ const App = () => {
       });
     }
   }, [manOppgaveFetcher]);
+
+  useEffect(() => {
+    if (manOppgave?.validationResult.totalVurdering !== undefined) {
+      if (isNotStarted(manOppgavePutter)) {
+        const URL = hentOppgaveUrlPut(manOppgave.oppgaveid);
+        const valideringsresultat = new ValidationResult(manOppgave.validationResult);
+        manOppgavePutter.fetch(
+          URL,
+          {
+            method: 'PUT',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(valideringsresultat),
+          },
+          (fetchState: FetchState) => {
+            if (fetchState.httpCode >= 401) {
+              setFeilmelding(`Det har oppstått en feil med feilkode: ${fetchState.httpCode}`);
+            } else {
+              setManOppgave(null);
+              sessionStorage.clear();
+              const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
+              if (GOSYS_URL) {
+                setTimeout(() => (window.location.href = GOSYS_URL), 1000);
+              } else {
+                setFeilmelding('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
+              }
+            }
+          },
+        );
+      }
+    }
+  }, [manOppgave, manOppgavePutter]);
 
   const handterAvgjorelse = (avgjorelse: boolean | undefined): void => {
     if (avgjorelse === undefined) {
@@ -116,23 +148,14 @@ const App = () => {
   }
 
   if (manOppgave?.validationResult.ruleHits.length === 1) {
-    return (
-      <EnRegel
-        sykmelding={manOppgave.sykmelding}
-        regel={manOppgave.validationResult.ruleHits[0].ruleName}
-        handterAvgjorelse={handterAvgjorelse}
-        handterAvbryt={() =>
-          setFeilmelding(
-            'Du har avbrutt oppgaven. Du kan enten lukke vinduet, eller laste inn siden på nytt for hente oppgaven tilbake.',
-          )
-        }
-      />
-    );
+    return <EnRegelController manuellOppgave={manOppgave} setManOppgave={setManOppgave} />;
   }
 
   if (manOppgave) {
     if (manOppgave.validationResult.ruleHits.length > 1) {
-      return <FlereRegler manOppgave={manOppgave} handterAvgjorelse={handterAvgjorelse} />;
+      return (
+        <FlereRegler manOppgave={manOppgave} handterAvgjorelse={handterAvgjorelse} setManOppgave={setManOppgave} />
+      );
     }
   }
 
