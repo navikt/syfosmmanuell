@@ -44,10 +44,21 @@ export class ValidationResult {
   constructor(validationResult: any) {
     this.status = validationResult.status;
     this.ruleHits = validationResult.ruleHits.map((ruleHit: any) => new RuleInfo(ruleHit));
+    this.setTilbakemeldinger();
   }
 
   setStatus = (vurdering: boolean) => {
     this.status = vurdering ? 'OK' : 'INVALID';
+  };
+
+  setRuleHitStatus = (arsak: RuleNames, vurdering: boolean) => {
+    this.ruleHits.find((ruleHit, index, obj) => {
+      if (ruleHit.ruleName === arsak) {
+        obj[index].ruleStatus = vurdering ? 'OK' : 'INVALID';
+        return true;
+      }
+      return false;
+    });
   };
 
   setTilbakemeldinger = () => {
@@ -85,6 +96,7 @@ export class ValidationResultWithStatus extends ValidationResult {
   setBehandlet = (arsak: RuleNames, vurdering: boolean): ValidationResultWithStatus => {
     this.behandlet.set(arsak, vurdering);
     this.antallBehandlet++;
+    this.setRuleHitStatus(arsak, vurdering);
 
     if (this.antallBehandlet === this.ruleHits.length && this.totalVurdering == null) {
       let antallTrue = 0;

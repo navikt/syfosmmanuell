@@ -69,7 +69,6 @@ const App = () => {
           const URL = hentOppgaveUrlPut(manOppgave.oppgaveid);
           const valideringsresultat = new ValidationResult(manOppgave.validationResult);
           valideringsresultat.setStatus(avgjorelse);
-          valideringsresultat.setTilbakemeldinger();
           manOppgavePutter.fetch(
             URL,
             {
