@@ -11,11 +11,10 @@ import crossCircle from '../svg/cross-circle.svg';
 
 interface FlereReglerProps {
   manOppgave: ManuellOppgave;
-  handterAvgjorelse: (avgjorelse: boolean | undefined) => void;
   setManOppgave: (value: React.SetStateAction<ManuellOppgave | null | undefined>) => void;
 }
 
-const FlereRegler = ({ manOppgave, handterAvgjorelse, setManOppgave }: FlereReglerProps) => {
+const FlereRegler = ({ manOppgave, setManOppgave }: FlereReglerProps) => {
   const [aktuellRegel, setAktuellRegel] = useState<RuleNames | undefined>();
   const [valideringsresultat, setValideringsresultat] = useState<ValidationResultWithStatus>(
     new ValidationResultWithStatus(manOppgave.validationResult),

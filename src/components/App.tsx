@@ -89,48 +89,6 @@ const App = () => {
     }
   }, [manOppgave, manOppgavePutter]);
 
-  const handterAvgjorelse = (avgjorelse: boolean | undefined): void => {
-    if (avgjorelse === undefined) {
-      // Skal ikke kunne skje
-      const error = new Error('Avgjørelse ble satt til "undefined"');
-      setFeilmelding(error.message);
-      console.error(error);
-    } else {
-      if (manOppgave) {
-        if (isNotStartedOrPending(manOppgavePutter)) {
-          const URL = hentOppgaveUrlPut(manOppgave.oppgaveid);
-          const valideringsresultat = new ValidationResult(manOppgave.validationResult);
-          valideringsresultat.setStatus(avgjorelse);
-          manOppgavePutter.fetch(
-            URL,
-            {
-              method: 'PUT',
-              credentials: 'same-origin',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(valideringsresultat),
-            },
-            (fetchState: FetchState) => {
-              if (fetchState.httpCode >= 401) {
-                setFeilmelding(`Det har oppstått en feil med feilkode: ${fetchState.httpCode}`);
-              } else {
-                setManOppgave(null);
-                sessionStorage.clear();
-                const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
-                if (GOSYS_URL) {
-                  setTimeout(() => (window.location.href = GOSYS_URL), 2000);
-                } else {
-                  setFeilmelding('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
-                }
-              }
-            },
-          );
-        }
-      } else {
-        console.error('Manuell oppgave ble ikke funnet');
-      }
-    }
-  };
-
   if (feilMelding) {
     return <Normaltekst>{feilMelding}</Normaltekst>;
   }
@@ -154,7 +112,7 @@ const App = () => {
   if (manOppgave) {
     if (manOppgave.validationResult.ruleHits.length > 1) {
       return (
-        <FlereRegler manOppgave={manOppgave} handterAvgjorelse={handterAvgjorelse} setManOppgave={setManOppgave} />
+        <FlereRegler manOppgave={manOppgave} setManOppgave={setManOppgave} />
       );
     }
   }

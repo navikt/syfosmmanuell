@@ -52,13 +52,13 @@ describe('app', () => {
   });
 
   describe('Innsending av vurdering', () => {
-    it('Handteravgjorelse sender riktig HTTP request når valideringsresultat skal være OK', async () => {
+    it('Sender riktig HTTP request når valideringsresultat skal være OK', async () => {
       mock.get('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/', oppgaveEnRegel);
       mock.put('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/', {});
 
       const valideringsresultat = new ValidationResult(oppgaveEnRegel[0].validationResult);
+      valideringsresultat.setRuleHitStatus(valideringsresultat.ruleHits[0].ruleName, true);
       valideringsresultat.setStatus(true);
-      valideringsresultat.setTilbakemeldinger();
       const { getByLabelText, getByText } = render(<App />);
 
       await wait(() => getByLabelText('Godkjenn', { exact: false }));
@@ -75,13 +75,13 @@ describe('app', () => {
       expect(spy.lastCall()?.request.body).toEqual(JSON.parse(JSON.stringify(valideringsresultat))); // Må parses slik for at det ikke skal klages på typescript-typer
     });
 
-    it('Handteravgjorelse sender riktig HTTP request når valideringsresultat skal være INVALID', async () => {
+    it('Sender riktig HTTP request når valideringsresultat skal være INVALID', async () => {
       mock.get('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/', oppgaveEnRegel);
       mock.put('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/', {});
 
       const valideringsresultat = new ValidationResult(oppgaveEnRegel[0].validationResult);
+      valideringsresultat.setRuleHitStatus(valideringsresultat.ruleHits[0].ruleName, false);
       valideringsresultat.setStatus(false);
-      valideringsresultat.setTilbakemeldinger();
       const { getByLabelText, getByText } = render(<App />);
 
       await wait(() => getByLabelText('Avvis', { exact: false }));
