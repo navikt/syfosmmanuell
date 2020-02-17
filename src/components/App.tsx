@@ -52,7 +52,7 @@ const App = () => {
           console.error('Ingen oppgave funnet');
         } else {
           try {
-            setManOppgave(new ManuellOppgave(fetchState.data.shift()));
+            setManOppgave(new ManuellOppgave(fetchState.data[0]));
           } catch (error) {
             setFeilmelding('Kunne ikke formattere manuell oppgave');
             console.error(error);
