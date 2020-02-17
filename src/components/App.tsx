@@ -3,7 +3,7 @@ import useFetch, { isNotStarted, FetchState, isAnyPending } from '../hooks/useFe
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
-import FlereRegler from './FlereReglerController';
+import FlereReglerController from './FlereReglerController';
 import { ValidationResult } from '../types/validationresultTypes';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import EnRegelController from './EnRegelController';
@@ -112,7 +112,7 @@ const App = () => {
   if (manOppgave) {
     if (manOppgave.validationResult.ruleHits.length > 1) {
       return (
-        <FlereRegler manOppgave={manOppgave} setManOppgave={setManOppgave} />
+        <FlereReglerController manOppgave={manOppgave} setManOppgave={setManOppgave} />
       );
     }
   }

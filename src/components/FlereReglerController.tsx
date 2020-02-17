@@ -9,12 +9,12 @@ import { Knapp } from 'nav-frontend-knapper';
 import checkCircle from '../svg/check-circle.svg';
 import crossCircle from '../svg/cross-circle.svg';
 
-interface FlereReglerProps {
+interface FlereReglerControllerProps {
   manOppgave: ManuellOppgave;
   setManOppgave: (value: React.SetStateAction<ManuellOppgave | null | undefined>) => void;
 }
 
-const FlereRegler = ({ manOppgave, setManOppgave }: FlereReglerProps) => {
+const FlereReglerController = ({ manOppgave, setManOppgave }: FlereReglerControllerProps) => {
   const [aktuellRegel, setAktuellRegel] = useState<RuleNames | undefined>();
   const [valideringsresultat, setValideringsresultat] = useState<ValidationResultWithStatus>(
     new ValidationResultWithStatus(manOppgave.validationResult),
@@ -48,43 +48,41 @@ const FlereRegler = ({ manOppgave, setManOppgave }: FlereReglerProps) => {
   if (!aktuellRegel) {
     return (
       <Panel border className="panel">
-        <div className="regler">
-          <Systemtittel className="panel__tittel">En sykmelding må vurderes manuelt</Systemtittel>
-          <Element>Årsaker til manuell vurdering</Element>
-          {valideringsresultat.ruleHits.map((regel, index) => (
-            <div key={index} className="regler__element">
-              <Normaltekst>
-                {index + 1}. {RuleNamesDescription[regel.ruleName]}
-              </Normaltekst>
-              {valideringsresultat.behandlet.get(regel.ruleName) === undefined ? (
-                <Knapp form="kompakt" className="knapp--margin-left" onClick={() => setAktuellRegel(regel.ruleName)}>
-                  Vurder
-                </Knapp>
-              ) : (
-                <img
-                  src={valideringsresultat.behandlet.get(regel.ruleName) === false ? crossCircle : checkCircle}
-                  className="validert-bilde"
-                  alt={`${valideringsresultat.behandlet.get(regel.ruleName) ? 'checkmark' : 'cross'}`}
-                />
-              )}
-            </div>
-          ))}
-          <div>
-            <Knapp
-              disabled={valideringsresultat.totalVurdering === undefined}
-              className="knapp--margin-right"
-              onClick={() => handterFerdigstill()}
-            >
-              Ferdigstill
-            </Knapp>
-            <Knapp
-              onClick={() => {
-                handterAvbryt();
-              }}
-            >
-              Nullstill vurderinger
-            </Knapp>
+        <Systemtittel className="panel__tittel">En sykmelding må vurderes manuelt</Systemtittel>
+        <Element>Årsaker til manuell vurdering</Element>
+        {valideringsresultat.ruleHits.map((regel, index) => (
+          <div key={index} className="panel__element">
+            <Normaltekst>
+              {index + 1}. {RuleNamesDescription[regel.ruleName]}
+            </Normaltekst>
+            {valideringsresultat.behandlet.get(regel.ruleName) === undefined ? (
+              <Knapp form="kompakt" className="knapp--margin-left" onClick={() => setAktuellRegel(regel.ruleName)}>
+                Vurder
+              </Knapp>
+            ) : (
+              <img
+                src={valideringsresultat.behandlet.get(regel.ruleName) === false ? crossCircle : checkCircle}
+                className="validert-bilde"
+                alt={`${valideringsresultat.behandlet.get(regel.ruleName) ? 'checkmark' : 'cross'}`}
+              />
+            )}
           </div>
+        ))}
+        <div>
+          <Knapp
+            disabled={valideringsresultat.totalVurdering === undefined}
+            className="knapp--margin-right"
+            onClick={() => handterFerdigstill()}
+          >
+            Ferdigstill
+          </Knapp>
+          <Knapp
+            onClick={() => {
+              handterAvbryt();
+            }}
+          >
+            Nullstill vurderinger
+          </Knapp>
         </div>
       </Panel>
     );
@@ -101,4 +99,4 @@ const FlereRegler = ({ manOppgave, setManOppgave }: FlereReglerProps) => {
   );
 };
 
-export default FlereRegler;
+export default FlereReglerController;

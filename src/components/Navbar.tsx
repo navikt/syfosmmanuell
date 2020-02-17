@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { hentLogOutUrl, hentLogInUrl } from '../utils/urlUtils';
 import { EtikettLiten } from 'nav-frontend-typografi';
+import './Navbar.less';
 
 type Knappetekst = 'Logg ut' | 'Logg inn';
 
@@ -23,7 +24,7 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
       })
       .then(text => {
         if (!text) {
-          throw new Error('Kunne ikke hente brukernavn fra server')
+          throw new Error('Kunne ikke hente brukernavn fra server');
         }
         setText(`Logget inn som: ${text}`);
       })
@@ -49,24 +50,14 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
   };
 
   return (
-    <div
-      className="navbar"
-      style={{
-        display: 'flex',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        marginBottom: '2rem',
-        borderBottom: '1px solid #C6C2BF',
-      }}
-    >
+    <div className="navbar">
       <EtikettLiten>{text}</EtikettLiten>
       {knappetekst === 'Logg ut' ? (
-        <Flatknapp style={{ margin: '0.5rem' }} onClick={() => loggUt()}>
+        <Flatknapp className="navbar__knapp" onClick={() => loggUt()}>
           Logg ut
         </Flatknapp>
       ) : (
-        <Flatknapp style={{ margin: '0.5rem' }} onClick={() => loggInn()}>
+        <Flatknapp className="navbar__knapp" onClick={() => loggInn()}>
           Logg inn
         </Flatknapp>
       )}

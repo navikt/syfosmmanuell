@@ -1,6 +1,7 @@
 import React from 'react';
 import { RuleNames, RuleNamesDescription } from '../../types/validationresultTypes';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import './SykmeldingHeader.less';
 
 interface SykmeldingheaderProps {
   regel: RuleNames;
@@ -10,9 +11,11 @@ interface SykmeldingheaderProps {
 
 const Sykmeldingheader = ({ regel, arbeidsgiver, sykmelder }: SykmeldingheaderProps) => {
   return (
-    <div style={{ padding: '1rem' }}>
-      <Element>Årsak til manuell vurdering:</Element>
-      <Normaltekst style={{ marginBottom: '1.5rem' }}>{RuleNamesDescription[regel]}</Normaltekst>
+    <div className="sykmelding-header">
+      <div className="sykmelding-header__arsak">
+        <Element>Årsak til manuell vurdering:</Element>
+        <Normaltekst>{RuleNamesDescription[regel]}</Normaltekst>
+      </div>
       <Element>Arbeidsgiver: {arbeidsgiver}</Element>
       <Element>Sykmelder: {sykmelder}</Element>
     </div>

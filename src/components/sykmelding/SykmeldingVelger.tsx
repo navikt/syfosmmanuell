@@ -1,7 +1,6 @@
 import React from 'react';
 import { Sykmelding as SykmeldingType } from '../../types/sykmeldingTypes';
 import { RuleNames } from '../../types/validationresultTypes';
-import './sykmelding.less';
 import MuskelOgSkjelett from './sykmeldingvarianter/MuskelOgSkjelett';
 import Tilbakedatert from './sykmeldingvarianter/Tilbakedatert';
 import TilbakedatertForlengelse from './sykmeldingvarianter/TilbakedatertForlengelse';
