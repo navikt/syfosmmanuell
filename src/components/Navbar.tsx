@@ -49,20 +49,24 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
     window.location.href = hentLogInUrl();
   };
 
-  return (
-    <div className="navbar">
-      <EtikettLiten>{text ? text : 'Kunne ikke hente brukerinformasjon'}</EtikettLiten>
-      {knappetekst === 'Logg ut' ? (
-        <Flatknapp className="navbar__knapp" onClick={() => loggUt()}>
-          Logg ut
-        </Flatknapp>
-      ) : (
-        <Flatknapp className="navbar__knapp" onClick={() => loggInn()}>
-          Logg inn
-        </Flatknapp>
-      )}
-    </div>
-  );
+  if (text) {
+    return (
+      <div className="navbar">
+        <EtikettLiten>{text}</EtikettLiten>
+        {knappetekst === 'Logg ut' ? (
+          <Flatknapp className="navbar__element--margin-left" onClick={() => loggUt()}>
+            Logg ut
+          </Flatknapp>
+        ) : (
+          <Flatknapp className="navbar__element--margin-left" onClick={() => loggInn()}>
+            Logg inn
+          </Flatknapp>
+        )}
+      </div>
+    );
+  }
+
+  return <div className="navbar" />;
 };
 
 export default Navbar;
