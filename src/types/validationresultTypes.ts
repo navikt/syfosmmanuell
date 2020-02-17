@@ -77,14 +77,14 @@ export class ValidationResultWithStatus extends ValidationResult {
 
   constructor(validationResult: any) {
     super(validationResult);
-    if (validationResult.behandlet) {
+    if (validationResult.behandlet && validationResult.behandlet instanceof Map) {
       this.behandlet = new Map<RuleNames, boolean | undefined>(validationResult.behandlet);
       this.antallBehandlet = validationResult.antallBehandlet;
       this.totalVurdering = validationResult.totalVurdering;
     } else {
       const behandletMap = new Map<RuleNames, boolean | undefined>();
-      validationResult.ruleHits.forEach((ruleHit: RuleNames) => {
-        behandletMap.set(ruleHit, undefined);
+      validationResult.ruleHits.forEach((ruleHit: RuleInfo) => {
+        behandletMap.set(ruleHit.ruleName, undefined);
       });
       this.behandlet = behandletMap;
       this.antallBehandlet = 0;

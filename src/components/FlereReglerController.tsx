@@ -25,6 +25,7 @@ const FlereReglerController = ({ manOppgave, setManOppgave }: FlereReglerControl
       const vurdertRegel = new ValidationResultWithStatus(valideringsresultat);
       vurdertRegel.setBehandlet(aktuellRegel, vurdering);
       vurdertRegel.setRuleHitStatus(aktuellRegel, vurdering);
+      //console.log(vurdertRegel)
       setValideringsresultat(vurdertRegel);
       setAktuellRegel(undefined);
     }
