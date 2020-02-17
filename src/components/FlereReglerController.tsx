@@ -4,7 +4,7 @@ import { RuleNames, ValidationResultWithStatus, RuleNamesDescription } from '../
 import EnRegel from './EnRegel';
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { Panel } from 'nav-frontend-paneler';
-import './flereReglerController.less';
+import './FlereReglerController.less';
 import { Knapp } from 'nav-frontend-knapper';
 import checkCircle from '../svg/check-circle.svg';
 import crossCircle from '../svg/cross-circle.svg';
