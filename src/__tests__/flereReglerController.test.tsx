@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
 import { render, fireEvent, act, wait } from '@testing-library/react';
-import FlereRegler from '../components/FlereReglerController';
+import FlereReglerController from '../components/FlereReglerController';
 import { oppgaveFlereRegler } from '../mock/data/sykmelding';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { RuleNamesDescription } from '../types/validationresultTypes';
@@ -16,7 +16,7 @@ describe('flereReglerController', () => {
   });
 
   it('Rendrer alle årsaker til manuell vurdering', () => {
-    const { getByText, getAllByText } = render(<FlereRegler manOppgave={flereRegler} setManOppgave={setManOppgave} />);
+    const { getByText, getAllByText } = render(<FlereReglerController manOppgave={flereRegler} setManOppgave={setManOppgave} />);
     expect(
       getByText(RuleNamesDescription[flereRegler.validationResult.ruleHits[0].ruleName], { exact: false }),
     ).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('flereReglerController', () => {
   });
 
   it('Rendrer sykmelding når "vurder" trykkes', () => {
-    const { getAllByText, getByText } = render(<FlereRegler manOppgave={flereRegler} setManOppgave={setManOppgave} />);
+    const { getAllByText, getByText } = render(<FlereReglerController manOppgave={flereRegler} setManOppgave={setManOppgave} />);
     const vurderknapp = getAllByText('Vurder')[0];
     fireEvent.click(vurderknapp);
     expect(getByText('Årsak til manuell vurdering:')).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe('flereReglerController', () => {
 
   it('Ferdigstill er grået ut frem til alle regler er vurdert.', async () => {
     const { getByText, getAllByText, getByLabelText } = render(
-      <FlereRegler manOppgave={flereRegler} setManOppgave={setManOppgave} />,
+      <FlereReglerController manOppgave={flereRegler} setManOppgave={setManOppgave} />,
     );
     expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
     let vurderingsknapper = getAllByText('Vurder');
@@ -65,7 +65,7 @@ describe('flereReglerController', () => {
 
   it('setManOppgave kalles med true når alle regler er vurdert til godkjent', async () => {
     const { getByText, getAllByText, getByLabelText } = render(
-      <FlereRegler manOppgave={flereRegler} setManOppgave={setManOppgave} />,
+      <FlereReglerController manOppgave={flereRegler} setManOppgave={setManOppgave} />,
     );
     expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
     let vurderingsknapper = getAllByText('Vurder');
@@ -96,7 +96,7 @@ describe('flereReglerController', () => {
 
   it('setManOppgave kalles med false når én regel er vurdert til avvist', async () => {
     const { getByText, getAllByText, getByLabelText } = render(
-      <FlereRegler manOppgave={flereRegler} setManOppgave={setManOppgave} />,
+      <FlereReglerController manOppgave={flereRegler} setManOppgave={setManOppgave} />,
     );
     expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
     let vurderingsknapper = getAllByText('Vurder');
@@ -128,7 +128,7 @@ describe('flereReglerController', () => {
 
   it('Nullstill vurderinger gjør at vurderknapper kommer tilbake', async () => {
     const { getByText, getAllByText, getByLabelText } = render(
-      <FlereRegler manOppgave={flereRegler} setManOppgave={setManOppgave} />,
+      <FlereReglerController manOppgave={flereRegler} setManOppgave={setManOppgave} />,
     );
     expect(getByText('Ferdigstill')).toHaveAttribute('disabled');
     let vurderingsknapper = getAllByText('Vurder');
