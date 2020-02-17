@@ -3,7 +3,7 @@ import useFetch, { isNotStarted, FetchState, isAnyPending } from '../hooks/useFe
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
-import FlereRegler from './FlereRegler';
+import FlereRegler from './FlereReglerController';
 import { ValidationResult } from '../types/validationresultTypes';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import EnRegelController from './EnRegelController';

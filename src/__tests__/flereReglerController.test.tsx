@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
 import { render, fireEvent, act, wait } from '@testing-library/react';
-import FlereRegler from '../components/FlereRegler';
+import FlereRegler from '../components/FlereReglerController';
 import { oppgaveFlereRegler } from '../mock/data/sykmelding';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { RuleNamesDescription } from '../types/validationresultTypes';
@@ -9,7 +9,7 @@ import { RuleNamesDescription } from '../types/validationresultTypes';
 const setManOppgave = jest.fn();
 let flereRegler = new ManuellOppgave(oppgaveFlereRegler[0]);
 
-describe('flereRegler', () => {
+describe('flereReglerController', () => {
   afterEach(() => {
     setManOppgave.mockReset();
     flereRegler = new ManuellOppgave(oppgaveFlereRegler[0]);

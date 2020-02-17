@@ -4,7 +4,7 @@ import { RuleNames, ValidationResultWithStatus, RuleNamesDescription } from '../
 import EnRegel from './EnRegel';
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { Panel } from 'nav-frontend-paneler';
-import './regel.less';
+import './flereReglerController.less';
 import { Knapp } from 'nav-frontend-knapper';
 import checkCircle from '../svg/check-circle.svg';
 import crossCircle from '../svg/cross-circle.svg';
@@ -49,9 +49,7 @@ const FlereRegler = ({ manOppgave, setManOppgave }: FlereReglerProps) => {
     return (
       <Panel border className="panel">
         <div className="regler">
-          <Systemtittel style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            En sykmelding må vurderes manuelt
-          </Systemtittel>
+          <Systemtittel className="panel__tittel">En sykmelding må vurderes manuelt</Systemtittel>
           <Element>Årsaker til manuell vurdering</Element>
           {valideringsresultat.ruleHits.map((regel, index) => (
             <div key={index} className="regler__element">
