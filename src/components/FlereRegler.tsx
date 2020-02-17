@@ -47,33 +47,25 @@ const FlereRegler = ({ manOppgave, setManOppgave }: FlereReglerProps) => {
 
   if (!aktuellRegel) {
     return (
-      <Panel tittel="En sykmelding må vurderes manuelt" border className="panel">
-        <div className="arsak-wrapper" style={{ padding: '1rem' }}>
+      <Panel border className="panel">
+        <div className="regler">
           <Systemtittel style={{ textAlign: 'center', marginBottom: '3rem' }}>
             En sykmelding må vurderes manuelt
           </Systemtittel>
           <Element>Årsaker til manuell vurdering</Element>
           {valideringsresultat.ruleHits.map((regel, index) => (
-            <div
-              key={index}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: '1rem',
-              }}
-            >
+            <div key={index} className="regler__element">
               <Normaltekst>
                 {index + 1}. {RuleNamesDescription[regel.ruleName]}
               </Normaltekst>
               {valideringsresultat.behandlet.get(regel.ruleName) === undefined ? (
-                <Knapp form="kompakt" style={{ marginLeft: '2rem' }} onClick={() => setAktuellRegel(regel.ruleName)}>
+                <Knapp form="kompakt" className="knapp--margin-left" onClick={() => setAktuellRegel(regel.ruleName)}>
                   Vurder
                 </Knapp>
               ) : (
                 <img
                   src={valideringsresultat.behandlet.get(regel.ruleName) === false ? crossCircle : checkCircle}
-                  style={{ marginLeft: '4rem', marginRight: '2rem' }}
+                  className="validert-bilde"
                   alt={`${valideringsresultat.behandlet.get(regel.ruleName) ? 'checkmark' : 'cross'}`}
                 />
               )}
@@ -82,7 +74,7 @@ const FlereRegler = ({ manOppgave, setManOppgave }: FlereReglerProps) => {
           <div>
             <Knapp
               disabled={valideringsresultat.totalVurdering === undefined}
-              style={{ marginRight: '1rem' }}
+              className="knapp--margin-right"
               onClick={() => handterFerdigstill()}
             >
               Ferdigstill
