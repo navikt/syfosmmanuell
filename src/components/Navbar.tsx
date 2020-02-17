@@ -51,7 +51,7 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
 
   return (
     <div className="navbar">
-      <EtikettLiten>{text}</EtikettLiten>
+      <EtikettLiten>{text ? text : 'Kunne ikke hente brukerinformasjon'}</EtikettLiten>
       {knappetekst === 'Logg ut' ? (
         <Flatknapp className="navbar__knapp" onClick={() => loggUt()}>
           Logg ut
