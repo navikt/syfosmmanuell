@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useFetch, { isNotStarted, FetchState, isNotStartedOrPending, isAnyPending } from '../hooks/useFetch';
+import useFetch, { isNotStarted, FetchState, isAnyPending } from '../hooks/useFetch';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';

@@ -7,9 +7,13 @@ import {
 import { oppgaveEnRegel, oppgaveFlereRegler } from '../mock/data/sykmelding';
 
 describe('validationResult', () => {
-  it('Parser objektet riktig', () => {
+  it('Parser objektet riktig og setter messageForUser og messageForSender', () => {
     const valideringsresultatEnRegel = new ValidationResult(oppgaveEnRegel[0].validationResult);
-    expect(valideringsresultatEnRegel.ruleHits).toEqual(oppgaveEnRegel[0].validationResult.ruleHits);
+
+    valideringsresultatEnRegel.ruleHits.forEach(regel => {
+      expect(regel.messageForSender).toEqual(MessageForSender[regel.ruleName]);
+      expect(regel.messageForUser).toEqual(MessageForUser[regel.ruleName]);
+    });
     expect(valideringsresultatEnRegel.status).toEqual(oppgaveEnRegel[0].validationResult.status);
   });
 

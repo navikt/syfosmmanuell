@@ -31,8 +31,6 @@ const FlereRegler = ({ manOppgave, setManOppgave }: FlereReglerProps) => {
   };
 
   const handterFerdigstill = () => {
-    //console.log(valideringsresultat);
-    //console.log(manOppgave)
     if (valideringsresultat.totalVurdering !== undefined) {
       const vurdertOppgave = new ManuellOppgave(manOppgave);
       vurdertOppgave.validationResult = valideringsresultat;
