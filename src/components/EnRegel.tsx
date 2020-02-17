@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './regel.less';
+import './EnRegel.less';
 import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import RadioOgKnapper from './RadioOgKnapper';
 import { Sykmelding as SykmeldingType } from '../types/sykmeldingTypes';
