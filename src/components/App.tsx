@@ -5,7 +5,7 @@ import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlErr
 import Spinner from 'nav-frontend-spinner';
 import FlereReglerController from './FlereReglerController';
 import { ValidationResult } from '../types/validationresultTypes';
-import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 import EnRegelController from './EnRegelController';
 
 const App = () => {
@@ -99,7 +99,7 @@ const App = () => {
   }
 
   if (manOppgave === null) {
-    return <Undertittel>Oppgaven er løst... Du videresendes til GOSYS</Undertittel>;
+    return <Normaltekst>Oppgaven er løst... Du videresendes til GOSYS</Normaltekst>;
   }
 
   if (isAnyPending([manOppgaveFetcher, manOppgavePutter])) {
