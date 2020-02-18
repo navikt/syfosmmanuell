@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import useFetch, { isNotStarted, FetchState, isNotStartedOrPending, isAnyPending } from '../hooks/useFetch';
+import useFetch, { isNotStarted, FetchState, isAnyPending } from '../hooks/useFetch';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
-import EnRegel from './EnRegel';
-import FlereRegler from './FlereRegler';
+import FlereReglerController from './FlereReglerController';
 import { ValidationResult } from '../types/validationresultTypes';
-import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
+import EnRegelController from './EnRegelController';
 
 const App = () => {
   const [manOppgave, setManOppgave] = useState<ManuellOppgave | null>();
@@ -42,12 +42,17 @@ const App = () => {
             'Kunne ikke hente oppgave på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
           );
         }
-        if (!fetchState.data) {
+        else if (fetchState.httpCode >= 400) {
+          setFeilmelding(
+            `Feil ved henting av manuell oppgave. Feilkode: ${fetchState.httpCode}`,
+          );
+        }
+        else if (!fetchState.data || fetchState.data.length === 0) {
           setFeilmelding('Ingen oppgave funnet');
           console.error('Ingen oppgave funnet');
         } else {
           try {
-            setManOppgave(new ManuellOppgave(fetchState.data.shift()));
+            setManOppgave(new ManuellOppgave(fetchState.data[0]));
           } catch (error) {
             setFeilmelding('Kunne ikke formattere manuell oppgave');
             console.error(error);
@@ -57,55 +62,44 @@ const App = () => {
     }
   }, [manOppgaveFetcher]);
 
-  const handterAvgjorelse = (avgjorelse: boolean | undefined): void => {
-    if (avgjorelse === undefined) {
-      // Skal ikke kunne skje
-      const error = new Error('Avgjørelse ble satt til "undefined"');
-      setFeilmelding(error.message);
-      console.error(error);
-    } else {
-      if (manOppgave) {
-        if (isNotStartedOrPending(manOppgavePutter)) {
-          const URL = hentOppgaveUrlPut(manOppgave.oppgaveid);
-          const valideringsresultat = new ValidationResult(manOppgave.validationResult);
-          valideringsresultat.setStatus(avgjorelse);
-          valideringsresultat.setTilbakemeldinger();
-          manOppgavePutter.fetch(
-            URL,
-            {
-              method: 'PUT',
-              credentials: 'same-origin',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(valideringsresultat),
-            },
-            (fetchState: FetchState) => {
-              if (fetchState.httpCode >= 401) {
-                setFeilmelding(`Det har oppstått en feil med feilkode: ${fetchState.httpCode}`);
+  useEffect(() => {
+    if (manOppgave?.validationResult.totalVurdering !== undefined) {
+      if (isNotStarted(manOppgavePutter)) {
+        const URL = hentOppgaveUrlPut(manOppgave.oppgaveid);
+        const valideringsresultat = new ValidationResult(manOppgave.validationResult);
+        manOppgavePutter.fetch(
+          URL,
+          {
+            method: 'PUT',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(valideringsresultat),
+          },
+          (fetchState: FetchState) => {
+            if (fetchState.httpCode >= 401) {
+              setFeilmelding(`Det har oppstått en feil med feilkode: ${fetchState.httpCode}`);
+            } else {
+              setManOppgave(null);
+              sessionStorage.clear();
+              const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
+              if (GOSYS_URL) {
+                setTimeout(() => (window.location.href = GOSYS_URL), 1000);
               } else {
-                setManOppgave(null);
-                sessionStorage.clear();
-                const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
-                if (GOSYS_URL) {
-                  setTimeout(() => (window.location.href = GOSYS_URL), 2000);
-                } else {
-                  setFeilmelding('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
-                }
+                setFeilmelding('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
               }
-            },
-          );
-        }
-      } else {
-        console.error('Manuell oppgave ble ikke funnet');
+            }
+          },
+        );
       }
     }
-  };
+  }, [manOppgave, manOppgavePutter]);
 
   if (feilMelding) {
     return <Normaltekst>{feilMelding}</Normaltekst>;
   }
 
   if (manOppgave === null) {
-    return <Undertittel>Oppgaven er løst... Du videresendes til GOSYS</Undertittel>;
+    return <Normaltekst>Oppgaven er løst... Du videresendes til GOSYS</Normaltekst>;
   }
 
   if (isAnyPending([manOppgaveFetcher, manOppgavePutter])) {
@@ -117,23 +111,14 @@ const App = () => {
   }
 
   if (manOppgave?.validationResult.ruleHits.length === 1) {
-    return (
-      <EnRegel
-        sykmelding={manOppgave.sykmelding}
-        regel={manOppgave.validationResult.ruleHits[0].ruleName}
-        handterAvgjorelse={handterAvgjorelse}
-        handterAvbryt={() =>
-          setFeilmelding(
-            'Du har avbrutt oppgaven. Du kan enten lukke vinduet, eller laste inn siden på nytt for hente oppgaven tilbake.',
-          )
-        }
-      />
-    );
+    return <EnRegelController manuellOppgave={manOppgave} setManOppgave={setManOppgave} />;
   }
 
   if (manOppgave) {
     if (manOppgave.validationResult.ruleHits.length > 1) {
-      return <FlereRegler manOppgave={manOppgave} handterAvgjorelse={handterAvgjorelse} />;
+      return (
+        <FlereReglerController manOppgave={manOppgave} setManOppgave={setManOppgave} />
+      );
     }
   }
 

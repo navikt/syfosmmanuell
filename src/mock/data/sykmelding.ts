@@ -7,8 +7,9 @@ export const oppgaveEnRegel = [
         {
           ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
           ruleStatus: 'MANUAL_PROCESSING',
-          messageForUser: 'message for user',
-          messageForSender: 'message for sender',
+          messageForUser: 'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
+          messageForSender:
+            'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
         },
       ],
     },
@@ -178,14 +179,16 @@ export const oppgaveFlereRegler = [
         {
           ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
           ruleStatus: 'MANUAL_PROCESSING',
-          messageForUser: 'message for user',
-          messageForSender: 'message for sender',
+          messageForUser: 'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
+          messageForSender:
+            'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
         },
         {
           ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE',
           ruleStatus: 'MANUAL_PROCESSING',
-          messageForUser: 'message for user',
-          messageForSender: 'message for sender',
+          messageForUser: 'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
+          messageForSender:
+            'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
         },
       ],
     },
@@ -274,8 +277,7 @@ export const oppgaveFlereRegler = [
         ],
         prognose: {
           arbeidsforEtterPeriode: true,
-          hensynArbeidsplassen:
-            'Pasienten må ta det rolig',
+          hensynArbeidsplassen: 'Pasienten må ta det rolig',
           erIArbeid: {
             egetArbeidPaSikt: true,
             annetArbeidPaSikt: true,
@@ -304,8 +306,7 @@ export const oppgaveFlereRegler = [
           'Jeg, legen, oppfortrer arbeidsplassen til å anskaffe hev-senk pult for å forhindre utvikling av pasientens ryggproblemer. Pasienten må også ta det rolig på arbeidsplassen og unngå å løfte tungt',
         tiltakNAV:
           'Jeg mener at Nav gjør en ypperlig jobb. Godt jobbet. Her kan det utdypes om ting Nav burde gjøre for å at pasienten skal kunne bedre arbeidsevnen sin. Det kan godt stå en del tekst her',
-        andreTiltak:
-          'Pasienten burde begynne å trene på egenhånd, og endre sitt kosthold.',
+        andreTiltak: 'Pasienten burde begynne å trene på egenhånd, og endre sitt kosthold.',
         meldingTilNAV: {
           bistandUmiddelbart: true,
           beskrivBistand: 'trenger hjelp',

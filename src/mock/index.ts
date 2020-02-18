@@ -1,5 +1,6 @@
 import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock';
-import { oppgaveFlereRegler } from './data/sykmelding';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { oppgaveFlereRegler, oppgaveEnRegel } from './data/sykmelding';
 
 const mock = FetchMock.configure({
   enableFallback: true,

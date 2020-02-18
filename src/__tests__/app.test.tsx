@@ -4,7 +4,6 @@ import { render, wait, act, fireEvent } from '@testing-library/react';
 import { oppgaveEnRegel, oppgaveFlereRegler } from '../mock/data/sykmelding';
 import App from '../components/App';
 import FetchMock, { SpyMiddleware } from 'yet-another-fetch-mock';
-import { ValidationResult } from '../types/validationresultTypes';
 
 describe('app', () => {
   let mock: FetchMock;
@@ -52,13 +51,24 @@ describe('app', () => {
   });
 
   describe('Innsending av vurdering', () => {
-    it('Handteravgjorelse sender riktig HTTP request når valideringsresultat skal være OK', async () => {
+    it('Sender riktig HTTP request når valideringsresultat skal være OK', async () => {
       mock.get('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/', oppgaveEnRegel);
       mock.put('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/', {});
 
-      const valideringsresultat = new ValidationResult(oppgaveEnRegel[0].validationResult);
-      valideringsresultat.setStatus(true);
-      valideringsresultat.setTilbakemeldinger();
+      const valideringsresultat = {
+        ruleHits: [
+          {
+            messageForSender:
+              'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
+            messageForUser:
+              'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
+            ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
+            ruleStatus: 'OK',
+          },
+        ],
+        status: 'OK',
+      };
+
       const { getByLabelText, getByText } = render(<App />);
 
       await wait(() => getByLabelText('Godkjenn', { exact: false }));
@@ -72,16 +82,27 @@ describe('app', () => {
       await wait(() => getByText('Oppagven ble ferdigstillt', { exact: false }));
       expect(spy.size()).toBe(2);
       expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/');
-      expect(spy.lastCall()?.request.body).toEqual(JSON.parse(JSON.stringify(valideringsresultat))); // Må parses slik for at det ikke skal klages på typescript-typer
+      expect(spy.lastCall()?.request.body).toEqual(valideringsresultat);
     });
 
-    it('Handteravgjorelse sender riktig HTTP request når valideringsresultat skal være INVALID', async () => {
+    it('Sender riktig HTTP request når valideringsresultat skal være INVALID', async () => {
       mock.get('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/', oppgaveEnRegel);
       mock.put('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/', {});
 
-      const valideringsresultat = new ValidationResult(oppgaveEnRegel[0].validationResult);
-      valideringsresultat.setStatus(false);
-      valideringsresultat.setTilbakemeldinger();
+      const valideringsresultat = {
+        ruleHits: [
+          {
+            messageForSender:
+              'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
+            messageForUser:
+              'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
+            ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
+            ruleStatus: 'INVALID',
+          },
+        ],
+        status: 'INVALID',
+      };
+
       const { getByLabelText, getByText } = render(<App />);
 
       await wait(() => getByLabelText('Avvis', { exact: false }));
@@ -95,7 +116,7 @@ describe('app', () => {
       await wait(() => getByText('Oppagven ble ferdigstillt', { exact: false }));
       expect(spy.size()).toBe(2);
       expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/');
-      expect(spy.lastCall()?.request.body).toEqual(JSON.parse(JSON.stringify(valideringsresultat))); // Må parses slik for at det ikke skal klages på typescript-typer
+      expect(spy.lastCall()?.request.body).toEqual(valideringsresultat);
     });
   });
 });

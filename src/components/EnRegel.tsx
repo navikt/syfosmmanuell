@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './regel.less';
+import './EnRegel.less';
 import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import RadioOgKnapper from './RadioOgKnapper';
 import { Sykmelding as SykmeldingType } from '../types/sykmeldingTypes';
-import Sykmelding from '../components/sykmelding/Sykmelding';
+import Sykmelding from './sykmelding/SykmeldingVelger';
 import { RuleNames } from '../types/validationresultTypes';
 import { Panel } from 'nav-frontend-paneler';
 import { Systemtittel } from 'nav-frontend-typografi';
@@ -23,28 +23,20 @@ const EnRegel = ({ sykmelding, regel, finnesFlereRegler, handterAvgjorelse, hand
 
   return (
     <Panel border className="panel">
-      <div className="sykmelding-wrapper" style={{ padding: '1rem' }}>
-        <Systemtittel style={{ marginBottom: '1rem', textAlign: 'center' }}>
-          En sykmelding må vurderes manuelt
-        </Systemtittel>
-        <Sykmeldingheader
-          regel={regel}
-          arbeidsgiver={sykmelding.arbeidsgiver.navn}
-          sykmelder={sykmelding.navnFastlege}
-        />
-        <Sykmelding sykmelding={sykmelding} regel={regel} />
-        <RadioOgKnapper
-          regel={regel}
-          knappetekst={finnesFlereRegler ? 'Lagre' : 'Ferdigstill'}
-          handterAvgjorelse={handterAvgjorelse}
-          handterAvbryt={handterAvbryt}
-        />
-      </div>
-      <div style={{ textAlign: 'center' }}>
+      <Systemtittel className="panel__tittel">En sykmelding må vurderes manuelt</Systemtittel>
+      <Sykmeldingheader regel={regel} arbeidsgiver={sykmelding.arbeidsgiver.navn} sykmelder={sykmelding.navnFastlege} />
+      <Sykmelding sykmelding={sykmelding} regel={regel} />
+      <RadioOgKnapper
+        regel={regel}
+        knappetekst={finnesFlereRegler ? 'Lagre' : 'Ferdigstill'}
+        handterAvgjorelse={handterAvgjorelse}
+        handterAvbryt={handterAvbryt}
+      />
+      <div className="hele-sykmeldingen-visning">
         <Flatknapp
           form="kompakt"
           onClick={() => setVisHeleSykmeldingen(!visHeleSykmeldingen)}
-          style={{ marginTop: '2rem', marginBottom: '2rem' }}
+          className="hele-sykmeldingen-visning__knapp"
         >
           {visHeleSykmeldingen ? 'Skjul hele sykmeldingen' : 'Vis hele sykmeldingen'}
         </Flatknapp>
