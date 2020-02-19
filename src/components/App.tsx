@@ -50,7 +50,7 @@ const App = () => {
           try {
             setManOppgave(new ManuellOppgave(fetchState.data[0]));
           } catch (error) {
-            setFeilmelding('Kunne ikke formattere manuell oppgave');
+            setFeilmelding(`Feil ved formattering av manuell oppgave. Feilkode: ${error}`);
             console.error(error);
           }
         }

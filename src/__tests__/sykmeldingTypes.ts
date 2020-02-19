@@ -1,7 +1,6 @@
 import {
   Sykmelding,
   AnnenFraverGrunn,
-  Arbeidsgiver,
   HarArbeidsgiver,
   MedisinskArsakType,
   ArbeidsrelatertArsakType,
@@ -170,5 +169,12 @@ describe('sykmeldingTypes', () => {
     expect(dayjs(syketilfelleStartDato).format('YYYY-MM-DD')).toEqual(_syketilfelleStartDato);
     expect(dayjs(signaturDato).format('YYYY-MM-DDTHH:mm:ss')).toEqual(_signaturDato);
     expect(navnFastlege).toEqual(_navnFastlege);
-});
+  });
+
+  it('Kaster error ved forsøk på parsing av ugyldig JSON', () => {
+    const tomtObjekt = {};
+    expect(() => {
+      new Sykmelding(tomtObjekt);
+    }).toThrowError();
+  });
 });
