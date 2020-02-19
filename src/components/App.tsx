@@ -41,13 +41,9 @@ const App = () => {
           setFeilmelding(
             'Kunne ikke hente oppgave på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
           );
-        }
-        else if (fetchState.httpCode >= 400) {
-          setFeilmelding(
-            `Feil ved henting av manuell oppgave. Feilkode: ${fetchState.httpCode}`,
-          );
-        }
-        else if (!fetchState.data || fetchState.data.length === 0) {
+        } else if (fetchState.httpCode >= 400) {
+          setFeilmelding(`Feil ved henting av manuell oppgave. Feilkode: ${fetchState.httpCode}`);
+        } else if (!fetchState.data || fetchState.data.length === 0) {
           setFeilmelding('Ingen oppgave funnet');
           console.error('Ingen oppgave funnet');
         } else {
@@ -116,9 +112,7 @@ const App = () => {
 
   if (manOppgave) {
     if (manOppgave.validationResult.ruleHits.length > 1) {
-      return (
-        <FlereReglerController manOppgave={manOppgave} setManOppgave={setManOppgave} />
-      );
+      return <FlereReglerController manOppgave={manOppgave} setManOppgave={setManOppgave} />;
     }
   }
 
