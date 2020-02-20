@@ -77,10 +77,7 @@ const App = () => {
             body: JSON.stringify(valideringsresultat),
           },
           (fetchState: FetchState) => {
-            if (fetchState.httpCode !== 204) {
-              setFeilmelding(`Det oppsto en feil ved innsending. HTTPfeilkode: ${fetchState.httpCode}`);
-              console.error(`Det oppsto en feil ved innsending. HTTPfeilkode: ${fetchState.httpCode}`);
-            } else {
+            if (fetchState.httpCode === 200 || fetchState.httpCode === 204) {
               setManOppgave(null);
               sessionStorage.clear();
               const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
@@ -90,6 +87,9 @@ const App = () => {
                 setFeilmelding('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
                 console.error('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
               }
+            } else {
+              setFeilmelding(`Det oppsto en feil ved innsending. HTTPfeilkode: ${fetchState.httpCode}`);
+              console.error(`Det oppsto en feil ved innsending. HTTPfeilkode: ${fetchState.httpCode}`);
             }
           },
         );
