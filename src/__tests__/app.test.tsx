@@ -79,7 +79,7 @@ describe('app', () => {
       act(() => {
         fireEvent.click(getByText('Ferdigstill'));
       });
-      await wait(() => getByText('Oppgaven ble ferdigstillt', { exact: false }));
+      await wait(() => getByText('Oppgaven ble ferdigstilt', { exact: false }));
       expect(spy.size()).toBe(2);
       expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/');
       expect(spy.lastCall()?.request.body).toEqual(valideringsresultat);
@@ -113,7 +113,7 @@ describe('app', () => {
       act(() => {
         fireEvent.click(getByText('Ferdigstill'));
       });
-      await wait(() => getByText('Oppgaven ble ferdigstillt', { exact: false }));
+      await wait(() => getByText('Oppgaven ble ferdigstilt', { exact: false }));
       expect(spy.size()).toBe(2);
       expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/');
       expect(spy.lastCall()?.request.body).toEqual(valideringsresultat);
