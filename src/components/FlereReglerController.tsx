@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { RuleNames, ValidationResultWithStatus, RuleNamesDescription } from '../types/validationresultTypes';
 import EnRegel from './EnRegel';
-import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Panel } from 'nav-frontend-paneler';
 import './FlereReglerController.less';
 import { Knapp } from 'nav-frontend-knapper';
@@ -49,7 +49,6 @@ const FlereReglerController = ({ manOppgave, setManOppgave }: FlereReglerControl
   if (!aktuellRegel) {
     return (
       <Panel border className="panel">
-        <Systemtittel className="panel__tittel">En sykmelding må vurderes manuelt</Systemtittel>
         <Element>Årsaker til manuell vurdering</Element>
         {valideringsresultat.ruleHits.map((regel, index) => (
           <div key={index} className="panel__element">
@@ -69,7 +68,7 @@ const FlereReglerController = ({ manOppgave, setManOppgave }: FlereReglerControl
             )}
           </div>
         ))}
-        <div>
+        <div className="knapper">
           <Knapp
             disabled={valideringsresultat.totalVurdering === undefined}
             className="knapp--margin-right"

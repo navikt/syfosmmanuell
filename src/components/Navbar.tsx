@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Flatknapp } from 'nav-frontend-knapper';
-import { hentLogOutUrl, hentLogInUrl } from '../utils/urlUtils';
-import { EtikettLiten } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
+import navLogo from '../svg/nav-logo.svg';
 import './Navbar.less';
 
-type Knappetekst = 'Logg ut' | 'Logg inn';
-
-interface NavbarProps {
-  visInnhold: (vis: boolean) => void;
-}
-
-const Navbar = ({ visInnhold }: NavbarProps) => {
-  const [text, setText] = useState<string | undefined>();
-  const [knappetekst, setKnappetekst] = useState<Knappetekst>('Logg ut');
+const Navbar = () => {
+  const [loginText, setLoginText] = useState<string | undefined>();
 
   useEffect(() => {
     const URL = process.env.REACT_APP_WEB_SERVER_URL
@@ -26,47 +18,20 @@ const Navbar = ({ visInnhold }: NavbarProps) => {
         if (!text) {
           throw new Error('Kunne ikke hente brukernavn fra server');
         }
-        setText(`Logget inn som: ${text}`);
+        setLoginText(`Logget inn som: ${text}`);
       })
       .catch(error => console.error(error));
-  }, [visInnhold]);
+  }, []);
 
-  const loggUt = () => {
-    fetch(hentLogOutUrl())
-      .then(res => {
-        if (res.status === 200) {
-          setText(undefined);
-          setKnappetekst('Logg inn');
-          visInnhold(false);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
-
-  const loggInn = () => {
-    window.location.href = hentLogInUrl();
-  };
-
-  if (text) {
-    return (
-      <div className="navbar">
-        <EtikettLiten>{text}</EtikettLiten>
-        {knappetekst === 'Logg ut' ? (
-          <Flatknapp className="navbar__element--margin-left" onClick={() => loggUt()}>
-            Logg ut
-          </Flatknapp>
-        ) : (
-          <Flatknapp className="navbar__element--margin-left" onClick={() => loggInn()}>
-            Logg inn
-          </Flatknapp>
-        )}
-      </div>
-    );
-  }
-
-  return <div className="navbar" />;
+  return (
+    <div className="navbar">
+      <span className="navbar__left">
+        <img className="navlogo" src={navLogo} alt="NAV-logo" />
+        <Element>Manuell vurdering av sykmelding</Element>
+      </span>
+      <Element>{loginText}</Element>
+    </div>
+  );
 };
 
 export default Navbar;

@@ -99,11 +99,7 @@ const App = () => {
   }
 
   if (isAnyPending([manOppgaveFetcher, manOppgavePutter])) {
-    return (
-      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-        <Spinner />
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (manOppgave?.validationResult.ruleHits.length === 1) {

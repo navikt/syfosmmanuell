@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.less';
 import * as serviceWorker from './serviceWorker';
-import AppWrapper from './AppWrapper';
+import AppWrapper from './components/AppWrapper';
 
 console.log('NODE_ENV: ' + process.env.NODE_ENV);
 console.log('REACT_APP_NODE_ENV: ' + process.env.REACT_APP_NODE_ENV);
