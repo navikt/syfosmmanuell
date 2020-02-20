@@ -6,7 +6,6 @@ import { Sykmelding as SykmeldingType } from '../types/sykmeldingTypes';
 import Sykmelding from './sykmelding/SykmeldingVelger';
 import { RuleNames } from '../types/validationresultTypes';
 import { Panel } from 'nav-frontend-paneler';
-import { Systemtittel } from 'nav-frontend-typografi';
 import { Flatknapp } from 'nav-frontend-knapper';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';
 
@@ -23,7 +22,6 @@ const EnRegel = ({ sykmelding, regel, finnesFlereRegler, handterAvgjorelse, hand
 
   return (
     <Panel border className="panel">
-      <Systemtittel className="panel__tittel">En sykmelding må vurderes manuelt</Systemtittel>
       <Sykmeldingheader regel={regel} arbeidsgiver={sykmelding.arbeidsgiver.navn} sykmelder={sykmelding.navnFastlege} />
       <Sykmelding sykmelding={sykmelding} regel={regel} />
       <RadioOgKnapper
