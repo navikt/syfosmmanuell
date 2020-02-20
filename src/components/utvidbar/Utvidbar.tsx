@@ -3,6 +3,7 @@ import './utvidbar.less';
 import Chevron from 'nav-frontend-chevron';
 import React, { useEffect, useRef, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Flatknapp } from 'nav-frontend-knapper';
 
 interface UtvidbarProps {
     apen?: boolean;
@@ -70,9 +71,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 <div ref={innhold} className="utvidbar__innhold">
                     {props.children}
                     <div className="lenkerad ikke-print">
-                        <button
-                            type="button"
-                            className="lenke"
+                        <Flatknapp
                             aria-pressed={!apen}
                             tabIndex={apen ? undefined : -1}
                             onClick={() => {
@@ -80,8 +79,8 @@ const Utvidbar = (props: UtvidbarProps) => {
                                 setApen(!apen);
                             }}
                         >
-                            <Normaltekst tag="span">Lukk</Normaltekst>
-                        </button>
+                            Lukk
+                        </Flatknapp>
                     </div>
                 </div>
             </div>
