@@ -41,8 +41,10 @@ const App = () => {
           setFeilmelding(
             'Kunne ikke hente oppgave på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
           );
+        } else if (fetchState.httpCode === 204) {
+          setFeilmelding('Oppgaven du prøver å hente er allerede løst');
         } else if (fetchState.httpCode >= 400) {
-          setFeilmelding(`Feil ved henting av manuell oppgave. Feilkode: ${fetchState.httpCode}`);
+          setFeilmelding(`Feil ved henting av oppgave. Feilkode: ${fetchState.httpCode}`);
         } else if (!fetchState.data || fetchState.data.length === 0) {
           setFeilmelding('Ingen oppgave funnet');
           console.error('Ingen oppgave funnet');
