@@ -29,7 +29,7 @@ const Navbar = () => {
         <img className="navlogo" src={navLogo} alt="NAV-logo" />
         <Element>Manuell vurdering av sykmelding</Element>
       </span>
-      <Element>{loginText}</Element>
+      {loginText && <Element>{loginText}</Element>}
     </div>
   );
 };
