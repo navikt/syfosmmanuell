@@ -20,19 +20,20 @@ const App = () => {
       try {
         OPPGAVE_ID = hentOppgaveidFraUrlParameter(window.location.href);
         sessionStorage.setItem('OPPGAVE_ID', OPPGAVE_ID);
-      } catch (e) {
-        if (e instanceof UrlError) {
+      } catch (error) {
+        if (error instanceof UrlError) {
           const OPPGAVE_ID_FRA_STORAGE = sessionStorage.getItem('OPPGAVE_ID');
           if (OPPGAVE_ID_FRA_STORAGE === null) {
             setFeilmelding(
               'Kunne ikke finne oppgaveid i URL eller sessionStorage. Lukk vinduet/fanen og forsøk å åpne oppgaven på nytt fra Gosys.',
             );
+            console.error(`Kunne ikke finne oppgaveid i URL eller sessionStorage. ${error}`);
           } else {
             OPPGAVE_ID = OPPGAVE_ID_FRA_STORAGE;
           }
         } else {
           setFeilmelding('Ukjent feil');
-          console.error(e);
+          console.error(error);
         }
       }
       const URL = hentOppgaveUrl(OPPGAVE_ID);
@@ -43,8 +44,10 @@ const App = () => {
           );
         } else if (fetchState.httpCode === 204) {
           setFeilmelding('Oppgaven du prøver å hente er allerede løst');
+          console.error(`Oppgaven du prøver å hente er allerede løst. HTTP status code: ${fetchState.httpCode}`);
         } else if (fetchState.httpCode >= 400) {
-          setFeilmelding(`Feil ved henting av oppgave. Feilkode: ${fetchState.httpCode}`);
+          setFeilmelding(`Feil ved henting av oppgave. HTTP status code: ${fetchState.httpCode}`);
+          console.error(`Feil ved henting av oppgave. HTTP status code: ${fetchState.httpCode}`);
         } else if (!fetchState.data || fetchState.data.length === 0) {
           setFeilmelding('Ingen oppgave funnet');
           console.error('Ingen oppgave funnet');
@@ -53,7 +56,7 @@ const App = () => {
             setManOppgave(new ManuellOppgave(fetchState.data[0]));
           } catch (error) {
             setFeilmelding(`Feil ved formattering av manuell oppgave. Feilkode: ${error}`);
-            console.error(error);
+            console.error(`Feil ved formattering av manuell oppgave. Feilkode: ${error}`);
           }
         }
       });
@@ -74,8 +77,9 @@ const App = () => {
             body: JSON.stringify(valideringsresultat),
           },
           (fetchState: FetchState) => {
-            if (fetchState.httpCode >= 401) {
-              setFeilmelding(`Det har oppstått en feil med feilkode: ${fetchState.httpCode}`);
+            if (fetchState.httpCode !== 204) {
+              setFeilmelding(`Det oppsto en feil ved innsending. HTTPfeilkode: ${fetchState.httpCode}`);
+              console.error(`Det oppsto en feil ved innsending. HTTPfeilkode: ${fetchState.httpCode}`);
             } else {
               setManOppgave(null);
               sessionStorage.clear();
@@ -84,6 +88,7 @@ const App = () => {
                 setTimeout(() => (window.location.href = GOSYS_URL), 1000);
               } else {
                 setFeilmelding('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
+                console.error('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
               }
             }
           },
