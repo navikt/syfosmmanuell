@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Periode } from '../../../../types/sykmeldingTypes';
-import { sorterPerioderEldsteFoerst } from '../../../../utils/sorterSykemeldingUtils';
+import { sorterPerioderEldsteFoerst } from '../../../../utils/sorterSykmeldingUtils';
 import PeriodeSeksjon from './PeriodeSeksjon';
 import Margin from '../../layout/Margin';
 
