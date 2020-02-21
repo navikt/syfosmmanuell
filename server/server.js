@@ -13,7 +13,7 @@ const port = config.server.port;
 
 async function startApp() {
   try {
-    setupLogging();
+    setupLogging(server);
 
     session.setup(server);
 
