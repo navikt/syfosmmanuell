@@ -6,24 +6,19 @@ import express from 'express';
 import helmet from 'helmet';
 import passport from 'passport';
 import session from './session';
-
-// for debugging during development
-import morganBody from 'morgan-body';
-import morgan from 'morgan';
+import setupLogging from './logging';
 
 const server = express();
 const port = config.server.port;
 
 async function startApp() {
   try {
-    morganBody(server);
-    morgan('dev');
+    setupLogging();
 
     session.setup(server);
 
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
-    //server.use(cookieParser());
 
     // setup sane defaults for CORS and HTTP headers
     server.use(helmet());
