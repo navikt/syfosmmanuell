@@ -6,12 +6,9 @@ const setupLogging = server => {
     morganBody(server);
     morgan('dev');
   } else {
-    server.use(
-      morgan('common', {
-        skip: (req, res) => res.statusCode < 400,
-      }),
-    );
+    morgan('common');
   }
 };
+console.error("daedaw")
 
 export default setupLogging;

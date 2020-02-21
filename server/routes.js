@@ -50,7 +50,7 @@ const setup = authClient => {
       }
       res.status(200).send(user.name);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       res.status(500).json(error);
     }
   });
