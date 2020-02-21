@@ -6,9 +6,8 @@ const setupLogging = server => {
     morganBody(server);
     morgan('dev');
   } else {
-    morgan('common');
+    server.use(morgan('common'));
   }
 };
-console.error("daedaw")
 
 export default setupLogging;
