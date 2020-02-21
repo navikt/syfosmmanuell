@@ -51,8 +51,8 @@ export const tilLesbarDatoUtenAarstall = (datoArg: Date) => {
 };
 
 export function hentDagerMellomDatoer(fra: Date, til: Date) {
-    const f = dayjs(fra);
-    const t = dayjs(til);
+    const f = dayjs(`${fra.getFullYear()}-${fra.getMonth()}-${fra.getDate()}`);
+    const t = dayjs(`${til.getFullYear()}-${til.getMonth()}-${til.getDate()}`);
 
     const diff = t.diff(f, 'day');
 

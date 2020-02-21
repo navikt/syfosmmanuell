@@ -12,8 +12,7 @@ it('hentDagerMellomDatoer Beregner riktig antall dager mellom to datoer', () => 
     const fom2 = new Date('Thu Oct 18 2018 00:00:00 GMT+0200 (Central European Summer Time)');
     const tom2 = new Date('Mon Nov 12 2018 00:00:00 GMT+0100 (Central European Standard Time)');
 
-    // TODO: Denne skulle potensielt vært 26. Endre algoritmen til å ignorere tidsoner?
-    const expected2 = 27;
+    const expected2 = 26;
 
     const durationInDays2 = hentDagerMellomDatoer(fom2, tom2);
     expect(durationInDays2).toEqual(expected2);
@@ -29,7 +28,7 @@ it('hentDagerMellomDatoer Beregner riktig antall dager mellom to datoer', () => 
     const fom4 = new Date('2018-12-31');
     const tom4 = new Date('2019-01-01');
 
-    const expected4 = 2;
+    const expected4 = 1;
 
     const durationInDays4 = hentDagerMellomDatoer(fom4, tom4);
     expect(durationInDays4).toEqual(expected4);
