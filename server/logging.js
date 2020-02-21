@@ -6,7 +6,11 @@ const setupLogging = server => {
     morganBody(server);
     morgan('dev');
   } else {
-    server.use(morgan('common'));
+    server.use(morgan('common'), {
+      skip: function(req, res) {
+        return req.originalUrl !== '/is_alive' || req.originalUrl !== '/is_ready';
+      },
+    });
   }
 };
 
