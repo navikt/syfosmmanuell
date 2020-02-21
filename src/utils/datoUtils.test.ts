@@ -28,7 +28,7 @@ it('hentDagerMellomDatoer Beregner riktig antall dager mellom to datoer', () => 
     const fom4 = new Date('2018-12-31');
     const tom4 = new Date('2019-01-01');
 
-    const expected4 = 1;
+    const expected4 = 2;
 
     const durationInDays4 = hentDagerMellomDatoer(fom4, tom4);
     expect(durationInDays4).toEqual(expected4);
