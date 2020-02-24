@@ -30,14 +30,6 @@ const RadioOgKnapper = ({ regel, knappetekst, handterAvgjorelse, handterAvbryt }
   const [erGodkjent, setErGodkjent] = useState<boolean | undefined>(undefined);
   const REGELTEKST = hentRegelTekst(regel);
 
-  const radioendring = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.value === 'godkjent') {
-      setErGodkjent(true);
-    } else if (event.target.value === 'avvist') {
-      setErGodkjent(false);
-    }
-  };
-
   return (
     <div className="radio-og-knapper">
       <span className="radio-og-knapper__radiogruppe">
@@ -45,14 +37,14 @@ const RadioOgKnapper = ({ regel, knappetekst, handterAvgjorelse, handterAvbryt }
           label={`Godkjenn ${REGELTEKST}`}
           name="radiogruppe"
           value="godkjent"
-          onChange={radioendring}
+          onChange={() => setErGodkjent(true)}
           checked={erGodkjent === true}
         />
         <Radio
           label={`Avvis ${REGELTEKST}`}
           name="radiogruppe"
           value="avvist"
-          onChange={radioendring}
+          onChange={() => setErGodkjent(false)}
           checked={erGodkjent === false}
         />
       </span>

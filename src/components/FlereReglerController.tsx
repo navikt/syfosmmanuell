@@ -38,7 +38,7 @@ const FlereReglerController = ({ manOppgave, setManOppgave }: FlereReglerControl
       vurdertOppgave.validationResult.setStatus(valideringsresultat.totalVurdering);
       setManOppgave(vurdertOppgave);
     } else {
-      throw new Error('Oppgaven ble forsøkt ferdigstillt uten totalvurdering');
+      throw new Error('Oppgaven ble forsøkt ferdigstilt uten totalvurdering');
     }
   };
 
