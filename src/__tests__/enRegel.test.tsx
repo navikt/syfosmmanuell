@@ -20,7 +20,7 @@ describe('enRegel', () => {
   it('Rendrer riktig årsak', () => {
     const { getByText } = render(
       <EnRegel
-        sykmelding={enRegel.sykmelding}
+        receivedSykmelding={enRegel.receivedSykmelding}
         regel={enRegel.validationResult.ruleHits[0].ruleName}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
@@ -35,7 +35,7 @@ describe('enRegel', () => {
   it('Kaller handterAvbryt når "avbryt" trykkes', () => {
     const { getByText } = render(
       <EnRegel
-        sykmelding={enRegel.sykmelding}
+        receivedSykmelding={enRegel.receivedSykmelding}
         regel={enRegel.validationResult.ruleHits[0].ruleName}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
@@ -49,7 +49,7 @@ describe('enRegel', () => {
   it('Kaller handterAvgjorelse med argument "true" når oppgaven godkjennes', () => {
     const { getByText, getByLabelText } = render(
       <EnRegel
-        sykmelding={enRegel.sykmelding}
+        receivedSykmelding={enRegel.receivedSykmelding}
         regel={enRegel.validationResult.ruleHits[0].ruleName}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
@@ -66,7 +66,7 @@ describe('enRegel', () => {
   it('Kaller handterAvgjorelse med argument "false" når oppgaven avvises', () => {
     const { getByText, getByLabelText } = render(
       <EnRegel
-        sykmelding={enRegel.sykmelding}
+        receivedSykmelding={enRegel.receivedSykmelding}
         regel={enRegel.validationResult.ruleHits[0].ruleName}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
@@ -83,7 +83,7 @@ describe('enRegel', () => {
   it('Viser hele sykmeldingen når "vis hele sykmeldingen" trykkes', () => {
     const { getByText, getAllByText } = render(
       <EnRegel
-        sykmelding={enRegel.sykmelding}
+        receivedSykmelding={enRegel.receivedSykmelding}
         regel={enRegel.validationResult.ruleHits[0].ruleName}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
