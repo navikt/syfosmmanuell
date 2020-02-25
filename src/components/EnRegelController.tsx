@@ -8,7 +8,7 @@ interface EnRegelControllerProps {
 }
 
 const EnRegelController = ({ manuellOppgave, setManOppgave }: EnRegelControllerProps) => {
-  const { sykmelding, validationResult } = manuellOppgave;
+  const { receivedSykmelding, validationResult } = manuellOppgave;
   const regel = validationResult.ruleHits[0].ruleName;
 
   const handterAvgjorelse = (avgjorelse: boolean): void => {
@@ -25,7 +25,7 @@ const EnRegelController = ({ manuellOppgave, setManOppgave }: EnRegelControllerP
 
   return (
     <EnRegel
-      sykmelding={sykmelding}
+      receivedSykmelding={receivedSykmelding}
       regel={regel}
       handterAvgjorelse={handterAvgjorelse}
       handterAvbryt={handterAvbryt}
