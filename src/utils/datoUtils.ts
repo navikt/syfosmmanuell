@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc)
 
 const maaneder = [
     'januar',
@@ -43,19 +45,17 @@ export const tilLesbarPeriodeUtenArstall = (fomArg: string, tomArg: string): str
 };
 
 export const tilLesbarDatoUtenAarstall = (datoArg: Date) => {
-    if (datoArg) {
-        const dato = new Date(datoArg);
-        const dag = dato.getDate();
-        const manedIndex = dato.getMonth();
-        const maned = maaneder[manedIndex];
-        return `${dag}. ${maned}`;
-    }
-    return null;
+    const dato = new Date(datoArg);
+    const dag = dato.getDate();
+    const manedIndex = dato.getMonth();
+    const maned = maaneder[manedIndex];
+    return `${dag}. ${maned}`;
 };
 
 export function hentDagerMellomDatoer(fra: Date, til: Date) {
-    const f = dayjs(fra);
-    const t = dayjs(til);
+    const format = "YYYY-MM-DD";
+    const f = dayjs.utc(fra, format);
+    const t = dayjs.utc(til, format);
 
     const diff = t.diff(f, 'day');
 
@@ -68,5 +68,5 @@ export function hentDagerMellomDatoer(fra: Date, til: Date) {
     }
 
     // +2 for å inkludere til og fra-datoen
-    return diff + 2;
+    return diff + 1;
 }

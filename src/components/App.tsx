@@ -76,8 +76,8 @@ const App = () => {
         if (GOSYS_URL) {
           setTimeout(() => (window.location.href = GOSYS_URL), 1000);
         } else {
-          setFeilmelding('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
-          console.error('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
+          setFeilmelding('Oppgaven ble ferdigstilt, men det var ikke mulig å sende deg tilbake til GOSYS');
+          console.error('Oppgaven ble ferdigstilt, men det var ikke mulig å sende deg tilbake til GOSYS');
         }
       }
     } catch (error) {
