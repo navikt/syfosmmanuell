@@ -21,14 +21,20 @@ const App = () => {
         setFeilmelding(
           'Kunne ikke hente oppgave på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
         );
+        console.error(
+          'Kunne ikke hente oppgave på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
+        );
       } else if (response.status === 204) {
         setFeilmelding('Oppgaven du prøver å hente er allerede løst');
+        console.error('Oppgaven du prøver å hente er allerede løst');
       } else if (response.status >= 400) {
         setFeilmelding(`Feil ved henting av oppgave. Feilkode: ${response.status}`);
+        console.error(`Feil ved henting av oppgave. Feilkode: ${response.status}`);
       } else {
         const data = await response.json();
         if (data.length === 0) {
           setFeilmelding('Ingen oppgaver funnet');
+          console.error('Ingen oppgaver funnet');
         } else {
           setManOppgave(new ManuellOppgave(data[0]));
         }
@@ -59,14 +65,19 @@ const App = () => {
         setFeilmelding(
           'Kunne vurdere oppgaven på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
         );
+        console.error(
+          'Kunne vurdere oppgaven på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
+        );
       } else if (response.status > 401) {
         setFeilmelding(`Det har oppstått en feil med feilkode: ${response.status}`);
+        console.error(`Det har oppstått en feil med feilkode: ${response.status}`);
       } else if (response.ok) {
         const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
         if (GOSYS_URL) {
           setTimeout(() => (window.location.href = GOSYS_URL), 1000);
         } else {
           setFeilmelding('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
+          console.error('Oppagven ble ferdigstillt, men det var ikke mulig å sende deg tilbake til GOSYS');
         }
       }
     } catch (error) {
