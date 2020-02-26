@@ -51,7 +51,7 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
               syketilfelleStartDato={sykmelding.syketilfelleStartDato}
             />
           </SeksjonMedTittel>
-          <MulighetForArbeid />
+          {/* <MulighetForArbeid /> */}
           <Friskmelding prognose={sykmelding.prognose} />
           <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
           <Arbeidsevne tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen} tiltakNAV={sykmelding.tiltakNAV} />
