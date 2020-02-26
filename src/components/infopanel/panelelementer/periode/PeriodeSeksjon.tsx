@@ -41,7 +41,7 @@ const PeriodeSeksjon = ({ periode, understrek }: PeriodeSeksjonProps) => {
           &nbsp;&bull; {antallDager} {antallDager === 1 ? 'dag' : 'dager'}
         </Normaltekst>
       </div>
-      {periodeUndertekst(periode)}
+      <Normaltekst>{periodeUndertekst(periode)}</Normaltekst>
       {understrek && <hr />}
     </div>
   );
