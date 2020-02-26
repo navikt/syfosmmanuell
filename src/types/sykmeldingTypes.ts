@@ -146,7 +146,7 @@ class ArbeidsrelatertArsak {
   }
 }
 
-class Gradert {
+export class Gradert {
   reisetilskudd: boolean;
   grad?: number;
   constructor(gradert: any) {

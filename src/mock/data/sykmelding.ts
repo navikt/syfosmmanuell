@@ -109,7 +109,7 @@ export const oppgaveEnRegel = [
             tom: '2018-11-12',
             aktivitetIkkeMulig: null,
             avventendeInnspillTilArbeidsgiver: null,
-            behandlingsdager: true,
+            behandlingsdager: 8,
             gradert: null,
             reisetilskudd: false,
           },
