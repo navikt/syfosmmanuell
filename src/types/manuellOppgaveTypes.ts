@@ -4,9 +4,12 @@ import { Sykmelding } from './sykmeldingTypes';
 export class ReceivedSykmelding {
   sykmelding: Sykmelding;
   mottattDato: Date;
+  personNrPasient: string;
+
   constructor(receivedSykmelding: any) {
     this.sykmelding = new Sykmelding(receivedSykmelding.sykmelding);
     this.mottattDato = new Date(receivedSykmelding.mottattDato + 'Z'); // Lagret i databasen som utc, men mangler Z
+    this.personNrPasient = receivedSykmelding.personNrPasient;
   }
 }
 

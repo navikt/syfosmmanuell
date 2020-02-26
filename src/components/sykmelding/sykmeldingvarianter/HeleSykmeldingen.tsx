@@ -36,14 +36,13 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
         {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
           <DiagnoseSeksjon key={index.toString()} diagnose={diagnose} bidiagnose />
         ))}
-        <FraverSeksjon fraver={sykmelding.medisinskVurdering.annenFraversArsak} />
+        <FraverSeksjon annenFraversArsak={sykmelding.medisinskVurdering.annenFraversArsak} />
         <SvangerskapSeksjon svangerskap={sykmelding.medisinskVurdering.svangerskap} />
         <SkadeSeksjon medisinskVurdering={sykmelding.medisinskVurdering} />
         <ArbeidsuforSeksjon prognose={sykmelding.prognose} />
         <PrognoseSeksjon prognose={sykmelding.prognose} />
         <ArbeidsgiverSeksjon arbeidsgiver={sykmelding.arbeidsgiver} />
         <LegeSeksjon navn={sykmelding.navnFastlege} />
-
         <Utvidbar ikon={doktor} ikonHover={doktorHover} tittel="Flere opplysninger fra sykmelder">
           <SeksjonMedTittel understrek>
             <BehandlingsDatoer
