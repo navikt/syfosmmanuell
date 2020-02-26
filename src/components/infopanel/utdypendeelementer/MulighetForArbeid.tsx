@@ -1,5 +1,5 @@
 import React from 'react';
-import { AktivitetIkkeMulig, Periode } from '../../../types/sykmeldingTypes';
+import { Periode } from '../../../types/sykmeldingTypes';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 
@@ -21,7 +21,7 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
   }
 
   const medisinskeBeskrivelser = perioder.filter(periode => periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse);
-
+  
   const arbeidsrelaterteBeskrivelser = perioder.filter(
     periode => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse,
   );

@@ -68,6 +68,15 @@ export const oppgaveEnRegel = [
             },
             avventendeInnspillTilArbeidsgiver: null,
             behandlingsdager: null,
+            gradert: null,
+            reisetilskudd: false,
+          },
+          {
+            fom: '2018-10-18',
+            tom: '2018-11-12',
+            aktivitetIkkeMulig: null,
+            avventendeInnspillTilArbeidsgiver: null,
+            behandlingsdager: null,
             gradert: {
               reisetilskudd: true,
               grad: 56,
@@ -77,23 +86,41 @@ export const oppgaveEnRegel = [
           {
             fom: '2018-10-18',
             tom: '2018-11-12',
-            aktivitetIkkeMulig: {
-              medisinskArsak: {
-                beskrivelse: 'dette er en annen beskrivelse m',
-                arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
-              },
-              arbeidsrelatertArsak: {
-                beskrivelse: 'dette er en beskrivelse',
-                arsak: ['ANNET'],
-              },
-            },
+            aktivitetIkkeMulig: null,
             avventendeInnspillTilArbeidsgiver: null,
             behandlingsdager: null,
             gradert: {
               reisetilskudd: true,
-              grad: 56,
+              grad: null,
             },
             reisetilskudd: false,
+          },
+          {
+            fom: '2018-10-18',
+            tom: '2018-11-12',
+            aktivitetIkkeMulig: null,
+            avventendeInnspillTilArbeidsgiver: null,
+            behandlingsdager: null,
+            gradert: null,
+            reisetilskudd: false,
+          },
+          {
+            fom: '2018-10-18',
+            tom: '2018-11-12',
+            aktivitetIkkeMulig: null,
+            avventendeInnspillTilArbeidsgiver: null,
+            behandlingsdager: true,
+            gradert: null,
+            reisetilskudd: false,
+          },
+          {
+            fom: '2018-10-18',
+            tom: '2018-11-12',
+            aktivitetIkkeMulig: null,
+            avventendeInnspillTilArbeidsgiver: null,
+            behandlingsdager: false,
+            gradert: null,
+            reisetilskudd: true,
           },
         ],
         prognose: {
