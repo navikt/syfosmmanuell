@@ -19,7 +19,7 @@ interface EnRegelProps {
 
 const EnRegel = ({ receivedSykmelding, regel, finnesFlereRegler, handterAvgjorelse, handterAvbryt }: EnRegelProps) => {
   const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
-  const { sykmelding, mottattDato } = receivedSykmelding;
+  const { sykmelding, personNrPasient, mottattDato } = receivedSykmelding;
 
   return (
     <Panel border className="panel">
@@ -29,7 +29,7 @@ const EnRegel = ({ receivedSykmelding, regel, finnesFlereRegler, handterAvgjorel
         sykmelder={sykmelding.navnFastlege}
         mottattDato={mottattDato}
       />
-      <Sykmelding sykmelding={sykmelding} regel={regel} />
+      <Sykmelding sykmelding={sykmelding} personNrPasient={personNrPasient} regel={regel} />
       <RadioOgKnapper
         regel={regel}
         knappetekst={finnesFlereRegler ? 'Lagre' : 'Ferdigstill'}

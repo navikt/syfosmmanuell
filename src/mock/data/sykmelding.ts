@@ -194,6 +194,7 @@ export const oppgaveEnRegel = [
         navnFastlege: 'Doktor Legesen',
       },
       mottattDato: '2020-02-24T15:27:54',
+      personNrPasient: '12345678910',
     },
   },
 ];
