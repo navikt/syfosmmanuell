@@ -18,8 +18,8 @@ import MulighetForArbeid from '../../infopanel/utdypendeelementer/MulighetForArb
 import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding';
 import UtdypendeOpplysninger from '../../infopanel/utdypendeelementer/UtdypendeOpplysninger';
 import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
+import Annet from '../../infopanel/utdypendeelementer/Annet';
 import SeksjonMedTittel from '../../infopanel/layout/SeksjonMedTittel';
-import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 import { Flatknapp } from 'nav-frontend-knapper';
 
 interface HeleSykmeldingenProps {
@@ -51,13 +51,15 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
               syketilfelleStartDato={sykmelding.syketilfelleStartDato}
             />
           </SeksjonMedTittel>
-          {/* <MulighetForArbeid /> */}
+          <MulighetForArbeid perioder={sykmelding.perioder} />
           <Friskmelding prognose={sykmelding.prognose} />
           <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
           <Arbeidsevne tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen} tiltakNAV={sykmelding.tiltakNAV} />
-          <SeksjonMedTittel tittel="Annet">
-            <ElementMedTekst margin tittel="Telefon til lege/sykmelder" tekst={sykmelding.behandler.tlf} />
-          </SeksjonMedTittel>
+          <Annet
+            meldingTilNAV={sykmelding.meldingTilNAV}
+            meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver}
+            behandlerTelefon={sykmelding.behandler.tlf}
+          />
         </Utvidbar>
         <div style={{ textAlign: 'center' }}>
           <Flatknapp

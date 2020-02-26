@@ -1,4 +1,5 @@
 import React from 'react';
+import { AktivitetIkkeMulig, Periode } from '../../../types/sykmeldingTypes';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 
@@ -7,39 +8,70 @@ import Margin from '../layout/Margin';
 import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
 
-// TODO: Koble opp til data i sykmelding
-const testSvar = 'andre årsaker til sykefravær';
+interface MulighetForArbeidProps {
+  perioder: Periode[];
+}
 
-const MulighetForArbeid = () => {
-    if (!true) {
-        return null;
-    }
+const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
+  const harMedisinskArsak = perioder.some(periode => periode.aktivitetIkkeMulig?.medisinskArsak?.arsak);
+  const harArbeidsrelatertArsak = perioder.some(periode => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak);
 
-    return (
-        <SeksjonMedTittel understrek tittel={tekster['muliget-for-arbeid.tittel']}>
-            <Margin>
-                <ElementMedTekst tittel={tekster['muliget-for-arbeid.medisinske-arsaker.tittel']} />
-                <EnkelCheckbox tittel={tekster['muliget-for-arbeid.medisinske-arsaker']} margin checked vis />
-            </Margin>
+  if (!harMedisinskArsak && !harArbeidsrelatertArsak) {
+    return null;
+  }
 
-            <ElementMedTekst
-                tittel={tekster['muliget-for-arbeid.medisinske-arsaker.beskriv']}
-                tekst={testSvar}
-                margin
-            />
+  const medisinskeBeskrivelser = perioder.filter(periode => periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse);
 
-            <Margin>
-                <ElementMedTekst tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen.tittel']} />
-                <EnkelCheckbox tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen']} margin checked vis />
-            </Margin>
+  const arbeidsrelaterteBeskrivelser = perioder.filter(
+    periode => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse,
+  );
 
-            <ElementMedTekst
-                tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen.angi']}
-                tekst={testSvar}
-                margin
-            />
-        </SeksjonMedTittel>
-    );
+  return (
+    <SeksjonMedTittel understrek tittel={tekster['muliget-for-arbeid.tittel']}>
+      <Margin>
+        <ElementMedTekst vis={!!harMedisinskArsak} tittel={tekster['muliget-for-arbeid.medisinske-arsaker.tittel']} />
+        <EnkelCheckbox
+          tittel={tekster['muliget-for-arbeid.medisinske-arsaker']}
+          margin
+          checked
+          vis={!!harMedisinskArsak}
+        />
+      </Margin>
+
+      {medisinskeBeskrivelser.map(periode => (
+        <ElementMedTekst
+          vis
+          tittel="Beskrivelse"
+          tekst={periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse}
+          margin
+          innrykk
+        />
+      ))}
+
+      <Margin>
+        <ElementMedTekst
+          vis={!!harArbeidsrelatertArsak}
+          tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen.tittel']}
+        />
+        <EnkelCheckbox
+          vis={!!harArbeidsrelatertArsak}
+          tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen']}
+          margin
+          checked
+        />
+      </Margin>
+
+      {arbeidsrelaterteBeskrivelser.map(periode => (
+        <ElementMedTekst
+          vis
+          tittel="Beskrivelse"
+          tekst={periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse}
+          margin
+          innrykk
+        />
+      ))}
+    </SeksjonMedTittel>
+  );
 };
 
 export default MulighetForArbeid;
