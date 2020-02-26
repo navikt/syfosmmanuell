@@ -1,5 +1,5 @@
 import React from 'react';
-import { AktivitetIkkeMulig } from '../../../types/sykmeldingTypes';
+import { AktivitetIkkeMulig, Periode } from '../../../types/sykmeldingTypes';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 
@@ -9,55 +9,67 @@ import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
 
 interface MulighetForArbeidProps {
-  aktivitetIkkeMulig: AktivitetIkkeMulig;
+  perioder: Periode[];
 }
 
-const MulighetForArbeid = ({ aktivitetIkkeMulig }: MulighetForArbeidProps) => {
-  if (!aktivitetIkkeMulig.arbeidsrelatertArsak && !aktivitetIkkeMulig.medisinskArsak) {
+const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
+  const harMedisinskArsak = perioder.some(periode => periode.aktivitetIkkeMulig?.medisinskArsak?.arsak);
+  const harArbeidsrelatertArsak = perioder.some(periode => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak);
+
+  if (!harMedisinskArsak && !harArbeidsrelatertArsak) {
     return null;
   }
+
+  const medisinskeBeskrivelser = perioder.filter(periode => periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse);
+
+  const arbeidsrelaterteBeskrivelser = perioder.filter(
+    periode => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse,
+  );
 
   return (
     <SeksjonMedTittel understrek tittel={tekster['muliget-for-arbeid.tittel']}>
       <Margin>
-        <ElementMedTekst
-          vis={!!aktivitetIkkeMulig.medisinskArsak}
-          tittel={tekster['muliget-for-arbeid.medisinske-arsaker.tittel']}
-        />
+        <ElementMedTekst vis={!!harMedisinskArsak} tittel={tekster['muliget-for-arbeid.medisinske-arsaker.tittel']} />
         <EnkelCheckbox
           tittel={tekster['muliget-for-arbeid.medisinske-arsaker']}
           margin
           checked
-          vis={!!aktivitetIkkeMulig.medisinskArsak}
+          vis={!!harMedisinskArsak}
         />
       </Margin>
 
-      <ElementMedTekst
-        tittel={tekster['muliget-for-arbeid.medisinske-arsaker.beskriv']}
-        tekst={aktivitetIkkeMulig.medisinskArsak?.beskrivelse}
-        margin
-        vis={!!aktivitetIkkeMulig.medisinskArsak?.beskrivelse}
-      />
+      {medisinskeBeskrivelser.map(periode => (
+        <ElementMedTekst
+          vis
+          tittel="Beskrivelse"
+          tekst={periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse}
+          margin
+          innrykk
+        />
+      ))}
 
       <Margin>
         <ElementMedTekst
-          vis={!!aktivitetIkkeMulig.arbeidsrelatertArsak}
+          vis={!!harArbeidsrelatertArsak}
           tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen.tittel']}
         />
         <EnkelCheckbox
-          vis={!!aktivitetIkkeMulig.arbeidsrelatertArsak}
+          vis={!!harArbeidsrelatertArsak}
           tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen']}
           margin
           checked
         />
       </Margin>
 
-      <ElementMedTekst
-        vis={!!aktivitetIkkeMulig.arbeidsrelatertArsak?.beskrivelse}
-        tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen.angi']}
-        tekst={aktivitetIkkeMulig.arbeidsrelatertArsak?.beskrivelse}
-        margin
-      />
+      {arbeidsrelaterteBeskrivelser.map(periode => (
+        <ElementMedTekst
+          vis
+          tittel="Beskrivelse"
+          tekst={periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse}
+          margin
+          innrykk
+        />
+      ))}
     </SeksjonMedTittel>
   );
 };

@@ -97,7 +97,7 @@ export class Periode {
   }
 }
 
-class AktivitetIkkeMulig {
+export class AktivitetIkkeMulig {
   medisinskArsak?: MedisinskArsak;
   arbeidsrelatertArsak?: ArbeidsrelatertArsak;
   constructor(aktivitetIkkeMulig: any) {

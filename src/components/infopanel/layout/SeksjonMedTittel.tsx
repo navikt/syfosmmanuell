@@ -4,7 +4,7 @@ import { Systemtittel } from 'nav-frontend-typografi';
 
 interface SeksjonMedTittelProps {
     tittel?: string;
-    children: JSX.Element | (JSX.Element | null)[];
+    children: any /* JSX.Element | (JSX.Element | null)[]; */
     understrek?: boolean;
 }
 

@@ -20,10 +20,7 @@ import UtdypendeOpplysninger from '../../infopanel/utdypendeelementer/UtdypendeO
 import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
 import Annet from '../../infopanel/utdypendeelementer/Annet';
 import SeksjonMedTittel from '../../infopanel/layout/SeksjonMedTittel';
-import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 import { Flatknapp } from 'nav-frontend-knapper';
-import EnkelCheckbox from '../../infopanel/layout/EnkelCheckbox';
-import Margin from '../../infopanel/layout/Margin';
 
 interface HeleSykmeldingenProps {
   sykmelding: Sykmelding;
@@ -54,7 +51,7 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
               syketilfelleStartDato={sykmelding.syketilfelleStartDato}
             />
           </SeksjonMedTittel>
-          <MulighetForArbeid aktivitetIkkeMulig={sykmelding.perioder} />
+          <MulighetForArbeid perioder={sykmelding.perioder} />
           <Friskmelding prognose={sykmelding.prognose} />
           <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
           <Arbeidsevne tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen} tiltakNAV={sykmelding.tiltakNAV} />

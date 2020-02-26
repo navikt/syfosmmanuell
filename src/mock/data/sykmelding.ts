@@ -58,7 +58,7 @@ export const oppgaveEnRegel = [
             tom: '2018-11-12',
             aktivitetIkkeMulig: {
               medisinskArsak: {
-                beskrivelse: 'dette er en beskrivelse',
+                beskrivelse: 'dette er en beskrivelse m',
                 arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
               },
               arbeidsrelatertArsak: {
@@ -79,7 +79,7 @@ export const oppgaveEnRegel = [
             tom: '2018-11-12',
             aktivitetIkkeMulig: {
               medisinskArsak: {
-                beskrivelse: 'dette er en beskrivelse',
+                beskrivelse: 'dette er en annen beskrivelse m',
                 arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
               },
               arbeidsrelatertArsak: {
