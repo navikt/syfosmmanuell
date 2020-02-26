@@ -48,3 +48,7 @@ typings/
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Idea project files
+*.iml
+.idea/

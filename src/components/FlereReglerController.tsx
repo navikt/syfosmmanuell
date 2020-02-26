@@ -90,7 +90,7 @@ const FlereReglerController = ({ manOppgave, setManOppgave }: FlereReglerControl
 
   return (
     <EnRegel
-      sykmelding={manOppgave.sykmelding}
+      receivedSykmelding={manOppgave.receivedSykmelding}
       regel={aktuellRegel}
       finnesFlereRegler
       handterAvgjorelse={handterVurdering}

@@ -166,6 +166,7 @@ export const oppgaveEnRegel = [
         signaturDato: '2019-04-29T08:34:16',
         navnFastlege: 'Doktor Legesen',
       },
+      mottattDato: '2020-02-24T15:27:54',
     },
   },
 ];
@@ -343,6 +344,7 @@ export const oppgaveFlereRegler = [
         signaturDato: '2019-04-29T08:34:16',
         navnFastlege: 'Doktor Legesen',
       },
+      mottattDato: '2020-02-24T15:27:54',
     },
   },
 ];
