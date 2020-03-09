@@ -21,7 +21,7 @@ const TilbakedatertForlengelse = ({ sykmelding, personNrPasient }: Tilbakedatert
     <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
       <SeksjonMedTittel understrek>
         <ElementMedTekst vis tittel="Fødselsnummer pasient" tekst={personNrPasient} margin />
-        <BehandlingsDatoer behandletTidspunkt={sykmelding.signaturDato} />
+        <BehandlingsDatoer signaturDato={sykmelding.signaturDato} />
         <Tilbakedateringsinfo
           dokumenterbarKontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
           kanIkkeIvaretaEgneInteresser={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}

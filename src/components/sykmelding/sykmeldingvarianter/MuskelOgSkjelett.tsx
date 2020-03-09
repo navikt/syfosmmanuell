@@ -12,7 +12,7 @@ interface MuskelOgSkjelettProps {
 const MuskelOgSkjelett = ({ sykmelding }: MuskelOgSkjelettProps) => {
   return (
     <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
-      <BehandlingsDatoer behandletTidspunkt={sykmelding.signaturDato} />
+      <BehandlingsDatoer signaturDato={sykmelding.signaturDato} />
       <SykmeldingPerioder perioder={sykmelding.perioder} />
       <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
       {sykmelding.medisinskVurdering.biDiagnoser.map((biDiagnose, index) => (
