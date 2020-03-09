@@ -6,17 +6,17 @@ import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import ElementMedTekst from '../layout/ElementMedTekst';
 
 interface BehandlingsDatoerProps {
-  behandletTidspunkt?: Date;
+  signaturDato?: Date;
   syketilfelleStartDato?: Date;
 }
 
-const BehandlingsDatoer = ({ behandletTidspunkt, syketilfelleStartDato }: BehandlingsDatoerProps) => {
+const BehandlingsDatoer = ({ signaturDato, syketilfelleStartDato }: BehandlingsDatoerProps) => {
   return (
     <SeksjonMedTittel >
       <ElementMedTekst
-        vis={!!behandletTidspunkt}
+        vis={!!signaturDato}
         tittel="Dato sykmeldingen ble skrevet"
-        tekst={tilLesbarDatoMedArstall(behandletTidspunkt)}
+        tekst={tilLesbarDatoMedArstall(signaturDato)}
         margin
       />
       <ElementMedTekst

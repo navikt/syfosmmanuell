@@ -46,7 +46,7 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
         <Utvidbar ikon={doktor} ikonHover={doktorHover} tittel="Flere opplysninger fra sykmelder">
           <SeksjonMedTittel understrek>
             <BehandlingsDatoer
-              behandletTidspunkt={sykmelding.behandletTidspunkt}
+              signaturDato={sykmelding.signaturDato}
               syketilfelleStartDato={sykmelding.syketilfelleStartDato}
             />
           </SeksjonMedTittel>
