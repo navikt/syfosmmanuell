@@ -5,19 +5,15 @@ import tekster from '../infopanel-tekster';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
 
 interface ArbeidsuforSeksjonProps {
-    prognose?: Prognose;
+  prognose?: Prognose;
 }
 
 const ArbeidsuforSeksjon = ({ prognose }: ArbeidsuforSeksjonProps) => {
-    if (!prognose) {
-        return null;
-    }
+  if (!prognose || !prognose.arbeidsforEtterPeriode) {
+    return null;
+  }
 
-    if (prognose.arbeidsforEtterPeriode) {
-        return null;
-    }
-
-    return <EnkelCheckbox tittel={tekster['arbeidsufor.tittel']} checked margin vis />;
+  return <EnkelCheckbox tittel={tekster['arbeidsufor.tittel']} checked margin vis />;
 };
 
 export default ArbeidsuforSeksjon;
