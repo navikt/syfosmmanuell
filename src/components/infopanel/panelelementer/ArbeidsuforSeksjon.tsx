@@ -9,11 +9,7 @@ interface ArbeidsuforSeksjonProps {
 }
 
 const ArbeidsuforSeksjon = ({ prognose }: ArbeidsuforSeksjonProps) => {
-  if (!prognose) {
-    return null;
-  }
-
-  if (prognose.arbeidsforEtterPeriode === false) {
+  if (!prognose || !prognose.arbeidsforEtterPeriode) {
     return null;
   }
 
