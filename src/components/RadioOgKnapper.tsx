@@ -6,8 +6,6 @@ import './RadioOgKnapper.less';
 
 const hentRegelTekst = (regel: RuleNames): string => {
   switch (regel) {
-    case 'BEHANDLER_KI_FT_MT_BENYTTER_ANNEN_DIAGNOSEKODE_ENN_L':
-      return 'knytning til muskel- og skjelettlidelser';
     case 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE':
       return 'tilbakedatering';
     case 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE':
