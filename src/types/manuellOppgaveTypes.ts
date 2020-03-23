@@ -1,16 +1,26 @@
 import { ValidationResultWithStatus } from './validationresultTypes';
 import { Sykmelding } from './sykmeldingTypes';
 
+export class ReceivedSykmelding {
+  sykmelding: Sykmelding;
+  mottattDato: Date;
+  personNrPasient: string;
+
+  constructor(receivedSykmelding: any) {
+    this.sykmelding = new Sykmelding(receivedSykmelding.sykmelding);
+    this.mottattDato = new Date(receivedSykmelding.mottattDato + 'Z'); // Lagret i databasen som utc, men mangler Z
+    this.personNrPasient = receivedSykmelding.personNrPasient;
+  }
+}
+
 export class ManuellOppgave {
   oppgaveid: number;
   validationResult: ValidationResultWithStatus;
-  sykmelding: Sykmelding;
+  receivedSykmelding: ReceivedSykmelding;
 
   constructor(manuellOppgave: any) {
     this.oppgaveid = manuellOppgave.oppgaveid;
     this.validationResult = new ValidationResultWithStatus(manuellOppgave.validationResult);
-    this.sykmelding = manuellOppgave.receivedSykmelding
-      ? new Sykmelding(manuellOppgave.receivedSykmelding.sykmelding)
-      : new Sykmelding(manuellOppgave.sykmelding);
+    this.receivedSykmelding = new ReceivedSykmelding(manuellOppgave.receivedSykmelding);
   }
 }

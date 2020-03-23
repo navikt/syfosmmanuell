@@ -9,16 +9,19 @@ import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
 import UtdypendeOpplysninger from '../../infopanel/utdypendeelementer/UtdypendeOpplysninger';
 import Tilbakedateringsinfo from '../../infopanel/utdypendeelementer/Tilbakedateringsinfo';
 import SeksjonMedTittel from '../../infopanel/layout/SeksjonMedTittel';
+import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 
 interface TilbakedatertForlengelseProps {
   sykmelding: Sykmelding;
+  personNrPasient: string;
 }
 
-const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps) => {
+const TilbakedatertForlengelse = ({ sykmelding, personNrPasient }: TilbakedatertForlengelseProps) => {
   return (
     <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
       <SeksjonMedTittel understrek>
-        <BehandlingsDatoer behandletTidspunkt={sykmelding.signaturDato} />
+        <ElementMedTekst vis tittel="Fødselsnummer pasient" tekst={personNrPasient} margin />
+        <BehandlingsDatoer signaturDato={sykmelding.signaturDato} />
         <Tilbakedateringsinfo
           dokumenterbarKontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
           kanIkkeIvaretaEgneInteresser={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}

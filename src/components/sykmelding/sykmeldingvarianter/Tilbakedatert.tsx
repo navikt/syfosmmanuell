@@ -8,16 +8,19 @@ import BehandlingsDatoer from '../../infopanel/utdypendeelementer/BehandlingsDat
 import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
 import Tilbakedateringsinfo from '../../infopanel/utdypendeelementer/Tilbakedateringsinfo';
 import SeksjonMedTittel from '../../infopanel/layout/SeksjonMedTittel';
+import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 
 interface TilbakedatertProps {
   sykmelding: Sykmelding;
+  personNrPasient: string;
 }
 
-const Tilbakedatert = ({ sykmelding }: TilbakedatertProps) => {
+const Tilbakedatert = ({ sykmelding, personNrPasient }: TilbakedatertProps) => {
   return (
     <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
       <SeksjonMedTittel understrek>
-        <BehandlingsDatoer behandletTidspunkt={sykmelding.signaturDato} />
+        <ElementMedTekst vis tittel="Fødselsnummer pasient" tekst={personNrPasient} margin />
+        <BehandlingsDatoer signaturDato={sykmelding.signaturDato} />
         <Tilbakedateringsinfo
           dokumenterbarKontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
           kanIkkeIvaretaEgneInteresser={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}

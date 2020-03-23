@@ -18,8 +18,8 @@ import MulighetForArbeid from '../../infopanel/utdypendeelementer/MulighetForArb
 import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding';
 import UtdypendeOpplysninger from '../../infopanel/utdypendeelementer/UtdypendeOpplysninger';
 import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
+import Annet from '../../infopanel/utdypendeelementer/Annet';
 import SeksjonMedTittel from '../../infopanel/layout/SeksjonMedTittel';
-import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 import { Flatknapp } from 'nav-frontend-knapper';
 
 interface HeleSykmeldingenProps {
@@ -36,28 +36,33 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
         {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
           <DiagnoseSeksjon key={index.toString()} diagnose={diagnose} bidiagnose />
         ))}
-        <FraverSeksjon fraver={sykmelding.medisinskVurdering.annenFraversArsak} />
+        <FraverSeksjon annenFraversArsak={sykmelding.medisinskVurdering.annenFraversArsak} />
         <SvangerskapSeksjon svangerskap={sykmelding.medisinskVurdering.svangerskap} />
         <SkadeSeksjon medisinskVurdering={sykmelding.medisinskVurdering} />
         <ArbeidsuforSeksjon prognose={sykmelding.prognose} />
         <PrognoseSeksjon prognose={sykmelding.prognose} />
         <ArbeidsgiverSeksjon arbeidsgiver={sykmelding.arbeidsgiver} />
         <LegeSeksjon navn={sykmelding.navnFastlege} />
-
         <Utvidbar ikon={doktor} ikonHover={doktorHover} tittel="Flere opplysninger fra sykmelder">
           <SeksjonMedTittel understrek>
             <BehandlingsDatoer
-              behandletTidspunkt={sykmelding.behandletTidspunkt}
+              signaturDato={sykmelding.signaturDato}
               syketilfelleStartDato={sykmelding.syketilfelleStartDato}
             />
           </SeksjonMedTittel>
-          <MulighetForArbeid />
+          <MulighetForArbeid perioder={sykmelding.perioder} />
           <Friskmelding prognose={sykmelding.prognose} />
           <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
-          <Arbeidsevne tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen} tiltakNAV={sykmelding.tiltakNAV} />
-          <SeksjonMedTittel tittel="Annet">
-            <ElementMedTekst margin tittel="Telefon til lege/sykmelder" tekst={sykmelding.behandler.tlf} />
-          </SeksjonMedTittel>
+          <Arbeidsevne
+            tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen}
+            tiltakNAV={sykmelding.tiltakNAV}
+            andreTiltak={sykmelding.andreTiltak}
+          />
+          <Annet
+            meldingTilNAV={sykmelding.meldingTilNAV}
+            meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver}
+            behandlerTelefon={sykmelding.behandler.tlf}
+          />
         </Utvidbar>
         <div style={{ textAlign: 'center' }}>
           <Flatknapp

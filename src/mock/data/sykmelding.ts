@@ -58,7 +58,7 @@ export const oppgaveEnRegel = [
             tom: '2018-11-12',
             aktivitetIkkeMulig: {
               medisinskArsak: {
-                beskrivelse: 'dette er en beskrivelse',
+                beskrivelse: 'dette er en beskrivelse m',
                 arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
               },
               arbeidsrelatertArsak: {
@@ -66,6 +66,15 @@ export const oppgaveEnRegel = [
                 arsak: ['MANGLENDE_TILRETTELEGGING', 'ANNET'],
               },
             },
+            avventendeInnspillTilArbeidsgiver: null,
+            behandlingsdager: null,
+            gradert: null,
+            reisetilskudd: false,
+          },
+          {
+            fom: '2018-10-18',
+            tom: '2018-11-12',
+            aktivitetIkkeMulig: null,
             avventendeInnspillTilArbeidsgiver: null,
             behandlingsdager: null,
             gradert: {
@@ -77,23 +86,41 @@ export const oppgaveEnRegel = [
           {
             fom: '2018-10-18',
             tom: '2018-11-12',
-            aktivitetIkkeMulig: {
-              medisinskArsak: {
-                beskrivelse: 'dette er en beskrivelse',
-                arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
-              },
-              arbeidsrelatertArsak: {
-                beskrivelse: 'dette er en beskrivelse',
-                arsak: ['ANNET'],
-              },
-            },
+            aktivitetIkkeMulig: null,
             avventendeInnspillTilArbeidsgiver: null,
             behandlingsdager: null,
             gradert: {
               reisetilskudd: true,
-              grad: 56,
+              grad: null,
             },
             reisetilskudd: false,
+          },
+          {
+            fom: '2018-10-18',
+            tom: '2018-11-12',
+            aktivitetIkkeMulig: null,
+            avventendeInnspillTilArbeidsgiver: null,
+            behandlingsdager: null,
+            gradert: null,
+            reisetilskudd: false,
+          },
+          {
+            fom: '2018-10-18',
+            tom: '2018-11-12',
+            aktivitetIkkeMulig: null,
+            avventendeInnspillTilArbeidsgiver: null,
+            behandlingsdager: 8,
+            gradert: null,
+            reisetilskudd: false,
+          },
+          {
+            fom: '2018-10-18',
+            tom: '2018-11-12',
+            aktivitetIkkeMulig: null,
+            avventendeInnspillTilArbeidsgiver: null,
+            behandlingsdager: false,
+            gradert: null,
+            reisetilskudd: true,
           },
         ],
         prognose: {
@@ -166,6 +193,8 @@ export const oppgaveEnRegel = [
         signaturDato: '2019-04-29T08:34:16',
         navnFastlege: 'Doktor Legesen',
       },
+      mottattDato: '2020-02-24T15:27:54',
+      personNrPasient: '12345678910',
     },
   },
 ];
@@ -343,6 +372,8 @@ export const oppgaveFlereRegler = [
         signaturDato: '2019-04-29T08:34:16',
         navnFastlege: 'Doktor Legesen',
       },
+      mottattDato: '2020-02-24T15:27:54',
+      personNrPasient: '12345678910',
     },
   },
 ];
