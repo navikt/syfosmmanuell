@@ -40,7 +40,7 @@ describe('app', () => {
     );
     const { getByText } = render(<App />);
 
-    await wait(() => getByText('403', { exact: false }));
+    await wait(() => getByText('Feil ved henting av oppgave. Feilkode: 403', { exact: false }));
     expect(spy.size()).toBe(1);
     expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/');
   });
@@ -125,6 +125,42 @@ describe('app', () => {
         fireEvent.click(getByText('Ferdigstill'));
       });
       await wait(() => getByText('Oppgaven ble ferdigstilt', { exact: false }));
+      expect(spy.size()).toBe(2);
+      expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/');
+      expect(spy.lastCall()?.request.body).toEqual(valideringsresultat);
+    });
+
+    it('Prøver kun å ferdigstille oppgaven én gang dersom man får 403', async () => {
+      mock.get('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/', oppgaveEnRegel);
+      mock.put('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/', () =>
+        Promise.resolve({ status: 403 }),
+      );
+
+      const valideringsresultat = {
+        ruleHits: [
+          {
+            messageForSender:
+              'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
+            messageForUser:
+              'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
+            ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
+            ruleStatus: 'OK',
+          },
+        ],
+        status: 'OK',
+      };
+
+      const { getByLabelText, getByText } = render(<App />);
+
+      await wait(() => getByLabelText('Godkjenn', { exact: false }));
+      act(() => {
+        fireEvent.click(getByLabelText('Godkjenn', { exact: false }));
+      });
+      await wait(() => getByText('Ferdigstill'));
+      act(() => {
+        fireEvent.click(getByText('Ferdigstill'));
+      });
+      await wait(() => getByText('Det har oppstått en feil med feilkode: 403', { exact: false }));
       expect(spy.size()).toBe(2);
       expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/');
       expect(spy.lastCall()?.request.body).toEqual(valideringsresultat);
