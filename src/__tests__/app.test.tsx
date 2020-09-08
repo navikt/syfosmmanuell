@@ -34,6 +34,17 @@ describe('app', () => {
     expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/');
   });
 
+  it('Kaller endepunkt for henting av manuell oppgave kun én gang dersom man får 403', async () => {
+    mock.get('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/', () =>
+      Promise.resolve({ status: 403 }),
+    );
+    const { getByText } = render(<App />);
+
+    await wait(() => getByText('403', { exact: false }));
+    expect(spy.size()).toBe(1);
+    expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/');
+  });
+
   it('Rendrer visning for én regel dersom oppgaven har ett regelutfall', async () => {
     mock.get('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/', oppgaveEnRegel);
     const { getByText } = render(<App />);

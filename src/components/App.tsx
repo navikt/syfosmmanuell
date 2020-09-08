@@ -86,19 +86,19 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (manOppgave === undefined && !isLoading) {
+    if (manOppgave === undefined && !isLoading && !feilMelding) {
       setIsLoading(true);
       manOppgaveFetcher().finally(() => setIsLoading(false));
     }
 
-    if (manOppgave?.validationResult.totalVurdering !== undefined && !isLoading) {
+    if (manOppgave?.validationResult.totalVurdering !== undefined && !isLoading && !feilMelding) {
       setIsLoading(true);
       manOppgavePutter(manOppgave).finally(() => {
         setManOppgave(null);
         setIsLoading(false);
       });
     }
-  }, [isLoading, manOppgave]);
+  }, [isLoading, manOppgave, feilMelding]);
 
   if (feilMelding) {
     return <Normaltekst>{feilMelding}</Normaltekst>;
