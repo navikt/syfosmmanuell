@@ -13,17 +13,17 @@ interface MulighetForArbeidProps {
 }
 
 const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
-  const harMedisinskArsak = perioder.some(periode => periode.aktivitetIkkeMulig?.medisinskArsak?.arsak);
-  const harArbeidsrelatertArsak = perioder.some(periode => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak);
+  const harMedisinskArsak = perioder.some((periode) => periode.aktivitetIkkeMulig?.medisinskArsak?.arsak);
+  const harArbeidsrelatertArsak = perioder.some((periode) => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak);
 
   if (!harMedisinskArsak && !harArbeidsrelatertArsak) {
     return null;
   }
 
-  const medisinskeBeskrivelser = perioder.filter(periode => periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse);
-  
+  const medisinskeBeskrivelser = perioder.filter((periode) => periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse);
+
   const arbeidsrelaterteBeskrivelser = perioder.filter(
-    periode => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse,
+    (periode) => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse,
   );
 
   return (
@@ -38,8 +38,9 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
         />
       </Margin>
 
-      {medisinskeBeskrivelser.map(periode => (
+      {medisinskeBeskrivelser.map((periode, index) => (
         <ElementMedTekst
+          key={index}
           vis
           tittel="Beskrivelse"
           tekst={periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse}
@@ -61,8 +62,9 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
         />
       </Margin>
 
-      {arbeidsrelaterteBeskrivelser.map(periode => (
+      {arbeidsrelaterteBeskrivelser.map((periode, index) => (
         <ElementMedTekst
+          key={index}
           vis
           tittel="Beskrivelse"
           tekst={periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse}
