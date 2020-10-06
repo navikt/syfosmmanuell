@@ -9,13 +9,14 @@ interface EnRegelControllerProps {
 
 const EnRegelController = ({ manuellOppgave, setManOppgave }: EnRegelControllerProps) => {
   const { receivedSykmelding, validationResult } = manuellOppgave;
-  const regel = validationResult.ruleHits[0].ruleName;
-
+  const regelUtslag = validationResult.ruleHits;
   const handterAvgjorelse = (avgjorelse: boolean): void => {
     const vurdertOppgave = new ManuellOppgave(manuellOppgave);
-    vurdertOppgave.validationResult.setBehandlet(regel, avgjorelse);
-    vurdertOppgave.validationResult.setStatus(avgjorelse);
-    vurdertOppgave.validationResult.setRuleHitStatus(regel, avgjorelse);
+    regelUtslag.forEach((regel) => {
+      vurdertOppgave.validationResult.setBehandlet(regel.ruleName, avgjorelse);
+      vurdertOppgave.validationResult.setStatus(avgjorelse);
+      vurdertOppgave.validationResult.setRuleHitStatus(regel.ruleName, avgjorelse);
+    });
     setManOppgave(vurdertOppgave);
   };
 
@@ -26,7 +27,7 @@ const EnRegelController = ({ manuellOppgave, setManOppgave }: EnRegelControllerP
   return (
     <EnRegel
       receivedSykmelding={receivedSykmelding}
-      regel={regel}
+      regelUtslag={regelUtslag}
       handterAvgjorelse={handterAvgjorelse}
       handterAvbryt={handterAvbryt}
     />

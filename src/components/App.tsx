@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut, UrlError } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
-import FlereReglerController from './FlereReglerController';
 import { ValidationResult } from '../types/validationresultTypes';
 import { Normaltekst } from 'nav-frontend-typografi';
 import EnRegelController from './EnRegelController';
@@ -112,14 +111,8 @@ const App = () => {
     return <Normaltekst>Oppgaven er løst... Du videresendes til GOSYS</Normaltekst>;
   }
 
-  if (manOppgave?.validationResult.ruleHits.length === 1) {
-    return <EnRegelController manuellOppgave={manOppgave} setManOppgave={setManOppgave} />;
-  }
-
   if (manOppgave) {
-    if (manOppgave.validationResult.ruleHits.length > 1) {
-      return <FlereReglerController manOppgave={manOppgave} setManOppgave={setManOppgave} />;
-    }
+    return <EnRegelController manuellOppgave={manOppgave} setManOppgave={setManOppgave} />;
   }
 
   return <p>Ukjent feil</p>;

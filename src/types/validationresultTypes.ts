@@ -17,7 +17,7 @@ export type RuleNames =
   | 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE'
   | 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE';
 
-class RuleInfo {
+export class RuleInfo {
   ruleName: RuleNames;
   ruleStatus: Status;
   messageForUser: string;
@@ -58,7 +58,7 @@ export class ValidationResult {
   };
 
   setTilbakemeldinger = () => {
-    this.ruleHits = this.ruleHits.map(regel => {
+    this.ruleHits = this.ruleHits.map((regel) => {
       regel.messageForSender = MessageForSender[regel.ruleName];
       regel.messageForUser = MessageForUser[regel.ruleName];
       return regel;

@@ -1,45 +1,28 @@
 import React, { useState } from 'react';
-import { RuleNames } from '../types/validationresultTypes';
 import { Radio } from 'nav-frontend-skjema';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import './RadioOgKnapper.less';
 
-const hentRegelTekst = (regel: RuleNames): string => {
-  switch (regel) {
-    case 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE':
-      return 'tilbakedatering';
-    case 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE':
-      return 'tilbakedatering';
-    default:
-      return 'ukjent regel';
-  }
-};
-
-type Knappetekst = 'Ferdigstill' | 'Lagre';
-
 interface RadioOgKnapperProps {
-  regel: RuleNames;
-  knappetekst: Knappetekst;
   handterAvgjorelse: (avgjorelse: boolean) => void;
   handterAvbryt: () => void;
 }
 
-const RadioOgKnapper = ({ regel, knappetekst, handterAvgjorelse, handterAvbryt }: RadioOgKnapperProps) => {
+const RadioOgKnapper = ({ handterAvgjorelse, handterAvbryt }: RadioOgKnapperProps) => {
   const [erGodkjent, setErGodkjent] = useState<boolean | undefined>(undefined);
-  const REGELTEKST = hentRegelTekst(regel);
 
   return (
     <div className="radio-og-knapper">
       <span className="radio-og-knapper__radiogruppe">
         <Radio
-          label={`Godkjenn ${REGELTEKST}`}
+          label={`Godkjenn`}
           name="radiogruppe"
           value="godkjent"
           onChange={() => setErGodkjent(true)}
           checked={erGodkjent === true}
         />
         <Radio
-          label={`Avvis ${REGELTEKST}`}
+          label={`Avvis`}
           name="radiogruppe"
           value="avvist"
           onChange={() => setErGodkjent(false)}
@@ -57,7 +40,7 @@ const RadioOgKnapper = ({ regel, knappetekst, handterAvgjorelse, handterAvbryt }
             }
           }}
         >
-          {knappetekst}
+          Ferdigstill
         </Knapp>
         <Flatknapp onClick={handterAvbryt}>Avbryt</Flatknapp>
       </span>

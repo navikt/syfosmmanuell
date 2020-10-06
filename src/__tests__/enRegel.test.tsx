@@ -21,7 +21,7 @@ describe('enRegel', () => {
     const { getByText } = render(
       <EnRegel
         receivedSykmelding={enRegel.receivedSykmelding}
-        regel={enRegel.validationResult.ruleHits[0].ruleName}
+        regelUtslag={enRegel.validationResult.ruleHits}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
       />,
@@ -36,7 +36,7 @@ describe('enRegel', () => {
     const { getByText } = render(
       <EnRegel
         receivedSykmelding={enRegel.receivedSykmelding}
-        regel={enRegel.validationResult.ruleHits[0].ruleName}
+        regelUtslag={enRegel.validationResult.ruleHits}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
       />,
@@ -50,7 +50,7 @@ describe('enRegel', () => {
     const { getByText, getByLabelText } = render(
       <EnRegel
         receivedSykmelding={enRegel.receivedSykmelding}
-        regel={enRegel.validationResult.ruleHits[0].ruleName}
+        regelUtslag={enRegel.validationResult.ruleHits}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
       />,
@@ -67,7 +67,7 @@ describe('enRegel', () => {
     const { getByText, getByLabelText } = render(
       <EnRegel
         receivedSykmelding={enRegel.receivedSykmelding}
-        regel={enRegel.validationResult.ruleHits[0].ruleName}
+        regelUtslag={enRegel.validationResult.ruleHits}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
       />,
@@ -84,7 +84,7 @@ describe('enRegel', () => {
     const { getByText, getAllByText } = render(
       <EnRegel
         receivedSykmelding={enRegel.receivedSykmelding}
-        regel={enRegel.validationResult.ruleHits[0].ruleName}
+        regelUtslag={enRegel.validationResult.ruleHits}
         handterAvgjorelse={handterAvgjorelse}
         handterAvbryt={handterAvbryt}
       />,
