@@ -1,4 +1,4 @@
-import { ValidationResultWithStatus } from './validationresultTypes';
+import { ValidationResult } from './validationresultTypes';
 import { Sykmelding } from './sykmeldingTypes';
 
 export class ReceivedSykmelding {
@@ -15,12 +15,12 @@ export class ReceivedSykmelding {
 
 export class ManuellOppgave {
   oppgaveid: number;
-  validationResult: ValidationResultWithStatus;
+  validationResult: ValidationResult;
   receivedSykmelding: ReceivedSykmelding;
 
   constructor(manuellOppgave: any) {
     this.oppgaveid = manuellOppgave.oppgaveid;
-    this.validationResult = new ValidationResultWithStatus(manuellOppgave.validationResult);
+    this.validationResult = new ValidationResult(manuellOppgave.validationResult);
     this.receivedSykmelding = new ReceivedSykmelding(manuellOppgave.receivedSykmelding);
   }
 }

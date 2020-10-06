@@ -16,9 +16,15 @@ const Sykmeldingheader = ({ regelUtslag, arbeidsgiver, sykmelder, mottattDato }:
     <div className="sykmelding-header">
       <div className="sykmelding-header__arsak">
         <Element>{regelUtslag.length > 1 ? 'Årsaker' : 'Årsak'} til manuell vurdering:</Element>
-        {regelUtslag.map((regel, index) => {
-          return <Normaltekst key={index}>{RuleNamesDescription[regel.ruleName]}</Normaltekst>;
-        })}
+        <ul>
+          {regelUtslag.map((regel, index) => {
+            return (
+              <li key={index}>
+                <Normaltekst>{RuleNamesDescription[regel.ruleName]}</Normaltekst>
+              </li>
+            );
+          })}
+        </ul>
       </div>
       <div className="sykmelding-header__mottattdato">
         <Element>Dato mottatt av NAV:</Element>

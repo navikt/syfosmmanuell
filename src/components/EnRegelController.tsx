@@ -1,23 +1,22 @@
 import React from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
+import { ValidationResult } from '../types/validationresultTypes';
 import EnRegel from './EnRegel';
 
 interface EnRegelControllerProps {
   manuellOppgave: ManuellOppgave;
-  setManOppgave: (value: React.SetStateAction<ManuellOppgave | null | undefined>) => void;
+  ferdigstillOppgave: (validationsResult: ValidationResult, oppgaveid: number) => void;
 }
 
-const EnRegelController = ({ manuellOppgave, setManOppgave }: EnRegelControllerProps) => {
+const EnRegelController = ({ manuellOppgave, ferdigstillOppgave }: EnRegelControllerProps) => {
   const { receivedSykmelding, validationResult } = manuellOppgave;
   const regelUtslag = validationResult.ruleHits;
+
   const handterAvgjorelse = (avgjorelse: boolean): void => {
-    const vurdertOppgave = new ManuellOppgave(manuellOppgave);
-    regelUtslag.forEach((regel) => {
-      vurdertOppgave.validationResult.setBehandlet(regel.ruleName, avgjorelse);
-      vurdertOppgave.validationResult.setStatus(avgjorelse);
-      vurdertOppgave.validationResult.setRuleHitStatus(regel.ruleName, avgjorelse);
-    });
-    setManOppgave(vurdertOppgave);
+    const validationResult = new ValidationResult(manuellOppgave.validationResult);
+    validationResult.setStatus(avgjorelse);
+
+    ferdigstillOppgave(validationResult, manuellOppgave.oppgaveid);
   };
 
   const handterAvbryt = (): void => {

@@ -74,7 +74,7 @@ describe('app', () => {
             messageForUser:
               'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
             ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
-            ruleStatus: 'OK',
+            ruleStatus: 'MANUAL_PROCESSING',
           },
         ],
         status: 'OK',
@@ -108,7 +108,7 @@ describe('app', () => {
             messageForUser:
               'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
             ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
-            ruleStatus: 'INVALID',
+            ruleStatus: 'MANUAL_PROCESSING',
           },
         ],
         status: 'INVALID',
@@ -144,7 +144,7 @@ describe('app', () => {
             messageForUser:
               'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
             ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
-            ruleStatus: 'OK',
+            ruleStatus: 'MANUAL_PROCESSING',
           },
         ],
         status: 'OK',
@@ -160,7 +160,7 @@ describe('app', () => {
       act(() => {
         fireEvent.click(getByText('Ferdigstill'));
       });
-      await wait(() => getByText('Det har oppstått en feil med feilkode: 403', { exact: false }));
+      await wait(() => getByText('Feil ved ferdigstilling av oppgaven. Feilkode: 403', { exact: false }));
       expect(spy.size()).toBe(2);
       expect(spy.lastUrl()).toBe('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/');
       expect(spy.lastCall()?.request.body).toEqual(valideringsresultat);
