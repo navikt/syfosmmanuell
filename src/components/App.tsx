@@ -49,9 +49,9 @@ const App = () => {
     }
   };
 
-  const ferdigstillOppgave = (result: Result, oppgaveid: number) => {
+  const ferdigstillOppgave = (result: Result) => {
     setIsLoading(true);
-    fetch(hentOppgaveUrlPut(oppgaveid), {
+    fetch(hentOppgaveUrlPut(manOppgave!.oppgaveid), {
       method: 'PUT',
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },

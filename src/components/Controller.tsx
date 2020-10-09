@@ -1,37 +1,24 @@
 import React, { useState } from 'react';
 import './Controller.less';
 import Sykmeldingheader from './sykmelding/SykmeldingHeader';
-import Vurderingspanel from './Vurderingspanel';
 import { Panel } from 'nav-frontend-paneler';
 import { Flatknapp } from 'nav-frontend-knapper';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { Result } from '../types/resultTypes';
 import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse';
+import Form from './form/Form';
 
 interface ControllerProps {
   manuellOppgave: ManuellOppgave;
-  ferdigstillOppgave: (result: Result, oppgaveid: number) => void;
+  ferdigstillOppgave: (result: Result) => void;
 }
 
 const Controller = ({ manuellOppgave, ferdigstillOppgave }: ControllerProps) => {
   const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
-  const { receivedSykmelding, validationResult, oppgaveid } = manuellOppgave;
+  const { receivedSykmelding, validationResult } = manuellOppgave;
   const { ruleHits } = validationResult;
   const { sykmelding, personNrPasient, mottattDato } = receivedSykmelding;
-
-  const handterAvgjorelse = (avgjorelse: boolean): void => {
-    const result: Result = {
-      godkjent: avgjorelse,
-      messageForSender: '', // TODO: Correct message for sender
-    };
-
-    ferdigstillOppgave(result, oppgaveid);
-  };
-
-  const handterAvbryt = (): void => {
-    console.log('avbryt trykket');
-  };
 
   return (
     <Panel border className="panel">
@@ -42,7 +29,7 @@ const Controller = ({ manuellOppgave, ferdigstillOppgave }: ControllerProps) => 
         mottattDato={mottattDato}
       />
       <TilbakedatertForlengelse sykmelding={sykmelding} personNrPasient={personNrPasient} />
-      <Vurderingspanel handterAvgjorelse={handterAvgjorelse} handterAvbryt={handterAvbryt} />
+      <Form ferdigstillOppgave={ferdigstillOppgave} />
       <div className="hele-sykmeldingen-visning">
         <Flatknapp
           form="kompakt"
