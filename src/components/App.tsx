@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
-import { ValidationResult } from '../types/validationresultTypes';
 import { Normaltekst } from 'nav-frontend-typografi';
-import EnRegelController from './EnRegelController';
+import { Result } from '../types/resultTypes';
+import Controller from './Controller';
 
 const App = () => {
   const [manOppgave, setManOppgave] = useState<ManuellOppgave | null | undefined>(undefined);
@@ -49,13 +49,13 @@ const App = () => {
     }
   };
 
-  const ferdigstillOppgave = (validationResult: ValidationResult, oppgaveid: number) => {
+  const ferdigstillOppgave = (result: Result, oppgaveid: number) => {
     setIsLoading(true);
     fetch(hentOppgaveUrlPut(oppgaveid), {
       method: 'PUT',
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(validationResult),
+      body: JSON.stringify(result),
     })
       .then((response) => {
         if (response.ok) {
@@ -102,7 +102,7 @@ const App = () => {
   }
 
   if (manOppgave) {
-    return <EnRegelController manuellOppgave={manOppgave} ferdigstillOppgave={ferdigstillOppgave} />;
+    return <Controller manuellOppgave={manOppgave} ferdigstillOppgave={ferdigstillOppgave} />;
   }
 
   return <p>Ukjent feil</p>;

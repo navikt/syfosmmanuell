@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import './RadioOgKnapper.less';
+import './Vurderingspanel.less';
 
-interface RadioOgKnapperProps {
+interface VurderingspanelProps {
   handterAvgjorelse: (avgjorelse: boolean) => void;
   handterAvbryt: () => void;
 }
 
-const RadioOgKnapper = ({ handterAvgjorelse, handterAvbryt }: RadioOgKnapperProps) => {
+const Vurderingspanel = ({ handterAvgjorelse, handterAvbryt }: VurderingspanelProps) => {
   const [erGodkjent, setErGodkjent] = useState<boolean | undefined>(undefined);
 
   return (
@@ -48,4 +48,4 @@ const RadioOgKnapper = ({ handterAvgjorelse, handterAvbryt }: RadioOgKnapperProp
   );
 };
 
-export default RadioOgKnapper;
+export default Vurderingspanel;

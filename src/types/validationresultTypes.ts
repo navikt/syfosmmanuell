@@ -40,28 +40,5 @@ export class ValidationResult {
   constructor(validationResult: any) {
     this.status = validationResult.status;
     this.ruleHits = validationResult.ruleHits.map((ruleHit: any) => new RuleInfo(ruleHit));
-    this.setTilbakemeldinger();
   }
-
-  setStatus = (vurdering: boolean) => {
-    this.status = vurdering ? 'OK' : 'INVALID';
-  };
-
-  setRuleHitStatus = (arsak: RuleNames, vurdering: boolean) => {
-    this.ruleHits.find((ruleHit, index, obj) => {
-      if (ruleHit.ruleName === arsak) {
-        obj[index].ruleStatus = vurdering ? 'OK' : 'INVALID';
-        return true;
-      }
-      return false;
-    });
-  };
-
-  setTilbakemeldinger = () => {
-    this.ruleHits = this.ruleHits.map((regel) => {
-      regel.messageForSender = MessageForSender[regel.ruleName];
-      regel.messageForUser = MessageForUser[regel.ruleName];
-      return regel;
-    });
-  };
 }
