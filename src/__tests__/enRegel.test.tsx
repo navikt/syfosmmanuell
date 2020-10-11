@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import EnRegel from '../components/Controller';
+import EnRegel from '../components/MainContent';
 import { oppgaveEnRegel } from '../mock/data/sykmelding';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { RuleNamesDescription } from '../types/validationresultTypes';

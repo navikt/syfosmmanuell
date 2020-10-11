@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Controller.less';
+import './MainContent.less';
 import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import { Panel } from 'nav-frontend-paneler';
 import { Flatknapp } from 'nav-frontend-knapper';
@@ -9,12 +9,12 @@ import { Result } from '../types/resultTypes';
 import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse';
 import Form from './form/Form';
 
-interface ControllerProps {
+interface MainContentProps {
   manuellOppgave: ManuellOppgave;
   ferdigstillOppgave: (result: Result) => void;
 }
 
-const Controller = ({ manuellOppgave, ferdigstillOppgave }: ControllerProps) => {
+const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) => {
   const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
   const { receivedSykmelding, validationResult } = manuellOppgave;
   const { ruleHits } = validationResult;
@@ -46,4 +46,4 @@ const Controller = ({ manuellOppgave, ferdigstillOppgave }: ControllerProps) => 
   );
 };
 
-export default Controller;
+export default MainContent;

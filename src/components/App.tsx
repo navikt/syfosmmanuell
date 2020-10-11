@@ -4,7 +4,7 @@ import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut } from 
 import Spinner from 'nav-frontend-spinner';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Result } from '../types/resultTypes';
-import Controller from './Controller';
+import MainContent from './MainContent';
 
 const App = () => {
   const [manOppgave, setManOppgave] = useState<ManuellOppgave | null | undefined>(undefined);
@@ -102,7 +102,7 @@ const App = () => {
   }
 
   if (manOppgave) {
-    return <Controller manuellOppgave={manOppgave} ferdigstillOppgave={ferdigstillOppgave} />;
+    return <MainContent manuellOppgave={manOppgave} ferdigstillOppgave={ferdigstillOppgave} />;
   }
 
   return <p>Ukjent feil</p>;
