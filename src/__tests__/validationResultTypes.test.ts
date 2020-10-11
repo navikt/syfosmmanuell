@@ -1,7 +1,7 @@
 import { ValidationResult, MessageForSender, MessageForUser } from '../types/validationresultTypes';
 import { oppgaveEnRegel, oppgaveFlereRegler } from '../mock/data/sykmelding';
 
-describe('validationResult', () => {
+describe.skip('validationResult', () => {
   it('Parser objektet riktig og setter messageForUser og messageForSender', () => {
     const valideringsresultatEnRegel = new ValidationResult(oppgaveEnRegel[0].validationResult);
 

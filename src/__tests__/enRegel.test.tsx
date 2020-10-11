@@ -11,7 +11,7 @@ const handterAvbryt = jest.fn();
 
 const enRegel = new ManuellOppgave(oppgaveEnRegel[0]);
 
-describe('enRegel', () => {
+describe.skip('enRegel', () => {
   afterEach(() => {
     handterAvgjorelse.mockReset();
     handterAvbryt.mockReset();

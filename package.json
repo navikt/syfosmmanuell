@@ -14,7 +14,7 @@
     "@types/react-dom": "^16.9.4",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
-    "craco-less": "^1.15.0",
+    "craco-less": "^1.17.0",
     "dayjs": "^1.8.18",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-chevron": "^1.0.10",
@@ -46,7 +46,7 @@
     "react-collapse": "^5.0.1",
     "react-dom": "^16.12.0",
     "react-hook-form": "^6.9.2",
-    "react-scripts": "3.4.0",
+    "react-scripts": "^3.4.3",
     "typescript": "^3.7.4",
     "yet-another-fetch-mock": "^3.3.1"
   },
