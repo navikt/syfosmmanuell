@@ -1,10 +1,10 @@
 import React from 'react';
-import { Periode } from '../../../../types/sykmeldingTypes';
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 
-import { tilLesbarPeriodeMedArstall, hentDagerMellomDatoer } from '../../../../utils/datoUtils';
 import './periodeseksjon.less';
-import { periodeUndertekst } from '../../../../utils/tekstUtils';
+import { Periode } from '../../../../../../types/sykmeldingTypes';
+import { periodeUndertekst } from '../../../../../../utils/tekstUtils';
+import { hentDagerMellomDatoer, tilLesbarPeriodeMedArstall } from '../../../../../../utils/datoUtils';
 
 interface PeriodeSeksjonProps {
   periode: Periode;

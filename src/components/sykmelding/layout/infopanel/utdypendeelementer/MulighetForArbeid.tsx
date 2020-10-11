@@ -1,5 +1,4 @@
 import React from 'react';
-import { Periode } from '../../../types/sykmeldingTypes';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 
@@ -7,6 +6,7 @@ import tekster from '../infopanel-tekster';
 import Margin from '../layout/Margin';
 import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
+import { Periode } from '../../../../../types/sykmeldingTypes';
 
 interface MulighetForArbeidProps {
   perioder: Periode[];

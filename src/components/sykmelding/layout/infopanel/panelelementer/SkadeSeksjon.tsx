@@ -1,7 +1,6 @@
 import React from 'react';
-import { MedisinskVurdering } from '../../../types/sykmeldingTypes';
-
-import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
+import { MedisinskVurdering } from '../../../../../types/sykmeldingTypes';
+import { tilLesbarDatoMedArstall } from '../../../../../utils/datoUtils';
 
 import tekster from '../infopanel-tekster';
 import CheckboxMedDato from '../layout/CheckboxMedDato';
