@@ -45,7 +45,6 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
         render={({ onChange, value }) => (
           <RadioPanelGruppe
             className="radio-group"
-            legend="Vurdering"
             name="godkjent"
             onChange={onChange}
             checked={value}
