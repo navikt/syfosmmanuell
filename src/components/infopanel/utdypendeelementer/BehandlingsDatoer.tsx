@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
+
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import ElementMedTekst from '../layout/ElementMedTekst';
-import { tilLesbarDatoMedArstall } from '../../../../../utils/datoUtils';
 
 interface BehandlingsDatoerProps {
   signaturDato?: Date;
@@ -11,7 +12,7 @@ interface BehandlingsDatoerProps {
 
 const BehandlingsDatoer = ({ signaturDato, syketilfelleStartDato }: BehandlingsDatoerProps) => {
   return (
-    <SeksjonMedTittel>
+    <SeksjonMedTittel >
       <ElementMedTekst
         vis={!!signaturDato}
         tittel="Dato sykmeldingen ble skrevet"

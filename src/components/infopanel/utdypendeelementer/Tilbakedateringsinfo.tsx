@@ -1,6 +1,6 @@
 import React from 'react';
-import { tilLesbarDatoMedArstall } from '../../../../../utils/datoUtils';
 import ElementMedTekst from '../layout/ElementMedTekst';
+import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 
 interface TilbakedateringsinfoProps {
   dokumenterbarKontaktDato?: Date;

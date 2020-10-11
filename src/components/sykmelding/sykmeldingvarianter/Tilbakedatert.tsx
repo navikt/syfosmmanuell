@@ -1,14 +1,14 @@
 import React from 'react';
 import { Sykmelding } from '../../../types/sykmeldingTypes';
-import InfoPanel from '../layout/infopanel/InfoPanel';
-import ElementMedTekst from '../layout/infopanel/layout/ElementMedTekst';
-import SeksjonMedTittel from '../layout/infopanel/layout/SeksjonMedTittel';
-import DiagnoseSeksjon from '../layout/infopanel/panelelementer/diagnose/DiagnoseSeksjon';
-import SykmeldingPerioder from '../layout/infopanel/panelelementer/periode/SykmeldingPerioder';
-import Arbeidsevne from '../layout/infopanel/utdypendeelementer/Arbeidsevne';
-import BehandlingsDatoer from '../layout/infopanel/utdypendeelementer/BehandlingsDatoer';
-import Friskmelding from '../layout/infopanel/utdypendeelementer/Friskmelding';
-import Tilbakedateringsinfo from '../layout/infopanel/utdypendeelementer/Tilbakedateringsinfo';
+import DiagnoseSeksjon from '../../infopanel/panelelementer/diagnose/DiagnoseSeksjon';
+import InfoPanel from '../../infopanel/InfoPanel';
+import SykmeldingPerioder from '../../infopanel/panelelementer/periode/SykmeldingPerioder';
+import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding';
+import BehandlingsDatoer from '../../infopanel/utdypendeelementer/BehandlingsDatoer';
+import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
+import Tilbakedateringsinfo from '../../infopanel/utdypendeelementer/Tilbakedateringsinfo';
+import SeksjonMedTittel from '../../infopanel/layout/SeksjonMedTittel';
+import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 
 interface TilbakedatertProps {
   sykmelding: Sykmelding;

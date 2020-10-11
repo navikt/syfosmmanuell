@@ -1,10 +1,10 @@
 import React from 'react';
+import { MeldingTilNAV } from '../../../types/sykmeldingTypes';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import ElementMedTekst from '../layout/ElementMedTekst';
 import Margin from '../layout/Margin';
-import EnkelCheckbox from '../layout/EnkelCheckbox';
-import { MeldingTilNAV } from '../../../../../types/sykmeldingTypes';
+import EnkelCheckbox from '../../infopanel/layout/EnkelCheckbox';
 
 interface AnnetProps {
   meldingTilNAV?: MeldingTilNAV;

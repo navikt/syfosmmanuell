@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { Periode } from '../../../../types/sykmeldingTypes';
+import { sorterPerioderEldsteFoerst } from '../../../../utils/sorterSykmeldingUtils';
 import PeriodeSeksjon from './PeriodeSeksjon';
 import Margin from '../../layout/Margin';
-import { Periode } from '../../../../../../types/sykmeldingTypes';
-import { sorterPerioderEldsteFoerst } from '../../../../../../utils/sorterSykmeldingUtils';
 
 interface SykmeldingPerioderProps {
     perioder: Periode[];
