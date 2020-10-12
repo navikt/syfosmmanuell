@@ -50,8 +50,8 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
             checked={value}
             feil={errors.godkjent?.message}
             radios={[
-              { id: 'b-godkjent', label: 'Godkjenn', value: 'true' },
-              { label: 'Avvis', value: 'false' },
+              { id: 'b-godkjent', label: 'Godkjenn tilbakedatering', value: 'true' },
+              { label: 'Avvis tilbakedatering', value: 'false' },
             ]}
           />
         )}
