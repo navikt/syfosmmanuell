@@ -72,10 +72,10 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
               radios={[
                 {
                   id: 'b-avvisningstekst',
-                  label: arsaker.TILBAKEDATERT_FORLENGELSE.label,
-                  value: arsaker.TILBAKEDATERT_FORLENGELSE.key,
+                  label: arsaker.TILBAKEDATERT_MANGLER_BEGRUNNELSE.label,
+                  value: arsaker.TILBAKEDATERT_MANGLER_BEGRUNNELSE.key,
                 },
-                { label: arsaker.TILBAKEDATERT_FORSTE.label, value: arsaker.TILBAKEDATERT_FORSTE.key },
+                { label: arsaker.TILBAKEDATERT_IKKE_GODTATT.label, value: arsaker.TILBAKEDATERT_IKKE_GODTATT.key },
               ]}
             />
           )}
