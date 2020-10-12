@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
-import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPut } from '../utils/urlUtils';
+import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPost } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Result } from '../types/resultTypes';
@@ -51,8 +51,8 @@ const App = () => {
 
   const ferdigstillOppgave = (result: Result) => {
     setIsLoading(true);
-    fetch(hentOppgaveUrlPut(manOppgave!.oppgaveid), {
-      method: 'PUT',
+    fetch(hentOppgaveUrlPost(manOppgave!.oppgaveid), {
+      method: 'POST',
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(result),
