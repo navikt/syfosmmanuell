@@ -13,18 +13,20 @@ const HvaViSierTilBehandlerOgPasient = ({ arsak }: HvaViSierTilBehandlerOgPasien
   }
 
   return (
-    <div className="se-hva-vi-sier">
-      <Ekspanderbartpanel border tittel="Se hva vi sier til behandleren og pasienten">
-        <div className="se-hva-vi-sier__behandler">
-          <Element>Beskjed til behandleren</Element>
-          <Normaltekst>{arsaker[arsak].messageForSender}</Normaltekst>
-        </div>
-        <div className="se-hva-vi-sier__pasient">
-          <Element>Beskjed til pasienten</Element>
-          <Normaltekst>{arsaker[arsak].messageForUser}</Normaltekst>
-        </div>
-      </Ekspanderbartpanel>
-    </div>
+    <Ekspanderbartpanel
+      className="se-hva-vi-sier"
+      border
+      tittel={<Normaltekst>Se hva vi sier til behandleren og pasienten</Normaltekst>}
+    >
+      <div className="se-hva-vi-sier__behandler">
+        <Element>Beskjed til behandleren</Element>
+        <Normaltekst>{arsaker[arsak].messageForSender}</Normaltekst>
+      </div>
+      <div className="se-hva-vi-sier__pasient">
+        <Element>Beskjed til pasienten</Element>
+        <Normaltekst>{arsaker[arsak].messageForUser}</Normaltekst>
+      </div>
+    </Ekspanderbartpanel>
   );
 };
 
