@@ -27,6 +27,6 @@ export const arsaker: Arsaker = {
 };
 
 export interface FormShape {
-  godkjent: string;
+  godkjent: 'true' | 'false';
   avvisningstekst?: Arsak;
 }

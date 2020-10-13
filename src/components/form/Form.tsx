@@ -41,7 +41,14 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
       <Controller
         control={control}
         name="godkjent"
-        rules={{ required: 'Oppgaven mangler vurdering' }}
+        rules={{
+          validate: (value) => {
+            if (value === 'true' || value === 'false') {
+              return true;
+            }
+            return 'Oppgaven mangler vurdering';
+          },
+        }}
         render={({ onChange, value }) => (
           <RadioPanelGruppe
             className="radio-group"
