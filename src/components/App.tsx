@@ -68,7 +68,7 @@ const App = () => {
           }
         } else if (response.status === 401) {
           throw new Error(
-            'Kunne vurdere oppgaven på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
+            'Kunne ikke vurdere oppgaven på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
           );
         } else {
           throw new Error(`Feil ved ferdigstilling av oppgaven. Feilkode: ${response.status}`);
