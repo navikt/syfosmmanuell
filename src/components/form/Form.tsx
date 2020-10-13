@@ -98,7 +98,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
         />
       )}
       <Knapp type="hoved" htmlType="submit">
-        Ferdigstill
+        Registrer
       </Knapp>
     </form>
   );
