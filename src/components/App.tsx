@@ -64,7 +64,7 @@ const App = () => {
           if (GOSYS_URL) {
             setTimeout(() => (window.location.href = GOSYS_URL), 1000);
           } else {
-            throw new Error('Oppgaven ble ferdigstilt, men det var ikke mulig å sende deg tilbake til GOSY');
+            throw new Error('Oppgaven ble ferdigstilt, men det var ikke mulig å sende deg tilbake til GOSYS');
           }
         } else if (response.status === 401) {
           throw new Error(
