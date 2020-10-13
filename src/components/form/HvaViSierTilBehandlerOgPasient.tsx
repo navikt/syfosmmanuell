@@ -20,11 +20,11 @@ const HvaViSierTilBehandlerOgPasient = ({ arsak }: HvaViSierTilBehandlerOgPasien
       type="intern"
     >
       <div className="se-hva-vi-sier__behandler">
-        <Element>Beskjed til behandleren</Element>
+        <Element tag="h4">Beskjed til behandleren</Element>
         <Normaltekst>{arsaker[arsak].messageForSender}</Normaltekst>
       </div>
       <div className="se-hva-vi-sier__pasient">
-        <Element>Beskjed til pasienten</Element>
+        <Element tag="h4">Beskjed til pasienten</Element>
         <Normaltekst>{arsaker[arsak].messageForUser}</Normaltekst>
       </div>
     </Expandable>

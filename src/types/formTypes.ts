@@ -11,7 +11,7 @@ export const arsaker: Arsaker = {
     key: 'TILBAKEDATERT_MANGLER_BEGRUNNELSE',
     label: 'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok hvorfor dette var nødvendig.',
     messageForSender:
-      'Sykmelding gjelder som hovedregel fra den dagen pasienten oppsøker behandler. Sykmeldingen er tilbakedatert uten at det kommer tydelig nok fram hvorfor dette var nødvendig. Sykmeldingen er derfor avvist, og det må skrives en ny hvis sykmelding fortsatt er aktuelt. Pasienten har fått beskjed.',
+      'Sykmelding gjelder som hovedregel fra den dagen pasienten oppsøker behandler. Sykmeldingen er tilbakedatert uten at det kommer tydelig nok fram hvorfor dette var nødvendig. Sykmeldingen er derfor avvist, og det må skrives en ny hvis det fortsatt er aktuelt med sykmelding. Pasienten har fått beskjed om å vente på ny sykmelding fra deg.',
     messageForUser:
       'Sykmelding gjelder som hovedregel fra den dagen du oppsøker behandler. Sykmeldingen din er tilbakedatert uten at det er gitt en god nok begrunnelse for dette. Behandleren din må skrive ut en ny sykmelding og begrunne bedre hvorfor den er tilbakedatert. Din behandler har mottatt melding fra NAV om dette.',
   },
