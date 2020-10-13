@@ -20,7 +20,7 @@ export const arsaker: Arsaker = {
     label:
       'NAV kan ikke godta tilbakedateringen. Det må skrives ny der f.o.m-dato er datoen for den første kontakten med pasienten.',
     messageForSender:
-      'NAV kan ikke godta tilbakedateringen. Sykmeldingen er derfor avvist. Hvis sykmelding fortsatt er aktuelt, må det skrives ny sykmelding der f.o.m.-dato er dagen du var i kontakt med pasienten. Pasienten har fått beskjed.',
+      'NAV kan ikke godta tilbakedateringen. Sykmeldingen er derfor avvist. Hvis det fortsatt er aktuelt med sykmelding, må det skrives ny sykmelding der f.o.m.-dato er dagen du var i kontakt med pasienten. Pasienten har fått beskjed om å vente på ny sykmelding fra deg.',
     messageForUser:
       'NAV kan ikke godta sykmeldingen din fordi den starter før dagen du tok kontakt med behandleren. Trenger du fortsatt sykmelding, må behandleren din skrive en ny som gjelder fra den dagen dere var i kontakt. Behandleren din har fått beskjed fra NAV om dette.',
   },
