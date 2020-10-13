@@ -1,7 +1,7 @@
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React from 'react';
 import { Arsak, arsaker } from '../../types/formTypes';
+import Expandable from '../expandable/Expandable';
 import './HvaViSierTilBehandlerOgPasient.less';
 
 interface HvaViSierTilBehandlerOgPasientProps {
@@ -13,10 +13,11 @@ const HvaViSierTilBehandlerOgPasient = ({ arsak }: HvaViSierTilBehandlerOgPasien
   }
 
   return (
-    <Ekspanderbartpanel
+    <Expandable
       className="se-hva-vi-sier"
-      border
-      tittel={<Normaltekst>Se hva vi sier til behandleren og pasienten</Normaltekst>}
+      erApen={false}
+      tittel="Se hva vi sier til behandleren og pasienten"
+      type="intern"
     >
       <div className="se-hva-vi-sier__behandler">
         <Element>Beskjed til behandleren</Element>
@@ -26,7 +27,7 @@ const HvaViSierTilBehandlerOgPasient = ({ arsak }: HvaViSierTilBehandlerOgPasien
         <Element>Beskjed til pasienten</Element>
         <Normaltekst>{arsaker[arsak].messageForUser}</Normaltekst>
       </div>
-    </Ekspanderbartpanel>
+    </Expandable>
   );
 };
 
