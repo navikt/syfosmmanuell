@@ -25,7 +25,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
   const onSubmit = (data: FormShape) => {
     const result: Result = {
       ...data,
-      godkjent: data.godkjent === 'true' ? true : false,
+      godkjent: data.godkjent === 'true',
     };
     ferdigstillOppgave(result);
   };
