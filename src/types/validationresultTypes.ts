@@ -17,7 +17,7 @@ export type RuleNames =
   | 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE'
   | 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE';
 
-class RuleInfo {
+export class RuleInfo {
   ruleName: RuleNames;
   ruleStatus: Status;
   messageForUser: string;
@@ -40,73 +40,5 @@ export class ValidationResult {
   constructor(validationResult: any) {
     this.status = validationResult.status;
     this.ruleHits = validationResult.ruleHits.map((ruleHit: any) => new RuleInfo(ruleHit));
-    this.setTilbakemeldinger();
   }
-
-  setStatus = (vurdering: boolean) => {
-    this.status = vurdering ? 'OK' : 'INVALID';
-  };
-
-  setRuleHitStatus = (arsak: RuleNames, vurdering: boolean) => {
-    this.ruleHits.find((ruleHit, index, obj) => {
-      if (ruleHit.ruleName === arsak) {
-        obj[index].ruleStatus = vurdering ? 'OK' : 'INVALID';
-        return true;
-      }
-      return false;
-    });
-  };
-
-  setTilbakemeldinger = () => {
-    this.ruleHits = this.ruleHits.map(regel => {
-      regel.messageForSender = MessageForSender[regel.ruleName];
-      regel.messageForUser = MessageForUser[regel.ruleName];
-      return regel;
-    });
-  };
-}
-
-export class ValidationResultWithStatus extends ValidationResult {
-  behandlet: Map<RuleNames, boolean | undefined>;
-  antallBehandlet: number;
-  totalVurdering: boolean | undefined;
-
-  constructor(validationResult: any) {
-    super(validationResult);
-    if (validationResult.behandlet && validationResult.behandlet instanceof Map) {
-      this.behandlet = new Map<RuleNames, boolean | undefined>(validationResult.behandlet);
-      this.antallBehandlet = validationResult.antallBehandlet;
-      this.totalVurdering = validationResult.totalVurdering;
-    } else {
-      const behandletMap = new Map<RuleNames, boolean | undefined>();
-      validationResult.ruleHits.forEach((ruleHit: RuleInfo) => {
-        behandletMap.set(ruleHit.ruleName, undefined);
-      });
-      this.behandlet = behandletMap;
-      this.antallBehandlet = 0;
-      this.totalVurdering = undefined;
-    }
-  }
-
-  // Brukes for å sette state for vurdering av hvert enkelt regelutslag
-  setBehandlet = (arsak: RuleNames, vurdering: boolean): ValidationResultWithStatus => {
-    this.behandlet.set(arsak, vurdering);
-    this.antallBehandlet++;
-    this.setRuleHitStatus(arsak, vurdering);
-
-    if (this.antallBehandlet === this.ruleHits.length && this.totalVurdering == null) {
-      let antallTrue = 0;
-      this.behandlet.forEach((value, key) => {
-        if (value === false) {
-          this.totalVurdering = false;
-          return this;
-        } else if (value === true) {
-          antallTrue++;
-        }
-      });
-
-      if (antallTrue === this.ruleHits.length) this.totalVurdering = true;
-    }
-    return this;
-  };
 }

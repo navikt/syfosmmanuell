@@ -1,22 +1,30 @@
 import React from 'react';
-import { RuleNames, RuleNamesDescription } from '../../types/validationresultTypes';
+import { RuleInfo, RuleNamesDescription } from '../../types/validationresultTypes';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import dayjs from 'dayjs';
 import './SykmeldingHeader.less';
 
 interface SykmeldingheaderProps {
-  regel: RuleNames;
+  regelUtslag: RuleInfo[];
   arbeidsgiver?: string;
   sykmelder: string;
   mottattDato: Date;
 }
 
-const Sykmeldingheader = ({ regel, arbeidsgiver, sykmelder, mottattDato }: SykmeldingheaderProps) => {
+const Sykmeldingheader = ({ regelUtslag, arbeidsgiver, sykmelder, mottattDato }: SykmeldingheaderProps) => {
   return (
     <div className="sykmelding-header">
       <div className="sykmelding-header__arsak">
-        <Element>Årsak til manuell vurdering:</Element>
-        <Normaltekst>{RuleNamesDescription[regel]}</Normaltekst>
+        <Element>{regelUtslag.length > 1 ? 'Årsaker' : 'Årsak'} til manuell vurdering:</Element>
+        <ul>
+          {regelUtslag.map((regel, index) => {
+            return (
+              <li key={index}>
+                <Normaltekst>{RuleNamesDescription[regel.ruleName]}</Normaltekst>
+              </li>
+            );
+          })}
+        </ul>
       </div>
       <div className="sykmelding-header__mottattdato">
         <Element>Dato mottatt av NAV:</Element>

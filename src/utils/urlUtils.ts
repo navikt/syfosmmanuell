@@ -40,7 +40,7 @@ export const hentOppgaveUrl = (oppgaveid: string): string => {
   return 'https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/';
 };
 
-export const hentOppgaveUrlPut = (oppgaveid: number): string => {
+export const hentOppgaveUrlPost = (oppgaveid: number): string => {
   if (process.env.REACT_APP_NODE_ENV === 'production' || process.env.REACT_APP_NODE_ENV === 'preprod') {
     const PUT_MAN_VURDERING = process.env.REACT_APP_PUT_MANUELL_VURDERING_URL;
     if (!PUT_MAN_VURDERING) {

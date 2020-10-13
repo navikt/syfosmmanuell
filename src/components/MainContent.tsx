@@ -1,41 +1,35 @@
 import React, { useState } from 'react';
-import './EnRegel.less';
+import './MainContent.less';
 import Sykmeldingheader from './sykmelding/SykmeldingHeader';
-import RadioOgKnapper from './RadioOgKnapper';
-import Sykmelding from './sykmelding/SykmeldingVelger';
-import { RuleNames } from '../types/validationresultTypes';
 import { Panel } from 'nav-frontend-paneler';
 import { Flatknapp } from 'nav-frontend-knapper';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';
-import { ReceivedSykmelding } from '../types/manuellOppgaveTypes';
+import { ManuellOppgave } from '../types/manuellOppgaveTypes';
+import { Result } from '../types/resultTypes';
+import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse';
+import Form from './form/Form';
 
-interface EnRegelProps {
-  receivedSykmelding: ReceivedSykmelding;
-  regel: RuleNames;
-  finnesFlereRegler?: boolean;
-  handterAvgjorelse: (avgjorelse: boolean) => void;
-  handterAvbryt: () => void;
+interface MainContentProps {
+  manuellOppgave: ManuellOppgave;
+  ferdigstillOppgave: (result: Result) => void;
 }
 
-const EnRegel = ({ receivedSykmelding, regel, finnesFlereRegler, handterAvgjorelse, handterAvbryt }: EnRegelProps) => {
+const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) => {
   const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
+  const { receivedSykmelding, validationResult } = manuellOppgave;
+  const { ruleHits } = validationResult;
   const { sykmelding, personNrPasient, mottattDato } = receivedSykmelding;
 
   return (
     <Panel border className="panel">
       <Sykmeldingheader
-        regel={regel}
+        regelUtslag={ruleHits}
         arbeidsgiver={sykmelding.arbeidsgiver.navn}
         sykmelder={sykmelding.navnFastlege}
         mottattDato={mottattDato}
       />
-      <Sykmelding sykmelding={sykmelding} personNrPasient={personNrPasient} regel={regel} />
-      <RadioOgKnapper
-        regel={regel}
-        knappetekst={finnesFlereRegler ? 'Lagre' : 'Ferdigstill'}
-        handterAvgjorelse={handterAvgjorelse}
-        handterAvbryt={handterAvbryt}
-      />
+      <TilbakedatertForlengelse sykmelding={sykmelding} personNrPasient={personNrPasient} />
+      <Form ferdigstillOppgave={ferdigstillOppgave} />
       <div className="hele-sykmeldingen-visning">
         <Flatknapp
           form="kompakt"
@@ -52,4 +46,4 @@ const EnRegel = ({ receivedSykmelding, regel, finnesFlereRegler, handterAvgjorel
   );
 };
 
-export default EnRegel;
+export default MainContent;
