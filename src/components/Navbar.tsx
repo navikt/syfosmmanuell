@@ -11,26 +11,26 @@ const Navbar = () => {
       ? process.env.REACT_APP_WEB_SERVER_URL + 'user'
       : 'https://syfosmmanuell.nais.preprod.local/user';
     fetch(URL)
-      .then(res => {
+      .then((res) => {
         return res.text();
       })
-      .then(text => {
+      .then((text) => {
         if (!text) {
           throw new Error('Kunne ikke hente brukernavn fra server');
         }
         setLoginText(`Logget inn som: ${text}`);
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   }, []);
 
   return (
-    <div className="navbar">
+    <header className="navbar">
       <span className="navbar__left">
         <img className="navlogo" src={navLogo} alt="NAV-logo" />
         <Element>Manuell vurdering av sykmelding</Element>
       </span>
       {loginText && <Element>{loginText}</Element>}
-    </div>
+    </header>
   );
 };
 
