@@ -10,4 +10,4 @@ COPY ./server .
 
 RUN npm install
 
-CMD ["npm", "start"] 
+CMD ["node", "./server.js"] 

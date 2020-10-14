@@ -58,9 +58,9 @@ spec:
       value: https://graph.microsoft.com
     - name: GRAPH_API_SCOPES
       value: https://graph.microsoft.com/.default
-    - name: MODIACONTEXTHOLDER_PATH
+    - name: MODIA_CONTEXT_PATH
       value: modiacontextholder/api
-    - name: MODIACONTEXTHOLDER_URL
+    - name: MODIA_CONTEXT_URL
       value: https://modiacontextholder-q1.nais.preprod.loca
     - name: REDIS_HOST
       value: syfosmmanuell-redis.default.svc.nais.local
