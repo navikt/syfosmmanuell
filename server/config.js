@@ -39,7 +39,7 @@ const downstreamApiReverseProxy = {
   clientId: envVar({ name: 'DOWNSTREAM_API_CLIENT_ID' }),
   path: envVar({ name: 'DOWNSTREAM_API_PATH' }),
   url: envVar({ name: 'DOWNSTREAM_API_URL' }),
-  scopes: envVar({ name: 'DOWNSTREAM_API_SCOPES' }),
+  scopes: envVar({ name: 'DOWNSTREAM_API_SCOPES', required: false }),
 };
 
 const modiaContextReverseProxy = {
