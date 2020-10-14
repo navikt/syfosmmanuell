@@ -1,5 +1,4 @@
 import authUtils from './auth/utils';
-import config from './config';
 import express from 'express';
 import path from 'path';
 import passport from 'passport';
@@ -20,13 +19,13 @@ const ensureAuthenticated = async (req, res, next) => {
   }
 };
 
-const setup = authClient => {
+const setup = (authClient) => {
   // Unprotected
-  router.get('/is_alive', (req, res) => res.send('Alive'));
-  router.get('/is_ready', (req, res) => res.send('Ready'));
+  router.get('/is_alive', (_req, res) => res.send('Alive'));
+  router.get('/is_ready', (_req, res) => res.send('Ready'));
 
   router.get('/login', passport.authenticate('azureOidc', { failureRedirect: '/login' }));
-  router.use('/callback', passport.authenticate('azureOidc', { failureRedirect: '/login' }), (req, res) => {
+  router.use('/callback', passport.authenticate('azureOidc', { failureRedirect: '/login' }), (_req, res) => {
     if (session.redirectTo) {
       res.redirect(session.redirectTo);
     } else {
@@ -55,27 +54,9 @@ const setup = authClient => {
     }
   });
 
-  router.get('/logout', (req, res) => {
-    req.logOut();
-    req.session.destroy(error => {
-      if (!error) {
-        if (config.azureAd.logoutRedirectUri) {
-          res
-            .status(200)
-            .send('logged out')
-            .redirect(config.azureAd.logoutRedirectUri);
-        } else {
-          res.status(200).send('logged out');
-        }
-      } else {
-        res.status(500).send('Could not log out due to a server error');
-      }
-    });
-  });
-
   reverseProxy.setup(router, authClient);
 
-  router.use('/*', (req, res) => {
+  router.use('/*', (_req, res) => {
     res.status(404).send('Not found');
   });
 
