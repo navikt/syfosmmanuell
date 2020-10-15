@@ -1,8 +1,8 @@
-import authUtils from './auth/utils';
+import authUtils from '../auth/utils';
 import express, { NextFunction, Request, Response } from 'express';
 import path from 'path';
 import passport from 'passport';
-import reverseProxy from './proxy/reverse-proxy';
+import reverseProxy from '../proxy/reverse-proxy';
 import { Client } from 'openid-client';
 
 const router = express.Router();
@@ -32,10 +32,10 @@ const setup = (authClient: Client) => {
     }
   });
 
-  router.use(ensureAuthenticated);
+  //router.use(ensureAuthenticated);
 
   // Protected
-  router.use('/', express.static(path.join(__dirname, 'build')));
+  router.use('/', express.static(path.join(__dirname, '../../../client/build')));
 
   reverseProxy.setup(router, authClient);
 

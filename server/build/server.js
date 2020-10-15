@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const azure_1 = __importDefault(require("./auth/azure"));
 const config_1 = __importDefault(require("./config"));
-const routes_1 = __importDefault(require("./routes"));
+const routes_1 = __importDefault(require("./routes/routes"));
 const cors_1 = __importDefault(require("./cors"));
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));

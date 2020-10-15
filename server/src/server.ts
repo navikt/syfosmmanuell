@@ -1,6 +1,6 @@
 import azure from './auth/azure';
 import config from './config';
-import routes from './routes';
+import routes from './routes/routes';
 import cors from './cors';
 import express from 'express';
 import helmet from 'helmet';

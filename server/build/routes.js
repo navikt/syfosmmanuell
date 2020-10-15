@@ -43,9 +43,9 @@ const setup = (authClient) => {
             res.redirect('/');
         }
     });
-    router.use(ensureAuthenticated);
+    //router.use(ensureAuthenticated);
     // Protected
-    router.use('/', express_1.default.static(path_1.default.join(__dirname, 'build')));
+    router.use('/', express_1.default.static(path_1.default.join(__dirname, '../../../client/build')));
     reverse_proxy_1.default.setup(router, authClient);
     router.use('/*', (_req, res) => {
         res.status(404).send('Not found');
