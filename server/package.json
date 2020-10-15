@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
     "compile": "tsc",
     "start": "node ./build/server.js",
     "dev": "NODE_ENV=development nodemon -e ts --exec \"npm run compile && npm run start\""
