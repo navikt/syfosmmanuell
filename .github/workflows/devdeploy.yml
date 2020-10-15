@@ -17,15 +17,17 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: Install deps
+      - name: Install deps for client
         run: |
           npm install
-      - name: Run tests
+        working-directory: ./client
+      - name: Run tests for client
         env:
           CI: true
         run: |
           npm run test
-      - name: Build
+        working-directory: ./client
+      - name: Build client
         env:
           REACT_APP_NODE_ENV: preprod # Brukes siden det ikke er mulig å endre NODE_ENV manuelt
           REACT_APP_GET_MANUELLE_OPPGAVER_URL: https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/?oppgaveid=
@@ -35,6 +37,19 @@ jobs:
           REACT_APP_GOSYS_URL: https://gosys.nais.preprod.local/gosys/bruker/brukeroversikt.jsf
         run: |
           npm run build
+        working-directory: ./client
+      - name: Install deps for server
+        run: |
+          npm install
+        working-directory: ./server
+      - name: Run tests for server
+        run: |
+          npm test
+        working-directory: ./server
+      - name: Build server
+        run: |
+          npm run compile
+        working-directory: ./server
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
