@@ -7,18 +7,11 @@ import helmet from 'helmet';
 import passport from 'passport';
 import session from './session';
 
-// for debugging during development
-import morganBody from 'morgan-body';
-import morgan from 'morgan';
-
 const server = express();
 const port = config.server.port;
 
 async function startApp() {
   try {
-    morganBody(server);
-    morgan('dev');
-
     session.setup(server);
 
     server.use(express.json());

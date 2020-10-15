@@ -1,12 +1,20 @@
-import { TokenSet } from 'openid-client';
+import { Request } from 'express';
+import { Client, TokenSet } from 'openid-client';
+import { TokenSets } from '../@types/express';
+import { ProxyConfig } from '../config';
 
 const tokenSetSelfId = 'self';
 
-const getOnBehalfOfAccessToken = (authClient, req, proxyConfig) => {
+const getOnBehalfOfAccessToken = (
+  authClient: Client,
+  req: Request,
+  proxyConfig: ProxyConfig,
+  forApi: keyof TokenSets,
+) => {
   return new Promise((resolve, reject) => {
-    if (hasValidAccessToken(req, proxyConfig.clientId)) {
+    if (hasValidAccessToken(req, forApi)) {
       const tokenSets = getTokenSetsFromSession(req);
-      resolve(tokenSets[proxyConfig.clientId].access_token);
+      resolve(tokenSets![forApi]!.access_token);
     } else {
       authClient
         .grant({
@@ -14,10 +22,10 @@ const getOnBehalfOfAccessToken = (authClient, req, proxyConfig) => {
           client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
           requested_token_use: 'on_behalf_of',
           scope: createOnBehalfOfScope(proxyConfig),
-          assertion: req.user.tokenSets[tokenSetSelfId].access_token,
+          assertion: req.user!.tokenSets.self.access_token,
         })
         .then((tokenSet) => {
-          req.user.tokenSets[proxyConfig.clientId] = tokenSet;
+          req.user!.tokenSets[forApi] = tokenSet;
           resolve(tokenSet.access_token);
         })
         .catch((err) => {
@@ -28,11 +36,11 @@ const getOnBehalfOfAccessToken = (authClient, req, proxyConfig) => {
   });
 };
 
-const appendDefaultScope = (scope) => `${scope}/.default`;
+const appendDefaultScope = (scope: string): string => `${scope}/.default`;
 
-const formatClientIdScopeForV2Clients = (clientId) => appendDefaultScope(`api://${clientId}`);
+const formatClientIdScopeForV2Clients = (clientId: string): string => appendDefaultScope(`api://${clientId}`);
 
-const createOnBehalfOfScope = (proxyConfig) => {
+const createOnBehalfOfScope = (proxyConfig: ProxyConfig) => {
   if (proxyConfig.scopes && proxyConfig.scopes.length > 0) {
     return `${proxyConfig.scopes.join(' ')}`;
   } else {
@@ -40,14 +48,14 @@ const createOnBehalfOfScope = (proxyConfig) => {
   }
 };
 
-const getTokenSetsFromSession = (req) => {
+const getTokenSetsFromSession = (req: Request) => {
   if (req && req.user) {
     return req.user.tokenSets;
   }
   return null;
 };
 
-const hasValidAccessToken = (req, key = tokenSetSelfId) => {
+const hasValidAccessToken = (req: Request, key: keyof TokenSets = tokenSetSelfId) => {
   const tokenSets = getTokenSetsFromSession(req);
   if (!tokenSets) {
     return false;

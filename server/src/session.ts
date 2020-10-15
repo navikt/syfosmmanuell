@@ -1,10 +1,11 @@
 import config from './config';
 import redis from 'redis';
 import session from 'express-session';
+import { Application } from 'express';
 
 const SESSION_MAX_AGE_MILLISECONDS = 60 * 60 * 1000;
 
-const setup = (app) => {
+const setup = (app: Application) => {
     app.set('trust proxy', 1);
     if (process.env.NODE_ENV === 'development') {
         app.use(session({
@@ -12,7 +13,7 @@ const setup = (app) => {
                 maxAge: SESSION_MAX_AGE_MILLISECONDS,
                 sameSite: 'lax'
             },
-            secret: config.server.sessionKey,
+            secret: config.server.sessionKey!,
             name: config.server.cookieName,
             resave: false,
             saveUninitialized: true,
@@ -43,7 +44,7 @@ const setup = (app) => {
                 },
                 name: config.server.cookieName,
                 saveUninitialized: true,
-                secret: config.server.sessionKey,
+                secret: config.server.sessionKey!,
                 store: store,
                 resave: false,
             })

@@ -1,9 +1,9 @@
-import { custom, Issuer, Strategy } from 'openid-client';
+import { Client, ClientMetadata, custom, Issuer, Strategy, TokenSet } from 'openid-client';
 import authUtils from './utils';
 import config from '../config';
 import httpProxy from '../proxy/http-proxy';
 
-const metadata = {
+const metadata: ClientMetadata = {
   client_id: config.azureAd.clientId,
   client_secret: config.azureAd.clientSecret,
   redirect_uris: [config.azureAd.redirectUri],
@@ -22,8 +22,8 @@ const client = async () => {
   return new issuer.Client(metadata);
 };
 
-const strategy = client => {
-  const verify = (tokenSet, done) => {
+const strategy = (client: Client) => {
+  const verify = (tokenSet: TokenSet, done: any) => {
     if (tokenSet.expired()) {
       return done(null, false);
     }
