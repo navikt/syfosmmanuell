@@ -90,15 +90,27 @@ const App = () => {
   }, [manOppgave]);
 
   if (feilMelding) {
-    return <Normaltekst>{feilMelding}</Normaltekst>;
+    return (
+      <div className="margin-top--2">
+        <Normaltekst>{feilMelding}</Normaltekst>
+      </div>
+    );
   }
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <div className="margin-top--2">
+        <Spinner />
+      </div>
+    );
   }
 
   if (isCompleted) {
-    return <Normaltekst>Oppgaven er løst... Du videresendes til GOSYS</Normaltekst>;
+    return (
+      <div className="margin-top--2">
+        <Normaltekst>Oppgaven er løst... Du videresendes til GOSYS</Normaltekst>
+      </div>
+    );
   }
 
   if (manOppgave) {
