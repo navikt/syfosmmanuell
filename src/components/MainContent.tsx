@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './MainContent.less';
 import Sykmeldingheader from './sykmelding/SykmeldingHeader';
-import { Panel } from 'nav-frontend-paneler';
 import { Flatknapp } from 'nav-frontend-knapper';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
@@ -21,7 +20,7 @@ const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) =
   const { sykmelding, personNrPasient, mottattDato } = receivedSykmelding;
 
   return (
-    <Panel border className="panel">
+    <div className="panel">
       <Sykmeldingheader
         regelUtslag={ruleHits}
         arbeidsgiver={sykmelding.arbeidsgiver.navn}
@@ -42,7 +41,7 @@ const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) =
       {visHeleSykmeldingen && (
         <HeleSykmeldingen sykmelding={sykmelding} setVisHeleSykmeldingen={setVisHeleSykmeldingen} />
       )}
-    </Panel>
+    </div>
   );
 };
 

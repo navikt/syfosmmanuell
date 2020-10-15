@@ -18,9 +18,9 @@ const AppWrapper = () => {
   return (
     <>
       <Navbar />
-      <span className="app">
+      <main>
         <App />
-      </span>
+      </main>
     </>
   );
 };
