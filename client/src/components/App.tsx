@@ -6,7 +6,11 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Result } from '../types/resultTypes';
 import MainContent from './MainContent';
 
-const App = () => {
+interface AppProps {
+  enhet: string | null | undefined;
+}
+
+const App = ({ enhet }: AppProps) => {
   const [manOppgave, setManOppgave] = useState<ManuellOppgave | null | undefined>(undefined);
   const [feilMelding, setFeilmelding] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -113,6 +117,13 @@ const App = () => {
     );
   }
 
+  if (!enhet) {
+    return (
+      <div className="margin-top--2">
+        <Normaltekst>Vennligst velg enhet i menyen øverst på siden.</Normaltekst>
+      </div>
+    );
+  }
   if (manOppgave) {
     return <MainContent manuellOppgave={manOppgave} ferdigstillOppgave={ferdigstillOppgave} />;
   }
