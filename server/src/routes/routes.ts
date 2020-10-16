@@ -2,8 +2,10 @@ import authUtils from '../auth/utils';
 import express, { NextFunction, Request, Response } from 'express';
 import path from 'path';
 import passport from 'passport';
-import reverseProxy from '../proxy/reverse-proxy';
+import downstreamApiReverseProxy from '../proxy/downstream-api-reverse-proxy';
 import { Client } from 'openid-client';
+import config from '../config';
+import modiaContextHolderReverseProxy from '../proxy/modia-context-holder-reverse-proxy';
 
 const router = express.Router();
 
@@ -32,12 +34,13 @@ const setup = (authClient: Client) => {
     }
   });
 
-  //router.use(ensureAuthenticated);
+  router.use(ensureAuthenticated);
 
   // Protected
   router.use('/', express.static(path.join(__dirname, '../../../client/build')));
 
-  reverseProxy.setup(router, authClient);
+  downstreamApiReverseProxy.setup(router, authClient);
+  modiaContextHolderReverseProxy.setup(router, authClient);
 
   router.use('/*', (_req, res) => {
     res.status(404).send('Not found');

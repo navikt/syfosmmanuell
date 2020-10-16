@@ -5,6 +5,7 @@ import url from 'url';
 import { Client } from 'openid-client';
 import { Request, Router } from 'express';
 import { RequestOptions } from 'https';
+import logger from '../logging';
 
 const options = (proxyConfig: ProxyConfig, authClient: Client) => ({
   parseReqBody: true,
@@ -36,7 +37,7 @@ const options = (proxyConfig: ProxyConfig, authClient: Client) => ({
       (pathFromRequest ? pathFromRequest : '') +
       (queryString ? '?' + queryString : '');
 
-    console.log(`Proxying request from '${req.originalUrl}' to '${stripTrailingSlash(urlFromApi.href)}${newPath}'`);
+    logger.info(`Proxying request from '${req.originalUrl}' to '${stripTrailingSlash(urlFromApi.href)}${newPath}'`);
     return newPath;
   },
 });
@@ -44,8 +45,9 @@ const options = (proxyConfig: ProxyConfig, authClient: Client) => ({
 const stripTrailingSlash = (str: string): string => (str.endsWith('/') ? str.slice(0, -1) : str);
 
 const setup = (router: Router, authClient: Client) => {
-  const proxyConfig = config.downstreamApiReverseProxy;
-  router.use(`/${proxyConfig.path}/*`, proxy(proxyConfig.url, options(proxyConfig, authClient)));
+  const { path, url } = config.downstreamApiReverseProxy;
+  logger.info(`Setting up proxy for '${path}'`);
+  router.use(`/${path}/*`, proxy(url, options(config.downstreamApiReverseProxy, authClient)));
 };
 
 export default { setup };

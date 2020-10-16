@@ -2,6 +2,7 @@ import { Client, ClientMetadata, custom, Issuer, Strategy, TokenSet } from 'open
 import authUtils from './utils';
 import config from '../config';
 import httpProxy from '../proxy/http-proxy';
+import logger from '../logging';
 
 const metadata: ClientMetadata = {
   client_id: config.azureAd.clientId,
@@ -18,7 +19,7 @@ const client = async () => {
     });
   }
   const issuer = await Issuer.discover(config.azureAd.discoveryUrl);
-  console.log(`Discovered issuer ${issuer.issuer}`);
+  logger.info(`Discovered issuer ${issuer.issuer}`);
   return new issuer.Client(metadata);
 };
 

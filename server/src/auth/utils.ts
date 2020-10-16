@@ -2,6 +2,7 @@ import { Request } from 'express';
 import { Client, TokenSet } from 'openid-client';
 import { TokenSets } from '../@types/express';
 import { ProxyConfig } from '../config';
+import logger from '../logging';
 
 const tokenSetSelfId = 'self';
 
@@ -29,7 +30,7 @@ const getOnBehalfOfAccessToken = (
           resolve(tokenSet.access_token);
         })
         .catch((err) => {
-          console.error(err);
+          logger.error(err);
           reject(err);
         });
     }

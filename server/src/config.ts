@@ -1,10 +1,12 @@
+import logger from './logging';
+
 if (process.env.NODE_ENV === 'development') {
   require('dotenv/config');
 }
 
 const envVar = ({ name, required = true }: { name: string; required?: boolean }) => {
   if (!process.env[name] && required) {
-    console.error(`Missing required environment variable '${name}'`);
+    logger.error(`Missing required environment variable '${name}'`);
     process.exit(1);
   }
   return process.env[name];
