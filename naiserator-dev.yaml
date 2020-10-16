@@ -61,7 +61,7 @@ spec:
     - name: MODIA_CONTEXT_PATH
       value: modiacontextholder/api
     - name: MODIA_CONTEXT_URL
-      value: https://modiacontextholder-q1.nais.preprod.loca
+      value: https://modiacontextholder-q1.nais.preprod.local
     - name: REDIS_HOST
       value: syfosmmanuell-redis.default.svc.nais.local
     - name: REDIS_PORT
