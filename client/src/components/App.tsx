@@ -58,7 +58,7 @@ const App = ({ enhet }: AppProps) => {
     fetch(hentOppgaveUrlPost(manOppgave!.oppgaveid), {
       method: 'POST',
       credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-Nav-Enhet': enhet! },
       body: JSON.stringify(result),
     })
       .then((response) => {
