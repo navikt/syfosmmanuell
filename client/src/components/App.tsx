@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPost } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
@@ -17,13 +17,17 @@ const App = ({ enhet }: AppProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
+  // Need to store enhet in a ref becuase setTimeout reads value of "enhet" at declaration
+  const enhetRef = useRef(enhet);
+  enhetRef.current = enhet;
+
   // if enhet is not passed from the decorator within 10s -> display error
   useEffect(() => {
     if (enhet) {
       setMissingEnhetError(null);
     } else {
       const timer = setTimeout(() => {
-        if (!enhet) {
+        if (!enhetRef.current) {
           setMissingEnhetError(
             new Error('Feil ved henting av valgt enhet. Har du husket å velge enhet i menyen øverst på siden?'),
           );
