@@ -1,24 +1,18 @@
 import azure from './auth/azure';
 import config from './config';
-import routes from './routes';
+import routes from './routes/routes';
 import cors from './cors';
 import express from 'express';
 import helmet from 'helmet';
 import passport from 'passport';
 import session from './session';
-
-// for debugging during development
-import morganBody from 'morgan-body';
-import morgan from 'morgan';
+import logger from './logging';
 
 const server = express();
 const port = config.server.port;
 
 async function startApp() {
   try {
-    morganBody(server);
-    morgan('dev');
-
     session.setup(server);
 
     server.use(express.json());
@@ -32,21 +26,21 @@ async function startApp() {
     // initialize passport and restore authentication state, if any, from the session
     server.use(passport.initialize());
     server.use(passport.session());
-    
+
     const azureAuthClient = await azure.client();
     const azureOidcStrategy = azure.strategy(azureAuthClient);
-    
+
     passport.use('azureOidc', azureOidcStrategy);
     passport.serializeUser((user, done) => done(null, user));
     passport.deserializeUser((user, done) => done(null, user));
-    
+
     // setup routes
     server.use('/', routes.setup(azureAuthClient));
 
-    server.listen(port, () => console.log(`Listening on port ${port}`));
+    server.listen(port, () => logger.info(`Listening on port ${port}`));
   } catch (error) {
-    console.error('Error during start-up', error);
+    logger.error('Error during start-up', error);
   }
 }
 
-startApp().catch(err => console.log(err));
+startApp().catch((err) => logger.info(err));

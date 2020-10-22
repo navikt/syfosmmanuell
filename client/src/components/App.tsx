@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPost } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
@@ -6,11 +6,36 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Result } from '../types/resultTypes';
 import MainContent from './MainContent';
 
-const App = () => {
+interface AppProps {
+  enhet: string | null | undefined;
+}
+
+const App = ({ enhet }: AppProps) => {
   const [manOppgave, setManOppgave] = useState<ManuellOppgave | null | undefined>(undefined);
-  const [feilMelding, setFeilmelding] = useState<string | null>(null);
+  const [apiError, setApiError] = useState<Error | null>(null);
+  const [missingEnhetError, setMissingEnhetError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
+
+  // Need to store enhet in a ref becuase setTimeout reads value of "enhet" at declaration
+  const enhetRef = useRef(enhet);
+  enhetRef.current = enhet;
+
+  // if enhet is not passed from the decorator within 10s -> display error
+  useEffect(() => {
+    if (enhet) {
+      setMissingEnhetError(null);
+    } else {
+      const timer = setTimeout(() => {
+        if (!enhetRef.current) {
+          setMissingEnhetError(
+            new Error('Feil ved henting av valgt enhet. Har du husket å velge enhet i menyen øverst på siden?'),
+          );
+        }
+      }, 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [enhet]);
 
   const hentOppgave = () => {
     try {
@@ -38,14 +63,14 @@ const App = () => {
         })
         .catch((error) => {
           console.error(error);
-          setFeilmelding(error.message);
+          setApiError(error);
         })
         .finally(() => {
           setIsLoading(false);
         });
     } catch (error) {
       console.error(error);
-      setFeilmelding(error.message);
+      setApiError(error);
     }
   };
 
@@ -54,7 +79,7 @@ const App = () => {
     fetch(hentOppgaveUrlPost(manOppgave!.oppgaveid), {
       method: 'POST',
       credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-Nav-Enhet': enhet! },
       body: JSON.stringify(result),
     })
       .then((response) => {
@@ -75,7 +100,7 @@ const App = () => {
         }
       })
       .catch((error) => {
-        setFeilmelding(error.message);
+        setApiError(error);
         console.error(error);
       })
       .finally(() => {
@@ -89,15 +114,23 @@ const App = () => {
     }
   }, [manOppgave]);
 
-  if (feilMelding) {
+  if (apiError) {
     return (
       <div className="margin-top--2">
-        <Normaltekst>{feilMelding}</Normaltekst>
+        <Normaltekst>{apiError.message}</Normaltekst>
       </div>
     );
   }
 
-  if (isLoading) {
+  if (missingEnhetError) {
+    return (
+      <div className="margin-top--2">
+        <Normaltekst>{missingEnhetError.message}</Normaltekst>
+      </div>
+    );
+  }
+
+  if (isLoading || !enhet) {
     return (
       <div className="margin-top--2">
         <Spinner />
