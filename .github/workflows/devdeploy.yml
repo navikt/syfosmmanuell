@@ -30,9 +30,6 @@ jobs:
       - name: Build client
         env:
           REACT_APP_NODE_ENV: preprod # Brukes siden det ikke er mulig å endre NODE_ENV manuelt
-          REACT_APP_GET_MANUELLE_OPPGAVER_URL: https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/?oppgaveid=
-          REACT_APP_PUT_MANUELL_VURDERING_URL: https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/
-          REACT_APP_GET_LOG_OUT_URL: https://syfosmmanuell.nais.preprod.local/logout
           REACT_APP_WEB_SERVER_URL: https://syfosmmanuell.nais.preprod.local/
           REACT_APP_HEAD_URL: https://app-q1.adeo.no
           REACT_APP_GOSYS_URL: https://gosys.nais.preprod.local/gosys/bruker/brukeroversikt.jsf

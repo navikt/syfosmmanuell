@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
-import { hentOppgaveidFraUrlParameter, hentOppgaveUrl, hentOppgaveUrlPost } from '../utils/urlUtils';
+import { hentOppgaveidFraUrlParameter } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Result } from '../types/resultTypes';
@@ -40,7 +40,7 @@ const App = ({ enhet }: AppProps) => {
   const hentOppgave = () => {
     try {
       const OPPGAVE_ID = hentOppgaveidFraUrlParameter(window.location.href);
-      const URL = hentOppgaveUrl(OPPGAVE_ID);
+      const URL = `/backend/api/v1/hentManuellOppgave/${OPPGAVE_ID}`;
       setIsLoading(true);
       fetch(URL, {
         credentials: 'same-origin',
@@ -76,7 +76,8 @@ const App = ({ enhet }: AppProps) => {
 
   const ferdigstillOppgave = (result: Result) => {
     setIsLoading(true);
-    fetch(hentOppgaveUrlPost(manOppgave!.oppgaveid), {
+    const URL = `/backend/api/v1/vurderingmanuelloppgave/${manOppgave!.oppgaveid}`;
+    fetch(URL, {
       method: 'POST',
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json', 'X-Nav-Enhet': enhet! },
