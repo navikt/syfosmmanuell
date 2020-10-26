@@ -40,7 +40,7 @@ const App = ({ enhet }: AppProps) => {
   const hentOppgave = () => {
     try {
       const OPPGAVE_ID = hentOppgaveidFraUrlParameter(window.location.href);
-      const URL = `/backend/api/v1/hentManuellOppgave/${OPPGAVE_ID}`;
+      const URL = `/backend/api/v1/manuellOppgave/${OPPGAVE_ID}`;
       setIsLoading(true);
       fetch(URL, {
         credentials: 'same-origin',
