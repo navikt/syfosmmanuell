@@ -13,7 +13,7 @@ mock.get('/modiacontextholder/api/decorator', decorator);
 mock.get('/modiacontextholder/api/context/aktivenhet', aktivenhet);
 mock.delete('/modiacontextholder/api/context/aktivbruker', () => Promise.resolve({ status: 200 }));
 
-mock.get('https://syfosmmanuell.nais.preprod.local/backend/api/v1/hentManuellOppgave/', oppgaveFlereRegler);
+mock.get('/backend/api/v1/manuellOppgave/', oppgaveFlereRegler);
 mock.get('https://syfosmmanuell.nais.preprod.local/logout', { body: 'logged out' });
 mock.get('https://syfosmmanuell.nais.preprod.local/user', 'Bruker Navn');
-mock.post('https://syfosmmanuell.nais.preprod.local/backend/api/v1/vurderingmanuelloppgave/', {});
+mock.post('/backend/api/v1/vurderingmanuelloppgave/', {});
