@@ -29,10 +29,9 @@ const getOnBehalfOfAccessToken = (
           req.user!.tokenSets[forApi] = tokenSet;
           resolve(tokenSet.access_token);
         })
-        .catch((_err) => {
-          const sanitizedError = new Error(`Failed to get on-behalf-of token for request ${req.originalUrl}`);
-          logger.error(sanitizedError);
-          reject(sanitizedError);
+        .catch((err) => {
+          logger.error(err);
+          reject(err);
         });
     }
   });
