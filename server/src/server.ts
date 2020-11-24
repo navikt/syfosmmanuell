@@ -43,4 +43,10 @@ async function startApp() {
   }
 }
 
-startApp().catch((err) => logger.info(err));
+startApp().catch((error) => {
+  if (error.code === 'ETIMEDOUT') {
+    logger.error('ETIMEDOUT: A connection timed out'); // Needs to be sanitized
+  } else {
+    logger.error(error);
+  }
+});
