@@ -11,8 +11,7 @@ import dayjs from 'dayjs';
 
 describe('sykmeldingTypes', () => {
   it('Parser JSON sykmelding til Sykmelding object', () => {
-    const { receivedSykmelding } = oppgaveFlereRegler[0];
-    const { sykmelding } = receivedSykmelding;
+    const { sykmelding } = oppgaveFlereRegler[0];
     const sykmeldingParsed = new Sykmelding(sykmelding);
 
     const {
