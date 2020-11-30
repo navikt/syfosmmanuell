@@ -59,7 +59,7 @@ const App = ({ enhet }: AppProps) => {
           }
         })
         .then((oppgave) => {
-          setManOppgave(new ManuellOppgave(oppgave[0]));
+          setManOppgave(new ManuellOppgave(oppgave));
         })
         .catch((error) => {
           console.error(error);
