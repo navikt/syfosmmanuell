@@ -1,6 +1,6 @@
 import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { oppgaveFlereRegler, oppgaveEnRegel } from './data/sykmelding';
+import { oppgaveFlereRegler, oppgaveEnRegel } from './data/manuellOppgave';
 import decorator from './data/decorator.json';
 import aktivenhet from './data/aktivenhet.json';
 

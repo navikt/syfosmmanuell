@@ -15,9 +15,8 @@ interface MainContentProps {
 
 const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) => {
   const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
-  const { receivedSykmelding, validationResult } = manuellOppgave;
+  const { sykmelding, personNrPasient, mottattDato, validationResult } = manuellOppgave;
   const { ruleHits } = validationResult;
-  const { sykmelding, personNrPasient, mottattDato } = receivedSykmelding;
 
   return (
     <div className="panel">

@@ -6,7 +6,7 @@ import {
   ArbeidsrelatertArsakType,
   SvarRestriksjon,
 } from '../types/sykmeldingTypes';
-import { oppgaveFlereRegler } from '../mock/data/sykmelding';
+import { oppgaveFlereRegler } from '../mock/data/manuellOppgave';
 import dayjs from 'dayjs';
 
 describe('sykmeldingTypes', () => {
