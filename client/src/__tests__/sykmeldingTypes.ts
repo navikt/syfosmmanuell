@@ -6,13 +6,12 @@ import {
   ArbeidsrelatertArsakType,
   SvarRestriksjon,
 } from '../types/sykmeldingTypes';
-import { oppgaveFlereRegler } from '../mock/data/sykmelding';
+import { manuellOppgave } from '../mock/data/manuellOppgave';
 import dayjs from 'dayjs';
 
 describe('sykmeldingTypes', () => {
   it('Parser JSON sykmelding til Sykmelding object', () => {
-    const { receivedSykmelding } = oppgaveFlereRegler[0];
-    const { sykmelding } = receivedSykmelding;
+    const { sykmelding } = manuellOppgave;
     const sykmeldingParsed = new Sykmelding(sykmelding);
 
     const {
@@ -172,9 +171,9 @@ describe('sykmeldingTypes', () => {
   });
 
   it('Kaster error ved forsøk på parsing av ugyldig JSON', () => {
-    const tomtObjekt = {};
+    const incompleteSykmelding = {};
     expect(() => {
-      new Sykmelding(tomtObjekt);
+      new Sykmelding(incompleteSykmelding);
     }).toThrowError();
   });
 });
