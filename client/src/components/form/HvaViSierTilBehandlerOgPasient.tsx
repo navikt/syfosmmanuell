@@ -1,11 +1,11 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React from 'react';
-import { Arsak, arsaker } from '../../types/formTypes';
+import { ArsakType, arsaker } from '../../types/formTypes';
 import Expandable from '../expandable/Expandable';
 import './HvaViSierTilBehandlerOgPasient.less';
 
 interface HvaViSierTilBehandlerOgPasientProps {
-  arsak?: Arsak;
+  arsak?: ArsakType;
 }
 const HvaViSierTilBehandlerOgPasient = ({ arsak }: HvaViSierTilBehandlerOgPasientProps) => {
   if (!arsak) {

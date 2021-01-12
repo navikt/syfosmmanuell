@@ -1,11 +1,24 @@
-export type Arsak = 'TILBAKEDATERT_MANGLER_BEGRUNNELSE' | 'TILBAKEDATERT_IKKE_GODTATT';
+export type MerknadType = 'UGYLDIG_TILBAKEDATERING';
+interface MerknadTekster<T> {
+  type: T;
+  beskrivelse: string;
+}
+export type Merknader = Record<MerknadType, MerknadTekster<MerknadType>>;
+export const merknader: Merknader = {
+  UGYLDIG_TILBAKEDATERING: {
+    type: 'UGYLDIG_TILBAKEDATERING',
+    beskrivelse: 'Dette er en beskrivelse',
+  },
+};
+
+export type ArsakType = 'TILBAKEDATERT_MANGLER_BEGRUNNELSE' | 'TILBAKEDATERT_IKKE_GODTATT';
 interface ArsakTekster<T> {
   key: T;
   label: string;
   messageForSender: string;
   messageForUser: string;
 }
-export type Arsaker = Record<Arsak, ArsakTekster<Arsak>>;
+export type Arsaker = Record<ArsakType, ArsakTekster<ArsakType>>;
 export const arsaker: Arsaker = {
   TILBAKEDATERT_MANGLER_BEGRUNNELSE: {
     key: 'TILBAKEDATERT_MANGLER_BEGRUNNELSE',
@@ -27,6 +40,7 @@ export const arsaker: Arsaker = {
 };
 
 export interface FormShape {
-  godkjent: 'true' | 'false';
-  avvisningstekst?: Arsak;
+  status: 'GODKJENT' | 'UGYLDIG_TILBAKEDATERING' | 'UGYLDIG_BEGRUNNELSE';
+  merknad?: MerknadType;
+  avvisningstekst?: ArsakType;
 }

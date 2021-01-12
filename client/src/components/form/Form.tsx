@@ -2,10 +2,11 @@ import { Knapp } from 'nav-frontend-knapper';
 import { Feiloppsummering, FeiloppsummeringFeil, RadioPanelGruppe } from 'nav-frontend-skjema';
 import React, { useEffect, useRef } from 'react';
 import { useForm, Controller, DeepMap, FieldError } from 'react-hook-form';
-import { arsaker, FormShape } from '../../types/formTypes';
+import { arsaker, FormShape, merknader } from '../../types/formTypes';
 import { Result } from '../../types/resultTypes';
 import './Form.less';
 import HvaViSierTilBehandlerOgPasient from './HvaViSierTilBehandlerOgPasient';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): FeiloppsummeringFeil[] =>
   Object.entries(errors).map(([key, value]) => ({ skjemaelementId: `b-${key}`, feilmelding: value?.message! }));
@@ -18,14 +19,15 @@ interface FormProps {
 
 const Form = ({ ferdigstillOppgave }: FormProps) => {
   const { control, handleSubmit, errors, watch } = useForm<FormShape>();
-  const watchGodkjent = watch('godkjent');
+  const watchGodkjent = watch('status');
   const watchAvvisningstekst = watch('avvisningstekst');
   const feiloppsummeringRef = useRef<HTMLDivElement>();
 
   const onSubmit = (data: FormShape) => {
     const result: Result = {
-      ...data,
-      godkjent: data.godkjent === 'true',
+      godkjent: ['GODKJENT', 'UGYLDIG_TILBAKEDATERING'].includes(data.status),
+      merknad: data.status === 'UGYLDIG_TILBAKEDATERING' ? merknader[data.status] : undefined,
+      avvisnigstekst: data.avvisningstekst,
     };
     ferdigstillOppgave(result);
   };
@@ -40,10 +42,10 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
         control={control}
-        name="godkjent"
+        name="status"
         rules={{
           validate: (value) => {
-            if (value === 'true' || value === 'false') {
+            if (['GODKJENT', 'UGYLDIG_TILBAKEDATERING', 'UGYLDIG_BEGRUNNELSE'].includes(value)) {
               return true;
             }
             return 'Oppgaven mangler vurdering';
@@ -55,15 +57,16 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
             name="godkjent"
             onChange={onChange}
             checked={value}
-            feil={errors.godkjent?.message}
+            feil={errors.status?.message}
             radios={[
-              { id: 'b-godkjent', label: 'Godkjenn tilbakedatering', value: 'true' },
-              { label: 'Avvis tilbakedatering', value: 'false' },
+              { id: 'b-godkjent', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
+              { id: 'b-delvis', label: 'Avslå tilbakedatering', value: 'UGYLDIG_TILBAKEDATERING' },
+              { label: 'Be om ny begrunnelse', value: 'UGYLDIG_BEGRUNNELSE' },
             ]}
           />
         )}
       />
-      {watchGodkjent === 'false' && (
+      {watchGodkjent === 'UGYLDIG_BEGRUNNELSE' && (
         <Controller
           control={control}
           name="avvisningstekst"
