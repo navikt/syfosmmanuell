@@ -6,7 +6,6 @@ import { arsaker, FormShape, merknader } from '../../types/formTypes';
 import { Result } from '../../types/resultTypes';
 import './Form.less';
 import HvaViSierTilBehandlerOgPasient from './HvaViSierTilBehandlerOgPasient';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): FeiloppsummeringFeil[] =>
   Object.entries(errors).map(([key, value]) => ({ skjemaelementId: `b-${key}`, feilmelding: value?.message! }));
@@ -54,7 +53,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
         render={({ onChange, value }) => (
           <RadioPanelGruppe
             className="radio-group"
-            name="godkjent"
+            name="status"
             onChange={onChange}
             checked={value}
             feil={errors.status?.message}
