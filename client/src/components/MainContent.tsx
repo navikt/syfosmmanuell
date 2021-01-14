@@ -4,13 +4,12 @@ import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import { Flatknapp } from 'nav-frontend-knapper';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
-import { Result } from '../types/resultTypes';
 import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse';
-import Form from './form/Form';
+import Form, { FormShape } from './form/Form';
 
 interface MainContentProps {
   manuellOppgave: ManuellOppgave;
-  ferdigstillOppgave: (result: Result) => void;
+  ferdigstillOppgave: (result: FormShape) => void;
 }
 
 const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) => {
