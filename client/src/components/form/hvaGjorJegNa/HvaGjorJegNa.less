@@ -1,0 +1,41 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler.less';
+
+.hva-gjor-jeg-na {
+  margin-bottom: 2rem;
+
+  &__intro {
+    margin-bottom: 1rem;
+  }
+
+  &__list {
+    counter-reset: item;
+    margin: 0;
+    padding-top: 1rem;
+    padding-left: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      counter-increment: item;
+      list-style: none inside;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    li:before {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+      padding: 8px;
+      background: white;
+      height: 35px;
+      width: 35px;
+      border: 1px solid #78706a;
+      border-radius: 50%;
+      content: counter(item);
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+    }
+  }
+}
