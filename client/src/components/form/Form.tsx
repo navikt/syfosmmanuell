@@ -52,7 +52,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
             checked={value}
             feil={errors.status?.message}
             radios={[
-              { id: 'b-godkjent', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
+              { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
               { label: 'Avslå tilbakedatering', value: 'UGYLDIG_TILBAKEDATERING' },
               { label: 'Be om ny begrunnelse', value: 'UGYLDIG_BEGRUNNELSE' },
             ]}
