@@ -1,6 +1,6 @@
 import React from 'react';
 import { Periode } from '../../../../types/sykmeldingTypes';
-import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { tilLesbarPeriodeMedArstall, hentDagerMellomDatoer } from '../../../../utils/datoUtils';
 import './periodeseksjon.less';
@@ -15,11 +15,9 @@ const PeriodeSeksjon = ({ periode, understrek }: PeriodeSeksjonProps) => {
   const antallDager = hentDagerMellomDatoer(periode.fom, periode.tom);
   return (
     <div className="periodeseksjon">
-      <EtikettLiten>Sykmeldingsperiode</EtikettLiten>
+      <Element>Sykmeldingsperiode</Element>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <Normaltekst>
-          <strong>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</strong>
-        </Normaltekst>
+        <Normaltekst>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</Normaltekst>
         <Normaltekst>
           &nbsp;&bull; {antallDager} {antallDager === 1 ? 'dag' : 'dager'}
         </Normaltekst>
