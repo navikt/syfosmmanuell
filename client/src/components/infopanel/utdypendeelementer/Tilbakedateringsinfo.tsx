@@ -1,28 +1,39 @@
 import React from 'react';
 import ElementMedTekst from '../layout/ElementMedTekst';
-import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
+import { hentDagerMellomDatoer, tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 
 interface TilbakedateringsinfoProps {
-  dokumenterbarKontaktDato?: Date;
-  kanIkkeIvaretaEgneInteresser?: string;
+  kontaktDato?: Date;
+  syketilfelleStartDato?: Date;
+  begrunnelseIkkeKontakt?: string;
 }
 
 const Tilbakedateringsinfo = ({
-  dokumenterbarKontaktDato,
-  kanIkkeIvaretaEgneInteresser,
+  kontaktDato,
+  syketilfelleStartDato,
+  begrunnelseIkkeKontakt,
 }: TilbakedateringsinfoProps) => {
+  const tilbakedatertDuration = hentDagerMellomDatoer(syketilfelleStartDato, kontaktDato);
   return (
     <>
       <ElementMedTekst
-        vis={!!dokumenterbarKontaktDato}
-        tittel="Dato for dokumenterbar kontakt med pasienten"
-        tekst={tilLesbarDatoMedArstall(dokumenterbarKontaktDato)}
+        vis={!!kontaktDato}
+        tittel="Dato pasienten oppsøkte behandler"
+        tekst={tilLesbarDatoMedArstall(kontaktDato)}
         margin
       />
       <ElementMedTekst
-        vis={!!kanIkkeIvaretaEgneInteresser}
+        vis={!!syketilfelleStartDato}
+        tittel="Dato sykmeldingen ble skrevet fra"
+        tekst={`${tilLesbarDatoMedArstall(syketilfelleStartDato)} • tilbakedatert ${tilbakedatertDuration} dag${
+          tilbakedatertDuration > 1 && 'er'
+        }`}
+        margin
+      />
+      <ElementMedTekst
+        vis={!!begrunnelseIkkeKontakt}
         tittel="Begrunnelse for tilbakedatering"
-        tekst={kanIkkeIvaretaEgneInteresser}
+        tekst={begrunnelseIkkeKontakt}
         margin
       />
     </>

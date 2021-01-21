@@ -165,7 +165,7 @@ export const manuellOppgave = {
       navn: 'NAV Test generator',
       versjon: '1.0',
     },
-    syketilfelleStartDato: '2018-10-10',
+    syketilfelleStartDato: '2018-10-1',
     signaturDato: '2019-04-29T08:34:16',
     navnFastlege: 'Doktor Legesen',
   },
