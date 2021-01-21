@@ -15,7 +15,7 @@ const PeriodeSeksjon = ({ periode, understrek }: PeriodeSeksjonProps) => {
   const antallDager = hentDagerMellomDatoer(periode.fom, periode.tom);
   return (
     <div className="periodeseksjon">
-      <EtikettLiten>Periode</EtikettLiten>
+      <EtikettLiten>Sykmeldingsperiode</EtikettLiten>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <Normaltekst>
           <strong>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</strong>
