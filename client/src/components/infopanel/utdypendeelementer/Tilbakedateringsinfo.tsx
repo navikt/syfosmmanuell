@@ -2,6 +2,8 @@ import React from 'react';
 import ElementMedTekst from '../layout/ElementMedTekst';
 import { hentDagerMellomDatoer, tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 
+import './Tilbakedateringsinfo.less';
+
 interface TilbakedateringsinfoProps {
   kontaktDato?: Date;
   syketilfelleStartDato?: Date;
@@ -15,7 +17,7 @@ const Tilbakedateringsinfo = ({
 }: TilbakedateringsinfoProps) => {
   const tilbakedatertDuration = hentDagerMellomDatoer(syketilfelleStartDato, kontaktDato);
   return (
-    <>
+    <div className="tilbakedateringsinfo">
       <ElementMedTekst
         vis={!!kontaktDato}
         tittel="Dato pasienten oppsøkte behandler"
@@ -34,9 +36,8 @@ const Tilbakedateringsinfo = ({
         vis={!!begrunnelseIkkeKontakt}
         tittel="Begrunnelse for tilbakedatering"
         tekst={begrunnelseIkkeKontakt}
-        margin
       />
-    </>
+    </div>
   );
 };
 
