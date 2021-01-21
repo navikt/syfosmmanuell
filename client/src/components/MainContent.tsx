@@ -25,6 +25,7 @@ const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) =
         arbeidsgiver={sykmelding.arbeidsgiver.navn}
         sykmelder={sykmelding.navnFastlege}
         mottattDato={mottattDato}
+        personNrPasient={personNrPasient}
       />
       <TilbakedatertForlengelse sykmelding={sykmelding} personNrPasient={personNrPasient} />
       <Form ferdigstillOppgave={ferdigstillOppgave} />
