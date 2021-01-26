@@ -6,16 +6,21 @@ import './InfoTilPasient.less';
 const InfoTilPasientAvvisning = () => {
   return (
     <Expandable className="info-til-pasient" erApen={false} tittel="Se hva vi sier til pasienten" type="intern">
-      <Undertittel className="info-til-pasient__title">Mangler opplysninger for tilbakedatering</Undertittel>
+      <Undertittel className="info-til-pasient__title">Sykmeldingen kan dessverre ikke brukes</Undertittel>
+      <Normaltekst className="info-til-pasient__paragraph">Beklager at vi må bry deg mens du er syk.</Normaltekst>
       <Normaltekst className="info-til-pasient__paragraph">
-        Vanligvis starter sykmeldingen den datoen du er hos behandleren. I enkelte tilfeller kan datoen i sykmeldingen
-        settes tilbake i tid, det vi kaller tilbakedatering. NAV vurderer om det er en gyldig grunn for
-        tilbakedateringen.
+        Du trenger en ny sykmelding fordi det er gjort en feil i utfyllingen. Vi har gitt beskjed til legen din om hva
+        som er feil, og at du må få en ny sykmelding.
       </Normaltekst>
       <Normaltekst className="info-til-pasient__paragraph">
-        Sykmeldingen din er datert til før du oppsøkte behandleren, uten at det er gitt en god nok begrunnelse for
-        dette. Behandleren din må skrive ut en ny sykmelding og begrunne bedre hvorfor den er tilbakedatert. Din
-        behandler har mottatt melding fra NAV om dette.
+        Når du har fått ny sykmelding fra legen din, får du en ny beskjed fra oss om å logge deg inn på nav.no slik at
+        du kan sende inn sykmeldingen. Går det mange dager, bør du kontakte legen som skal skrive den nye sykmeldingen.
+      </Normaltekst>
+      <Normaltekst className="info-til-pasient__paragraph">
+        <strong>Grunnen til at sykmeldingen er avvist:</strong>
+      </Normaltekst>
+      <Normaltekst className="info-til-pasient__paragraph">
+        Sykmeldingen din starter før du oppsøkte behandleren, uten at det er gitt en god nok begrunnelse for dette.
       </Normaltekst>
     </Expandable>
   );
