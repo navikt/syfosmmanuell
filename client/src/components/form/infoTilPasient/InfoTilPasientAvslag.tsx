@@ -3,11 +3,7 @@ import React from 'react';
 import Expandable from '../../expandable/Expandable';
 import './InfoTilPasient.less';
 
-interface InfoTilPasientAvslagProps {
-  antallDagerTilbakedatert: number;
-}
-
-const InfoTilPasientAvslag = ({ antallDagerTilbakedatert }: InfoTilPasientAvslagProps) => {
+const InfoTilPasientAvslag = () => {
   return (
     <Expandable className="info-til-pasient" erApen={false} tittel="Se hva vi sier pasienten" type="intern">
       <section className="info-til-pasient__section">
@@ -18,8 +14,8 @@ const InfoTilPasientAvslag = ({ antallDagerTilbakedatert }: InfoTilPasientAvslag
           tilbakedateringen.
         </Normaltekst>
         <Normaltekst className="info-til-pasient__paragraph">
-          Sykmeldingen din er datert <strong>{antallDagerTilbakedatert} dager</strong> før du oppsøkte behandleren, og
-          det er ikke oppgitt noen gyldig grunn. Derfor vil du ikke få sykepenger for disse dagene.
+          Sykmeldingen din er datert til før du oppsøkte behandleren, og det er ikke oppgitt noen gyldig grunn. Derfor
+          vil du ikke få sykepenger for disse dagene.
         </Normaltekst>
       </section>
       <section className="info-til-pasient__section">

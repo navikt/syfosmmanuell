@@ -3,11 +3,7 @@ import React from 'react';
 import Expandable from '../../expandable/Expandable';
 import './InfoTilPasient.less';
 
-interface InfoTilPasientAvvisningProps {
-  antallDagerTilbakedatert: number;
-}
-
-const InfoTilPasientAvvisning = ({ antallDagerTilbakedatert }: InfoTilPasientAvvisningProps) => {
+const InfoTilPasientAvvisning = () => {
   return (
     <Expandable className="info-til-pasient" erApen={false} tittel="Se hva vi sier til pasienten" type="intern">
       <Undertittel className="info-til-pasient__title">Mangler opplysninger for tilbakedatering</Undertittel>
@@ -17,9 +13,9 @@ const InfoTilPasientAvvisning = ({ antallDagerTilbakedatert }: InfoTilPasientAvv
         tilbakedateringen.
       </Normaltekst>
       <Normaltekst className="info-til-pasient__paragraph">
-        Sykmeldingen din er datert <strong>{antallDagerTilbakedatert} dager</strong> før du oppsøkte behandleren, uten
-        at det er gitt en god nok begrunnelse for dette. Behandleren din mø skrive ut en ny sykmelding og begrunne bedre
-        hvorfor den er tilbakedatert. Din behandler har mottatt melding fra NAV om dette.
+        Sykmeldingen din er datert til før du oppsøkte behandleren, uten at det er gitt en god nok begrunnelse for
+        dette. Behandleren din må skrive ut en ny sykmelding og begrunne bedre hvorfor den er tilbakedatert. Din
+        behandler har mottatt melding fra NAV om dette.
       </Normaltekst>
     </Expandable>
   );

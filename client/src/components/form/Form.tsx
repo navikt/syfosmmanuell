@@ -62,12 +62,12 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
 
       {watchGodkjent === 'UGYLDIG_TILBAKEDATERING' && (
         <>
-          <InfoTilPasientAvslag antallDagerTilbakedatert={2} />
+          <InfoTilPasientAvslag />
           <HvaGjorJegNa />
         </>
       )}
 
-      {watchGodkjent === 'UGYLDIG_BEGRUNNELSE' && <InfoTilPasientAvvisning antallDagerTilbakedatert={1} />}
+      {watchGodkjent === 'UGYLDIG_BEGRUNNELSE' && <InfoTilPasientAvvisning />}
 
       {hasErrors(errors) && (
         <Feiloppsummering
