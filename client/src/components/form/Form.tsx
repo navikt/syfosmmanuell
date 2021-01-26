@@ -3,9 +3,10 @@ import { Feiloppsummering, FeiloppsummeringFeil, RadioPanelGruppe } from 'nav-fr
 import React, { useEffect, useRef } from 'react';
 import { useForm, Controller, DeepMap, FieldError } from 'react-hook-form';
 import './Form.less';
-import InfoTilPasientAvslag from './infoTilPasient/InfoTilPasientAvslag';
+import InfoTilPasientAvslag from './infoTil/InfoTilPasientAvslag';
 import HvaGjorJegNa from './hvaGjorJegNa/HvaGjorJegNa';
-import InfoTilPasientAvvisning from './infoTilPasient/InfoTilPasientAvvisning';
+import InfoTilPasientAvvisning from './infoTil/InfoTilPasientAvvisning';
+import InfoTilBehandlerAvvisning from './infoTil/InfoTilBehandlerAvvisning';
 
 export interface FormShape {
   status: 'GODKJENT' | 'UGYLDIG_TILBAKEDATERING' | 'UGYLDIG_BEGRUNNELSE';
@@ -67,7 +68,12 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
         </>
       )}
 
-      {watchGodkjent === 'UGYLDIG_BEGRUNNELSE' && <InfoTilPasientAvvisning />}
+      {watchGodkjent === 'UGYLDIG_BEGRUNNELSE' && (
+        <>
+          <InfoTilPasientAvvisning />
+          <InfoTilBehandlerAvvisning />
+        </>
+      )}
 
       {hasErrors(errors) && (
         <Feiloppsummering
