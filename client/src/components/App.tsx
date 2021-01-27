@@ -3,8 +3,8 @@ import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import { hentOppgaveidFraUrlParameter } from '../utils/urlUtils';
 import Spinner from 'nav-frontend-spinner';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Result } from '../types/resultTypes';
 import MainContent from './MainContent';
+import { FormShape } from './form/Form';
 
 interface AppProps {
   enhet: string | null | undefined;
@@ -74,7 +74,7 @@ const App = ({ enhet }: AppProps) => {
     }
   };
 
-  const ferdigstillOppgave = (result: Result) => {
+  const ferdigstillOppgave = (result: FormShape) => {
     setIsLoading(true);
     const URL = `/backend/api/v1/vurderingmanuelloppgave/${manOppgave!.oppgaveid}`;
     fetch(URL, {
