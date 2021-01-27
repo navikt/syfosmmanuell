@@ -12,7 +12,7 @@ const HvaGjorJegNa = () => {
       </Normaltekst>
       <ol className="hva-gjor-jeg-na__list">
         <li>Registrer vurderingen</li>
-        <li>Godkjenn oppgaven i Gosysjk</li>
+        <li>Godkjenn oppgaven i Gosys</li>
         <li>Kontakt behanler (med kopi til bruker) og be om mer opplysninger</li>
         <li>Lag ny oppgave i Gosys for å følge opp saken og dialog med behandler</li>
       </ol>
