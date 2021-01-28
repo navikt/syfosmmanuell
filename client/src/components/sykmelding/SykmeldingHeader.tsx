@@ -12,7 +12,13 @@ interface SykmeldingheaderProps {
   personNrPasient: string;
 }
 
-const Sykmeldingheader = ({ regelUtslag, arbeidsgiver, sykmelder, mottattDato }: SykmeldingheaderProps) => {
+const Sykmeldingheader = ({
+  regelUtslag,
+  personNrPasient,
+  arbeidsgiver,
+  sykmelder,
+  mottattDato,
+}: SykmeldingheaderProps) => {
   return (
     <div className="sykmelding-header">
       <Innholdstittel className="sykmelding-header__title">
@@ -20,13 +26,8 @@ const Sykmeldingheader = ({ regelUtslag, arbeidsgiver, sykmelder, mottattDato }:
       </Innholdstittel>
 
       <div className="sykmelding-header__section">
-        <Element>Pasientens navn:</Element>
-        <Normaltekst>N/A (fjern?)</Normaltekst>
-      </div>
-
-      <div className="sykmelding-header__section">
-        <Element>Arbeidsgiver:</Element>
-        <Normaltekst> {arbeidsgiver}</Normaltekst>
+        <Element>Fødselsnummer:</Element>
+        <Normaltekst> {personNrPasient}</Normaltekst>
       </div>
 
       <div className="sykmelding-header__section">
@@ -47,20 +48,3 @@ const Sykmeldingheader = ({ regelUtslag, arbeidsgiver, sykmelder, mottattDato }:
 };
 
 export default Sykmeldingheader;
-
-/*
-
-<div className="sykmelding-header__section">
-        <Element>{regelUtslag.length > 1 ? 'Årsaker' : 'Årsak'} til manuell vurdering:</Element>
-        <ul>
-          {regelUtslag.map((regel, index) => {
-            return (
-              <li key={index}>
-                <Normaltekst>{RuleNamesDescription[regel.ruleName]}</Normaltekst>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-
-*/
