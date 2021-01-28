@@ -18,7 +18,7 @@ const TilbakedatertForlengelse = ({ sykmelding, personNrPasient }: Tilbakedatert
 
       <Tilbakedateringsinfo
         kontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
-        syketilfelleStartDato={sykmelding.syketilfelleStartDato}
+        signaturDato={sykmelding.signaturDato}
         begrunnelseIkkeKontakt={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
       />
     </InfoPanel>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Sykmelding } from '../../../types/sykmeldingTypes';
 import DiagnoseSeksjon from '../../infopanel/panelelementer/diagnose/DiagnoseSeksjon';
-import InfoPanel from '../../infopanel/InfoPanel';
 import SykmeldingPerioder from '../../infopanel/panelelementer/periode/SykmeldingPerioder';
 import BehandlingsDatoer from '../../infopanel/utdypendeelementer/BehandlingsDatoer';
 import FraverSeksjon from '../../infopanel/panelelementer/FraverSeksjon';
@@ -21,6 +20,8 @@ import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
 import Annet from '../../infopanel/utdypendeelementer/Annet';
 import SeksjonMedTittel from '../../infopanel/layout/SeksjonMedTittel';
 import { Flatknapp } from 'nav-frontend-knapper';
+import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
+import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 
 interface HeleSykmeldingenProps {
   sykmelding: Sykmelding;
@@ -30,50 +31,65 @@ interface HeleSykmeldingenProps {
 const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmeldingenProps) => {
   return (
     <>
-      <InfoPanel tittel="Hele sykmeldingen" fargetema="info">
-        <SykmeldingPerioder perioder={sykmelding.perioder} />
-        <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
-        {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
-          <DiagnoseSeksjon key={index.toString()} diagnose={diagnose} bidiagnose />
-        ))}
-        <FraverSeksjon annenFraversArsak={sykmelding.medisinskVurdering.annenFraversArsak} />
-        <SvangerskapSeksjon svangerskap={sykmelding.medisinskVurdering.svangerskap} />
-        <SkadeSeksjon medisinskVurdering={sykmelding.medisinskVurdering} />
-        <ArbeidsuforSeksjon prognose={sykmelding.prognose} />
-        <PrognoseSeksjon prognose={sykmelding.prognose} />
-        <ArbeidsgiverSeksjon arbeidsgiver={sykmelding.arbeidsgiver} />
-        <LegeSeksjon navn={sykmelding.navnFastlege} />
-        <Utvidbar ikon={doktor} ikonHover={doktorHover} tittel="Flere opplysninger fra sykmelder">
-          <SeksjonMedTittel understrek>
-            <BehandlingsDatoer
-              signaturDato={sykmelding.signaturDato}
-              syketilfelleStartDato={sykmelding.syketilfelleStartDato}
-            />
-          </SeksjonMedTittel>
-          <MulighetForArbeid perioder={sykmelding.perioder} />
-          <Friskmelding prognose={sykmelding.prognose} />
-          <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
-          <Arbeidsevne
-            tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen}
-            tiltakNAV={sykmelding.tiltakNAV}
-            andreTiltak={sykmelding.andreTiltak}
-          />
-          <Annet
-            meldingTilNAV={sykmelding.meldingTilNAV}
-            meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver}
-            behandlerTelefon={sykmelding.behandler.tlf}
-          />
-        </Utvidbar>
-        <div style={{ textAlign: 'center' }}>
-          <Flatknapp
-            form="kompakt"
-            onClick={() => setVisHeleSykmeldingen(false)}
-            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-          >
-            Skjul hele sykmeldingen
-          </Flatknapp>
-        </div>
-      </InfoPanel>
+      <SykmeldingPerioder perioder={sykmelding.perioder} />
+      <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
+      {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
+        <DiagnoseSeksjon key={index.toString()} diagnose={diagnose} bidiagnose />
+      ))}
+      <ElementMedTekst
+        vis={!!sykmelding.signaturDato}
+        tittel="Dato sykmeldingen ble skrevet"
+        tekst={tilLesbarDatoMedArstall(sykmelding.signaturDato)}
+        margin
+      />
+      <ElementMedTekst
+        vis={!!sykmelding.kontaktMedPasient.kontaktDato}
+        tittel="Dato for dokumenterbar kontakt med pasienten"
+        tekst={tilLesbarDatoMedArstall(sykmelding.kontaktMedPasient.kontaktDato)}
+        margin
+      />
+      <ElementMedTekst
+        vis={!!sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
+        tittel="Begrunnelse for tilbakedatering"
+        tekst={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
+      />
+
+      <BehandlingsDatoer
+        signaturDato={sykmelding.signaturDato}
+        syketilfelleStartDato={sykmelding.syketilfelleStartDato}
+      />
+
+      <FraverSeksjon annenFraversArsak={sykmelding.medisinskVurdering.annenFraversArsak} />
+      <SvangerskapSeksjon svangerskap={sykmelding.medisinskVurdering.svangerskap} />
+      <SkadeSeksjon medisinskVurdering={sykmelding.medisinskVurdering} />
+      <ArbeidsuforSeksjon prognose={sykmelding.prognose} />
+      <PrognoseSeksjon prognose={sykmelding.prognose} />
+      <ArbeidsgiverSeksjon arbeidsgiver={sykmelding.arbeidsgiver} />
+      <LegeSeksjon navn={sykmelding.navnFastlege} />
+      <Utvidbar ikon={doktor} ikonHover={doktorHover} tittel="Flere opplysninger fra sykmelder">
+        <MulighetForArbeid perioder={sykmelding.perioder} />
+        <Friskmelding prognose={sykmelding.prognose} />
+        <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
+        <Arbeidsevne
+          tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen}
+          tiltakNAV={sykmelding.tiltakNAV}
+          andreTiltak={sykmelding.andreTiltak}
+        />
+        <Annet
+          meldingTilNAV={sykmelding.meldingTilNAV}
+          meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver}
+          behandlerTelefon={sykmelding.behandler.tlf}
+        />
+      </Utvidbar>
+      <div style={{ textAlign: 'center' }}>
+        <Flatknapp
+          form="kompakt"
+          onClick={() => setVisHeleSykmeldingen(false)}
+          style={{ marginTop: '1rem', marginBottom: '1rem' }}
+        >
+          Skjul hele sykmeldingen
+        </Flatknapp>
+      </div>
     </>
   );
 };

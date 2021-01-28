@@ -6,16 +6,12 @@ import './Tilbakedateringsinfo.less';
 
 interface TilbakedateringsinfoProps {
   kontaktDato?: Date;
-  syketilfelleStartDato?: Date;
+  signaturDato?: Date;
   begrunnelseIkkeKontakt?: string;
 }
 
-const Tilbakedateringsinfo = ({
-  kontaktDato,
-  syketilfelleStartDato,
-  begrunnelseIkkeKontakt,
-}: TilbakedateringsinfoProps) => {
-  const tilbakedatertDuration = hentDagerMellomDatoer(syketilfelleStartDato, kontaktDato);
+const Tilbakedateringsinfo = ({ kontaktDato, signaturDato, begrunnelseIkkeKontakt }: TilbakedateringsinfoProps) => {
+  const tilbakedatertDuration = hentDagerMellomDatoer(signaturDato, kontaktDato);
   return (
     <div className="tilbakedateringsinfo">
       <ElementMedTekst
@@ -25,10 +21,10 @@ const Tilbakedateringsinfo = ({
         margin
       />
       <ElementMedTekst
-        vis={!!syketilfelleStartDato}
+        vis={!!signaturDato}
         tittel="Dato sykmeldingen ble skrevet fra"
-        tekst={`${tilLesbarDatoMedArstall(syketilfelleStartDato)} • tilbakedatert ${tilbakedatertDuration} dag${
-          tilbakedatertDuration > 1 && 'er'
+        tekst={`${tilLesbarDatoMedArstall(signaturDato)} • tilbakedatert ${tilbakedatertDuration} dag${
+          tilbakedatertDuration > 1 ? 'er' : ''
         }`}
         margin
       />
