@@ -30,6 +30,7 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
     <SeksjonMedTittel understrek tittel={tekster['muliget-for-arbeid.tittel']}>
       <Margin>
         <ElementMedTekst vis={!!harMedisinskArsak} tittel={tekster['muliget-for-arbeid.medisinske-arsaker.tittel']} />
+        <br />
         <EnkelCheckbox
           tittel={tekster['muliget-for-arbeid.medisinske-arsaker']}
           margin
@@ -54,6 +55,7 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
           vis={!!harArbeidsrelatertArsak}
           tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen.tittel']}
         />
+        <br />
         <EnkelCheckbox
           vis={!!harArbeidsrelatertArsak}
           tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen']}
