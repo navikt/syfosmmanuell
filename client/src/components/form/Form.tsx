@@ -87,6 +87,9 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
       <Knapp type="hoved" htmlType="submit">
         Registrer
       </Knapp>
+      <Knapp type="flat" onClick={() => console.log('avbryt // TODO')}>
+        Avbryt
+      </Knapp>
     </form>
   );
 };
