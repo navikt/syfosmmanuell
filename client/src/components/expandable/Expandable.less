@@ -12,7 +12,6 @@
 
   &.intern {
     border: 0;
-    margin: 1rem 0;
 
     &:focus {
       box-shadow: none;
@@ -33,8 +32,6 @@
     }
 
     .expandable__innhold {
-      padding: 0 0 2rem;
-
       .alertstripe__ikon {
         display: none;
       }
@@ -51,6 +48,7 @@
     text-align: left;
     width: 100%;
     padding: 1.5rem 1rem;
+    margin-bottom: 0.5rem;
     border: 0;
     cursor: pointer;
     background-color: inherit;
@@ -98,7 +96,8 @@
   }
 
   .expandable__innhold {
-    padding: 0 1rem 1rem;
+    background-color: @navLysGra;
+    padding: 2rem;
   }
 
   .lenkerad {
@@ -120,10 +119,6 @@
       &:hover {
         color: @navBla;
       }
-    }
-
-    .expandable__innhold {
-      padding: 0 5.8rem 1.5rem;
     }
 
     &.apen {

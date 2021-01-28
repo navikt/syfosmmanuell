@@ -2,10 +2,15 @@ import { Knapp } from 'nav-frontend-knapper';
 import { Feiloppsummering, FeiloppsummeringFeil, RadioPanelGruppe } from 'nav-frontend-skjema';
 import React, { useEffect, useRef } from 'react';
 import { useForm, Controller, DeepMap, FieldError } from 'react-hook-form';
-import { arsaker, FormShape } from '../../types/formTypes';
-import { Result } from '../../types/resultTypes';
 import './Form.less';
-import HvaViSierTilBehandlerOgPasient from './HvaViSierTilBehandlerOgPasient';
+import InfoTilPasientAvslag from './infoTil/InfoTilPasientAvslag';
+import HvaGjorJegNa from './hvaGjorJegNa/HvaGjorJegNa';
+import InfoTilPasientAvvisning from './infoTil/InfoTilPasientAvvisning';
+import InfoTilBehandlerAvvisning from './infoTil/InfoTilBehandlerAvvisning';
+
+export interface FormShape {
+  status: 'GODKJENT' | 'UGYLDIG_TILBAKEDATERING' | 'UGYLDIG_BEGRUNNELSE';
+}
 
 const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): FeiloppsummeringFeil[] =>
   Object.entries(errors).map(([key, value]) => ({ skjemaelementId: `b-${key}`, feilmelding: value?.message! }));
@@ -13,22 +18,13 @@ const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): Feilo
 const hasErrors = (errors: DeepMap<FormShape, FieldError>): boolean => !!Object.keys(errors).length;
 
 interface FormProps {
-  ferdigstillOppgave: (result: Result) => void;
+  ferdigstillOppgave: (result: FormShape) => void;
 }
 
 const Form = ({ ferdigstillOppgave }: FormProps) => {
   const { control, handleSubmit, errors, watch } = useForm<FormShape>();
-  const watchGodkjent = watch('godkjent');
-  const watchAvvisningstekst = watch('avvisningstekst');
+  const watchGodkjent = watch('status');
   const feiloppsummeringRef = useRef<HTMLDivElement>();
-
-  const onSubmit = (data: FormShape) => {
-    const result: Result = {
-      ...data,
-      godkjent: data.godkjent === 'true',
-    };
-    ferdigstillOppgave(result);
-  };
 
   useEffect(() => {
     if (hasErrors(errors)) {
@@ -37,13 +33,13 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
   }, [errors]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit(ferdigstillOppgave)}>
       <Controller
         control={control}
-        name="godkjent"
+        name="status"
         rules={{
           validate: (value) => {
-            if (value === 'true' || value === 'false') {
+            if (['GODKJENT', 'UGYLDIG_TILBAKEDATERING', 'UGYLDIG_BEGRUNNELSE'].includes(value)) {
               return true;
             }
             return 'Oppgaven mangler vurdering';
@@ -51,52 +47,43 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
         }}
         render={({ onChange, value }) => (
           <RadioPanelGruppe
-            className="radio-group"
-            name="godkjent"
+            className="form__radio-group"
+            name="status"
             onChange={onChange}
             checked={value}
-            feil={errors.godkjent?.message}
+            feil={errors.status?.message}
             radios={[
-              { id: 'b-godkjent', label: 'Godkjenn tilbakedatering', value: 'true' },
-              { label: 'Avvis tilbakedatering', value: 'false' },
+              { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
+              { label: 'Avslå tilbakedatering', value: 'UGYLDIG_TILBAKEDATERING' },
+              { label: 'Be om ny begrunnelse', value: 'UGYLDIG_BEGRUNNELSE' },
             ]}
           />
         )}
       />
-      {watchGodkjent === 'false' && (
-        <Controller
-          control={control}
-          name="avvisningstekst"
-          rules={{ required: 'Oppgaven mangler avvisningsningsårsak' }}
-          render={({ onChange, value }) => (
-            <RadioPanelGruppe
-              className="radio-group"
-              legend="Velg årsak"
-              name="avvisningstekst"
-              onChange={onChange}
-              checked={value}
-              feil={errors.avvisningstekst?.message}
-              radios={[
-                {
-                  id: 'b-avvisningstekst',
-                  label: arsaker.TILBAKEDATERT_MANGLER_BEGRUNNELSE.label,
-                  value: arsaker.TILBAKEDATERT_MANGLER_BEGRUNNELSE.key,
-                },
-                { label: arsaker.TILBAKEDATERT_IKKE_GODTATT.label, value: arsaker.TILBAKEDATERT_IKKE_GODTATT.key },
-              ]}
-            />
-          )}
-        />
+
+      {watchGodkjent === 'UGYLDIG_TILBAKEDATERING' && (
+        <>
+          <InfoTilPasientAvslag />
+          <HvaGjorJegNa />
+        </>
       )}
-      <HvaViSierTilBehandlerOgPasient arsak={watchAvvisningstekst} />
+
+      {watchGodkjent === 'UGYLDIG_BEGRUNNELSE' && (
+        <>
+          <InfoTilPasientAvvisning />
+          <InfoTilBehandlerAvvisning />
+        </>
+      )}
+
       {hasErrors(errors) && (
         <Feiloppsummering
-          className="feiloppsummering"
+          className="form__feiloppsummering"
           innerRef={feiloppsummeringRef as any}
           tittel="For å gå videre må du rette opp følgende"
           feil={getFeilOppsummeringsfeil(errors)}
         />
       )}
+
       <Knapp type="hoved" htmlType="submit">
         Registrer
       </Knapp>
