@@ -1,26 +1,25 @@
 import React from 'react';
 import { Arbeidsgiver } from '../../../types/sykmeldingTypes';
 
-import tekster from '../infopanel-tekster';
 import EtikettMedTekst from '../layout/EtikettMedTekst';
 
 interface ArbeidsgiverSeksjonProps {
-    arbeidsgiver: Arbeidsgiver;
+  arbeidsgiver: Arbeidsgiver;
 }
 
 const ArbeidsgiverSeksjon = ({ arbeidsgiver }: ArbeidsgiverSeksjonProps) => {
-    if (!arbeidsgiver.harArbeidsgiver) {
-        return null;
-    }
+  if (!arbeidsgiver.harArbeidsgiver) {
+    return null;
+  }
 
-    return (
-        <EtikettMedTekst
-            tittel={tekster['arbeidsgiver.tittel']}
-            tekst={arbeidsgiver.navn}
-            undertekst={`${arbeidsgiver.stillingsprosent}${tekster['arbeidsgiver.stillingsprosent']}`}
-            margin
-        />
-    );
+  return (
+    <EtikettMedTekst
+      tittel="Arbeidsgiver som legen har skrevet inn"
+      tekst={arbeidsgiver.navn}
+      undertekst={`${arbeidsgiver.stillingsprosent}% stilling`}
+      margin
+    />
+  );
 };
 
 export default ArbeidsgiverSeksjon;

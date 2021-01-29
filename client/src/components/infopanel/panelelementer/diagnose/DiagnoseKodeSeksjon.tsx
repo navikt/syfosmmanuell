@@ -1,5 +1,4 @@
 import React from 'react';
-import tekster from '../../infopanel-tekster';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import HjelpetekstWrapper from '../../../hjelpetekst/HjelpetekstWrapper';
 
@@ -15,8 +14,10 @@ const DiagnoseKodeSeksjon = ({ kode, system, visHjelp }: DiagnoseKodeSeksjonProp
   return (
     <>
       <div className="diagnose-seksjon-kode-tittel-container">
-        <Element>{tekster['diagnosekode.tittel']}</Element>
-        {visHjelp && <HjelpetekstWrapper tekst={tekster['diagnosekode.hjelpetekst.tekst']} />}
+        <Element>Diagnosekode</Element>
+        {visHjelp && (
+          <HjelpetekstWrapper tekst="Diagnosekoden henviser til de internasjonale kodeverkene som klassifiserer sykdom og symptomer. De ulike diagnosekodene brukes for å gi en mest mulig presis diagnose." />
+        )}
       </div>
 
       <Normaltekst>{kode}</Normaltekst>

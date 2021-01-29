@@ -1,17 +1,16 @@
 import React from 'react';
 
-import tekster from '../infopanel-tekster';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
 
 interface SvangerskapSeksjonProps {
-    svangerskap: boolean;
+  svangerskap: boolean;
 }
 
 const SvangerskapSeksjon = ({ svangerskap }: SvangerskapSeksjonProps) => {
-    if (!svangerskap) {
-        return null;
-    }
-    return <EnkelCheckbox tittel={tekster['svangerskap.tittel']} checked margin vis />;
+  if (!svangerskap) {
+    return null;
+  }
+  return <EnkelCheckbox tittel="Sykdommen er svangerskapsrelatert" checked margin vis />;
 };
 
 export default SvangerskapSeksjon;

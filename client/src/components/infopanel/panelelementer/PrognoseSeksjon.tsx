@@ -1,18 +1,23 @@
 import React from 'react';
 
-import tekster from '../infopanel-tekster';
 import { Prognose } from '../../../types/sykmeldingTypes';
 import EtikettMedTekst from '../layout/EtikettMedTekst';
 
 interface PrognoseSeksjonProps {
-    prognose?: Prognose;
+  prognose?: Prognose;
 }
 
 const PrognoseSeksjon = ({ prognose }: PrognoseSeksjonProps) => {
-    if (!prognose?.hensynArbeidsplassen) {
-        return null;
-    }
-    return <EtikettMedTekst tittel={tekster['prognose.hensyn.tittel']} tekst={prognose.hensynArbeidsplassen} margin />;
+  if (!prognose?.hensynArbeidsplassen) {
+    return null;
+  }
+  return (
+    <EtikettMedTekst
+      tittel="Beskriv eventuelle hensyn som må tas på arbeidsplassen"
+      tekst={prognose.hensynArbeidsplassen}
+      margin
+    />
+  );
 };
 
 export default PrognoseSeksjon;
