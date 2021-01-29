@@ -27,9 +27,9 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
         <DiagnoseSeksjon key={index.toString()} diagnose={diagnose} bidiagnose />
       ))}
       <ElementMedTekst
-        vis={!!sykmelding.signaturDato}
+        vis={!!sykmelding.behandletTidspunkt}
         tittel="Dato sykmeldingen ble skrevet"
-        tekst={tilLesbarDatoMedArstall(sykmelding.signaturDato)}
+        tekst={tilLesbarDatoMedArstall(sykmelding.behandletTidspunkt)}
         margin
       />
       <ElementMedTekst

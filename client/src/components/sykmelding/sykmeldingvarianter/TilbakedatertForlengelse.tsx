@@ -18,6 +18,7 @@ const TilbakedatertForlengelse = ({ sykmelding, personNrPasient }: Tilbakedatert
 
       <Tilbakedateringsinfo
         perioder={sykmelding.perioder}
+        kontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
         behandletTidspunkt={sykmelding.behandletTidspunkt}
         begrunnelseIkkeKontakt={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
       />
