@@ -87,9 +87,9 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
       <Knapp type="hoved" htmlType="submit">
         Registrer
       </Knapp>
-      <Knapp type="flat" onClick={() => console.log('avbryt // TODO')}>
+      <a href={process.env.GOSYS_URL} className="knapp knapp--flat form__cancel">
         Avbryt
-      </Knapp>
+      </a>
     </form>
   );
 };
