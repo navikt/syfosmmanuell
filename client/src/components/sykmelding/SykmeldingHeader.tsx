@@ -1,24 +1,16 @@
 import React from 'react';
-import { RuleInfo } from '../../types/validationresultTypes';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import dayjs from 'dayjs';
 import './SykmeldingHeader.less';
 
 interface SykmeldingheaderProps {
-  regelUtslag: RuleInfo[];
   arbeidsgiver?: string;
   sykmelder: string;
   mottattDato: Date;
   personNrPasient: string;
 }
 
-const Sykmeldingheader = ({
-  regelUtslag,
-  personNrPasient,
-  arbeidsgiver,
-  sykmelder,
-  mottattDato,
-}: SykmeldingheaderProps) => {
+const Sykmeldingheader = ({ personNrPasient, arbeidsgiver, sykmelder, mottattDato }: SykmeldingheaderProps) => {
   return (
     <div className="sykmelding-header">
       <Innholdstittel className="sykmelding-header__title">
@@ -31,9 +23,11 @@ const Sykmeldingheader = ({
       </div>
 
       <div className="sykmelding-header__section">
-        <Normaltekst>
-          <b>Arbeidsgiver:</b> {arbeidsgiver}
-        </Normaltekst>
+        {arbeidsgiver && (
+          <Normaltekst>
+            <b>Arbeidsgiver:</b> {arbeidsgiver}
+          </Normaltekst>
+        )}
         <Normaltekst>
           <b>Sykmelder:</b> {sykmelder}
         </Normaltekst>
