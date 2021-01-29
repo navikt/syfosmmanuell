@@ -6,10 +6,11 @@ import ElementMedTekst from '../layout/ElementMedTekst';
 interface ArbeidsevneProps {
   tiltakArbeidsplassen?: string;
   tiltakNAV?: string;
+  andreTiltak?: string;
 }
 
-const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV }: ArbeidsevneProps) => {
-  if (!tiltakArbeidsplassen && !tiltakNAV) {
+const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV, andreTiltak }: ArbeidsevneProps) => {
+  if (!tiltakArbeidsplassen && !tiltakNAV && !andreTiltak) {
     return null;
   }
 
@@ -19,6 +20,12 @@ const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV }: ArbeidsevneProps) => {
         vis={!!tiltakArbeidsplassen}
         tittel="Tilrettelegging/hensyn som bør tas på arbeidsplassen"
         tekst={tiltakArbeidsplassen}
+        margin
+      />
+      <ElementMedTekst
+        vis={!!andreTiltak}
+        tittel="Eventuelle andre innspill til NAV. Beskriv"
+        tekst={andreTiltak}
         margin
       />
       <ElementMedTekst vis={!!tiltakNAV} tittel="Tiltak i regi av NAV" tekst={tiltakNAV} margin />
