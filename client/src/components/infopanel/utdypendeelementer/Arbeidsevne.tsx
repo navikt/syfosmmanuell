@@ -8,11 +8,10 @@ import ElementMedTekst from '../layout/ElementMedTekst';
 interface ArbeidsevneProps {
   tiltakArbeidsplassen?: string;
   tiltakNAV?: string;
-  andreTiltak?: string;
 }
 
-const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV, andreTiltak }: ArbeidsevneProps) => {
-  if (!tiltakArbeidsplassen && !tiltakNAV && !andreTiltak) {
+const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV }: ArbeidsevneProps) => {
+  if (!tiltakArbeidsplassen && !tiltakNAV) {
     return null;
   }
 
@@ -25,12 +24,6 @@ const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV, andreTiltak }: Arbeidsev
         margin
       />
       <ElementMedTekst vis={!!tiltakNAV} tittel={tekster['arbeidsevne.tiltak.tittel']} tekst={tiltakNAV} margin />
-      <ElementMedTekst
-        vis={!!andreTiltak}
-        tittel={tekster['arbeidsevne.andre-tiltak.tittel']}
-        tekst={andreTiltak}
-        margin
-      />
     </SeksjonMedTittel>
   );
 };
