@@ -110,11 +110,12 @@ export const manuellOppgave = {
         arbeidFOM: '2018-11-21',
         vurderingsdato: '2018-10-30',
       },
-      erIkkeIArbeid: {
+      erIkkeIArbeid: undefined,
+      /* erIkkeIArbeid: {
         arbeidsforPaSikt: true,
         arbeidsforFom: '2019-11-11',
         vurderingsdato: '2019-11-12',
-      },
+      } */
     },
     utdypendeOpplysninger: {
       '6.3': {
@@ -169,7 +170,7 @@ export const manuellOppgave = {
       navn: 'NAV Test generator',
       versjon: '1.0',
     },
-    syketilfelleStartDato: '2018-10-1',
+    syketilfelleStartDato: '2018-10-10',
     signaturDato: '2019-04-29T08:34:16',
     navnFastlege: 'Doktor Legesen',
   },
