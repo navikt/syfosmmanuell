@@ -53,7 +53,7 @@ export const tilLesbarDatoUtenAarstall = (datoArg: Date) => {
   return `${dag}. ${maned}`;
 };
 
-export function hentDagerMellomDatoer(fra?: Date, til?: Date) {
+export const countDaysBetweenTwoDatesIncludingFom = (fra?: Date, til?: Date) => {
   if (!fra || !til) {
     return undefined;
   }
@@ -74,7 +74,7 @@ export function hentDagerMellomDatoer(fra?: Date, til?: Date) {
 
   // Include starting date
   return diff + 1;
-}
+};
 
 export const getFirstFomInPeriod = (periods: Periode[] | undefined) => {
   if (!periods) {

@@ -1,6 +1,10 @@
 import React from 'react';
 import ElementMedTekst from '../layout/ElementMedTekst';
-import { getFirstFomInPeriod, hentDagerMellomDatoer, tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
+import {
+  getFirstFomInPeriod,
+  countDaysBetweenTwoDatesIncludingFom,
+  tilLesbarDatoMedArstall,
+} from '../../../utils/datoUtils';
 
 import './Tilbakedateringsinfo.less';
 import { Periode } from '../../../types/sykmeldingTypes';
@@ -19,7 +23,7 @@ const Tilbakedateringsinfo = ({
   begrunnelseIkkeKontakt,
 }: TilbakedateringsinfoProps) => {
   const fom = getFirstFomInPeriod(perioder);
-  const tilbakedatertDuration = hentDagerMellomDatoer(behandletTidspunkt, fom);
+  const tilbakedatertDuration = countDaysBetweenTwoDatesIncludingFom(behandletTidspunkt, fom);
   return (
     <div className="tilbakedateringsinfo">
       <ElementMedTekst

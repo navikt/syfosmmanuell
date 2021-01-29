@@ -1,6 +1,6 @@
 import { Periode } from '../types/sykmeldingTypes';
 import {
-  hentDagerMellomDatoer,
+  countDaysBetweenTwoDatesIncludingFom,
   tilLesbarDatoUtenAarstall,
   tilLesbarDatoMedArstall,
   tilLesbarPeriodeUtenArstall,
@@ -8,14 +8,14 @@ import {
   getFirstFomInPeriod,
 } from './datoUtils';
 
-describe('hentDagerMellomDatoer', () => {
+describe('countDaysBetweenTwoDatesIncludingFom', () => {
   it('Calculates correct number of days between two dates in different months', () => {
     const fom = new Date('2018-10-18');
     const tom = new Date('2018-11-01');
 
     const expected = 15;
 
-    const durationInDays = hentDagerMellomDatoer(fom, tom);
+    const durationInDays = countDaysBetweenTwoDatesIncludingFom(fom, tom);
     expect(durationInDays).toEqual(expected);
   });
   it('Calculates correct number of days between two of the same dates', () => {
@@ -24,7 +24,7 @@ describe('hentDagerMellomDatoer', () => {
 
     const expected = 1;
 
-    const durationInDays = hentDagerMellomDatoer(fom, tom);
+    const durationInDays = countDaysBetweenTwoDatesIncludingFom(fom, tom);
     expect(durationInDays).toEqual(expected);
   });
   it('Calculates correct number of days between two dates in different years', () => {
@@ -33,7 +33,7 @@ describe('hentDagerMellomDatoer', () => {
 
     const expected = 2;
 
-    const durationInDays = hentDagerMellomDatoer(fom, tom);
+    const durationInDays = countDaysBetweenTwoDatesIncludingFom(fom, tom);
     expect(durationInDays).toEqual(expected);
   });
   it('Returns undefined if a date is undefined', () => {
@@ -41,7 +41,7 @@ describe('hentDagerMellomDatoer', () => {
 
     const expected = undefined;
 
-    const durationInDays = hentDagerMellomDatoer(fom, undefined);
+    const durationInDays = countDaysBetweenTwoDatesIncludingFom(fom, undefined);
     expect(durationInDays).toEqual(expected);
   });
 });
