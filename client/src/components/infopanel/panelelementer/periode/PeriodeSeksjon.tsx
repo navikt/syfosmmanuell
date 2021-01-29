@@ -18,9 +18,11 @@ const PeriodeSeksjon = ({ periode, understrek }: PeriodeSeksjonProps) => {
       <Element>Sykmeldingsperiode</Element>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <Normaltekst>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</Normaltekst>
-        <Normaltekst>
-          &nbsp;&bull; {antallDager} {antallDager === 1 ? 'dag' : 'dager'}
-        </Normaltekst>
+        {antallDager && (
+          <Normaltekst>
+            &nbsp;&bull; {antallDager} {antallDager === 1 ? 'dag' : 'dager'}
+          </Normaltekst>
+        )}
       </div>
       <Normaltekst>{periodeUndertekst(periode)}</Normaltekst>
       {understrek && <hr />}

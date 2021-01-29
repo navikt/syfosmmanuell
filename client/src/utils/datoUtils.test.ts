@@ -42,6 +42,15 @@ it('hentDagerMellomDatoer Beregner riktig antall dager mellom to datoer', () => 
   expect(durationInDays4).toEqual(expected4);
 });
 
+it('hentDagerMellomDatoer Returns undefined if a date is undefined', () => {
+  const fom = new Date('2018-10-14');
+
+  const expected = undefined;
+
+  const durationInDays = hentDagerMellomDatoer(fom, undefined);
+  expect(durationInDays).toEqual(expected);
+});
+
 it('tilLesbarDatoUtenAarstall Returnerer dato uten årstall', () => {
   const dato = new Date('2020-02-29');
   const expected = '29. februar';
