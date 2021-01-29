@@ -110,7 +110,11 @@ export const manuellOppgave = {
         arbeidFOM: '2018-11-21',
         vurderingsdato: '2018-10-30',
       },
-      erIkkeIArbeid: null,
+      erIkkeIArbeid: {
+        arbeidsforPaSikt: true,
+        arbeidsforFom: '2019-11-11',
+        vurderingsdato: '2019-11-12',
+      },
     },
     utdypendeOpplysninger: {
       '6.3': {
