@@ -31,7 +31,7 @@ const Tilbakedateringsinfo = ({
       {tilbakedatertDuration && (
         <ElementMedTekst
           vis={!!behandletTidspunkt}
-          tittel="Dato sykmeldingen ble skrevet fra"
+          tittel="Dato sykmeldingen ble skrevet"
           tekst={`${tilLesbarDatoMedArstall(behandletTidspunkt)} • tilbakedatert ${tilbakedatertDuration} dag${
             tilbakedatertDuration > 1 ? 'er' : ''
           }`}
