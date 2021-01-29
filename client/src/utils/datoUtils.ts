@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { Periode } from '../types/sykmeldingTypes';
 dayjs.extend(utc);
 
 const maaneder = [
@@ -53,9 +54,8 @@ export const tilLesbarDatoUtenAarstall = (datoArg: Date) => {
 };
 
 export function hentDagerMellomDatoer(fra?: Date, til?: Date) {
-  // Doesn't fail gracefully
   if (!fra || !til) {
-    return 0;
+    return undefined;
   }
 
   const format = 'YYYY-MM-DD';
@@ -72,5 +72,23 @@ export function hentDagerMellomDatoer(fra?: Date, til?: Date) {
     return 2;
   }
 
-  return diff;
+  // Include starting date
+  return diff + 1;
 }
+
+export const getFirstFomInPeriod = (periods: Periode[] | undefined) => {
+  if (!periods) {
+    return undefined;
+  }
+
+  return periods?.reduce((acc, val) => {
+    if (!acc) {
+      return val.fom;
+    }
+
+    if (dayjs(val.fom).isBefore(dayjs(acc))) {
+      return val.fom;
+    }
+    return acc;
+  }, undefined as Date | undefined);
+};

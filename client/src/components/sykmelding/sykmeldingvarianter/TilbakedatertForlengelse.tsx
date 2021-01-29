@@ -17,8 +17,8 @@ const TilbakedatertForlengelse = ({ sykmelding, personNrPasient }: Tilbakedatert
       <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
 
       <Tilbakedateringsinfo
-        kontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
-        signaturDato={sykmelding.signaturDato}
+        perioder={sykmelding.perioder}
+        behandletTidspunkt={sykmelding.behandletTidspunkt}
         begrunnelseIkkeKontakt={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
       />
     </InfoPanel>

@@ -1,33 +1,37 @@
 import React from 'react';
 import ElementMedTekst from '../layout/ElementMedTekst';
-import { hentDagerMellomDatoer, tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
+import { getFirstFomInPeriod, hentDagerMellomDatoer, tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 
 import './Tilbakedateringsinfo.less';
+import { Periode } from '../../../types/sykmeldingTypes';
 
 interface TilbakedateringsinfoProps {
-  kontaktDato?: Date;
-  signaturDato?: Date;
+  perioder?: Periode[];
+  behandletTidspunkt?: Date;
   begrunnelseIkkeKontakt?: string;
 }
 
-const Tilbakedateringsinfo = ({ kontaktDato, signaturDato, begrunnelseIkkeKontakt }: TilbakedateringsinfoProps) => {
-  const tilbakedatertDuration = hentDagerMellomDatoer(signaturDato, kontaktDato);
+const Tilbakedateringsinfo = ({ perioder, behandletTidspunkt, begrunnelseIkkeKontakt }: TilbakedateringsinfoProps) => {
+  const fom = getFirstFomInPeriod(perioder);
+  const tilbakedatertDuration = hentDagerMellomDatoer(behandletTidspunkt, fom);
   return (
     <div className="tilbakedateringsinfo">
       <ElementMedTekst
-        vis={!!kontaktDato}
+        vis={!!fom}
         tittel="Dato pasienten oppsøkte behandler"
-        tekst={tilLesbarDatoMedArstall(kontaktDato)}
+        tekst={tilLesbarDatoMedArstall(fom)}
         margin
       />
-      <ElementMedTekst
-        vis={!!signaturDato}
-        tittel="Dato sykmeldingen ble skrevet fra"
-        tekst={`${tilLesbarDatoMedArstall(signaturDato)} • tilbakedatert ${tilbakedatertDuration} dag${
-          tilbakedatertDuration > 1 ? 'er' : ''
-        }`}
-        margin
-      />
+      {tilbakedatertDuration && (
+        <ElementMedTekst
+          vis={!!behandletTidspunkt}
+          tittel="Dato sykmeldingen ble skrevet fra"
+          tekst={`${tilLesbarDatoMedArstall(behandletTidspunkt)} • tilbakedatert ${tilbakedatertDuration} dag${
+            tilbakedatertDuration > 1 ? 'er' : ''
+          }`}
+          margin
+        />
+      )}
       <ElementMedTekst
         vis={!!begrunnelseIkkeKontakt}
         tittel="Begrunnelse for tilbakedatering"
