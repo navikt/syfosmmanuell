@@ -5,10 +5,7 @@ import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 
-import tekster from '../infopanel-tekster';
-import Margin from '../layout/Margin';
 import ElementMedTekst from '../layout/ElementMedTekst';
-import EnkelCheckbox from '../layout/EnkelCheckbox';
 
 interface FriskmeldingProps {
   prognose?: Prognose;
@@ -50,25 +47,25 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
         </>
       )}
       {erIkkeIArbeid && (
-        <Margin>
-          <EnkelCheckbox
-            tittel={tekster['friskmelding.ingen-arbeidsgiver']}
-            bold
+        <>
+          <ElementMedTekst
+            tittel="Kan pasienten på sikt komme tilbake i arbeid?"
+            tekst={erIkkeIArbeid.arbeidsforPaSikt ? 'Ja' : 'Nei'}
             margin
-            checked={erIkkeIArbeid.arbeidsforPaSikt}
-            vis={erIkkeIArbeid.arbeidsforPaSikt}
           />
           <ElementMedTekst
             vis={!!erIkkeIArbeid.arbeidsforFOM}
-            tittel={tekster['friskmelding.arbeidfom']}
+            tittel="Anslå når du tror dette kan skje"
             tekst={tilLesbarDatoMedArstall(erIkkeIArbeid.arbeidsforFOM)}
+            margin
           />
           <ElementMedTekst
             vis={!!erIkkeIArbeid.vurderingsdato}
-            tittel={tekster['friskmelding.ingen-arbeidsgiver.vurdering']}
+            tittel="Når antar du å kunne gi tilbakemelding på dette?"
             tekst={tilLesbarDatoMedArstall(erIkkeIArbeid.vurderingsdato)}
+            margin
           />
-        </Margin>
+        </>
       )}
     </SeksjonMedTittel>
   );
