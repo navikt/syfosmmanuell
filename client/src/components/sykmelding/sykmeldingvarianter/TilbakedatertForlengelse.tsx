@@ -15,6 +15,9 @@ const TilbakedatertForlengelse = ({ sykmelding, personNrPasient }: Tilbakedatert
     <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
       <SykmeldingPerioder perioder={sykmelding.perioder} />
       <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
+      {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
+        <DiagnoseSeksjon key={index.toString()} diagnose={diagnose} bidiagnose />
+      ))}
 
       <Tilbakedateringsinfo
         perioder={sykmelding.perioder}
