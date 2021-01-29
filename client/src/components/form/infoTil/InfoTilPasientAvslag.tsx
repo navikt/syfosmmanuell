@@ -22,7 +22,7 @@ const InfoTilPasientAvslag = () => {
         <Undertittel className="info-til-pasient__title">Hva nå?</Undertittel>
         <Normaltekst className="info-til-pasient__paragraph">
           Du kan likevel sende inn sykmeldingen. Når perioden er over, sender du søknaden om sykepenger. Når søknaden er
-          behandlet, vil du få en begrunnelse for hvorfor du ikke kan få sykepenger for de 3 dagene, og du får samtidig
+          behandlet, vil du få en begrunnelse for hvorfor du ikke kan få sykepenger for disse dagene, og du får samtidig
           mulighet til å klage.
         </Normaltekst>
       </section>
