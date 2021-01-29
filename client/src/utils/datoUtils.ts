@@ -58,11 +58,7 @@ export const countDaysBetweenTwoDatesIncludingFom = (fra?: Date, til?: Date) => 
     return undefined;
   }
 
-  const format = 'YYYY-MM-DD';
-  const f = dayjs.utc(fra, format);
-  const t = dayjs.utc(til, format);
-
-  const diff = t.diff(f, 'day');
+  const diff = dayjs(til).diff(fra, 'day');
 
   // Include starting date
   return diff + 1;
