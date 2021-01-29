@@ -6,6 +6,7 @@ import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 
 import ElementMedTekst from '../layout/ElementMedTekst';
+import EnkelCheckbox from '../layout/EnkelCheckbox';
 
 interface FriskmeldingProps {
   prognose?: Prognose;
@@ -16,10 +17,23 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
     return null;
   }
 
-  const { erIArbeid, erIkkeIArbeid } = prognose;
+  const { erIArbeid, erIkkeIArbeid, hensynArbeidsplassen, arbeidsforEtterPeriode } = prognose;
 
   return (
     <SeksjonMedTittel understrek tittel="Friskmelding/prognose">
+      <ElementMedTekst
+        tittel="Beskriv eventuelle hensyn som må tas på arbeidsplassen"
+        tekst={hensynArbeidsplassen}
+        margin
+        vis={!!hensynArbeidsplassen}
+      />
+      <EnkelCheckbox
+        tittel="Pasienten er 100 prosent arbeidsfør etter denne perioden"
+        checked={arbeidsforEtterPeriode}
+        margin
+        bold
+        vis={arbeidsforEtterPeriode}
+      />
       {erIArbeid && (
         <>
           <ElementMedTekst
