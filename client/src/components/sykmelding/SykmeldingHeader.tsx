@@ -4,13 +4,13 @@ import dayjs from 'dayjs';
 import './SykmeldingHeader.less';
 
 interface SykmeldingheaderProps {
-  arbeidsgiver?: string;
+  arbeidsgiverNavn?: string;
   sykmelder: string;
   mottattDato: Date;
   personNrPasient: string;
 }
 
-const Sykmeldingheader = ({ personNrPasient, arbeidsgiver, sykmelder, mottattDato }: SykmeldingheaderProps) => {
+const Sykmeldingheader = ({ personNrPasient, arbeidsgiverNavn, sykmelder, mottattDato }: SykmeldingheaderProps) => {
   return (
     <div className="sykmelding-header">
       <Innholdstittel className="sykmelding-header__title">
@@ -23,9 +23,9 @@ const Sykmeldingheader = ({ personNrPasient, arbeidsgiver, sykmelder, mottattDat
       </div>
 
       <div className="sykmelding-header__section">
-        {arbeidsgiver && (
+        {arbeidsgiverNavn && (
           <Normaltekst>
-            <b>Arbeidsgiver:</b> {arbeidsgiver}
+            <b>Arbeidsgiver:</b> {arbeidsgiverNavn}
           </Normaltekst>
         )}
         <Normaltekst>

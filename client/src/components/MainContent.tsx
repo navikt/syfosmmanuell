@@ -19,7 +19,7 @@ const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) =
   return (
     <div className="panel">
       <Sykmeldingheader
-        arbeidsgiver={sykmelding.arbeidsgiver.navn}
+        arbeidsgiverNavn={sykmelding.arbeidsgiver.navn}
         sykmelder={sykmelding.navnFastlege}
         mottattDato={mottattDato}
         personNrPasient={personNrPasient}
