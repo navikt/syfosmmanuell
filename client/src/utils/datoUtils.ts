@@ -64,14 +64,6 @@ export const countDaysBetweenTwoDatesIncludingFom = (fra?: Date, til?: Date) => 
 
   const diff = t.diff(f, 'day');
 
-  if (diff === 0) {
-    return 1;
-  }
-
-  if (diff === 1) {
-    return 2;
-  }
-
   // Include starting date
   return diff + 1;
 };
