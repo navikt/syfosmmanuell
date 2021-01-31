@@ -2,8 +2,6 @@ import React from 'react';
 
 import { SporsmalSvar } from '../../../types/sykmeldingTypes';
 
-import tekster from '../infopanel-tekster';
-
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import Margin from '../layout/Margin';
 import ElementMedTekst from '../layout/ElementMedTekst';
@@ -24,13 +22,6 @@ interface UtdypendeOpplysningerProps {
 }
 
 const UtdypendeOpplysninger = ({ opplysninger }: UtdypendeOpplysningerProps) => {
-  // TODO: legg til logikk for visning av seksjon
-  /*
-    const visSeksjon = sykmelding.utdypendeOpplysninger.sykehistorie ||
-        sykmelding.utdypendeOpplysninger.paavirkningArbeidsevne ||
-        sykmelding.utdypendeOpplysninger.resultatAvBehandling ||
-        sykmelding.utdypendeOpplysninger.henvisningUtredningBehandling;
-    */
   if (!opplysninger.size) {
     return null;
   }
@@ -42,7 +33,7 @@ const UtdypendeOpplysninger = ({ opplysninger }: UtdypendeOpplysningerProps) => 
   ));
 
   return (
-    <SeksjonMedTittel understrek tittel={tekster['utdypende.tittel']}>
+    <SeksjonMedTittel understrek tittel="Utdypende opplysninger">
       {opplysningGrupper}
     </SeksjonMedTittel>
   );

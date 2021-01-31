@@ -1,8 +1,8 @@
 import React from 'react';
 import { Periode } from '../../../../types/sykmeldingTypes';
-import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
-import { tilLesbarPeriodeMedArstall, hentDagerMellomDatoer } from '../../../../utils/datoUtils';
+import { tilLesbarPeriodeMedArstall, countDaysBetweenTwoDatesIncludingFom } from '../../../../utils/datoUtils';
 import './periodeseksjon.less';
 import { periodeUndertekst } from '../../../../utils/tekstUtils';
 
@@ -12,17 +12,17 @@ interface PeriodeSeksjonProps {
 }
 
 const PeriodeSeksjon = ({ periode, understrek }: PeriodeSeksjonProps) => {
-  const antallDager = hentDagerMellomDatoer(periode.fom, periode.tom);
+  const antallDager = countDaysBetweenTwoDatesIncludingFom(periode.fom, periode.tom);
   return (
     <div className="periodeseksjon">
-      <EtikettLiten>Periode</EtikettLiten>
+      <Element>Sykmeldingsperiode</Element>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <Normaltekst>
-          <strong>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</strong>
-        </Normaltekst>
-        <Normaltekst>
-          &nbsp;&bull; {antallDager} {antallDager === 1 ? 'dag' : 'dager'}
-        </Normaltekst>
+        <Normaltekst>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</Normaltekst>
+        {antallDager && (
+          <Normaltekst>
+            &nbsp;&bull; {antallDager} {antallDager === 1 ? 'dag' : 'dager'}
+          </Normaltekst>
+        )}
       </div>
       <Normaltekst>{periodeUndertekst(periode)}</Normaltekst>
       {understrek && <hr />}

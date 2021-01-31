@@ -3,7 +3,6 @@ import { Periode } from '../../../types/sykmeldingTypes';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 
-import tekster from '../infopanel-tekster';
 import Margin from '../layout/Margin';
 import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
@@ -27,11 +26,12 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
   );
 
   return (
-    <SeksjonMedTittel understrek tittel={tekster['muliget-for-arbeid.tittel']}>
+    <SeksjonMedTittel understrek tittel="Mulighet for arbeid">
       <Margin>
-        <ElementMedTekst vis={!!harMedisinskArsak} tittel={tekster['muliget-for-arbeid.medisinske-arsaker.tittel']} />
+        <ElementMedTekst vis={!!harMedisinskArsak} tittel="Pasienten kan ikke være i arbeid (100% sykmeldt)" />
+        <br />
         <EnkelCheckbox
-          tittel={tekster['muliget-for-arbeid.medisinske-arsaker']}
+          tittel="Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet"
           margin
           checked
           vis={!!harMedisinskArsak}
@@ -50,13 +50,11 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
       ))}
 
       <Margin>
-        <ElementMedTekst
-          vis={!!harArbeidsrelatertArsak}
-          tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen.tittel']}
-        />
+        <ElementMedTekst vis={!!harArbeidsrelatertArsak} tittel="Pasienten kan ikke være i arbeid (100% sykmeldt)" />
+        <br />
         <EnkelCheckbox
           vis={!!harArbeidsrelatertArsak}
-          tittel={tekster['muliget-for-arbeid.forhold-pa-arbeidsplassen']}
+          tittel="Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet"
           margin
           checked
         />

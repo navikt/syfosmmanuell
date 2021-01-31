@@ -1,38 +1,41 @@
 import React from 'react';
-import { RuleInfo, RuleNamesDescription } from '../../types/validationresultTypes';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import dayjs from 'dayjs';
 import './SykmeldingHeader.less';
 
 interface SykmeldingheaderProps {
-  regelUtslag: RuleInfo[];
-  arbeidsgiver?: string;
+  arbeidsgiverNavn?: string;
   sykmelder: string;
   mottattDato: Date;
+  personNrPasient: string;
 }
 
-const Sykmeldingheader = ({ regelUtslag, arbeidsgiver, sykmelder, mottattDato }: SykmeldingheaderProps) => {
+const Sykmeldingheader = ({ personNrPasient, arbeidsgiverNavn, sykmelder, mottattDato }: SykmeldingheaderProps) => {
   return (
     <div className="sykmelding-header">
-      <div className="sykmelding-header__arsak">
-        <Element>{regelUtslag.length > 1 ? 'Årsaker' : 'Årsak'} til manuell vurdering:</Element>
-        <ul>
-          {regelUtslag.map((regel, index) => {
-            return (
-              <li key={index}>
-                <Normaltekst>{RuleNamesDescription[regel.ruleName]}</Normaltekst>
-              </li>
-            );
-          })}
-        </ul>
+      <Innholdstittel className="sykmelding-header__title">
+        Manuell vurdering av tilbakedatert sykmelding
+      </Innholdstittel>
+
+      <div className="sykmelding-header__section">
+        <Element>Fødselsnummer:</Element>
+        <Normaltekst> {personNrPasient}</Normaltekst>
       </div>
-      <div className="sykmelding-header__mottattdato">
-        <Element>Dato mottatt av NAV:</Element>
+
+      <div className="sykmelding-header__section">
+        {arbeidsgiverNavn && (
+          <Normaltekst>
+            <b>Arbeidsgiver:</b> {arbeidsgiverNavn}
+          </Normaltekst>
+        )}
+        <Normaltekst>
+          <b>Sykmelder:</b> {sykmelder}
+        </Normaltekst>
+      </div>
+
+      <div className="sykmelding-header__section">
+        <Element>Dato NAV mottok sykmeldingen:</Element>
         <Normaltekst>{dayjs(mottattDato).format('DD.MM.YYYY kl. HH:mm:ss')}</Normaltekst>
-      </div>
-      <div className="sykmelding-header__arbg-sykmelder">
-        <Element>Arbeidsgiver: {arbeidsgiver}</Element>
-        <Element>Sykmelder: {sykmelder}</Element>
       </div>
     </div>
   );

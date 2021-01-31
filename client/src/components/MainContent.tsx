@@ -14,16 +14,15 @@ interface MainContentProps {
 
 const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) => {
   const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
-  const { sykmelding, personNrPasient, mottattDato, validationResult } = manuellOppgave;
-  const { ruleHits } = validationResult;
+  const { sykmelding, personNrPasient, mottattDato } = manuellOppgave;
 
   return (
     <div className="panel">
       <Sykmeldingheader
-        regelUtslag={ruleHits}
-        arbeidsgiver={sykmelding.arbeidsgiver.navn}
+        arbeidsgiverNavn={sykmelding.arbeidsgiver.navn}
         sykmelder={sykmelding.navnFastlege}
         mottattDato={mottattDato}
+        personNrPasient={personNrPasient}
       />
       <TilbakedatertForlengelse sykmelding={sykmelding} personNrPasient={personNrPasient} />
       <Form ferdigstillOppgave={ferdigstillOppgave} />
