@@ -1,15 +1,18 @@
 import { Knapp } from 'nav-frontend-knapper';
-import { Feiloppsummering, FeiloppsummeringFeil, RadioPanelGruppe } from 'nav-frontend-skjema';
+import { Feiloppsummering, FeiloppsummeringFeil, RadioPanelGruppe, Label } from 'nav-frontend-skjema';
 import React, { useEffect, useRef } from 'react';
 import { useForm, Controller, DeepMap, FieldError } from 'react-hook-form';
 import './Form.less';
-import InfoTilPasientAvslag from './infoTil/InfoTilPasientAvslag';
-import HvaGjorJegNa from './hvaGjorJegNa/HvaGjorJegNa';
-import InfoTilPasientAvvisning from './infoTil/InfoTilPasientAvvisning';
-import InfoTilBehandlerAvvisning from './infoTil/InfoTilBehandlerAvvisning';
+import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
+
+type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST';
+export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'KREVER_FLERE_OPPLYSNINGER';
+export type Avvisningstype = 'MANGLER_BEGRUNNELSE' | 'UGYLDIG_BEGRUNNELSE';
 
 export interface FormShape {
-  status: 'GODKJENT' | 'UGYLDIG_TILBAKEDATERING' | 'UGYLDIG_BEGRUNNELSE';
+  status: Status;
+  merknad?: Merknad; // if status === true and needs merknad
+  avvisningstype?: Avvisningstype; // if stasus === false
 }
 
 const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): FeiloppsummeringFeil[] =>
@@ -23,7 +26,10 @@ interface FormProps {
 
 const Form = ({ ferdigstillOppgave }: FormProps) => {
   const { control, handleSubmit, errors, watch } = useForm<FormShape>();
-  const watchGodkjent = watch('status');
+  const watchStatus = watch('status');
+  const watchMerknad = watch('merknad');
+  const watchAvvisningstype = watch('avvisningstype');
+
   const feiloppsummeringRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -39,7 +45,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
         name="status"
         rules={{
           validate: (value) => {
-            if (['GODKJENT', 'UGYLDIG_TILBAKEDATERING', 'UGYLDIG_BEGRUNNELSE'].includes(value)) {
+            if (['GODKJENT', 'GODKJENT_MED_MERKNAD', 'AVVIST'].includes(value)) {
               return true;
             }
             return 'Oppgaven mangler vurdering';
@@ -54,26 +60,82 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
             feil={errors.status?.message}
             radios={[
               { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
-              { label: 'Avslå tilbakedatering', value: 'UGYLDIG_TILBAKEDATERING' },
-              { label: 'Be om ny begrunnelse', value: 'UGYLDIG_BEGRUNNELSE' },
+              { label: 'Godkjenn med merknad', value: 'GODKJENT_MED_MERKNAD' },
+              { label: 'Avvis sykmeldingen', value: 'AVVIST' },
             ]}
           />
         )}
       />
 
-      {watchGodkjent === 'UGYLDIG_TILBAKEDATERING' && (
+      {watchStatus === 'GODKJENT_MED_MERKNAD' && (
         <>
-          <InfoTilPasientAvslag />
-          <HvaGjorJegNa />
+          <Label htmlFor="b-merknad">Velg merknadtype</Label>
+          <Controller
+            control={control}
+            name="merknad"
+            rules={{
+              validate: (value) => {
+                if (['UGYLDIG_TILBAKEDATERING', 'KREVER_FLERE_OPPLYSNINGER'].includes(value)) {
+                  return true;
+                }
+                return 'Mangler merknad';
+              },
+            }}
+            render={({ onChange, value }) => (
+              <RadioPanelGruppe
+                className="form__radio-group"
+                name="merknad"
+                onChange={onChange}
+                checked={value}
+                feil={errors.merknad?.message}
+                radios={[
+                  { id: 'b-merknad', label: 'Tilbakedateringen er ugyldig', value: 'UGYLDIG_TILBAKEDATERING' },
+                  { label: 'Behov for flere opplysninger', value: 'KREVER_FLERE_OPPLYSNINGER' },
+                ]}
+              />
+            )}
+          />
         </>
       )}
 
-      {watchGodkjent === 'UGYLDIG_BEGRUNNELSE' && (
+      {watchStatus === 'AVVIST' && (
         <>
-          <InfoTilPasientAvvisning />
-          <InfoTilBehandlerAvvisning />
+          <Label htmlFor="b-avvisningstype">Velg avvisningstype</Label>
+          <Controller
+            control={control}
+            name="avvisningstype"
+            rules={{
+              validate: (value) => {
+                if (['MANGLER_BEGRUNNELSE', 'UGYLDIG_BEGRUNNELSE'].includes(value)) {
+                  return true;
+                }
+                return 'Mangler avvisningstype';
+              },
+            }}
+            render={({ onChange, value }) => (
+              <RadioPanelGruppe
+                className="form__radio-group"
+                name="avvisningstype"
+                onChange={onChange}
+                checked={value}
+                feil={errors.avvisningstype?.message}
+                radios={[
+                  {
+                    id: 'b-avvisningstype',
+                    label: 'Begrunnelse for tilbakedatering mangler',
+                    value: 'MANGLER_BEGRUNNELSE',
+                  },
+                  { label: 'Begrunnelsen for tilbakedateringen er ugyldig', value: 'UGYLDIG_BEGRUNNELSE' },
+                ]}
+              />
+            )}
+          />
         </>
       )}
+
+      <div className="form__info-til-behandler-og-pasient">
+        <InfoTilBehandlerOgPasient type={watchMerknad || watchAvvisningstype} />
+      </div>
 
       {hasErrors(errors) && (
         <Feiloppsummering
