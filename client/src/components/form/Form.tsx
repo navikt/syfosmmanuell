@@ -11,8 +11,8 @@ export type Avvisningstype = 'MANGLER_BEGRUNNELSE' | 'UGYLDIG_BEGRUNNELSE';
 
 export interface FormShape {
   status: Status;
-  merknad?: Merknad; // if status === true and needs merknad
-  avvisningstype?: Avvisningstype; // if stasus === false
+  merknad?: Merknad; // if status === GODKJENT_MED_MERKNAD
+  avvisningstype?: Avvisningstype; // if stasus === AVVIST
 }
 
 const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): FeiloppsummeringFeil[] =>
@@ -89,8 +89,12 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
                 checked={value}
                 feil={errors.merknad?.message}
                 radios={[
-                  { id: 'b-merknad', label: 'Tilbakedateringen er ugyldig', value: 'UGYLDIG_TILBAKEDATERING' },
-                  { label: 'Behov for flere opplysninger', value: 'KREVER_FLERE_OPPLYSNINGER' },
+                  {
+                    id: 'b-merknad',
+                    label: 'Avslå tilbakedatering, hele eller deler av tilbakedatering er ugyldig',
+                    value: 'UGYLDIG_TILBAKEDATERING',
+                  },
+                  { label: 'Behov for flere opplysninger. Kontant behandler', value: 'KREVER_FLERE_OPPLYSNINGER' },
                 ]}
               />
             )}
@@ -122,10 +126,15 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
                 radios={[
                   {
                     id: 'b-avvisningstype',
-                    label: 'Begrunnelse for tilbakedatering mangler',
+                    label:
+                      'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig.',
                     value: 'MANGLER_BEGRUNNELSE',
                   },
-                  { label: 'Begrunnelsen for tilbakedateringen er ugyldig', value: 'UGYLDIG_BEGRUNNELSE' },
+                  {
+                    label:
+                      'NAV kan ikke godta tilbakedateringen. Det må skrives ny sykmelding der f.o.m-dato er datoen for den første kontakten med pasienten.',
+                    value: 'UGYLDIG_BEGRUNNELSE',
+                  },
                 ]}
               />
             )}
