@@ -11,8 +11,8 @@ export type Avvisningstype = 'MANGLER_BEGRUNNELSE' | 'UGYLDIG_BEGRUNNELSE';
 
 export interface FormShape {
   status: Status;
-  merknad?: Merknad; // if status === GODKJENT_MED_MERKNAD
-  avvisningstype?: Avvisningstype; // if stasus === AVVIST
+  merknad?: Merknad; // should be set if status === GODKJENT_MED_MERKNAD
+  avvisningstype?: Avvisningstype; // should be set if status === AVVIST
 }
 
 const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): FeiloppsummeringFeil[] =>
@@ -60,7 +60,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
             feil={errors.status?.message}
             radios={[
               { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
-              { label: 'Godkjenn med merknad', value: 'GODKJENT_MED_MERKNAD' },
+              { label: 'Registrer med merknad', value: 'GODKJENT_MED_MERKNAD' },
               { label: 'Avvis sykmeldingen', value: 'AVVIST' },
             ]}
           />
@@ -91,10 +91,10 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
                 radios={[
                   {
                     id: 'b-merknad',
-                    label: 'Avslå tilbakedatering, hele eller deler av tilbakedatering er ugyldig',
+                    label: 'Avslå tilbakedatering, hele eller deler av sykmeldingen er ugyldig',
                     value: 'UGYLDIG_TILBAKEDATERING',
                   },
-                  { label: 'Behov for flere opplysninger. Kontant behandler', value: 'KREVER_FLERE_OPPLYSNINGER' },
+                  { label: 'Behov for flere opplysninger. Kontakt behandler', value: 'KREVER_FLERE_OPPLYSNINGER' },
                 ]}
               />
             )}
