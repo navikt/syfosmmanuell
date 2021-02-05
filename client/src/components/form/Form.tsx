@@ -6,7 +6,7 @@ import './Form.less';
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
 type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST';
-export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'KREVER_FLERE_OPPLYSNINGER';
+export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER';
 export type Avvisningstype = 'MANGLER_BEGRUNNELSE' | 'UGYLDIG_BEGRUNNELSE';
 
 export interface FormShape {
@@ -75,7 +75,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
             name="merknad"
             rules={{
               validate: (value) => {
-                if (['UGYLDIG_TILBAKEDATERING', 'KREVER_FLERE_OPPLYSNINGER'].includes(value)) {
+                if (['UGYLDIG_TILBAKEDATERING', 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER'].includes(value)) {
                   return true;
                 }
                 return 'Mangler merknad';
@@ -94,7 +94,10 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
                     label: 'Avslå tilbakedatering, hele eller deler av sykmeldingen er ugyldig',
                     value: 'UGYLDIG_TILBAKEDATERING',
                   },
-                  { label: 'Behov for flere opplysninger. Kontakt behandler', value: 'KREVER_FLERE_OPPLYSNINGER' },
+                  {
+                    label: 'Behov for flere opplysninger. Kontakt behandler',
+                    value: 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
+                  },
                 ]}
               />
             )}
