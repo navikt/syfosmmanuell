@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import proxy, { ProxyOptions } from 'express-http-proxy';
 import { Client } from 'openid-client';
-import config, { ProxyConfig } from '../config';
+import { ProxyConfig } from '../config';
 import { RequestOptions } from 'http';
 import utils from '../auth/utils';
 import logger from '../logging';
@@ -32,10 +32,10 @@ const options = (proxyConfig: ProxyConfig, authClient: Client): ProxyOptions => 
   },
 });
 
-const setup = (router: Router, authClient: Client) => {
-  const { path, url } = config.modiaContextReverseProxy;
+const setup = (router: Router, authClient: Client, proxyConfig: ProxyConfig) => {
+  const { path, url } = proxyConfig;
   logger.info(`Setting up proxy for '${path}'`);
-  router.use(`/${path}/*`, proxy(url, options(config.modiaContextReverseProxy, authClient)));
+  router.use(`/${path}/*`, proxy(url, options(proxyConfig, authClient)));
 };
 
 export default { setup };

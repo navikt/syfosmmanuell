@@ -1,5 +1,5 @@
 import authUtils from '../auth/utils';
-import config, { ProxyConfig } from '../config';
+import { ProxyConfig } from '../config';
 import proxy from 'express-http-proxy';
 import url from 'url';
 import { Client } from 'openid-client';
@@ -44,10 +44,10 @@ const options = (proxyConfig: ProxyConfig, authClient: Client) => ({
 
 const stripTrailingSlash = (str: string): string => (str.endsWith('/') ? str.slice(0, -1) : str);
 
-const setup = (router: Router, authClient: Client) => {
-  const { path, url } = config.downstreamApiReverseProxy;
+const setup = (router: Router, authClient: Client, proxyConfig: ProxyConfig) => {
+  const { path, url } = proxyConfig;
   logger.info(`Setting up proxy for '${path}'`);
-  router.use(`/${path}/*`, proxy(url, options(config.downstreamApiReverseProxy, authClient)));
+  router.use(`/${path}/*`, proxy(url, options(proxyConfig, authClient)));
 };
 
 export default { setup };

@@ -1,5 +1,4 @@
 import azure from './auth/azure';
-import config from './config';
 import routes from './routes/routes';
 import cors from './cors';
 import express from 'express';
@@ -8,6 +7,7 @@ import passport from 'passport';
 import session from './session';
 import logger from './logging';
 import path from 'path';
+import loadConfig from './config';
 
 // for demo app running on nais labs
 function startDemoApp() {
@@ -31,8 +31,10 @@ function startDemoApp() {
 async function startApp() {
   try {
     const server = express();
+    const config = loadConfig();
     const port = config.server.port;
-    session.setup(server);
+
+    session.setup(server, config);
 
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
@@ -46,15 +48,15 @@ async function startApp() {
     server.use(passport.initialize());
     server.use(passport.session());
 
-    const azureAuthClient = await azure.client();
-    const azureOidcStrategy = azure.strategy(azureAuthClient);
+    const azureAuthClient = await azure.client(config.azureAd);
+    const azureOidcStrategy = azure.strategy(azureAuthClient, config.azureAd);
 
     passport.use('azureOidc', azureOidcStrategy);
     passport.serializeUser((user, done) => done(null, user));
     passport.deserializeUser((user, done) => done(null, user));
 
     // setup routes
-    server.use('/', routes.setup(azureAuthClient));
+    server.use('/', routes.setup(azureAuthClient, config));
 
     server.listen(port, () => logger.info(`Listening on port ${port}`));
   } catch (error) {
