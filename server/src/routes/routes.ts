@@ -4,8 +4,8 @@ import path from 'path';
 import passport from 'passport';
 import downstreamApiReverseProxy from '../proxy/downstream-api-reverse-proxy';
 import { Client } from 'openid-client';
+import config from '../config';
 import modiaContextHolderReverseProxy from '../proxy/modia-context-holder-reverse-proxy';
-import { Config } from '../config';
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ const ensureAuthenticated = async (req: Request, res: Response, next: NextFuncti
   }
 };
 
-const setup = (authClient: Client, config: Config) => {
+const setup = (authClient: Client) => {
   // Unprotected
   router.get('/is_alive', (_req, res) => res.send('Alive'));
   router.get('/is_ready', (_req, res) => res.send('Ready'));
@@ -39,8 +39,8 @@ const setup = (authClient: Client, config: Config) => {
   // Protected
   router.use('/', express.static(path.join(__dirname, '../../../client/build')));
 
-  downstreamApiReverseProxy.setup(router, authClient, config.downstreamApiReverseProxy);
-  modiaContextHolderReverseProxy.setup(router, authClient, config.modiaContextReverseProxy);
+  downstreamApiReverseProxy.setup(router, authClient);
+  modiaContextHolderReverseProxy.setup(router, authClient);
 
   router.use('/*', (_req, res) => {
     res.status(404).send('Not found');

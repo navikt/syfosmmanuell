@@ -1,4 +1,4 @@
-import { Config } from './config';
+import config from './config';
 import redis from 'redis';
 import session from 'express-session';
 import { Application } from 'express';
@@ -6,7 +6,7 @@ import logger from './logging';
 
 const SESSION_MAX_AGE_MILLISECONDS = 60 * 60 * 1000;
 
-const setup = (app: Application, config: Config) => {
+const setup = (app: Application) => {
   app.set('trust proxy', 1);
   if (process.env.NODE_ENV === 'development') {
     app.use(
