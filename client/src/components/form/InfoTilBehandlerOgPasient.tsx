@@ -2,16 +2,16 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import React from 'react';
 import './InfoTilBehandlerOgPasient.less';
 import Expandable from '../expandable/Expandable';
-import { Merknad, Avvisningstype } from './Form';
+import { Merknad, AvvisningType } from './Form';
 
-const BeskjedTilBehandler: Record<Avvisningstype, string> = {
+const BeskjedTilBehandler: Record<AvvisningType, string> = {
   MANGLER_BEGRUNNELSE:
     'Sykmelding gjelder som hovedregel fra den dagen pasienten oppsøker behandler. Sykmeldingen er tilbakedatert uten at det kommer tydelig nok fram hvorfor dette var nødvendig. Sykmeldingen er derfor avvist, og det må skrives en ny hvis det fortsatt er aktuelt med sykmelding. Pasienten har fått beskjed om å vente på ny sykmelding fra deg.',
   UGYLDIG_BEGRUNNELSE:
     'NAV kan ikke godta tilbakedateringen. Sykmeldingen er derfor avvist. Hvis sykmelding fortsatt er aktuelt, må det skrives ny sykmelding der f.o.m.-dato er dagen du var i kontakt med pasienten. Pasienten har fått beskjed om å vente på ny sykmelding fra deg.',
 };
 
-const BeskjedTilPasient: Record<Merknad | Avvisningstype, string> = {
+const BeskjedTilPasient: Record<Merknad | AvvisningType, string> = {
   MANGLER_BEGRUNNELSE:
     'Sykmelding gjelder som hovedregel fra den dagen du oppsøker behandler. Sykmeldingen din er tilbakedatert uten at det er gitt en god nok begrunnelse for dette. Behandleren din må skrive ut en ny sykmelding og begrunne bedre hvorfor den er tilbakedatert. Din behandler har mottatt melding fra NAV om dette.',
   UGYLDIG_BEGRUNNELSE:
@@ -23,7 +23,7 @@ const BeskjedTilPasient: Record<Merknad | Avvisningstype, string> = {
 };
 
 interface InfoTilBehandlerOgPasientProps {
-  type?: Merknad | Avvisningstype;
+  type?: Merknad | AvvisningType;
 }
 
 const InfoTilBehandlerOgPasient = ({ type }: InfoTilBehandlerOgPasientProps) => {

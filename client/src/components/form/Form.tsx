@@ -7,12 +7,12 @@ import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
 type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST';
 export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER';
-export type Avvisningstype = 'MANGLER_BEGRUNNELSE' | 'UGYLDIG_BEGRUNNELSE';
+export type AvvisningType = 'MANGLER_BEGRUNNELSE' | 'UGYLDIG_BEGRUNNELSE';
 
 export interface FormShape {
   status: Status;
   merknad?: Merknad; // should be set if status === GODKJENT_MED_MERKNAD
-  avvisningstype?: Avvisningstype; // should be set if status === AVVIST
+  avvisningType?: AvvisningType; // should be set if status === AVVIST
 }
 
 const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): FeiloppsummeringFeil[] =>
@@ -28,7 +28,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
   const { control, handleSubmit, errors, watch } = useForm<FormShape>();
   const watchStatus = watch('status');
   const watchMerknad = watch('merknad');
-  const watchAvvisningstype = watch('avvisningstype');
+  const watchAvvisningType = watch('avvisningType');
 
   const feiloppsummeringRef = useRef<HTMLDivElement>();
 
@@ -110,7 +110,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
           <Label htmlFor="b-avvisningstype">Velg avvisningstype</Label>
           <Controller
             control={control}
-            name="avvisningstype"
+            name="avvisningType"
             rules={{
               validate: (value) => {
                 if (['MANGLER_BEGRUNNELSE', 'UGYLDIG_BEGRUNNELSE'].includes(value)) {
@@ -125,7 +125,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
                 name="avvisningstype"
                 onChange={onChange}
                 checked={value}
-                feil={errors.avvisningstype?.message}
+                feil={errors.avvisningType?.message}
                 radios={[
                   {
                     id: 'b-avvisningstype',
@@ -146,7 +146,7 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
       )}
 
       <div className="form__info-til-behandler-og-pasient">
-        <InfoTilBehandlerOgPasient type={watchMerknad || watchAvvisningstype} />
+        <InfoTilBehandlerOgPasient type={watchMerknad || watchAvvisningType} />
       </div>
 
       {hasErrors(errors) && (
