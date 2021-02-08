@@ -91,11 +91,11 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
                 radios={[
                   {
                     id: 'b-merknad',
-                    label: 'Avslå tilbakedatering, hele eller deler av sykmeldingen er ugyldig',
+                    label: 'Avslå tilbakedatering, hele eller deler av sykmeldingen er ugyldig.',
                     value: 'UGYLDIG_TILBAKEDATERING',
                   },
                   {
-                    label: 'Behov for flere opplysninger. Kontakt behandler',
+                    label: 'Behov for flere opplysninger.',
                     value: 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
                   },
                 ]}
