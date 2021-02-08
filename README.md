@@ -2,8 +2,6 @@
 
 ![Deploy to master](https://github.com/navikt/syfosmmanuell/workflows/Deploy%20to%20prod/badge.svg?branch=master)
 
-<img src="./src/svg/flytdiagram.svg">
-
 ## Om syfosmmanuell
 
 Frontend for manuell behandling av sykemeldinger. Laget med React og Typescript. Statiske build-filer hostes fra en express-server, som tar hånd om autentisering mot Azure AD og fungerer som en proxy for kall downstream til API. Serveren er basert på dette [eksempelet](https://github.com/navikt/security-blueprints/tree/master/examples/oidc-login-azuread/login-proxy-nodejs).
