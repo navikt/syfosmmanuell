@@ -1,6 +1,6 @@
 import azure from './auth/azure';
 import routes from './routes/routes';
-import cors from './cors';
+import setupCors from './cors';
 import express from 'express';
 import helmet from 'helmet';
 import passport from 'passport';
@@ -42,13 +42,13 @@ async function startApp() {
 
     // setup sane defaults for CORS and HTTP headers
     server.use(helmet());
-    server.use(cors);
+    server.use(setupCors(config.server));
 
     // initialize passport and restore authentication state, if any, from the session
     server.use(passport.initialize());
     server.use(passport.session());
 
-    const azureAuthClient = await azure.client(config.azureAd);
+    const azureAuthClient = await azure.client(config);
     const azureOidcStrategy = azure.strategy(azureAuthClient, config.azureAd);
 
     passport.use('azureOidc', azureOidcStrategy);

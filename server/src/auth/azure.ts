@@ -1,24 +1,26 @@
 import { Client, ClientMetadata, custom, Issuer, Strategy, TokenSet } from 'openid-client';
 import authUtils from './utils';
-import config, { AzureAd } from '../config';
-import httpProxy from '../proxy/http-proxy';
+import { AzureAd, Config } from '../config';
+import httpProxyAgent from '../proxy/http-proxy';
 import logger from '../logging';
 
-const client = async (azureConfig: AzureAd) => {
+const client = async (config: Config) => {
   const metadata: ClientMetadata = {
-    client_id: azureConfig.clientId,
-    client_secret: azureConfig.clientSecret,
-    redirect_uris: [azureConfig.redirectUri],
-    token_endpoint_auth_method: azureConfig.tokenEndpointAuthMethod,
+    client_id: config.azureAd.clientId,
+    client_secret: config.azureAd.clientSecret,
+    redirect_uris: [config.azureAd.redirectUri],
+    token_endpoint_auth_method: config.azureAd.tokenEndpointAuthMethod,
   };
 
   // see https://github.com/panva/node-openid-client/blob/master/docs/README.md#customizing-individual-http-requests
-  if (httpProxy.agent) {
+  const agent = httpProxyAgent(config.server.proxy);
+  if (agent) {
     custom.setHttpOptionsDefaults({
-      agent: httpProxy.agent,
+      agent: agent,
     });
   }
-  const issuer = await Issuer.discover(azureConfig.discoveryUrl);
+
+  const issuer = await Issuer.discover(config.azureAd.discoveryUrl);
   logger.info(`Discovered issuer ${issuer.issuer}`);
   return new issuer.Client(metadata);
 };
