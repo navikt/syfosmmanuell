@@ -1,7 +1,11 @@
 export class UrlError extends Error {}
 
 export const hentOppgaveidFraUrlParameter = (url: string): string => {
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+  if (
+    process.env.NODE_ENV === 'development' ||
+    process.env.NODE_ENV === 'test' ||
+    process.env.REACT_APP_NODE_ENV === 'development'
+  ) {
     console.info('Du befinner deg i development og vil derfor motta mock-data');
     return '';
   }

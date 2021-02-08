@@ -33,5 +33,7 @@ spec:
   ingresses:
     - "https://syfosmmanuell.labs.nais.io"
   env:
+    - name: PORT
+      value: '3000'
     - name: IS_NAIS_LABS_DEMO
       value: 'true'
