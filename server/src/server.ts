@@ -7,12 +7,31 @@ import helmet from 'helmet';
 import passport from 'passport';
 import session from './session';
 import logger from './logging';
+import path from 'path';
 
-const server = express();
-const port = config.server.port;
+// for demo app running on nais labs
+function startDemoApp() {
+  const server = express();
+
+  // Nais routes
+  server.get('/is_alive', (_req, res) => res.send('Alive'));
+  server.get('/is_ready', (_req, res) => res.send('Ready'));
+
+  // Static content
+  server.use('/', express.static(path.join(__dirname, '../../client/build')));
+  server.use('*', (_req, res) => {
+    res.sendFile('index.html', { root: path.join(__dirname, '../../client/build') });
+  });
+
+  // start server
+  const PORT = process.env.PORT || 3000;
+  server.listen(PORT, () => logger.info(`Server listening on port ${PORT}`));
+}
 
 async function startApp() {
   try {
+    const server = express();
+    const port = config.server.port;
     session.setup(server);
 
     server.use(express.json());
@@ -43,10 +62,14 @@ async function startApp() {
   }
 }
 
-startApp().catch((error) => {
-  if (error.code === 'ETIMEDOUT') {
-    logger.error('ETIMEDOUT: A connection timed out'); // Needs to be sanitized
-  } else {
-    logger.error(error);
-  }
-});
+if (process.env.IS_NAIS_LABS_DEMO === 'true') {
+  startDemoApp();
+} else {
+  startApp().catch((error) => {
+    if (error.code === 'ETIMEDOUT') {
+      logger.error('ETIMEDOUT: A connection timed out'); // Needs to be sanitized
+    } else {
+      logger.error(error);
+    }
+  });
+}
