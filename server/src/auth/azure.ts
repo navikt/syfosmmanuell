@@ -1,29 +1,31 @@
 import { Client, ClientMetadata, custom, Issuer, Strategy, TokenSet } from 'openid-client';
 import authUtils from './utils';
-import config from '../config';
-import httpProxy from '../proxy/http-proxy';
+import { AzureAd, Config } from '../config';
+import httpProxyAgent from '../proxy/http-proxy';
 import logger from '../logging';
 
-const metadata: ClientMetadata = {
-  client_id: config.azureAd.clientId,
-  client_secret: config.azureAd.clientSecret,
-  redirect_uris: [config.azureAd.redirectUri],
-  token_endpoint_auth_method: config.azureAd.tokenEndpointAuthMethod,
-};
+const client = async (config: Config) => {
+  const metadata: ClientMetadata = {
+    client_id: config.azureAd.clientId,
+    client_secret: config.azureAd.clientSecret,
+    redirect_uris: [config.azureAd.redirectUri],
+    token_endpoint_auth_method: config.azureAd.tokenEndpointAuthMethod,
+  };
 
-const client = async () => {
   // see https://github.com/panva/node-openid-client/blob/master/docs/README.md#customizing-individual-http-requests
-  if (httpProxy.agent) {
+  const agent = httpProxyAgent(config.server.proxy);
+  if (agent) {
     custom.setHttpOptionsDefaults({
-      agent: httpProxy.agent,
+      agent: agent,
     });
   }
+
   const issuer = await Issuer.discover(config.azureAd.discoveryUrl);
   logger.info(`Discovered issuer ${issuer.issuer}`);
   return new issuer.Client(metadata);
 };
 
-const strategy = (client: Client) => {
+const strategy = (client: Client, azureConfig: AzureAd) => {
   const verify = (tokenSet: TokenSet, done: any) => {
     if (tokenSet.expired()) {
       return done(null, false);
@@ -39,9 +41,9 @@ const strategy = (client: Client) => {
   const options = {
     client: client,
     params: {
-      response_types: config.azureAd.responseTypes,
-      response_mode: config.azureAd.responseMode,
-      scope: `openid ${authUtils.appendDefaultScope(config.azureAd.clientId)}`,
+      response_types: azureConfig.responseTypes,
+      response_mode: azureConfig.responseMode,
+      scope: `openid ${authUtils.appendDefaultScope(azureConfig.clientId)}`,
     },
     passReqToCallback: false,
     usePKCE: 'S256',
