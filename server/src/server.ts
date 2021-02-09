@@ -41,7 +41,11 @@ async function startApp() {
     //server.use(cookieParser());
 
     // setup sane defaults for CORS and HTTP headers
-    server.use(helmet());
+    server.use(
+      helmet({
+        contentSecurityPolicy: false,
+      }),
+    );
     server.use(setupCors(config.server));
 
     // initialize passport and restore authentication state, if any, from the session
