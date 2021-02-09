@@ -53,7 +53,7 @@ async function startApp() {
 
     passport.use('azureOidc', azureOidcStrategy);
     passport.serializeUser((user, done) => done(null, user));
-    passport.deserializeUser((user, done) => done(null, user));
+    passport.deserializeUser((user, done) => done(null, user as Express.User));
 
     // setup routes
     server.use('/', routes.setup(azureAuthClient, config));
