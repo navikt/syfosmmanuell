@@ -1,9 +1,7 @@
-import config from '../config';
 import tunnel from 'tunnel';
 import logger from '../logging';
 
-const agent = () => {
-  const proxyUri = config.server.proxy;
+const httpProxyAgent = (proxyUri: string | undefined) => {
   if (proxyUri) {
     logger.info(`Proxying requests via ${proxyUri} for openid-cilent`);
     const hostPort = proxyUri.replace('https://', '').replace('http://', '').split(':', 2);
@@ -19,4 +17,4 @@ const agent = () => {
   }
 };
 
-export default { agent: agent() };
+export default httpProxyAgent;
