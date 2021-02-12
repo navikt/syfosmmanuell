@@ -22,4 +22,6 @@ mock.get('/modiacontextholder/api/context/aktivenhet', aktivenhet);
 mock.delete('/modiacontextholder/api/context/aktivbruker', () => Promise.resolve({ status: 200 }));
 
 mock.get(`/backend/api/v1/manuellOppgave/${manuellOppgave.oppgaveid}`, manuellOppgave);
-mock.post('/backend/api/v1/vurderingmanuelloppgave/', {});
+mock.post(`/backend/api/v1/vurderingmanuelloppgave/${manuellOppgave.oppgaveid}`, () =>
+  Promise.resolve({ status: 200 }),
+);

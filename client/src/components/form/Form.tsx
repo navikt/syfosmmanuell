@@ -1,7 +1,9 @@
 import { Knapp } from 'nav-frontend-knapper';
 import { Feiloppsummering, FeiloppsummeringFeil, RadioPanelGruppe, Label } from 'nav-frontend-skjema';
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useForm, Controller, DeepMap, FieldError } from 'react-hook-form';
+import { StoreContext } from '../../data/store';
+import { ApiError, vurderOppgave } from '../../utils/dataUtils';
 import './Form.less';
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
@@ -20,11 +22,10 @@ const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): Feilo
 
 const hasErrors = (errors: DeepMap<FormShape, FieldError>): boolean => !!Object.keys(errors).length;
 
-interface FormProps {
-  ferdigstillOppgave: (result: FormShape) => Promise<void>;
-}
+const Form = () => {
+  const { state, dispatch } = useContext(StoreContext);
+  const { manuellOppgave, enhet } = state;
 
-const Form = ({ ferdigstillOppgave }: FormProps) => {
   const { control, handleSubmit, errors, watch } = useForm<FormShape>();
   const watchStatus = watch('status');
   const watchMerknad = watch('merknad');
@@ -37,6 +38,29 @@ const Form = ({ ferdigstillOppgave }: FormProps) => {
       feiloppsummeringRef?.current?.focus();
     }
   }, [errors]);
+
+  const ferdigstillOppgave = async (result: FormShape) => {
+    if (!enhet) {
+      alert(
+        'Enhet mangler. Sørg for at du har valgt enhet i menyen øverst på siden. Forsøk deretter å registrere vurdering på nytt.',
+      );
+    } else {
+      dispatch({ type: 'SET_LOADING' });
+
+      try {
+        await vurderOppgave(`${manuellOppgave?.oppgaveid}`, enhet!!, result);
+
+        dispatch({ type: 'TASK_COMPLETED' });
+      } catch (error) {
+        console.error(error);
+        if (error instanceof ApiError) {
+          dispatch({ type: 'ERROR', payload: error });
+        } else {
+          dispatch({ type: 'ERROR', payload: new Error('En ukjnet feil oppsto ved vurdering av oppgaven.') });
+        }
+      }
+    }
+  };
 
   return (
     <form className="form" onSubmit={handleSubmit(ferdigstillOppgave)}>
