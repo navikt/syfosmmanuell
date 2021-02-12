@@ -5,6 +5,7 @@ import Spinner from 'nav-frontend-spinner';
 import { Normaltekst } from 'nav-frontend-typografi';
 import MainContent from './MainContent';
 import { FormShape } from './form/Form';
+import { Knapp } from 'nav-frontend-knapper';
 
 interface AppProps {
   enhet: string | null | undefined;
@@ -86,12 +87,6 @@ const App = ({ enhet }: AppProps) => {
       .then((response) => {
         if (response.ok) {
           setIsCompleted(true);
-          const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
-          if (GOSYS_URL) {
-            setTimeout(() => (window.location.href = GOSYS_URL), 1000);
-          } else {
-            throw new Error('Oppgaven ble ferdigstilt, men det var ikke mulig å sende deg tilbake til GOSYS');
-          }
         } else if (response.status === 401) {
           throw new Error(
             'Kunne ikke vurdere oppgaven på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
@@ -142,7 +137,21 @@ const App = ({ enhet }: AppProps) => {
   if (isCompleted) {
     return (
       <div className="margin-top--2">
-        <Normaltekst>Oppgaven er løst... Du videresendes til GOSYS</Normaltekst>
+        <Normaltekst>Oppgaven er løst.</Normaltekst>
+        <Knapp
+          type="hoved"
+          className="margin-top--2"
+          onClick={() => {
+            const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
+            if (GOSYS_URL) {
+              window.location.href = GOSYS_URL;
+            } else {
+              throw new Error('Det oppsto en feil ved da vi forsøkte å sende deg til GOSYS.');
+            }
+          }}
+        >
+          Tilbake til GOSYS
+        </Knapp>
       </div>
     );
   }
