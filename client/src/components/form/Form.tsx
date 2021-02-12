@@ -21,7 +21,7 @@ const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): Feilo
 const hasErrors = (errors: DeepMap<FormShape, FieldError>): boolean => !!Object.keys(errors).length;
 
 interface FormProps {
-  ferdigstillOppgave: (result: FormShape) => void;
+  ferdigstillOppgave: (result: FormShape) => Promise<void>;
 }
 
 const Form = ({ ferdigstillOppgave }: FormProps) => {

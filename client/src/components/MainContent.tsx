@@ -9,7 +9,7 @@ import Form, { FormShape } from './form/Form';
 
 interface MainContentProps {
   manuellOppgave: ManuellOppgave;
-  ferdigstillOppgave: (result: FormShape) => void;
+  ferdigstillOppgave: (result: FormShape) => Promise<void>;
 }
 
 const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) => {

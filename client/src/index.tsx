@@ -7,9 +7,6 @@ import App from './components/App';
 import { DecoratorProps, EnhetDisplay } from './types/DecoratorProps';
 import NAVSPA from '@navikt/navspa';
 
-console.log('NODE_ENV: ' + process.env.NODE_ENV);
-console.log('REACT_APP_NODE_ENV: ' + process.env.REACT_APP_NODE_ENV);
-
 if (process.env.NODE_ENV === 'development' || process.env.REACT_APP_NODE_ENV === 'development') {
   require('./mock');
 }
