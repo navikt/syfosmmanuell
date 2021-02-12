@@ -185,7 +185,7 @@ const Form = () => {
       <Knapp type="hoved" htmlType="submit">
         Registrer
       </Knapp>
-      <a href={process.env.GOSYS_URL} className="knapp knapp--flat form__cancel">
+      <a href={process.env.REACT_APP_GOSYS_URL} className="knapp knapp--flat form__cancel">
         Avbryt
       </a>
     </form>

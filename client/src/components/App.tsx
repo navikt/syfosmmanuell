@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import Spinner from 'nav-frontend-spinner';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -58,7 +58,7 @@ const App = () => {
   if (isCompleted) {
     return (
       <div className="margin-top--2">
-        <Normaltekst>Oppgaven er lÃ¸st.</Normaltekst>
+        <Normaltekst>Oppgaven er løst.</Normaltekst>
         <Knapp
           type="hoved"
           className="margin-top--2"
@@ -67,7 +67,7 @@ const App = () => {
             if (GOSYS_URL) {
               window.location.href = GOSYS_URL;
             } else {
-              throw new Error('Det oppsto en feil ved da vi fors¿kte Œ sende deg til GOSYS.');
+              throw new Error('Det oppsto en feil ved da vi forsøkte å sende deg til GOSYS.');
             }
           }}
         >
