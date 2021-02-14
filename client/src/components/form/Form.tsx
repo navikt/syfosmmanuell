@@ -45,7 +45,7 @@ const Form = () => {
         'Enhet mangler. Sørg for at du har valgt enhet i menyen øverst på siden. Forsøk deretter å registrere vurdering på nytt.',
       );
     } else {
-      dispatch({ type: 'SET_LOADING' });
+      dispatch({ type: 'FETCHING' });
 
       try {
         await vurderOppgave(`${manuellOppgave?.oppgaveid}`, enhet!!, result);

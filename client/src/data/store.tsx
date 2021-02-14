@@ -10,7 +10,7 @@ interface State {
 }
 
 export type Action =
-  | { type: 'SET_LOADING' }
+  | { type: 'FETCHING' }
   | { type: 'UPDATE_ENHET'; payload: string }
   | { type: 'TASK_LOADED'; payload: ManuellOppgave }
   | { type: 'TASK_COMPLETED' }
@@ -18,7 +18,7 @@ export type Action =
 
 export function stateReducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'SET_LOADING':
+    case 'FETCHING':
       return { ...state, isLoading: true };
     case 'UPDATE_ENHET':
       return { ...state, enhet: action.payload };

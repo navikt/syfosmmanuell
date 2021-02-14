@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     if (!manuellOppgave) {
       (async () => {
-        dispatch({ type: 'SET_LOADING' });
+        dispatch({ type: 'FETCHING' });
         try {
           const OPPGAVE_ID = new URL(window.location.href).searchParams.get('oppgaveid');
           if (OPPGAVE_ID === null) {
