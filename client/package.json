@@ -47,7 +47,7 @@
     "yet-another-fetch-mock": "^3.3.1"
   },
   "scripts": {
-    "start": "REACT_APP_HEAD_URL=https://navikt.github.io craco start",
+    "start": "NODE_ENV=test PORT=4321 REACT_APP_HEAD_URL=https://navikt.github.io craco start",
     "build": "craco build",
     "test": "craco test"
   },
@@ -69,6 +69,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.6.3"
+    "@testing-library/user-event": "^12.6.3",
+    "cypress": "^6.4.0"
   }
 }

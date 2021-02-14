@@ -84,8 +84,8 @@ const Form = () => {
             feil={errors.status?.message}
             radios={[
               { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
-              { label: 'Registrer med merknad', value: 'GODKJENT_MED_MERKNAD' },
-              { label: 'Avvis sykmeldingen', value: 'AVVIST' },
+              { id: 'b-status-godkjent-med-merknad', label: 'Registrer med merknad', value: 'GODKJENT_MED_MERKNAD' },
+              { id: 'b-status-avvist', label: 'Avvis sykmeldingen', value: 'AVVIST' },
             ]}
           />
         )}
@@ -119,6 +119,7 @@ const Form = () => {
                     value: 'UGYLDIG_TILBAKEDATERING',
                   },
                   {
+                    id: 'b-merknad-tilbakedatering-krever-flere-opplysninger',
                     label: 'Behov for flere opplysninger.',
                     value: 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
                   },
@@ -152,12 +153,13 @@ const Form = () => {
                 feil={errors.avvisningType?.message}
                 radios={[
                   {
-                    id: 'b-avvisningstype',
+                    id: 'b-avvisningType',
                     label:
                       'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig.',
                     value: 'MANGLER_BEGRUNNELSE',
                   },
                   {
+                    id: 'b-avvisningType-mangler-begrunnelse',
                     label:
                       'NAV kan ikke godta tilbakedateringen. Det må skrives ny sykmelding der f.o.m-dato er datoen for den første kontakten med pasienten.',
                     value: 'UGYLDIG_BEGRUNNELSE',
@@ -175,6 +177,7 @@ const Form = () => {
 
       {hasErrors(errors) && (
         <Feiloppsummering
+          id="feiloppsummering"
           className="form__feiloppsummering"
           innerRef={feiloppsummeringRef as any}
           tittel="For å gå videre må du rette opp følgende"
@@ -182,7 +185,7 @@ const Form = () => {
         />
       )}
 
-      <Knapp type="hoved" htmlType="submit">
+      <Knapp id="submit-button" type="hoved" htmlType="submit">
         Registrer
       </Knapp>
       <a href={process.env.REACT_APP_GOSYS_URL} className="knapp knapp--flat form__cancel">
