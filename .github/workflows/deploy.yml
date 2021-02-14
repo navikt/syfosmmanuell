@@ -24,12 +24,10 @@ jobs:
         env:
           CI: true
         run: |
-          npm run test
+          npm test
         working-directory: ./client
       - name: Build client
         env:
-          REACT_APP_NODE_ENV: production
-          REACT_APP_WEB_SERVER_URL: https://syfosmmanuell.nais.adeo.no/
           REACT_APP_HEAD_URL: https://app-q1.adeo.no
           REACT_APP_GOSYS_URL: https://gosys-nais.nais.adeo.no/gosys/bruker/brukeroversikt.jsf
         run: |
