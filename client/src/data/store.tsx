@@ -27,7 +27,6 @@ export function stateReducer(state: State, action: Action): State {
     case 'TASK_COMPLETED':
       return { ...state, isLoading: false, isCompleted: true, error: undefined };
     case 'ERROR':
-      // TODO: maybe dont set isLoading?
       return { ...state, isLoading: false, error: action.payload };
   }
 }
@@ -52,7 +51,3 @@ const StoreProvider = ({ children }: { children: React.ReactChild | React.ReactC
 };
 
 export default StoreProvider;
-// const [state, dispatch] = useReducer(stateReducer, initialState);
-
-// export const stateContext = createContext(state);
-// export const dispatchContext = createContext(dispatch);
