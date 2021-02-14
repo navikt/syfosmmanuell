@@ -7,7 +7,7 @@ import NAVSPA from '@navikt/navspa';
 import StoreProvider from './data/store';
 import DecoratorWrapper from './components/Decorator';
 
-if (process.env.NODE_ENV === 'development' || process.env.REACT_APP_NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   require('./mock');
 }
 
