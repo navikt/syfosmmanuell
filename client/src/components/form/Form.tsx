@@ -56,7 +56,7 @@ const Form = () => {
         if (error instanceof ApiError) {
           dispatch({ type: 'ERROR', payload: error });
         } else {
-          dispatch({ type: 'ERROR', payload: new Error('En ukjnet feil oppsto ved vurdering av oppgaven.') });
+          dispatch({ type: 'ERROR', payload: new Error('En ukjent feil oppsto ved vurdering av oppgaven.') });
         }
       }
     }
