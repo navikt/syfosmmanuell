@@ -58,7 +58,7 @@ const App = () => {
   if (isCompleted) {
     return (
       <div className="margin-top--2">
-        <Normaltekst>Oppgaven er løst.</Normaltekst>
+        <Normaltekst>Oppgaven er lÃ¸st.</Normaltekst>
         <Knapp
           type="hoved"
           className="margin-top--2"
@@ -67,7 +67,7 @@ const App = () => {
             if (GOSYS_URL) {
               window.location.href = GOSYS_URL;
             } else {
-              throw new Error('Det oppsto en feil ved da vi forsøkte å sende deg til GOSYS.');
+              throw new Error('Det oppsto en feil ved da vi forsÃ¸kte Ã¥ sende deg til GOSYS.');
             }
           }}
         >
