@@ -34,7 +34,6 @@ jobs:
         working-directory: ./client
       - name: Build client
         env:
-          REACT_APP_DEMO: 'true'
           REACT_APP_HEAD_URL: https://navikt.github.io
           REACT_APP_GOSYS_URL: https://gosys.nais.preprod.local/gosys/bruker/brukeroversikt.jsf
         run: |
