@@ -47,9 +47,12 @@
     "yet-another-fetch-mock": "^3.3.1"
   },
   "scripts": {
-    "start": "REACT_APP_HEAD_URL=https://navikt.github.io craco start",
+    "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "npm-run-all test-unit test-integration",
+    "test-unit": "NODE_ENV=test craco test",
+    "test-integration": "NODE_ENV=test npm-run-all --parallel start cypress-start",
+    "cypress-start": "wait-on http://localhost:4321 && cypress run"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -69,6 +72,9 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.6.3"
+    "@testing-library/user-event": "^12.6.3",
+    "cypress": "^6.4.0",
+    "npm-run-all": "^4.1.5",
+    "wait-on": "^5.2.1"
   }
 }

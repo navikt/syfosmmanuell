@@ -20,16 +20,20 @@ jobs:
         run: |
           npm install
         working-directory: ./client
-      - name: Run tests for client
+      - name: Run unit tests for client
         env:
           CI: true
         run: |
-          npm run test
+          npm run test-unit
+        working-directory: ./client
+      - name: Run integration tests for client
+        env:
+          NODE_ENV: 'test'
+        run: |
+          npm start & npm run cypress-start # Can not use "npm run test-integration", because process does not terminate.
         working-directory: ./client
       - name: Build client
         env:
-          REACT_APP_NODE_ENV: development # Brukes siden det ikke er mulig å endre NODE_ENV manuelt
-          REACT_APP_WEB_SERVER_URL: https://syfosmmanuell.dev.adeo.no/
           REACT_APP_HEAD_URL: https://navikt.github.io
           REACT_APP_GOSYS_URL: https://gosys.nais.preprod.local/gosys/bruker/brukeroversikt.jsf
         run: |
