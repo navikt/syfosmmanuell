@@ -1,9 +1,7 @@
 import { Knapp } from 'nav-frontend-knapper';
 import { Feiloppsummering, FeiloppsummeringFeil, RadioPanelGruppe, Label } from 'nav-frontend-skjema';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useForm, Controller, DeepMap, FieldError } from 'react-hook-form';
-import { StoreContext } from '../../data/store';
-import { ApiError, vurderOppgave } from '../../utils/dataUtils';
 import './Form.less';
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
@@ -22,10 +20,11 @@ const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): Feilo
 
 const hasErrors = (errors: DeepMap<FormShape, FieldError>): boolean => !!Object.keys(errors).length;
 
-const Form = () => {
-  const { state, dispatch } = useContext(StoreContext);
-  const { manuellOppgave, enhet } = state;
+interface FormProps {
+  ferdigstillOppgave: (result: FormShape) => void;
+}
 
+const Form = ({ ferdigstillOppgave }: FormProps) => {
   const { control, handleSubmit, errors, watch } = useForm<FormShape>();
   const watchStatus = watch('status');
   const watchMerknad = watch('merknad');
@@ -38,29 +37,6 @@ const Form = () => {
       feiloppsummeringRef?.current?.focus();
     }
   }, [errors]);
-
-  const ferdigstillOppgave = async (result: FormShape) => {
-    if (!enhet) {
-      alert(
-        'Enhet mangler. Sørg for at du har valgt enhet i menyen øverst på siden. Forsøk deretter å registrere vurdering på nytt.',
-      );
-    } else {
-      dispatch({ type: 'FETCHING' });
-
-      try {
-        await vurderOppgave(`${manuellOppgave?.oppgaveid}`, enhet!!, result);
-
-        dispatch({ type: 'TASK_COMPLETED' });
-      } catch (error) {
-        console.error(error);
-        if (error instanceof ApiError) {
-          dispatch({ type: 'ERROR', payload: error });
-        } else {
-          dispatch({ type: 'ERROR', payload: new Error('En ukjent feil oppsto ved vurdering av oppgaven.') });
-        }
-      }
-    }
-  };
 
   return (
     <form className="form" onSubmit={handleSubmit(ferdigstillOppgave)}>
@@ -84,8 +60,8 @@ const Form = () => {
             feil={errors.status?.message}
             radios={[
               { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
-              { id: 'b-status-godkjent-med-merknad', label: 'Registrer med merknad', value: 'GODKJENT_MED_MERKNAD' },
-              { id: 'b-status-avvist', label: 'Avvis sykmeldingen', value: 'AVVIST' },
+              { label: 'Registrer med merknad', value: 'GODKJENT_MED_MERKNAD' },
+              { label: 'Avvis sykmeldingen', value: 'AVVIST' },
             ]}
           />
         )}
@@ -119,7 +95,6 @@ const Form = () => {
                     value: 'UGYLDIG_TILBAKEDATERING',
                   },
                   {
-                    id: 'b-merknad-tilbakedatering-krever-flere-opplysninger',
                     label: 'Behov for flere opplysninger.',
                     value: 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
                   },
@@ -153,13 +128,12 @@ const Form = () => {
                 feil={errors.avvisningType?.message}
                 radios={[
                   {
-                    id: 'b-avvisningType',
+                    id: 'b-avvisningstype',
                     label:
                       'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig.',
                     value: 'MANGLER_BEGRUNNELSE',
                   },
                   {
-                    id: 'b-avvisningType-mangler-begrunnelse',
                     label:
                       'NAV kan ikke godta tilbakedateringen. Det må skrives ny sykmelding der f.o.m-dato er datoen for den første kontakten med pasienten.',
                     value: 'UGYLDIG_BEGRUNNELSE',
@@ -177,7 +151,6 @@ const Form = () => {
 
       {hasErrors(errors) && (
         <Feiloppsummering
-          id="feiloppsummering"
           className="form__feiloppsummering"
           innerRef={feiloppsummeringRef as any}
           tittel="For å gå videre må du rette opp følgende"
@@ -185,10 +158,10 @@ const Form = () => {
         />
       )}
 
-      <Knapp id="submit-button" type="hoved" htmlType="submit">
+      <Knapp type="hoved" htmlType="submit">
         Registrer
       </Knapp>
-      <a href={process.env.REACT_APP_GOSYS_URL} className="knapp knapp--flat form__cancel">
+      <a href={process.env.GOSYS_URL} className="knapp knapp--flat form__cancel">
         Avbryt
       </a>
     </form>
