@@ -9,10 +9,9 @@ import Form, { FormShape } from './form/Form';
 
 interface MainContentProps {
   manuellOppgave: ManuellOppgave;
-  ferdigstillOppgave: (result: FormShape) => void;
 }
 
-const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) => {
+const MainContent = ({ manuellOppgave }: MainContentProps) => {
   const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
   const { sykmelding, personNrPasient, mottattDato } = manuellOppgave;
 
@@ -25,7 +24,7 @@ const MainContent = ({ manuellOppgave, ferdigstillOppgave }: MainContentProps) =
         personNrPasient={personNrPasient}
       />
       <TilbakedatertForlengelse sykmelding={sykmelding} personNrPasient={personNrPasient} />
-      <Form ferdigstillOppgave={ferdigstillOppgave} />
+      <Form />
       <div className="hele-sykmeldingen-visning">
         <Flatknapp
           form="kompakt"
