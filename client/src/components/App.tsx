@@ -5,7 +5,6 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import MainContent from './MainContent';
 import { ApiError, hentOppgave } from '../utils/dataUtils';
 import { StoreContext } from '../data/store';
-import { Knapp } from 'nav-frontend-knapper';
 
 const App = () => {
   const { state, dispatch } = useContext(StoreContext);
