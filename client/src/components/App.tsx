@@ -5,7 +5,6 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import MainContent from './MainContent';
 import { ApiError, hentOppgave } from '../utils/dataUtils';
 import { StoreContext } from '../data/store';
-import { Knapp } from 'nav-frontend-knapper';
 
 const App = () => {
   const { state, dispatch } = useContext(StoreContext);
@@ -39,6 +38,24 @@ const App = () => {
     }
   }, [manuellOppgave]);
 
+  useEffect(() => {
+    if (isCompleted) {
+      const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
+      if (GOSYS_URL) {
+        setTimeout(() => {
+          window.location.href = GOSYS_URL;
+        }, 1000);
+      } else {
+        dispatch({
+          type: 'ERROR',
+          payload: new Error(
+            'Oppgaven ble registrert, men det oppsto en feil da vi forsøkte å sende deg tilbake til GOSYS.',
+          ),
+        });
+      }
+    }
+  }, [isCompleted]);
+
   if (error) {
     return (
       <div className="margin-top--2">
@@ -58,21 +75,7 @@ const App = () => {
   if (isCompleted) {
     return (
       <div className="margin-top--2">
-        <Normaltekst>Oppgaven er løst.</Normaltekst>
-        <Knapp
-          type="hoved"
-          className="margin-top--2"
-          onClick={() => {
-            const GOSYS_URL = process.env.REACT_APP_GOSYS_URL;
-            if (GOSYS_URL) {
-              window.location.href = GOSYS_URL;
-            } else {
-              throw new Error('Det oppsto en feil ved da vi forsøkte å sende deg til GOSYS.');
-            }
-          }}
-        >
-          Tilbake til GOSYS
-        </Knapp>
+        <Normaltekst>Oppgaven er registrert. Du videresendes automatisk til GOSYS.</Normaltekst>
       </div>
     );
   }
