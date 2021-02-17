@@ -28,13 +28,12 @@ jobs:
           npm run test-unit
         working-directory: ./client
       - name: Run integration tests for client
-        env:
-          NODE_ENV: 'test'
         run: |
-          npm start & npm run cypress-start # Can not use "npm run test-integration", because process does not terminate.
+          NODE_ENV=test npm start & npm run cypress-start # Can not use "npm run test-integration", because process does not terminate.
         working-directory: ./client
       - name: Build client
         env:
+          NODE_ENV: production
           REACT_APP_HEAD_URL: https://app-q1.dev.adeo.no
           REACT_APP_GOSYS_URL: https://gosys.nais.preprod.local/gosys/bruker/brukeroversikt.jsf
         run: |
