@@ -23,7 +23,7 @@ const Tilbakedateringsinfo = ({
   begrunnelseIkkeKontakt,
 }: TilbakedateringsinfoProps) => {
   const fom = getFirstFomInPeriod(perioder);
-  const tilbakedatertDuration = countDaysBetweenTwoDatesIncludingFom(behandletTidspunkt, fom);
+  const tilbakedatertDuration = countDaysBetweenTwoDatesIncludingFom(fom, behandletTidspunkt);
   return (
     <div className="tilbakedateringsinfo">
       <ElementMedTekst
