@@ -12,6 +12,10 @@ Frontend-appen bruker en pakke som er bakt inn i react-scripts til å "inject'e"
 
 Alle variable som skal være tilgjengelige server-side må defineres i `/naiserator-prod` / `/naiserator-dev`.
 
+## NAIS-labs demo lenke:
+
+https://syfosmmanuell.labs.nais.io
+
 ## Installering
 
 Klon bibliotek og last ned avhengigheter
