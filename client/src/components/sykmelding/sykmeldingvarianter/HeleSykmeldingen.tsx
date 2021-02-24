@@ -61,7 +61,11 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
       <Friskmelding prognose={sykmelding.prognose} />
       <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
       <Arbeidsevne tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen} tiltakNAV={sykmelding.tiltakNAV} />
-      <Annet behandlerTelefon={sykmelding.behandler.tlf} />
+      <Annet
+        meldingTilNAV={sykmelding.meldingTilNAV}
+        meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver}
+        behandlerTelefon={sykmelding.behandler.tlf}
+      />
       <div style={{ textAlign: 'center' }}>
         <Flatknapp
           form="kompakt"
