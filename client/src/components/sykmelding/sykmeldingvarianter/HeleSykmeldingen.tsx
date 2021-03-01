@@ -60,7 +60,11 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
       <MulighetForArbeid perioder={sykmelding.perioder} />
       <Friskmelding prognose={sykmelding.prognose} />
       <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
-      <Arbeidsevne tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen} tiltakNAV={sykmelding.tiltakNAV} />
+      <Arbeidsevne
+        tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen}
+        tiltakNAV={sykmelding.tiltakNAV}
+        andreTiltak={sykmelding.andreTiltak}
+      />
       <Annet
         meldingTilNAV={sykmelding.meldingTilNAV}
         meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver}
