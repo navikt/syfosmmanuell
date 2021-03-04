@@ -1,6 +1,5 @@
 import React from 'react';
 import { Sykmelding } from '../../../types/sykmeldingTypes';
-import DiagnoseSeksjon from '../../infopanel/panelelementer/diagnose/DiagnoseSeksjon';
 import SykmeldingPerioder from '../../infopanel/panelelementer/periode/SykmeldingPerioder';
 import MulighetForArbeid from '../../infopanel/utdypendeelementer/MulighetForArbeid';
 import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding';
@@ -14,6 +13,7 @@ import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 import './HeleSykmeldingen.less';
 import MeldingTilNAVSection from '../../infopanel/utdypendeelementer/MeldingTilNAVSection';
 import MeldingTilArbeidsgiverSection from '../../infopanel/utdypendeelementer/MeldingTilArbeidsgiverSection';
+import Diagnoser from '../../infopanel/utdypendeelementer/Diagnoser';
 
 interface HeleSykmeldingenProps {
   sykmelding: Sykmelding;
@@ -24,10 +24,7 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
   return (
     <div className="helesykmeldingen">
       <SykmeldingPerioder perioder={sykmelding.perioder} />
-      <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
-      {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
-        <DiagnoseSeksjon key={index.toString()} diagnose={diagnose} bidiagnose />
-      ))}
+
       <ElementMedTekst
         vis={!!sykmelding.behandletTidspunkt}
         tittel="Dato sykmeldingen ble skrevet"
@@ -59,6 +56,10 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
       />
       <ElementMedTekst vis={!!sykmelding.navnFastlege} tittel="Sykmelder" tekst={sykmelding.navnFastlege} margin />
       <hr />
+      <Diagnoser
+        medisinskVurdering={sykmelding.medisinskVurdering}
+        skjermesForPasient={sykmelding.skjermesForPasient}
+      />
       <MulighetForArbeid perioder={sykmelding.perioder} />
       <Friskmelding prognose={sykmelding.prognose} />
       <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />

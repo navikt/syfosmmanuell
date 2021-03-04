@@ -18,7 +18,7 @@ const DiagnoseSeksjon = ({ diagnose, bidiagnose }: DiagnoseSeksjonProps) => {
 
   const { tekst, kode, system } = diagnose;
 
-  const tittel = bidiagnose ? 'Bidiagnose' : 'Diagnose';
+  const tittel = bidiagnose ? '3.2. Bidiagnose' : '3.1. Diagnose';
 
   return (
     <div className="diagnose-container">
