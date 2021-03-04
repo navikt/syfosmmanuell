@@ -15,20 +15,20 @@ const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV, andreTiltak }: Arbeidsev
   }
 
   return (
-    <SeksjonMedTittel understrek tittel="Hva skal til for å bedre arbeidsevnen?">
+    <SeksjonMedTittel understrek tittel="7. Hva skal til for å bedre arbeidsevnen?">
       <ElementMedTekst
         vis={!!tiltakArbeidsplassen}
-        tittel="Tilrettelegging/hensyn som bør tas på arbeidsplassen"
+        tittel="7.1. Tilrettelegging/hensyn som bør tas på arbeidsplassen"
         tekst={tiltakArbeidsplassen}
         margin
       />
+      <ElementMedTekst vis={!!tiltakNAV} tittel="7.2. Tiltak i regi av NAV" tekst={tiltakNAV} margin />
       <ElementMedTekst
         vis={!!andreTiltak}
-        tittel="Eventuelle andre innspill til NAV. Beskriv"
+        tittel="7.3. Eventuelle andre innspill til NAV. Beskriv"
         tekst={andreTiltak}
         margin
       />
-      <ElementMedTekst vis={!!tiltakNAV} tittel="Tiltak i regi av NAV" tekst={tiltakNAV} margin />
     </SeksjonMedTittel>
   );
 };
