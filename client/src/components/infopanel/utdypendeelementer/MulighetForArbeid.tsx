@@ -26,12 +26,12 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
   );
 
   return (
-    <SeksjonMedTittel understrek tittel="Mulighet for arbeid">
+    <SeksjonMedTittel understrek tittel="4. Mulighet for arbeid">
+      <ElementMedTekst vis={!!harArbeidsrelatertArsak} tittel="4.3. Pasienten kan ikke være i arbeid (100% sykmeldt)" />
       <Margin>
-        <ElementMedTekst vis={!!harMedisinskArsak} tittel="Pasienten kan ikke være i arbeid (100% sykmeldt)" />
         <br />
         <EnkelCheckbox
-          tittel="Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet"
+          tittel="4.3.3. Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet"
           margin
           checked
           vis={!!harMedisinskArsak}
@@ -50,11 +50,10 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
       ))}
 
       <Margin>
-        <ElementMedTekst vis={!!harArbeidsrelatertArsak} tittel="Pasienten kan ikke være i arbeid (100% sykmeldt)" />
         <br />
         <EnkelCheckbox
           vis={!!harArbeidsrelatertArsak}
-          tittel="Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet"
+          tittel="4.3.4. Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet"
           margin
           checked
         />
