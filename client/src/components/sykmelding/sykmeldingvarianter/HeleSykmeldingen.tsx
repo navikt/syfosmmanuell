@@ -12,6 +12,8 @@ import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 
 import './HeleSykmeldingen.less';
+import MeldingTilNAVSection from '../../infopanel/utdypendeelementer/MeldingTilNAVSection';
+import MeldingTilArbeidsgiverSection from '../../infopanel/utdypendeelementer/MeldingTilArbeidsgiverSection';
 
 interface HeleSykmeldingenProps {
   sykmelding: Sykmelding;
@@ -65,11 +67,9 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
         tiltakNAV={sykmelding.tiltakNAV}
         andreTiltak={sykmelding.andreTiltak}
       />
-      <Annet
-        meldingTilNAV={sykmelding.meldingTilNAV}
-        meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver}
-        behandlerTelefon={sykmelding.behandler.tlf}
-      />
+      <MeldingTilNAVSection meldingTilNAV={sykmelding.meldingTilNAV} />
+      <MeldingTilArbeidsgiverSection meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver} />
+      <Annet behandlerTelefon={sykmelding.behandler.tlf} />
       <div style={{ textAlign: 'center' }}>
         <Flatknapp
           form="kompakt"
