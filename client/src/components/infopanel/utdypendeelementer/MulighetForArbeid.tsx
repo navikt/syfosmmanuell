@@ -34,6 +34,7 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
           tittel="4.3.3. Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet"
           margin
           checked
+          bold
           vis={!!harMedisinskArsak}
         />
       </Margin>
@@ -55,6 +56,7 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
           vis={!!harArbeidsrelatertArsak}
           tittel="4.3.4. Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet"
           margin
+          bold
           checked
         />
       </Margin>

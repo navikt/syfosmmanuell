@@ -49,6 +49,7 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
           tittel="3.4. Sykdommen er svangerskapsrelatert"
           margin
           checked
+          bold
           vis={!!medisinskVurdering.svangerskap}
         />
       </Margin>
@@ -59,6 +60,7 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
           tittel="3.5. Sykmeldingen kan skyldes en yrkesskade/yrkessykdom"
           margin
           checked
+          bold
           vis={!!medisinskVurdering.yrkesskade}
         />
       </Margin>
@@ -76,6 +78,7 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
           tittel="3.7. Det er påtrengende nødvendig å skjerme pasienten for medisinske opplysninger"
           margin
           checked
+          bold
           vis={!!skjermesForPasient}
         />
       </Margin>

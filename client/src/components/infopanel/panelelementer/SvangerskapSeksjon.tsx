@@ -10,7 +10,7 @@ const SvangerskapSeksjon = ({ svangerskap }: SvangerskapSeksjonProps) => {
   if (!svangerskap) {
     return null;
   }
-  return <EnkelCheckbox tittel="Sykdommen er svangerskapsrelatert" checked margin vis />;
+  return <EnkelCheckbox tittel="Sykdommen er svangerskapsrelatert" checked margin vis bold />;
 };
 
 export default SvangerskapSeksjon;

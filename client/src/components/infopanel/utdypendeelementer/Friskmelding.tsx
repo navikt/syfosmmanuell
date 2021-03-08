@@ -20,24 +20,25 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
   const { erIArbeid, erIkkeIArbeid, hensynArbeidsplassen, arbeidsforEtterPeriode } = prognose;
 
   return (
-    <SeksjonMedTittel understrek tittel="Friskmelding/prognose">
-      <ElementMedTekst
-        tittel="Beskriv eventuelle hensyn som må tas på arbeidsplassen"
-        tekst={hensynArbeidsplassen}
-        margin
-        vis={!!hensynArbeidsplassen}
-      />
+    <SeksjonMedTittel understrek tittel="5. Friskmelding/prognose">
       <EnkelCheckbox
-        tittel="Pasienten er 100 prosent arbeidsfør etter denne perioden"
+        tittel="5.1. Pasienten er 100 prosent arbeidsfør etter denne perioden"
         checked={arbeidsforEtterPeriode}
         margin
         bold
         vis={arbeidsforEtterPeriode}
       />
+      <ElementMedTekst
+        tittel="5.1.1. Beskriv eventuelle hensyn som må tas på arbeidsplassen"
+        tekst={hensynArbeidsplassen}
+        margin
+        vis={!!hensynArbeidsplassen}
+      />
+
       {erIArbeid && (
         <>
           <ElementMedTekst
-            tittel="Kan pasienten på sikt komme tilbake til samme arbeidsgiver?"
+            tittel="5.2.1. Kan pasienten på sikt komme tilbake til samme arbeidsgiver?"
             tekst={erIArbeid.egetArbeidPaSikt ? 'Ja' : 'Nei'}
             margin
           />
@@ -46,9 +47,10 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
             tittel="Anslå når du tror dette kan skje"
             tekst={tilLesbarDatoMedArstall(erIArbeid.arbeidFOM)}
             margin
+            innrykk
           />
           <ElementMedTekst
-            tittel="Kan pasienten på sikt komme i arbeid hos en annen arbeidsgiver?"
+            tittel="5.2.2. Kan pasienten på sikt komme i arbeid hos en annen arbeidsgiver?"
             tekst={erIArbeid.annetArbeidPaSikt ? 'Ja' : 'Nei'}
             margin
           />
@@ -57,13 +59,14 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
             tittel="Når antar du å kunne gi tilbakemelding på dette?"
             tekst={tilLesbarDatoMedArstall(erIArbeid.vurderingsdato)}
             margin
+            innrykk
           />
         </>
       )}
       {erIkkeIArbeid && (
         <>
           <ElementMedTekst
-            tittel="Kan pasienten på sikt komme tilbake i arbeid?"
+            tittel="5.3.1. Kan pasienten på sikt komme tilbake i arbeid?"
             tekst={erIkkeIArbeid.arbeidsforPaSikt ? 'Ja' : 'Nei'}
             margin
           />
@@ -72,10 +75,11 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
             tittel="Anslå når du tror dette kan skje"
             tekst={tilLesbarDatoMedArstall(erIkkeIArbeid.arbeidsforFOM)}
             margin
+            innrykk
           />
           <ElementMedTekst
             vis={!!erIkkeIArbeid.vurderingsdato}
-            tittel="Når antar du å kunne gi tilbakemelding på dette?"
+            tittel="5.3.2. Når antar du å kunne gi tilbakemelding på dette?"
             tekst={tilLesbarDatoMedArstall(erIkkeIArbeid.vurderingsdato)}
             margin
           />

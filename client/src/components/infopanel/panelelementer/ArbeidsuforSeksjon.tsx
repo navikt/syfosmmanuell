@@ -12,7 +12,7 @@ const ArbeidsuforSeksjon = ({ prognose }: ArbeidsuforSeksjonProps) => {
     return null;
   }
 
-  return <EnkelCheckbox tittel="Pasienten er 100 % arbeidsfør etter perioden" checked margin vis />;
+  return <EnkelCheckbox tittel="Pasienten er 100 % arbeidsfør etter perioden" checked margin vis bold />;
 };
 
 export default ArbeidsuforSeksjon;
