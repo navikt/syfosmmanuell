@@ -6,9 +6,10 @@ import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 
 interface TilbakedateringsSeksjonProps {
   kontaktDato?: Date;
+  begrunnelseIkkeKontakt?: string;
 }
 
-const TilbakedateringsSeksjon = ({ kontaktDato }: TilbakedateringsSeksjonProps) => {
+const TilbakedateringsSeksjon = ({ kontaktDato, begrunnelseIkkeKontakt }: TilbakedateringsSeksjonProps) => {
   if (!kontaktDato) {
     return null;
   }
@@ -19,6 +20,12 @@ const TilbakedateringsSeksjon = ({ kontaktDato }: TilbakedateringsSeksjonProps) 
         vis={!!kontaktDato}
         tittel="11.1. Dato for dokumenterbar kontakt med pasient"
         tekst={tilLesbarDatoMedArstall(kontaktDato)}
+        margin
+      />
+      <ElementMedTekst
+        vis={!!begrunnelseIkkeKontakt}
+        tittel="11.2. Pasienten har ikke kunnet ivareta egne intresser. Begrunn"
+        tekst={begrunnelseIkkeKontakt}
         margin
       />
     </SeksjonMedTittel>

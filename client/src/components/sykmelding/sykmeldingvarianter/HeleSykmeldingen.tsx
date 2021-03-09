@@ -71,7 +71,10 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
       />
       <MeldingTilNAVSection meldingTilNAV={sykmelding.meldingTilNAV} />
       <MeldingTilArbeidsgiverSection meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver} />
-      <TilbakedateringsSeksjon kontaktDato={sykmelding.kontaktMedPasient.kontaktDato} />
+      <TilbakedateringsSeksjon
+        kontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
+        begrunnelseIkkeKontakt={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
+      />
       <Annet behandlerTelefon={sykmelding.behandler.tlf} />
       <div style={{ textAlign: 'center' }}>
         <Flatknapp
