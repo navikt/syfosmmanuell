@@ -9,21 +9,35 @@ import './diagnoseseksjon.less';
 interface DiagnoseSeksjonProps {
   diagnose?: Diagnose;
   bidiagnose?: boolean;
+  withPrefix?: boolean;
 }
 
-const DiagnoseSeksjon = ({ diagnose, bidiagnose }: DiagnoseSeksjonProps) => {
+const DiagnoseSeksjon = ({ diagnose, bidiagnose, withPrefix = false }: DiagnoseSeksjonProps) => {
   if (!diagnose) {
     return null;
   }
 
   const { tekst, kode, system } = diagnose;
 
-  const tittel = bidiagnose ? '3.2. Bidiagnose' : '3.1. Diagnose';
+  const setTitle = () => {
+    if (bidiagnose) {
+      if (withPrefix) {
+        return '3.2. Bidiagnose';
+      }
+      return 'Bidiagnose';
+    }
+
+    if (withPrefix) {
+      return '3.1. Diagnose';
+    }
+
+    return 'Diagnose';
+  };
 
   return (
     <div className="diagnose-container">
       <div className="diagnose-seksjon">
-        <EtikettMedTekst tittel={tittel} tekst={tekst} undertekst="Diagnosen vises ikke til arbeidsgiveren" />
+        <EtikettMedTekst tittel={setTitle()} tekst={tekst} undertekst="Diagnosen vises ikke til arbeidsgiveren" />
       </div>
       <div className="diagnose-seksjon-kode">
         <DiagnoseKodeSeksjon kode={kode} system={system} visHjelp={!bidiagnose} />
