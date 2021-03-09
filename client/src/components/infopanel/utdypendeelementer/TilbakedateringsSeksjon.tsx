@@ -24,7 +24,7 @@ const TilbakedateringsSeksjon = ({ kontaktDato, begrunnelseIkkeKontakt }: Tilbak
       />
       <ElementMedTekst
         vis={!!begrunnelseIkkeKontakt}
-        tittel="11.2. Pasienten har ikke kunnet ivareta egne intresser. Begrunn"
+        tittel="11.2. Begrunnelse for tilbakedatering"
         tekst={begrunnelseIkkeKontakt}
         margin
       />
