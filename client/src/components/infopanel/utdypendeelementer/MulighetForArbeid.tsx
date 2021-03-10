@@ -3,73 +3,131 @@ import { Periode } from '../../../types/sykmeldingTypes';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 
-import Margin from '../layout/Margin';
 import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
+import { tilLesbarPeriodeMedArstall } from '../../../utils/datoUtils';
 
 interface MulighetForArbeidProps {
   perioder: Periode[];
 }
 
 const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
-  const harMedisinskArsak = perioder.some((periode) => periode.aktivitetIkkeMulig?.medisinskArsak?.arsak);
-  const harArbeidsrelatertArsak = perioder.some((periode) => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak);
-
-  if (!harMedisinskArsak && !harArbeidsrelatertArsak) {
-    return null;
-  }
-
-  const medisinskeBeskrivelser = perioder.filter((periode) => periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse);
-
-  const arbeidsrelaterteBeskrivelser = perioder.filter(
-    (periode) => periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse,
-  );
+  const avventendeSykmeldingPerioder = perioder.filter((periode) => periode.avventendeInnspillTilArbeidsgiver);
+  const gradertSykmeldingPerioder = perioder.filter((periode) => periode.gradert);
+  const fullSykmeldingPerioder = perioder.filter((periode) => periode.aktivitetIkkeMulig);
+  const behandlingsdagerSykmeldingPerioder = perioder.filter((periode) => periode.behandlingsdager);
+  const reisetilskuddSykmeldingPerioder = perioder.filter((periode) => periode.reisetilskudd);
 
   return (
     <SeksjonMedTittel understrek tittel="4. Mulighet for arbeid">
-      <ElementMedTekst vis={!!harArbeidsrelatertArsak} tittel="4.3. Pasienten kan ikke være i arbeid (100% sykmeldt)" />
-      <Margin>
-        <br />
-        <EnkelCheckbox
-          tittel="4.3.3. Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet"
-          margin
-          checked
-          bold
-          vis={!!harMedisinskArsak}
-        />
-      </Margin>
-
-      {medisinskeBeskrivelser.map((periode, index) => (
-        <ElementMedTekst
-          key={index}
-          vis
-          tittel="Beskrivelse"
-          tekst={periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse}
-          margin
-          innrykk
-        />
+      {avventendeSykmeldingPerioder.map((periode) => (
+        <>
+          <ElementMedTekst tittel="4.1. Pasienten kan benytte avventende sykmelding" margin />
+          <ElementMedTekst
+            tittel="4.1.1. f.o.m. - 4.1.2. t.o.m."
+            tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
+            margin
+            innrykk
+          />
+          <ElementMedTekst
+            tittel="4.1.3. Innspill til arbeidsgiver om tilrettelegging"
+            tekst={periode.avventendeInnspillTilArbeidsgiver}
+            margin
+            innrykk
+          />
+        </>
       ))}
-
-      <Margin>
-        <br />
-        <EnkelCheckbox
-          vis={!!harArbeidsrelatertArsak}
-          tittel="4.3.4. Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet"
-          margin
-          bold
-          checked
-        />
-      </Margin>
-
-      {arbeidsrelaterteBeskrivelser.map((periode, index) => (
-        <ElementMedTekst
-          key={index}
-          vis
-          tittel="Beskrivelse"
-          tekst={periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse}
-          margin
-          innrykk
-        />
+      {gradertSykmeldingPerioder.map((periode) => (
+        <>
+          <ElementMedTekst tittel="4.2. Pasienten kan være delvis i arbeid (gradert sykmelding)" margin />
+          <ElementMedTekst
+            tittel="4.2.1. f.o.m. - 4.2.2. t.o.m."
+            tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
+            margin
+            innrykk
+          />
+          <ElementMedTekst
+            tittel="4.2.3. Oppgi grad for sykmeldingen"
+            tekst={periode.gradert?.grad ? String(periode.gradert?.grad) : '-'}
+            margin
+            innrykk
+          />
+          <EnkelCheckbox
+            tittel="4.2.4. Pasienten kan være i delvis arbeid ved bruk av reisetilskudd"
+            margin
+            checked={!!periode.gradert?.reisetilskudd}
+            bold
+            vis
+          />
+        </>
+      ))}
+      {fullSykmeldingPerioder.map((periode) => (
+        <>
+          <ElementMedTekst tittel="4.3. Pasienten kan ikke være i arbeid (100 % sykmelding)" margin />
+          <ElementMedTekst
+            tittel="4.3.1. f.o.m. - 4.3.2. t.o.m."
+            tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
+            margin
+            innrykk
+          />
+          <EnkelCheckbox
+            tittel="4.3.3. Medisinske årsaker hindrer arbeidsrelatert aktivitet"
+            margin
+            checked={!!periode.aktivitetIkkeMulig?.medisinskArsak}
+            bold
+            vis
+          />
+          <ElementMedTekst
+            vis
+            tittel="Beskrivelse"
+            tekst={periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse}
+            margin
+            innrykk
+          />
+          <EnkelCheckbox
+            tittel="4.3.4. Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet"
+            margin
+            bold
+            checked={!!periode.aktivitetIkkeMulig?.arbeidsrelatertArsak}
+            vis
+          />
+          <ElementMedTekst
+            vis
+            tittel="Beskrivelse"
+            tekst={periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse}
+            margin
+            innrykk
+          />
+        </>
+      ))}
+      {behandlingsdagerSykmeldingPerioder.map((periode) => (
+        <>
+          <ElementMedTekst tittel="4.4. Pasienten kan ikke være i arbeid på behandlingsdager" margin />
+          <ElementMedTekst
+            tittel="4.4.1. f.o.m. - 4.4.2. t.o.m."
+            tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
+            margin
+            innrykk
+          />
+          <ElementMedTekst
+            vis
+            tittel="4.4.3 Oppgi antall dager i perioden"
+            tekst={periode.behandlingsdager ? String(periode.behandlingsdager) : '-'}
+            margin
+            innrykk
+          />
+        </>
+      ))}
+      {reisetilskuddSykmeldingPerioder.map((periode) => (
+        <>
+          <ElementMedTekst tittel="4.5. Pasienten kan være i fullt arbeid ved bruk av reisetilskudd" margin />
+          <ElementMedTekst
+            tittel="4.5.1. f.o.m. - 4.5.2. t.o.m."
+            tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
+            margin
+            innrykk
+          />
+        </>
       ))}
     </SeksjonMedTittel>
   );
