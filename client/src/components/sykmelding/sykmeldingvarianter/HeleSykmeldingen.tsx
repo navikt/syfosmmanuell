@@ -1,6 +1,5 @@
 import React from 'react';
 import { Sykmelding } from '../../../types/sykmeldingTypes';
-import SykmeldingPerioder from '../../infopanel/panelelementer/periode/SykmeldingPerioder';
 import MulighetForArbeid from '../../infopanel/utdypendeelementer/MulighetForArbeid';
 import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding';
 import UtdypendeOpplysninger from '../../infopanel/utdypendeelementer/UtdypendeOpplysninger';
@@ -25,8 +24,6 @@ interface HeleSykmeldingenProps {
 const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmeldingenProps) => {
   return (
     <div className="helesykmeldingen">
-      <SykmeldingPerioder perioder={sykmelding.perioder} />
-
       <ElementMedTekst
         vis={!!sykmelding.behandletTidspunkt}
         tittel="Dato sykmeldingen ble skrevet"
@@ -40,20 +37,8 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
         margin
       />
       <ElementMedTekst
-        vis={!!sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
-        tittel="Begrunnelse for tilbakedatering"
-        tekst={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
-        margin
-      />
-      <ElementMedTekst
         tittel="Pasienten er 100% arbeidsfør etter perioden"
         tekst={sykmelding.prognose?.arbeidsforEtterPeriode ? 'Ja' : 'Nei'}
-        margin
-      />
-      <ElementMedTekst
-        vis={!!sykmelding.arbeidsgiver.harArbeidsgiver}
-        tittel="Arbeidsgiver som legen har skrevet inn"
-        tekst={sykmelding.arbeidsgiver.navn}
         margin
       />
       <ElementMedTekst vis={!!sykmelding.navnFastlege} tittel="Sykmelder" tekst={sykmelding.navnFastlege} margin />
