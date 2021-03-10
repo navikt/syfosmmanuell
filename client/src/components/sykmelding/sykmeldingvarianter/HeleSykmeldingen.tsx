@@ -15,6 +15,7 @@ import MeldingTilNAVSection from '../../infopanel/utdypendeelementer/MeldingTilN
 import MeldingTilArbeidsgiverSection from '../../infopanel/utdypendeelementer/MeldingTilArbeidsgiverSection';
 import Diagnoser from '../../infopanel/utdypendeelementer/Diagnoser';
 import TilbakedateringsSeksjon from '../../infopanel/utdypendeelementer/TilbakedateringsSeksjon';
+import ArbeidsgiverSection from '../../infopanel/utdypendeelementer/ArbeidsgiverSection';
 
 interface HeleSykmeldingenProps {
   sykmelding: Sykmelding;
@@ -57,6 +58,7 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
       />
       <ElementMedTekst vis={!!sykmelding.navnFastlege} tittel="Sykmelder" tekst={sykmelding.navnFastlege} margin />
       <hr />
+      <ArbeidsgiverSection arbeidsgiver={sykmelding.arbeidsgiver} />
       <Diagnoser
         medisinskVurdering={sykmelding.medisinskVurdering}
         skjermesForPasient={sykmelding.skjermesForPasient}
