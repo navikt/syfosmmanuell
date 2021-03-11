@@ -36,11 +36,6 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
         tekst={tilLesbarDatoMedArstall(sykmelding.kontaktMedPasient.kontaktDato)}
         margin
       />
-      <ElementMedTekst
-        tittel="Pasienten er 100% arbeidsfør etter perioden"
-        tekst={sykmelding.prognose?.arbeidsforEtterPeriode ? 'Ja' : 'Nei'}
-        margin
-      />
       <ElementMedTekst vis={!!sykmelding.navnFastlege} tittel="Sykmelder" tekst={sykmelding.navnFastlege} margin />
       <hr />
       <ArbeidsgiverSection arbeidsgiver={sykmelding.arbeidsgiver} />
