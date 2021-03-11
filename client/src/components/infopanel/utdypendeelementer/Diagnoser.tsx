@@ -23,7 +23,7 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
     <SeksjonMedTittel understrek tittel="3. Diagnose">
       <DiagnoseSeksjon diagnose={medisinskVurdering.hovedDiagnose} withPrefix />
       {medisinskVurdering.biDiagnoser.map((diagnose, index) => (
-        <DiagnoseSeksjon key={index.toString()} diagnose={diagnose} bidiagnose withPrefix />
+        <DiagnoseSeksjon key={index} diagnose={diagnose} bidiagnose withPrefix />
       ))}
 
       {medisinskVurdering.annenFraversArsak && (
