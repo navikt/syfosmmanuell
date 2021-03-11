@@ -37,10 +37,12 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
 
       {erIArbeid && (
         <>
-          <ElementMedTekst
+          <EnkelCheckbox
             tittel="5.2.1. Kan pasienten på sikt komme tilbake til samme arbeidsgiver?"
-            tekst={erIArbeid.egetArbeidPaSikt ? 'Ja' : 'Nei'}
+            checked={erIArbeid.egetArbeidPaSikt}
             margin
+            bold
+            vis
           />
           <ElementMedTekst
             vis={erIArbeid.egetArbeidPaSikt && !!erIArbeid.arbeidFOM}
@@ -65,10 +67,12 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
       )}
       {erIkkeIArbeid && (
         <>
-          <ElementMedTekst
+          <EnkelCheckbox
             tittel="5.3.1. Kan pasienten på sikt komme tilbake i arbeid?"
-            tekst={erIkkeIArbeid.arbeidsforPaSikt ? 'Ja' : 'Nei'}
+            checked={erIkkeIArbeid.arbeidsforPaSikt}
             margin
+            bold
+            vis
           />
           <ElementMedTekst
             vis={!!erIkkeIArbeid.arbeidsforFOM}
