@@ -10,10 +10,6 @@ interface TilbakedateringsSeksjonProps {
 }
 
 const TilbakedateringsSeksjon = ({ kontaktDato, begrunnelseIkkeKontakt }: TilbakedateringsSeksjonProps) => {
-  if (!kontaktDato) {
-    return null;
-  }
-
   return (
     <SeksjonMedTittel understrek tittel="11. Tilbakedatering">
       <ElementMedTekst
