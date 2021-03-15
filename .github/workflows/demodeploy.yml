@@ -2,7 +2,6 @@ name: Deploy demo to nais labs
 on:
   push:
     branches:
-      - '*'
       - 'master'
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/syfosmmanuell:${{ github.sha }}
