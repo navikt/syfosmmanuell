@@ -14,13 +14,13 @@ const TilbakedateringsSeksjon = ({ kontaktDato, begrunnelseIkkeKontakt }: Tilbak
     <SeksjonMedTittel understrek tittel="11. Tilbakedatering">
       <ElementMedTekst
         vis={!!kontaktDato}
-        tittel="11.1. Dato for dokumenterbar kontakt med pasient"
+        tittel="11.1. Datoen for dokumenterbar kontakt med pasienten"
         tekst={tilLesbarDatoMedArstall(kontaktDato)}
         margin
       />
       <ElementMedTekst
         vis={!!begrunnelseIkkeKontakt}
-        tittel="11.2. Begrunnelse for tilbakedatering"
+        tittel="11.2. Begrunnelsen for tilbakedateringen"
         tekst={begrunnelseIkkeKontakt}
         margin
       />

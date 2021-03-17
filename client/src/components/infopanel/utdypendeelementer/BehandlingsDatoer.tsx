@@ -12,10 +12,10 @@ interface BehandlingsDatoerProps {
 
 const BehandlingsDatoer = ({ signaturDato, syketilfelleStartDato }: BehandlingsDatoerProps) => {
   return (
-    <SeksjonMedTittel >
+    <SeksjonMedTittel>
       <ElementMedTekst
         vis={!!signaturDato}
-        tittel="Dato sykmeldingen ble skrevet"
+        tittel="Datoen sykmeldingen ble skrevet"
         tekst={tilLesbarDatoMedArstall(signaturDato)}
         margin
       />

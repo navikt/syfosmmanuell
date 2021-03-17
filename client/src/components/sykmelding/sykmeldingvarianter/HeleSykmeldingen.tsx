@@ -26,13 +26,13 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
     <div className="helesykmeldingen">
       <ElementMedTekst
         vis={!!sykmelding.behandletTidspunkt}
-        tittel="Dato sykmeldingen ble skrevet"
+        tittel="Datoen sykmeldingen ble skrevet"
         tekst={tilLesbarDatoMedArstall(sykmelding.behandletTidspunkt)}
         margin
       />
       <ElementMedTekst
         vis={!!sykmelding.kontaktMedPasient.kontaktDato}
-        tittel="Dato for dokumenterbar kontakt med pasienten"
+        tittel="Datoen for dokumenterbar kontakt med pasienten"
         tekst={tilLesbarDatoMedArstall(sykmelding.kontaktMedPasient.kontaktDato)}
         margin
       />
