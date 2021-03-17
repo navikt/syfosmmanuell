@@ -51,10 +51,12 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
             margin
             innrykk
           />
-          <ElementMedTekst
+          <EnkelCheckbox
             tittel="5.2.2. Kan pasienten på sikt komme i arbeid hos en annen arbeidsgiver?"
-            tekst={erIArbeid.annetArbeidPaSikt ? 'Ja' : 'Nei'}
+            checked={erIArbeid.annetArbeidPaSikt}
             margin
+            bold
+            vis
           />
           <ElementMedTekst
             vis={erIArbeid.annetArbeidPaSikt && !!erIArbeid.vurderingsdato}
