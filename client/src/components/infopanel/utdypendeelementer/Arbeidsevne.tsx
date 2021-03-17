@@ -25,7 +25,7 @@ const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV, andreTiltak }: Arbeidsev
       <ElementMedTekst vis={!!tiltakNAV} tittel="7.2. Tiltak i regi av NAV" tekst={tiltakNAV} margin />
       <ElementMedTekst
         vis={!!andreTiltak}
-        tittel="7.3. Eventuelle andre innspill til NAV. Beskriv"
+        tittel="7.3. Beskriv eventuelle andre innspill til NAV"
         tekst={andreTiltak}
         margin
       />

@@ -130,13 +130,13 @@ export const manuellOppgave = {
     utdypendeOpplysninger: {
       '6.3': {
         '6.3.1': {
-          sporsmal: 'Er pasient frisk?',
+          sporsmal: 'Er pasienten frisk?',
           svar:
             'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
           restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
         },
         '6.3.2': {
-          sporsmal: 'Er pasient klar for å jobbe?',
+          sporsmal: 'Er pasienten klar for å jobbe?',
           svar:
             'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
           restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],

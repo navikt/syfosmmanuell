@@ -36,7 +36,7 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
           </Margin>
           <ElementMedTekst
             vis={!!medisinskVurdering.annenFraversArsak.beskrivelse}
-            tittel="3.3.2 Beskriv fraværsgrunn"
+            tittel="3.3.2 Beskriv fraværsgrunnen"
             tekst={medisinskVurdering.annenFraversArsak.beskrivelse}
             margin
           />

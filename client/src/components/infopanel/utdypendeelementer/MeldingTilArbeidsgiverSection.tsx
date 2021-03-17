@@ -17,7 +17,7 @@ const MeldingTilArbeidsgiverSection = ({ meldingTilArbeidsgiver }: MeldingTilArb
       <ElementMedTekst
         vis={!!meldingTilArbeidsgiver}
         margin
-        tittel="9.1. Andre innspill til Arbeidsgiver"
+        tittel="9.1. Andre innspill til arbeidsgiveren"
         tekst={meldingTilArbeidsgiver}
       />
     </SeksjonMedTittel>
