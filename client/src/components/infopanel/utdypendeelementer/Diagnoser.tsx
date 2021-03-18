@@ -44,7 +44,6 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
       )}
 
       <Margin>
-        <br />
         <EnkelCheckbox
           tittel="3.4. Sykdommen er svangerskapsrelatert"
           margin
@@ -55,7 +54,6 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
       </Margin>
 
       <Margin>
-        <br />
         <EnkelCheckbox
           tittel="3.5. Sykmeldingen kan skyldes en yrkesskade/yrkessykdom"
           margin
@@ -73,7 +71,6 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
       />
 
       <Margin>
-        <br />
         <EnkelCheckbox
           tittel="3.7. Det er påtrengende nødvendig å skjerme pasienten for medisinske opplysninger"
           margin
