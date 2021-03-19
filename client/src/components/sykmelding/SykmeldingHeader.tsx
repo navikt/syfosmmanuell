@@ -34,7 +34,7 @@ const Sykmeldingheader = ({ personNrPasient, arbeidsgiverNavn, sykmelder, mottat
       </div>
 
       <div className="sykmelding-header__section">
-        <Element>Dato NAV mottok sykmeldingen:</Element>
+        <Element>Datoen NAV mottok sykmeldingen:</Element>
         <Normaltekst>{dayjs(mottattDato).format('DD.MM.YYYY kl. HH:mm:ss')}</Normaltekst>
       </div>
     </div>

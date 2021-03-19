@@ -61,20 +61,20 @@ export const manuellOppgave = {
       {
         fom: '2018-10-18',
         tom: '2018-11-12',
-        aktivitetIkkeMulig: {
-          medisinskArsak: {
-            beskrivelse: 'dette er en beskrivelse',
-            arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
-          },
-          arbeidsrelatertArsak: {
-            beskrivelse: 'dette er en beskrivelse',
-            arsak: ['MANGLENDE_TILRETTELEGGING', 'ANNET'],
-          },
-        },
+        aktivitetIkkeMulig: null,
+        avventendeInnspillTilArbeidsgiver: 'Pasienten bør bruke hev/senk pult og få seg frisk luft en gang i blant.',
+        behandlingsdager: null,
+        gradert: null,
+        reisetilskudd: false,
+      },
+      {
+        fom: '2018-10-18',
+        tom: '2018-11-12',
+        aktivitetIkkeMulig: null,
         avventendeInnspillTilArbeidsgiver: null,
         behandlingsdager: null,
         gradert: {
-          reisetilskudd: true,
+          reisetilskudd: false,
           grad: 56,
         },
         reisetilskudd: false,
@@ -84,21 +84,36 @@ export const manuellOppgave = {
         tom: '2018-11-12',
         aktivitetIkkeMulig: {
           medisinskArsak: {
-            beskrivelse: 'dette er en beskrivelse',
+            beskrivelse: 'Dette er en beskrivelse på en medisinsk årsak',
             arsak: ['TILSTAND_HINDRER_AKTIVITET', 'AKTIVITET_FORVERRER_TILSTAND'],
           },
           arbeidsrelatertArsak: {
-            beskrivelse: 'dette er en beskrivelse',
+            beskrivelse: 'Dette er en beskrivelse på en arbeidsrelatert årsak',
             arsak: ['ANNET'],
           },
         },
         avventendeInnspillTilArbeidsgiver: null,
         behandlingsdager: null,
-        gradert: {
-          reisetilskudd: true,
-          grad: 56,
-        },
+        gradert: null,
         reisetilskudd: false,
+      },
+      {
+        fom: '2018-10-18',
+        tom: '2018-11-12',
+        aktivitetIkkeMulig: null,
+        avventendeInnspillTilArbeidsgiver: null,
+        behandlingsdager: 20,
+        gradert: null,
+        reisetilskudd: false,
+      },
+      {
+        fom: '2018-10-18',
+        tom: '2018-11-12',
+        aktivitetIkkeMulig: null,
+        avventendeInnspillTilArbeidsgiver: null,
+        behandlingsdager: null,
+        gradert: null,
+        reisetilskudd: true,
       },
     ],
     prognose: {
@@ -115,13 +130,13 @@ export const manuellOppgave = {
     utdypendeOpplysninger: {
       '6.3': {
         '6.3.1': {
-          sporsmal: 'Er pasient frisk?',
+          sporsmal: 'Er pasienten frisk?',
           svar:
             'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
           restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
         },
         '6.3.2': {
-          sporsmal: 'Er pasient klar for å jobbe?',
+          sporsmal: 'Er pasienten klar for å jobbe?',
           svar:
             'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
           restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],

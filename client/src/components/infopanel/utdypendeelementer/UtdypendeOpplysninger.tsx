@@ -12,7 +12,7 @@ interface OpplysningsGruppeProps {
 
 const OpplysningsGruppe = ({ opplysningGruppe }: OpplysningsGruppeProps) => {
   const sporsmal = Array.from(opplysningGruppe).map(([key, sporsmalSvar]) => (
-    <ElementMedTekst key={key} tittel={sporsmalSvar.sporsmal} tekst={sporsmalSvar.svar} margin />
+    <ElementMedTekst key={key} tittel={`${key}. ${sporsmalSvar.sporsmal}`} tekst={sporsmalSvar.svar} margin />
   ));
   return <>{sporsmal}</>;
 };
@@ -33,7 +33,7 @@ const UtdypendeOpplysninger = ({ opplysninger }: UtdypendeOpplysningerProps) => 
   ));
 
   return (
-    <SeksjonMedTittel understrek tittel="Utdypende opplysninger">
+    <SeksjonMedTittel understrek tittel="6. Utdypende opplysninger">
       {opplysningGrupper}
     </SeksjonMedTittel>
   );

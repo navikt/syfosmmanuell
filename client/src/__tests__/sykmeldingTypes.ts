@@ -95,22 +95,22 @@ describe('sykmeldingTypes', () => {
       expect(dayjs(periode.fom).format('YYYY-MM-DD')).toEqual(_perioder[index].fom);
       expect(dayjs(periode.tom).format('YYYY-MM-DD')).toEqual(_perioder[index].tom);
       expect(periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse).toEqual(
-        _perioder[index].aktivitetIkkeMulig.medisinskArsak.beskrivelse,
+        _perioder[index].aktivitetIkkeMulig?.medisinskArsak.beskrivelse,
       );
       periode.aktivitetIkkeMulig?.medisinskArsak?.arsak.forEach((arsak, arsakIndex) => {
         expect(arsak).toEqual(
           MedisinskArsakType[
-            _perioder[index].aktivitetIkkeMulig.medisinskArsak.arsak[arsakIndex] as keyof typeof MedisinskArsakType
+            _perioder[index].aktivitetIkkeMulig?.medisinskArsak.arsak[arsakIndex] as keyof typeof MedisinskArsakType
           ],
         );
       });
       expect(periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse).toEqual(
-        _perioder[index].aktivitetIkkeMulig.arbeidsrelatertArsak.beskrivelse,
+        _perioder[index].aktivitetIkkeMulig?.arbeidsrelatertArsak.beskrivelse,
       );
       periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak.forEach((arsak, arsakIndex) => {
         expect(arsak).toEqual(
           ArbeidsrelatertArsakType[
-            _perioder[index].aktivitetIkkeMulig.arbeidsrelatertArsak.arsak[
+            _perioder[index].aktivitetIkkeMulig?.arbeidsrelatertArsak.arsak[
               arsakIndex
             ] as keyof typeof ArbeidsrelatertArsakType
           ],
@@ -118,7 +118,7 @@ describe('sykmeldingTypes', () => {
       });
       expect(periode.avventendeInnspillTilArbeidsgiver).toEqual(_perioder[index].avventendeInnspillTilArbeidsgiver);
       expect(periode.behandlingsdager).toEqual(_perioder[index].behandlingsdager);
-      expect(periode.gradert).toEqual(_perioder[index].gradert);
+      expect(periode.gradert).toEqual(_perioder[index].gradert ?? undefined);
       expect(periode.reisetilskudd).toEqual(_perioder[index].reisetilskudd);
     });
     expect(prognose?.arbeidsforEtterPeriode).toEqual(_prognose.arbeidsforEtterPeriode);
