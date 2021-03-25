@@ -9,6 +9,8 @@ const BeskjedTilBehandler: Record<AvvisningType, string> = {
     'Sykmelding gjelder som hovedregel fra den dagen pasienten oppsøker behandler. Sykmeldingen er tilbakedatert uten at det kommer tydelig nok fram hvorfor dette var nødvendig. Sykmeldingen er derfor avvist, og det må skrives en ny hvis det fortsatt er aktuelt med sykmelding. Pasienten har fått beskjed om å vente på ny sykmelding fra deg.',
   UGYLDIG_BEGRUNNELSE:
     'NAV kan ikke godta tilbakedateringen. Sykmeldingen er derfor avvist. Hvis sykmelding fortsatt er aktuelt, må det skrives ny sykmelding der f.o.m.-dato er dagen du var i kontakt med pasienten. Pasienten har fått beskjed om å vente på ny sykmelding fra deg.',
+  UGYLDIG_TILBAKEDATERING:
+    'Det er ikke oppgitt en gyldig grunn til å kunne godkjenne tilbakedateringen i henhold til vilkårene i folketrygdloven §8-7. Tilbakedateringen er derfor avslått.',
 };
 
 const BeskjedTilPasient: Record<Merknad | AvvisningType, string> = {
@@ -32,7 +34,7 @@ const InfoTilBehandlerOgPasient = ({ type }: InfoTilBehandlerOgPasientProps) => 
   }
 
   // if type is Avvisningstype
-  if (type === 'MANGLER_BEGRUNNELSE' || type === 'UGYLDIG_BEGRUNNELSE') {
+  if (type === 'MANGLER_BEGRUNNELSE' || type === 'UGYLDIG_BEGRUNNELSE' || type === 'UGYLDIG_TILBAKEDATERING') {
     return (
       <Expandable
         className="info-til"

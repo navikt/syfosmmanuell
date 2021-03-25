@@ -9,7 +9,7 @@ import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
 type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST';
 export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER';
-export type AvvisningType = 'MANGLER_BEGRUNNELSE' | 'UGYLDIG_BEGRUNNELSE';
+export type AvvisningType = 'MANGLER_BEGRUNNELSE' | 'UGYLDIG_BEGRUNNELSE' | 'UGYLDIG_TILBAKEDATERING';
 
 export interface FormShape {
   status: Status;
@@ -155,13 +155,13 @@ const Form = () => {
                   {
                     id: 'b-avvisningType',
                     label:
-                      'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig.',
+                      'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig',
                     value: 'MANGLER_BEGRUNNELSE',
                   },
                   {
                     id: 'b-avvisningType-mangler-begrunnelse',
                     label:
-                      'NAV kan ikke godta tilbakedateringen. Det må skrives ny sykmelding der f.o.m-dato er datoen for den første kontakten med pasienten.',
+                      'NAV kan ikke godta tilbakedateringen. Det må skrives ny sykmelding der f.o.m-dato er datoen for den første kontakten med pasienten',
                     value: 'UGYLDIG_BEGRUNNELSE',
                   },
                 ]}
