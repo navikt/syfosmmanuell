@@ -115,12 +115,12 @@ const Form = () => {
                 radios={[
                   {
                     id: 'b-merknad',
-                    label: 'Avslå tilbakedatering, hele eller deler av sykmeldingen er ugyldig.',
+                    label: 'Avslå tilbakedatering, hele eller deler av sykmeldingen er ugyldig',
                     value: 'UGYLDIG_TILBAKEDATERING',
                   },
                   {
                     id: 'b-merknad-tilbakedatering-krever-flere-opplysninger',
-                    label: 'Behov for flere opplysninger.',
+                    label: 'Behov for flere opplysninger',
                     value: 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
                   },
                 ]}
