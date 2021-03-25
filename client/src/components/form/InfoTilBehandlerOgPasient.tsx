@@ -11,6 +11,8 @@ const BeskjedTilBehandler: Record<AvvisningType, string> = {
     'NAV kan ikke godta tilbakedateringen. Sykmeldingen er derfor avvist. Hvis sykmelding fortsatt er aktuelt, må det skrives ny sykmelding der f.o.m.-dato er dagen du var i kontakt med pasienten. Pasienten har fått beskjed om å vente på ny sykmelding fra deg.',
   UGYLDIG_TILBAKEDATERING:
     'Det er ikke oppgitt en gyldig grunn til å kunne godkjenne tilbakedateringen i henhold til vilkårene i folketrygdloven §8-7. Tilbakedateringen er derfor avslått.',
+  TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER:
+    'Sykmeldingen er tilbakedatert, og NAV trenger mer informasjon fra deg før den kan godkjennes. Du vil bli kontaktet i en dialogmelding.',
 };
 
 const BeskjedTilPasient: Record<Merknad | AvvisningType, string> = {
@@ -21,7 +23,7 @@ const BeskjedTilPasient: Record<Merknad | AvvisningType, string> = {
   UGYLDIG_TILBAKEDATERING:
     'Vanligvis starter sykmeldingen den datoen du er hos behandleren. I enkelte tilfeller kan datoen i sykmeldingen settes tilbake i tid, det vi kaller tilbakedatering. NAV vurderer om det er en gyldig grunn for tilbakedateringen.\n\nSykmeldingen din startet før du oppsøkte behandleren, og det er ikke oppgitt noen gyldig grunn. Derfor vil du ikke få sykepenger for disse dagene.\n\nDu kan likevel sende inn sykmeldingen. Når perioden er over, sender du søknaden om sykepenger. Når søknaden er behandlet, vil du få en begrunnelse for hvorfor du ikke kan få sykepenger for de tilbakedaterte dagene, og du får samtidig mulighet til å klage.',
   TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER:
-    'Sykmeldingen din starter tidligere enn den dagen du var hos behandleren. Vi kontakter nå behandleren din for å få opplysninger om hvorfor sykmeldingen er datert tilbake.\n\nDu kan likevel sende inn søknaden om sykepenger.',
+    'Sykmeldingen din starter tidligere enn den dagen du var hos behandleren. Vi kontakter nå behandleren din for å få opplysninger om hvorfor sykmeldingen er datert tilbake.\n\nDu kan likevel sende inn søknaden om sykepenger. Avhengig av hvilke opplysninger vi får fra behandleren din, kan det hende du ikke får sykepenger for dagene før sykmeldingstidspunktet.',
 };
 
 interface InfoTilBehandlerOgPasientProps {
@@ -34,7 +36,12 @@ const InfoTilBehandlerOgPasient = ({ type }: InfoTilBehandlerOgPasientProps) => 
   }
 
   // if type is Avvisningstype
-  if (type === 'MANGLER_BEGRUNNELSE' || type === 'UGYLDIG_BEGRUNNELSE' || type === 'UGYLDIG_TILBAKEDATERING') {
+  if (
+    type === 'MANGLER_BEGRUNNELSE' ||
+    type === 'UGYLDIG_BEGRUNNELSE' ||
+    type === 'UGYLDIG_TILBAKEDATERING' ||
+    type === 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER'
+  ) {
     return (
       <Expandable
         className="info-til"
