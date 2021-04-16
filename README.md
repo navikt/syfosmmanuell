@@ -12,7 +12,7 @@ Frontend-appen bruker en pakke som er bakt inn i react-scripts til å "inject'e"
 
 Alle variable som skal være tilgjengelige server-side må defineres i `/naiserator-prod` / `/naiserator-dev`.
 
-## NAIS-labs demo lenke:
+## Demo-side for appen kan besøkes på:
 
 https://syfosmmanuell.labs.nais.io
 
