@@ -158,7 +158,7 @@ export const manuellOppgave = {
       begrunnelseIkkeKontakt:
         'Har ikke kunnet ha kontakt med pasient siden pasient har vært hjemmeliggende med omgangssyke',
     },
-    behandletTidspunkt: '2018-10-14T14:52:35',
+    behandletTidspunkt: '2018-10-22T14:52:35',
     behandler: {
       fornavn: 'Fornavn',
       mellomnavn: 'Mellomnavnesen',
