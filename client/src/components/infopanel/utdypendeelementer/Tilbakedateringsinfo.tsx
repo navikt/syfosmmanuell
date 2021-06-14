@@ -7,8 +7,8 @@ import { Periode } from '../../../types/sykmeldingTypes';
 
 interface TilbakedateringsinfoProps {
   perioder: Periode[];
-  kontaktDato?: Date;
   behandletTidspunkt: Date;
+  kontaktDato?: Date;
   begrunnelseIkkeKontakt?: string;
 }
 
@@ -26,7 +26,7 @@ const Tilbakedateringsinfo = ({
       <div className="tilbakedateringsinfo__kontaktMedPasient">
         <ElementMedTekst
           vis={!!kontaktDato}
-          tittel="Datoen pasienten oppsøkte behandleren"
+          tittel="Dato for dokumenterbar kontakt med pasienten"
           tekst={tilLesbarDatoMedArstall(kontaktDato)}
           margin
         />
@@ -36,19 +36,12 @@ const Tilbakedateringsinfo = ({
           tekst={begrunnelseIkkeKontakt}
         />
       </div>
-
       <ElementMedTekst
-        vis={!!behandletTidspunkt}
-        tittel="Dato pasienten ble behandlet"
+        tittel="Dato pasienten oppsøkte behandleren"
         tekst={tilLesbarDatoMedArstall(behandletTidspunkt)}
         margin
       />
-      <ElementMedTekst
-        vis={!!behandletTidspunkt}
-        tittel="Startdato for sykmeldingen"
-        tekst={`${tilLesbarDatoMedArstall(fom)}`}
-        margin
-      />
+      <ElementMedTekst tittel="Startdato for sykmeldingen" tekst={`${tilLesbarDatoMedArstall(fom)}`} margin />
       {tilbakedatertDuration && (
         <ElementMedTekst
           vis
