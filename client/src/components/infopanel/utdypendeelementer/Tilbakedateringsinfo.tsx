@@ -1,18 +1,14 @@
 import React from 'react';
 import ElementMedTekst from '../layout/ElementMedTekst';
-import {
-  getFirstFomInPeriod,
-  countDaysBetweenTwoDatesIncludingFom,
-  tilLesbarDatoMedArstall,
-} from '../../../utils/datoUtils';
+import { tilLesbarDatoMedArstall, daysBetweenDates, getSykmeldingStartDate } from '../../../utils/datoUtils';
 
 import './Tilbakedateringsinfo.less';
 import { Periode } from '../../../types/sykmeldingTypes';
 
 interface TilbakedateringsinfoProps {
-  perioder?: Periode[];
+  perioder: Periode[];
+  behandletTidspunkt: Date;
   kontaktDato?: Date;
-  behandletTidspunkt?: Date;
   begrunnelseIkkeKontakt?: string;
 }
 
@@ -22,31 +18,38 @@ const Tilbakedateringsinfo = ({
   behandletTidspunkt,
   begrunnelseIkkeKontakt,
 }: TilbakedateringsinfoProps) => {
-  const fom = getFirstFomInPeriod(perioder);
-  const tilbakedatertDuration = countDaysBetweenTwoDatesIncludingFom(fom, behandletTidspunkt);
+  const fom = getSykmeldingStartDate(perioder);
+  const tilbakedatertDuration = daysBetweenDates(fom, behandletTidspunkt);
+
   return (
     <div className="tilbakedateringsinfo">
+      <div className="tilbakedateringsinfo__kontaktMedPasient">
+        <ElementMedTekst
+          vis={!!kontaktDato}
+          tittel="Dato for dokumenterbar kontakt med pasienten"
+          tekst={tilLesbarDatoMedArstall(kontaktDato)}
+          margin
+        />
+        <ElementMedTekst
+          vis={!!begrunnelseIkkeKontakt}
+          tittel="Begrunnelse for tilbakedateringen"
+          tekst={begrunnelseIkkeKontakt}
+        />
+      </div>
       <ElementMedTekst
-        vis={!!kontaktDato}
-        tittel="Datoen pasienten oppsøkte behandleren"
-        tekst={tilLesbarDatoMedArstall(kontaktDato)}
+        tittel="Dato pasienten oppsøkte behandleren"
+        tekst={tilLesbarDatoMedArstall(behandletTidspunkt)}
         margin
       />
+      <ElementMedTekst tittel="Startdato for sykmeldingen" tekst={`${tilLesbarDatoMedArstall(fom)}`} margin />
       {tilbakedatertDuration && (
         <ElementMedTekst
-          vis={!!behandletTidspunkt}
-          tittel="Datoen behandleren oppgir som første dag med sykmelding"
-          tekst={`${tilLesbarDatoMedArstall(behandletTidspunkt)} • tilbakedatert ${tilbakedatertDuration} dag${
-            tilbakedatertDuration > 1 ? 'er' : ''
-          }`}
+          vis
+          tittel="Antall dager tilbakedatert"
+          tekst={`${tilbakedatertDuration} dag${tilbakedatertDuration > 1 ? 'er' : ''}`}
           margin
         />
       )}
-      <ElementMedTekst
-        vis={!!begrunnelseIkkeKontakt}
-        tittel="Begrunnelse for tilbakedateringen"
-        tekst={begrunnelseIkkeKontakt}
-      />
     </div>
   );
 };

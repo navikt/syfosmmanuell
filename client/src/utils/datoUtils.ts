@@ -1,56 +1,35 @@
 import dayjs from 'dayjs';
+import 'dayjs/locale/nb';
 import utc from 'dayjs/plugin/utc';
 import { Periode } from '../types/sykmeldingTypes';
-dayjs.extend(utc);
 
-const maaneder = [
-  'januar',
-  'februar',
-  'mars',
-  'april',
-  'mai',
-  'juni',
-  'juli',
-  'august',
-  'september',
-  'oktober',
-  'november',
-  'desember',
-];
-const SKILLETEGN_PERIODE = '–';
+dayjs.locale('nb');
+dayjs.extend(utc);
 
 export const tilLesbarPeriodeMedArstall = (fom: Date, tom: Date): string => {
   const erSammeAar = fom.getFullYear() === tom.getFullYear();
   const erSammeMaaned = fom.getMonth() === tom.getMonth();
-  return erSammeAar && erSammeMaaned
-    ? `${fom.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
-    : erSammeAar
-    ? `${tilLesbarDatoUtenAarstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
-    : `${tilLesbarDatoMedArstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`;
+
+  if (erSammeAar && erSammeMaaned) {
+    return `${fom.getDate()}. - ${tilLesbarDatoMedArstall(tom)}`;
+  }
+
+  if (erSammeAar) {
+    return `${tilLesbarDatoUtenAarstall(fom)} - ${tilLesbarDatoMedArstall(tom)}`;
+  }
+
+  return `${tilLesbarDatoMedArstall(fom)} - ${tilLesbarDatoMedArstall(tom)}`;
 };
 
 export const tilLesbarDatoMedArstall = (datoArg?: Date) => {
   if (!datoArg) {
     return undefined;
   }
-  return `${tilLesbarDatoUtenAarstall(new Date(datoArg))} ${new Date(datoArg).getFullYear()}`;
-};
-
-export const tilLesbarPeriodeUtenArstall = (fomArg: string, tomArg: string): string => {
-  const fom = new Date(fomArg);
-  const tom = new Date(tomArg);
-  const erSammeMaaned = fom.getMonth() === tom.getMonth();
-  return erSammeMaaned
-    ? `${fom.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(tom)}`
-    : `${tilLesbarDatoUtenAarstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(tom)}`;
+  return dayjs(datoArg).format('DD. MMMM YYYY');
 };
 
 export const tilLesbarDatoUtenAarstall = (datoArg: Date) => {
-  const dato = new Date(datoArg);
-  const dag = dato.getDate();
-  const manedIndex = dato.getMonth();
-  const maned = maaneder[manedIndex];
-  return `${dag}. ${maned}`;
+  return dayjs(datoArg).format('DD. MMMM');
 };
 
 export const countDaysBetweenTwoDatesIncludingFom = (fra?: Date, til?: Date) => {
@@ -64,19 +43,20 @@ export const countDaysBetweenTwoDatesIncludingFom = (fra?: Date, til?: Date) => 
   return diff + 1;
 };
 
-export const getFirstFomInPeriod = (periods: Periode[] | undefined) => {
-  if (!periods) {
-    return undefined;
+export function daysBetweenDates(first: Date, second: Date): number {
+  return Math.abs(dayjs(first).diff(dayjs(second), 'day'));
+}
+
+export function getSykmeldingStartDate(sykmeldingsperioder: Periode[]): Date {
+  // Sykmelding without period should get rejected before this point
+  if (sykmeldingsperioder.length === 0) {
+    throw new Error('sykmeldingsperioder is empty');
   }
-
-  return periods?.reduce((acc, val) => {
-    if (!acc) {
-      return val.fom;
+  return sykmeldingsperioder.reduce((acc, value) => {
+    if (dayjs(value.fom).isBefore(dayjs(acc.fom))) {
+      return value;
     }
 
-    if (dayjs(val.fom).isBefore(dayjs(acc))) {
-      return val.fom;
-    }
     return acc;
-  }, undefined as Date | undefined);
-};
+  }).fom;
+}
