@@ -24,11 +24,7 @@ jobs:
         env:
           CI: true
         run: |
-          npm run test-unit
-        working-directory: ./client
-      - name: Run integration tests for client
-        run: |
-          NODE_ENV=test npm start & npm run cypress-start # Can not use "npm run test-integration", because process does not terminate.
+          npm test
         working-directory: ./client
       - name: Build client
         env:
