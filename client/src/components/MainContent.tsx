@@ -3,9 +3,9 @@ import './MainContent.less';
 import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import { Flatknapp } from 'nav-frontend-knapper';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';
-import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse';
 import Form, { FormShape } from './form/Form';
+import { ManuellOppgave } from '../types/manuellOppgave';
 
 interface MainContentProps {
   manuellOppgave: ManuellOppgave;

@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useReducer } from 'react';
-import { ManuellOppgave } from '../types/manuellOppgaveTypes';
+import { ManuellOppgave } from '../types/manuellOppgave';
 
 interface State {
   isLoading: boolean;

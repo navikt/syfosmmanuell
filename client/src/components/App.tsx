@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { ManuellOppgave } from '../types/manuellOppgaveTypes';
 import Spinner from 'nav-frontend-spinner';
 import { Normaltekst } from 'nav-frontend-typografi';
 import MainContent from './MainContent';
 import { ApiError, hentOppgave } from '../utils/dataUtils';
 import { StoreContext } from '../data/store';
+import { ManuellOppgave } from '../types/manuellOppgave';
 
 const App = () => {
   const { state, dispatch } = useContext(StoreContext);
@@ -20,7 +20,7 @@ const App = () => {
             throw new Error('Oppgaveid mangler i lenken.');
           } else {
             const manuellOppgaveRawJson = await hentOppgave(OPPGAVE_ID);
-            const manuellOppgave = new ManuellOppgave(manuellOppgaveRawJson);
+            const manuellOppgave = ManuellOppgave.parse(manuellOppgaveRawJson, {});
 
             dispatch({ type: 'TASK_LOADED', payload: manuellOppgave });
           }

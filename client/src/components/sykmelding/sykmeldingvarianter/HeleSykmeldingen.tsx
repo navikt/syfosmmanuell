@@ -1,5 +1,4 @@
 import React from 'react';
-import { Sykmelding } from '../../../types/sykmeldingTypes';
 import MulighetForArbeid from '../../infopanel/utdypendeelementer/MulighetForArbeid';
 import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding';
 import UtdypendeOpplysninger from '../../infopanel/utdypendeelementer/UtdypendeOpplysninger';
@@ -15,6 +14,7 @@ import MeldingTilArbeidsgiverSection from '../../infopanel/utdypendeelementer/Me
 import Diagnoser from '../../infopanel/utdypendeelementer/Diagnoser';
 import TilbakedateringsSeksjon from '../../infopanel/utdypendeelementer/TilbakedateringsSeksjon';
 import ArbeidsgiverSection from '../../infopanel/utdypendeelementer/ArbeidsgiverSection';
+import { Sykmelding } from '../../../types/sykmelding';
 
 interface HeleSykmeldingenProps {
   sykmelding: Sykmelding;

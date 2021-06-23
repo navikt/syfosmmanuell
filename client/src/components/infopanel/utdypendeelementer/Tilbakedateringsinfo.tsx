@@ -3,13 +3,13 @@ import ElementMedTekst from '../layout/ElementMedTekst';
 import { tilLesbarDatoMedArstall, daysBetweenDates, getSykmeldingStartDate } from '../../../utils/datoUtils';
 
 import './Tilbakedateringsinfo.less';
-import { Periode } from '../../../types/sykmeldingTypes';
+import { Periode } from '../../../types/sykmelding';
 
 interface TilbakedateringsinfoProps {
   perioder: Periode[];
   behandletTidspunkt: Date;
-  kontaktDato?: Date;
-  begrunnelseIkkeKontakt?: string;
+  kontaktDato: Date | null;
+  begrunnelseIkkeKontakt: string | null;
 }
 
 const Tilbakedateringsinfo = ({

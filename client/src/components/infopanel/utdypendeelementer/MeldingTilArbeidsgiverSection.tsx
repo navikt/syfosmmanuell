@@ -4,7 +4,7 @@ import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import ElementMedTekst from '../layout/ElementMedTekst';
 
 interface MeldingTilArbeidsgiverSectionProps {
-  meldingTilArbeidsgiver?: string;
+  meldingTilArbeidsgiver: string | null;
 }
 
 const MeldingTilArbeidsgiverSection = ({ meldingTilArbeidsgiver }: MeldingTilArbeidsgiverSectionProps) => {

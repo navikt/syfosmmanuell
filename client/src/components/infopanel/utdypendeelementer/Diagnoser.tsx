@@ -1,6 +1,6 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React from 'react';
-import { MedisinskVurdering } from '../../../types/sykmeldingTypes';
+import { AnnenFraverGrunnValues, MedisinskVurdering } from '../../../types/sykmelding';
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
@@ -31,7 +31,7 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
           <Margin>
             <Element>3.3.1. Lovfestet fraværsgrunn</Element>
             {medisinskVurdering.annenFraversArsak.grunn.map((grunn) => (
-              <Normaltekst>- {grunn}</Normaltekst>
+              <Normaltekst>- {AnnenFraverGrunnValues[grunn]}</Normaltekst>
             ))}
           </Margin>
           <ElementMedTekst

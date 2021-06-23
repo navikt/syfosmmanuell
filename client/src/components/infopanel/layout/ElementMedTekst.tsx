@@ -7,7 +7,7 @@ import Margin from './Margin';
 interface ElementMedTekstProps {
   vis?: boolean;
   tittel: string;
-  tekst?: string;
+  tekst?: string | null;
   innrykk?: boolean;
   margin?: boolean;
 }

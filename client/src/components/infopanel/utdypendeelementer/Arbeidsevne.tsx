@@ -4,9 +4,9 @@ import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import ElementMedTekst from '../layout/ElementMedTekst';
 
 interface ArbeidsevneProps {
-  tiltakArbeidsplassen?: string;
-  tiltakNAV?: string;
-  andreTiltak?: string;
+  tiltakArbeidsplassen: string | null;
+  tiltakNAV: string | null;
+  andreTiltak: string | null;
 }
 
 const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV, andreTiltak }: ArbeidsevneProps) => {

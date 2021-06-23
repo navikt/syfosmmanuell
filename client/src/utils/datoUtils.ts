@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/nb';
 import utc from 'dayjs/plugin/utc';
-import { Periode } from '../types/sykmeldingTypes';
+import { Periode } from '../types/sykmelding';
 
 dayjs.locale('nb');
 dayjs.extend(utc);
@@ -21,7 +21,7 @@ export const tilLesbarPeriodeMedArstall = (fom: Date, tom: Date): string => {
   return `${tilLesbarDatoMedArstall(fom)} - ${tilLesbarDatoMedArstall(tom)}`;
 };
 
-export const tilLesbarDatoMedArstall = (datoArg?: Date) => {
+export const tilLesbarDatoMedArstall = (datoArg?: Date | null) => {
   if (!datoArg) {
     return undefined;
   }

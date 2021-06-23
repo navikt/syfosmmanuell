@@ -7,7 +7,7 @@ import EtikettMedTekst from '../../layout/EtikettMedTekst';
 import './diagnoseseksjon.less';
 
 interface DiagnoseSeksjonProps {
-  diagnose?: Diagnose;
+  diagnose: Diagnose | null;
   bidiagnose?: boolean;
   withPrefix?: boolean;
 }

@@ -4,7 +4,7 @@ import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import ElementMedTekst from '../layout/ElementMedTekst';
 
 interface AnnetProps {
-  behandlerTelefon?: string;
+  behandlerTelefon: string | null;
 }
 
 const Annet = ({ behandlerTelefon }: AnnetProps) => {
