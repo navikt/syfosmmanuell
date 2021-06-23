@@ -21,7 +21,7 @@ interface UtdypendeOpplysningerProps {
 }
 
 const UtdypendeOpplysninger = ({ opplysninger }: UtdypendeOpplysningerProps) => {
-  if (!opplysninger.size) {
+  if (Object.keys(opplysninger).length === 0) {
     return null;
   }
 
