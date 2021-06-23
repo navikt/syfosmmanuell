@@ -187,11 +187,11 @@ export type KontaktMedPasient = z.infer<typeof KontaktMedPasient>;
 // --------
 
 const Adresse = z.object({
-  gate: z.string().optional(),
-  postnummer: z.number().optional(),
-  kommune: z.string().optional(),
-  postboks: z.string().optional(),
-  land: z.string().optional(),
+  gate: z.string().nullable(),
+  postnummer: z.number().nullable(),
+  kommune: z.string().nullable(),
+  postboks: z.string().nullable(),
+  land: z.string().nullable(),
 });
 
 export const Behandler = z.object({
