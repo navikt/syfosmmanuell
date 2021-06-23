@@ -1,19 +1,27 @@
-import { Periode, Gradert } from '../types/sykmeldingTypes';
+import { Periode } from '../types/sykmelding';
 import { periodeUndertekst } from './tekstUtils';
 
 describe('Periode undertekst', () => {
-  let periode: Periode;
+  let periode: Periode = {
+    fom: new Date('2018-10-18'),
+    tom: new Date('2018-11-12'),
+    aktivitetIkkeMulig: null,
+    avventendeInnspillTilArbeidsgiver: null,
+    behandlingsdager: null,
+    gradert: null,
+    reisetilskudd: false,
+  };
 
   beforeEach(() => {
-    periode = new Periode({
-      fom: '2018-10-18',
-      tom: '2018-11-12',
+    periode = {
+      fom: new Date('2018-10-18'),
+      tom: new Date('2018-11-12'),
       aktivitetIkkeMulig: null,
       avventendeInnspillTilArbeidsgiver: null,
       behandlingsdager: null,
       gradert: null,
       reisetilskudd: false,
-    });
+    };
   });
 
   it('Skal vise "Reisetilskudd er angitt" ved reisetilskudd', () => {
@@ -42,26 +50,26 @@ describe('Periode undertekst', () => {
   });
 
   it('Skal vise "56% sykmeldt" ved gradert sykmelding', () => {
-    periode.gradert = new Gradert({
+    periode.gradert = {
       reisetilskudd: false,
       grad: 56,
-    });
+    };
     expect(periodeUndertekst(periode)).toEqual('56% sykmeldt');
   });
 
   it('Skal vise "56% sykmeldt med reisetilskudd" ved gradert sykmelding', () => {
-    periode.gradert = new Gradert({
+    periode.gradert = {
       reisetilskudd: true,
       grad: 56,
-    });
+    };
     expect(periodeUndertekst(periode)).toEqual('56% sykmeldt med reisetilskudd');
   });
 
   it('Skal vise "Gradert med reisetilskudd (grad mangler)" ved gradert sykmelding', () => {
-    periode.gradert = new Gradert({
+    periode.gradert = {
       reisetilskudd: true,
       grad: null,
-    });
+    };
     expect(periodeUndertekst(periode)).toEqual('Gradert med reisetilskudd (grad mangler)');
   });
 });
