@@ -6,6 +6,7 @@ import { ApiError, hentOppgave } from '../utils/dataUtils';
 import { StoreContext } from '../data/store';
 import { ManuellOppgave } from '../types/manuellOppgave';
 import { logger } from '../utils/logger';
+import ErrorFallback from './errorFallback/ErrorFallback';
 
 const App = () => {
   const { state, dispatch } = useContext(StoreContext);
@@ -91,13 +92,7 @@ const App = () => {
     return <MainContent manuellOppgave={manuellOppgave} />;
   }
 
-  logger.error('An unknown error occurred while trying to render oppgave');
-  return (
-    <p>
-      Det oppsto dessverre en ukjent feil. Vi jobber sannsynligvis med å rette feilen. Ta kontakt dersom det ikke er
-      løst innen noen timer.
-    </p>
-  );
+  return <ErrorFallback />;
 };
 
 export default App;

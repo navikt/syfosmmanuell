@@ -32,7 +32,7 @@ export function stateReducer(state: State, action: Action): State {
 }
 
 export const initialState: State = {
-  isLoading: false,
+  isLoading: true,
   isCompleted: false,
   manuellOppgave: undefined,
   enhet: undefined,
