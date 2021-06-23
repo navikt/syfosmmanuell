@@ -20,7 +20,7 @@ const App = () => {
             throw new Error('Oppgaveid mangler i lenken.');
           } else {
             const manuellOppgaveRawJson = await hentOppgave(OPPGAVE_ID);
-            const manuellOppgave = ManuellOppgave.parse(manuellOppgaveRawJson, {});
+            const manuellOppgave = ManuellOppgave.parse(manuellOppgaveRawJson);
 
             dispatch({ type: 'TASK_LOADED', payload: manuellOppgave });
           }

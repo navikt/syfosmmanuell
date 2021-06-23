@@ -19,11 +19,12 @@ export type Arbeidsgiver = z.infer<typeof Arbeidsgiver>;
 
 // --------
 
-const Diagnose = z.object({
+export const Diagnose = z.object({
   system: z.string(),
   kode: z.string(),
   tekst: z.string(),
 });
+export type Diagnose = z.infer<typeof Diagnose>;
 
 const AnnenFraverGrunn = z.enum([
   'GODKJENT_HELSEINSTITUSJON',
@@ -187,7 +188,7 @@ export type KontaktMedPasient = z.infer<typeof KontaktMedPasient>;
 
 const Adresse = z.object({
   gate: z.string().optional(),
-  postnummer: z.string().optional(),
+  postnummer: z.number().optional(),
   kommune: z.string().optional(),
   postboks: z.string().optional(),
   land: z.string().optional(),
