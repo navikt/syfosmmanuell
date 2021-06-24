@@ -1,9 +1,9 @@
 import React from 'react';
-import { Sykmelding } from '../../../types/sykmeldingTypes';
 import DiagnoseSeksjon from '../../infopanel/panelelementer/diagnose/DiagnoseSeksjon';
 import InfoPanel from '../../infopanel/InfoPanel';
 import SykmeldingPerioder from '../../infopanel/panelelementer/periode/SykmeldingPerioder';
 import Tilbakedateringsinfo from '../../infopanel/utdypendeelementer/Tilbakedateringsinfo';
+import { Sykmelding } from '../../../types/sykmelding';
 
 interface TilbakedatertForlengelseProps {
   sykmelding: Sykmelding;

@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { useForm, Controller, DeepMap, FieldError } from 'react-hook-form';
 import { StoreContext } from '../../data/store';
 import { ApiError, vurderOppgave } from '../../utils/dataUtils';
+import { logger } from '../../utils/logger';
 import './Form.less';
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
@@ -41,6 +42,7 @@ const Form = () => {
 
   const ferdigstillOppgave = async (result: FormShape) => {
     if (!enhet) {
+      logger.warn('Missing enhet while trying to submit');
       alert(
         'Enhet mangler. Sørg for at du har valgt enhet i menyen øverst på siden. Forsøk deretter å registrere vurdering på nytt.',
       );
@@ -49,10 +51,10 @@ const Form = () => {
 
       try {
         await vurderOppgave(`${manuellOppgave?.oppgaveid}`, enhet!!, result);
-
         dispatch({ type: 'TASK_COMPLETED' });
+        logger.info('Submit success');
       } catch (error) {
-        console.error(error);
+        logger.error({ ...error, message: error.message ?? 'Unknown error message while submitting' });
         if (error instanceof ApiError) {
           dispatch({ type: 'ERROR', payload: error });
         } else {

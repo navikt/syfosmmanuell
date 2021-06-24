@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Prognose } from '../../../types/sykmeldingTypes';
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 
 import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
+import { Prognose } from '../../../types/sykmelding';
 
 interface FriskmeldingProps {
-  prognose?: Prognose;
+  prognose: Prognose | null;
 }
 
 const Friskmelding = ({ prognose }: FriskmeldingProps) => {

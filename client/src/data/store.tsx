@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useReducer } from 'react';
-import { ManuellOppgave } from '../types/manuellOppgaveTypes';
+import { ManuellOppgave } from '../types/manuellOppgave';
 
 interface State {
   isLoading: boolean;
@@ -32,7 +32,7 @@ export function stateReducer(state: State, action: Action): State {
 }
 
 export const initialState: State = {
-  isLoading: false,
+  isLoading: true,
   isCompleted: false,
   manuellOppgave: undefined,
   enhet: undefined,

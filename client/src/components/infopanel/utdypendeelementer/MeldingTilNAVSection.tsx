@@ -1,13 +1,13 @@
 import React from 'react';
-import { MeldingTilNAV } from '../../../types/sykmeldingTypes';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import ElementMedTekst from '../layout/ElementMedTekst';
 import Margin from '../layout/Margin';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
+import { MeldingTilNAV } from '../../../types/sykmelding';
 
 interface MeldingTilNAVSectionProps {
-  meldingTilNAV?: MeldingTilNAV;
+  meldingTilNAV: MeldingTilNAV | null;
 }
 
 const MeldingTilNAVSection = ({ meldingTilNAV }: MeldingTilNAVSectionProps) => {

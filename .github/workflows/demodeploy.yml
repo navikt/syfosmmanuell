@@ -15,7 +15,7 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - name: Install deps for client
         run: |
           npm install
@@ -24,13 +24,7 @@ jobs:
         env:
           CI: true
         run: |
-          npm run test-unit
-        working-directory: ./client
-      - name: Run integration tests for client
-        env:
-          NODE_ENV: 'test'
-        run: |
-          npm start & npm run cypress-start # Can not use "npm run test-integration", because process does not terminate.
+          npm test
         working-directory: ./client
       - name: Build client
         env:

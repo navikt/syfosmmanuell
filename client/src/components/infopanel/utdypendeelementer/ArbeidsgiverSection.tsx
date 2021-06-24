@@ -2,7 +2,7 @@ import React from 'react';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import ElementMedTekst from '../layout/ElementMedTekst';
-import { Arbeidsgiver } from '../../../types/sykmeldingTypes';
+import { Arbeidsgiver, HarArbeidsgiverValues } from '../../../types/sykmelding';
 
 interface ArbeidsgiverSectionProps {
   arbeidsgiver: Arbeidsgiver;
@@ -11,7 +11,7 @@ interface ArbeidsgiverSectionProps {
 const ArbeidsgiverSection = ({ arbeidsgiver }: ArbeidsgiverSectionProps) => {
   return (
     <SeksjonMedTittel understrek tittel="2. Arbeidsgiver">
-      <ElementMedTekst tittel="2.1. Pasienten har" tekst={arbeidsgiver.harArbeidsgiver} margin />
+      <ElementMedTekst tittel="2.1. Pasienten har" tekst={HarArbeidsgiverValues[arbeidsgiver.harArbeidsgiver]} margin />
       <ElementMedTekst
         vis={!!arbeidsgiver.navn}
         tittel="2.2. Arbeidsgiver for denne sykmeldingen"

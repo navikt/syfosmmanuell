@@ -5,8 +5,8 @@ import ElementMedTekst from '../layout/ElementMedTekst';
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 
 interface TilbakedateringsSeksjonProps {
-  kontaktDato?: Date;
-  begrunnelseIkkeKontakt?: string;
+  kontaktDato: Date | null;
+  begrunnelseIkkeKontakt: string | null;
 }
 
 const TilbakedateringsSeksjon = ({ kontaktDato, begrunnelseIkkeKontakt }: TilbakedateringsSeksjonProps) => {
