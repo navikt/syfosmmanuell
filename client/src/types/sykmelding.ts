@@ -261,6 +261,6 @@ export const Sykmelding = z.object({
     .transform((arg) => new Date(arg))
     .nullable(),
   signaturDato: z.string().transform((arg) => new Date(arg)),
-  navnFastlege: z.string(),
+  navnFastlege: z.string().nullable(),
 });
 export type Sykmelding = z.infer<typeof Sykmelding>;
