@@ -5,7 +5,7 @@ import './SykmeldingHeader.less';
 
 interface SykmeldingheaderProps {
   arbeidsgiverNavn: string | null;
-  sykmelder: string;
+  sykmelder: string | null;
   mottattDato: Date;
   personNrPasient: string;
 }
@@ -28,9 +28,11 @@ const Sykmeldingheader = ({ personNrPasient, arbeidsgiverNavn, sykmelder, mottat
             <b>Arbeidsgiver:</b> {arbeidsgiverNavn}
           </Normaltekst>
         )}
-        <Normaltekst>
-          <b>Sykmelder:</b> {sykmelder}
-        </Normaltekst>
+        {sykmelder && (
+          <Normaltekst>
+            <b>Sykmelder:</b> {sykmelder}
+          </Normaltekst>
+        )}
       </div>
 
       <div className="sykmelding-header__section">
