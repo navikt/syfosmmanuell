@@ -25,7 +25,7 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
   return (
     <div className="helesykmeldingen">
       <ElementMedTekst
-        vis={!!sykmelding.behandletTidspunkt}
+        vis={!!sykmelding.signaturDato}
         tittel="Datoen sykmeldingen ble skrevet"
         tekst={tilLesbarDatoMedArstall(sykmelding.signaturDato)}
         margin

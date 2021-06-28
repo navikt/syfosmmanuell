@@ -26,22 +26,26 @@ const Tilbakedateringsinfo = ({
       <div className="tilbakedateringsinfo__kontaktMedPasient">
         <ElementMedTekst
           vis={!!kontaktDato}
-          tittel="Dato for dokumenterbar kontakt med pasienten"
+          tittel="11.1 Dato for dokumenterbar kontakt med pasienten"
           tekst={tilLesbarDatoMedArstall(kontaktDato)}
           margin
         />
         <ElementMedTekst
           vis={!!begrunnelseIkkeKontakt}
-          tittel="Begrunnelse for tilbakedateringen"
+          tittel="11.2 Begrunnelse for tilbakedateringen"
           tekst={begrunnelseIkkeKontakt}
         />
       </div>
       <ElementMedTekst
-        tittel="Dato pasienten oppsøkte behandleren"
+        tittel="12.1 Dato pasienten oppsøkte behandleren"
         tekst={tilLesbarDatoMedArstall(behandletTidspunkt)}
         margin
       />
-      <ElementMedTekst tittel="Startdato for sykmeldingen" tekst={`${tilLesbarDatoMedArstall(fom)}`} margin />
+      <ElementMedTekst
+        tittel="Startdato for sykmeldingen (første fom. i perioden)"
+        tekst={`${tilLesbarDatoMedArstall(fom)}`}
+        margin
+      />
       {tilbakedatertDuration && (
         <ElementMedTekst
           vis
