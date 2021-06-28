@@ -10,12 +10,10 @@ import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
 type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST';
 export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER';
-export type AvvisningType = 'MANGLER_BEGRUNNELSE' | 'UGYLDIG_BEGRUNNELSE';
 
 export interface FormShape {
   status: Status;
   merknad?: Merknad; // should be set if status === GODKJENT_MED_MERKNAD
-  avvisningType?: AvvisningType; // should be set if status === AVVIST
 }
 
 const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): FeiloppsummeringFeil[] =>
@@ -30,7 +28,6 @@ const Form = () => {
   const { control, handleSubmit, errors, watch } = useForm<FormShape>();
   const watchStatus = watch('status');
   const watchMerknad = watch('merknad');
-  const watchAvvisningType = watch('avvisningType');
 
   const feiloppsummeringRef = useRef<HTMLDivElement>();
 
@@ -71,7 +68,7 @@ const Form = () => {
         name="status"
         rules={{
           validate: (value) => {
-            if (['GODKJENT', 'GODKJENT_MED_MERKNAD', 'AVVIST'].includes(value)) {
+            if (['GODKJENT', 'GODKJENT_MED_MERKNAD'].includes(value)) {
               return true;
             }
             return 'Oppgaven mangler vurdering';
@@ -87,7 +84,6 @@ const Form = () => {
             radios={[
               { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
               { id: 'b-status-godkjent-med-merknad', label: 'Registrer med merknad', value: 'GODKJENT_MED_MERKNAD' },
-              { id: 'b-status-avvist', label: 'Avvis sykmeldingen', value: 'AVVIST' },
             ]}
           />
         )}
@@ -132,49 +128,8 @@ const Form = () => {
         </>
       )}
 
-      {watchStatus === 'AVVIST' && (
-        <>
-          <Label htmlFor="b-avvisningstype">Velg avvisningstype</Label>
-          <Controller
-            control={control}
-            name="avvisningType"
-            rules={{
-              validate: (value) => {
-                if (['MANGLER_BEGRUNNELSE', 'UGYLDIG_BEGRUNNELSE'].includes(value)) {
-                  return true;
-                }
-                return 'Mangler avvisningstype';
-              },
-            }}
-            render={({ onChange, value }) => (
-              <RadioPanelGruppe
-                className="form__radio-group"
-                name="avvisningstype"
-                onChange={onChange}
-                checked={value}
-                feil={errors.avvisningType?.message}
-                radios={[
-                  {
-                    id: 'b-avvisningType',
-                    label:
-                      'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig.',
-                    value: 'MANGLER_BEGRUNNELSE',
-                  },
-                  {
-                    id: 'b-avvisningType-mangler-begrunnelse',
-                    label:
-                      'NAV kan ikke godta tilbakedateringen. Det må skrives ny sykmelding der f.o.m-dato er datoen for den første kontakten med pasienten.',
-                    value: 'UGYLDIG_BEGRUNNELSE',
-                  },
-                ]}
-              />
-            )}
-          />
-        </>
-      )}
-
       <div className="form__info-til-behandler-og-pasient">
-        <InfoTilBehandlerOgPasient type={watchMerknad || watchAvvisningType} />
+        <InfoTilBehandlerOgPasient type={watchMerknad} />
       </div>
 
       {hasErrors(errors) && (
