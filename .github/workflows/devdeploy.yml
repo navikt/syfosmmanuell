@@ -26,7 +26,7 @@ jobs:
 
   deploy-redis:
     needs: changes
-    if: ${{ need.changes.outputs.backend == 'true' }} # Only run on changes related to backend
+    if: ${{ needs.changes.outputs.backend == 'true' }} # Only run on changes related to backend
     name: Deploy redis to dev
     runs-on: ubuntu-latest
     steps:
