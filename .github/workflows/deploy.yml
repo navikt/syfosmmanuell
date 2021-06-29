@@ -12,9 +12,11 @@ jobs:
     # Set job outputs to values from filter step
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
-      frontend: ${{ steps.filter.outputs.frontend }}
     steps:
-      - uses: dorny/paths-filter@v2
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Detect changed paths
+        uses: dorny/paths-filter@v2
         id: filter
         with:
           filters: |
