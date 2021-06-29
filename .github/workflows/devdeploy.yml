@@ -15,14 +15,14 @@ jobs:
       backend: ${{ steps.filter.outputs.backend }}
       frontend: ${{ steps.filter.outputs.frontend }}
     steps:
-    - uses: dorny/paths-filter@v2
-      id: filter
-      with:
-        filters: |
-          backend:
-            - 'server/**'
-            - 'redis.yaml'
-            - 'naiserator-dev.yaml'
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            backend:
+              - 'server/**'
+              - 'redis.yaml'
+              - 'naiserator-dev.yaml'
 
   deploy-redis:
     needs: changes
