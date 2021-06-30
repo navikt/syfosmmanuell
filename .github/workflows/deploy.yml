@@ -8,6 +8,7 @@ env:
 jobs:
   # JOB to run change detection
   changes:
+    name: Change detection
     runs-on: ubuntu-latest
     # Set job outputs to values from filter step
     outputs:
@@ -26,9 +27,9 @@ jobs:
               - 'naiserator-prod.yaml'
 
   deploy-redis:
+    name: Deploy redis to prod
     needs: changes
     if: ${{ needs.changes.outputs.backend == 'true' }} # Only run on changes related to backend
-    name: Deploy redis to prod
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -41,7 +42,7 @@ jobs:
           RESOURCE: redis-config.yml
 
   build-push-deploy:
-    name: Checkout code and create docker tag
+    name: Build, push & deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

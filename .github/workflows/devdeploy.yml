@@ -9,6 +9,7 @@ env:
 jobs:
   # JOB to run change detection
   changes:
+    name: Change detection
     runs-on: ubuntu-latest
     # Set job outputs to values from filter step
     outputs:
@@ -42,7 +43,7 @@ jobs:
           RESOURCE: redis.yaml
 
   build-push-deploy:
-    name: Checkout code and create docker tag
+    name: Build, push & deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
