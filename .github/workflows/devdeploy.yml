@@ -7,8 +7,8 @@ on:
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/syfosmmanuell:${{ github.sha }}
 jobs:
-  build-push-deploy:
-    name: Checkout code and create docker tag
+  test:
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,6 +26,22 @@ jobs:
           CI: true
         run: |
           npm test
+        working-directory: ./client
+
+  build-push-deploy:
+    name: Checkout code and create docker tag
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Use Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - name: Install deps for client
+        run: |
+          npm install
         working-directory: ./client
       - name: Build client
         env:
