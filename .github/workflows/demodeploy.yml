@@ -7,7 +7,7 @@ env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/syfosmmanuell:${{ github.sha }}
 jobs:
   build-push-deploy:
-    name: Checkout code and create docker tag
+    name: Build, push & deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
