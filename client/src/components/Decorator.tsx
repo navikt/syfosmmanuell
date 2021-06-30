@@ -52,8 +52,9 @@ export enum FnrDisplay {
 export type EnhetContextvalue = Contextvalue<EnhetDisplay>;
 export type FnrContextvalue = Contextvalue<FnrDisplay>;
 
+const InternflateDecorator = Navspa.importer<DecoratorProps>('internarbeidsflatefs');
+
 const DecoratorWrapper = () => {
-  const InternflateDecorator = Navspa.importer<DecoratorProps>('internarbeidsflatefs');
   const { dispatch } = useContext(StoreContext);
 
   const decoratorConfig: DecoratorProps = {
