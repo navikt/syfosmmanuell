@@ -60,7 +60,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-fss
-          RESOURCE: redis-config.yml
+          RESOURCE: redis.yaml
 
   build-push-deploy:
     name: Checkout code and create docker tag
