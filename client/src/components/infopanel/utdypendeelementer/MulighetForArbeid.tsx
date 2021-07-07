@@ -5,7 +5,7 @@ import SeksjonMedTittel from '../layout/SeksjonMedTittel';
 import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
 import { tilLesbarPeriodeMedArstall } from '../../../utils/datoUtils';
-import { Periode } from '../../../types/sykmelding';
+import { ArbeidsrelatertArsakTypeValues, MedisinskArsakTypeValues, Periode } from '../../../types/sykmelding';
 
 interface MulighetForArbeidProps {
   perioder: Periode[];
@@ -74,6 +74,9 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
             tittel="4.3.3. Medisinske årsaker hindrer arbeidsrelatert aktivitet"
             margin
             checked={!!periode.aktivitetIkkeMulig?.medisinskArsak}
+            listItems={periode.aktivitetIkkeMulig?.medisinskArsak?.arsak.map(
+              (arsak) => MedisinskArsakTypeValues[arsak],
+            )}
             bold
             vis
           />
@@ -89,6 +92,9 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
             margin
             bold
             checked={!!periode.aktivitetIkkeMulig?.arbeidsrelatertArsak}
+            listItems={periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak.map(
+              (arsak) => ArbeidsrelatertArsakTypeValues[arsak],
+            )}
             vis
           />
           <ElementMedTekst
