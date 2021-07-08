@@ -12,17 +12,29 @@ interface EnkelCheckboxProps {
   innrykk?: boolean;
   bold?: boolean;
   vis?: boolean;
+  listItems?: string[];
 }
 
-const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true }: EnkelCheckboxProps) => {
+const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true, listItems }: EnkelCheckboxProps) => {
   if (!vis) {
     return null;
   }
 
-  const innhold = (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <img style={{ marginRight: '1rem' }} src={checked ? sjekkboks : sjekkboksKryss} alt="sjekkboks ikon" />
-      <span>{bold ? <Element>{tittel}</Element> : <Normaltekst>{tittel}</Normaltekst>}</span>
+  const innhold: JSX.Element = (
+    <div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <img style={{ marginRight: '1rem' }} src={checked ? sjekkboks : sjekkboksKryss} alt="sjekkboks ikon" />
+        <span>{bold ? <Element>{tittel}</Element> : <Normaltekst>{tittel}</Normaltekst>}</span>
+      </div>
+      {!!listItems?.length && (
+        <ul style={{ marginTop: '1rem', marginLeft: '2.5rem' }}>
+          {listItems.map((item) => (
+            <li>
+              <Normaltekst>{item}</Normaltekst>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 
