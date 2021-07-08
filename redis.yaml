@@ -2,9 +2,9 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   labels:
-    team: teamsykefravr
+    team: teamsykmelding
   name: syfosmmanuell-redis
-  namespace: default
+  namespace: teamsykmelding
 spec:
   image: redis:5-alpine
   port: 6379

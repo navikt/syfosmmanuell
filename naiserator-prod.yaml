@@ -2,9 +2,9 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: syfosmmanuell
-  namespace: default
+  namespace: teamsykmelding
   labels:
-    team: teamsykefravr
+    team: teamsykmelding
 spec:
   image: {{ image }}
   replicas:
@@ -40,7 +40,7 @@ spec:
         mountPath: /secrets/azuread/syfosmmanuell
       - kvPath: /azuread/data/prod/creds/syfosmmanuell-backend
         mountPath: /secrets/azuread/syfosmmanuell-backend
-      - kvPath: /kv/prod/fss/syfosmmanuell/default
+      - kvPath: /kv/prod/fss/syfosmmanuell/teamsykmelding
         mountPath: /secrets/default/syfosmmanuell
   webproxy: true
   ingresses:
@@ -63,7 +63,7 @@ spec:
     - name: MODIA_CONTEXT_URL
       value: https://modiacontextholder.nais.adeo.no
     - name: REDIS_HOST
-      value: syfosmmanuell-redis.default.svc.nais.local
+      value: syfosmmanuell-redis.teamsykmelding.svc.nais.local
     - name: REDIS_PORT
       value: '6379'
     - name: NODE_EXTRA_CA_CERTS
