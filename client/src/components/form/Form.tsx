@@ -25,12 +25,8 @@ const Form = () => {
   const { state, dispatch } = useContext(StoreContext);
   const { manuellOppgave, enhet } = state;
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm<FormShape>();
+  const { control, handleSubmit, formState, watch } = useForm<FormShape>();
+  const { errors } = formState;
   const watchStatus = watch('status');
   const watchMerknad = watch('merknad');
 
@@ -40,7 +36,7 @@ const Form = () => {
     if (hasErrors(errors)) {
       feiloppsummeringRef?.current?.focus();
     }
-  }, [errors]);
+  }, [errors, formState, feiloppsummeringRef]);
 
   const ferdigstillOppgave = async (result: FormShape) => {
     if (!enhet) {
