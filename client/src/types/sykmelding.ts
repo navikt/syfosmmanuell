@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { z } from 'zod';
 
 const HarArbeidsgiver = z.enum(['EN_ARBEIDSGIVER', 'FLERE_ARBEIDSGIVERE', 'INGEN_ARBEIDSGIVER']);
