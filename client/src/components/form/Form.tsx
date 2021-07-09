@@ -1,10 +1,11 @@
 import { Knapp } from 'nav-frontend-knapper';
-import { Feiloppsummering, FeiloppsummeringFeil, RadioPanelGruppe, Label } from 'nav-frontend-skjema';
-import React, { useContext, useEffect, useRef } from 'react';
-import { useForm, Controller, DeepMap, FieldError } from 'react-hook-form';
+import { RadioPanelGruppe, Label } from 'nav-frontend-skjema';
+import { useContext } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { StoreContext } from '../../data/store';
 import { ApiError, vurderOppgave } from '../../utils/dataUtils';
 import { logger } from '../../utils/logger';
+import FeiloppsummeringContainer from './FeiloppsummeringContainer';
 import './Form.less';
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
@@ -16,31 +17,14 @@ export interface FormShape {
   merknad?: Merknad; // should be set if status === GODKJENT_MED_MERKNAD
 }
 
-const getFeilOppsummeringsfeil = (errors: DeepMap<FormShape, FieldError>): FeiloppsummeringFeil[] =>
-  Object.entries(errors).map(([key, value]) => ({ skjemaelementId: `b-${key}`, feilmelding: value?.message! }));
-
-const hasErrors = (errors: DeepMap<FormShape, FieldError>): boolean => !!Object.keys(errors).length;
-
 const Form = () => {
   const { state, dispatch } = useContext(StoreContext);
   const { manuellOppgave, enhet } = state;
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm<FormShape>();
+  const { control, handleSubmit, formState, watch } = useForm<FormShape>();
+  const { errors } = formState;
   const watchStatus = watch('status');
   const watchMerknad = watch('merknad');
-
-  const feiloppsummeringRef = useRef<HTMLDivElement>();
-
-  useEffect(() => {
-    if (hasErrors(errors)) {
-      feiloppsummeringRef?.current?.focus();
-    }
-  }, [errors]);
 
   const ferdigstillOppgave = async (result: FormShape) => {
     if (!enhet) {
@@ -137,15 +121,7 @@ const Form = () => {
         <InfoTilBehandlerOgPasient type={watchMerknad} />
       </div>
 
-      {hasErrors(errors) && (
-        <Feiloppsummering
-          id="feiloppsummering"
-          className="form__feiloppsummering"
-          innerRef={feiloppsummeringRef as any}
-          tittel="For å gå videre må du rette opp følgende"
-          feil={getFeilOppsummeringsfeil(errors)}
-        />
-      )}
+      <FeiloppsummeringContainer formState={formState} />
 
       <Knapp id="submit-button" type="hoved" htmlType="submit">
         Registrer
