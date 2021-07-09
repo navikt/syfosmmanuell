@@ -25,7 +25,8 @@ const Form = () => {
   const { state, dispatch } = useContext(StoreContext);
   const { manuellOppgave, enhet } = state;
 
-  const { control, handleSubmit, errors, watch } = useForm<FormShape>();
+  const { control, handleSubmit, formState, watch } = useForm<FormShape>();
+  const { errors } = formState;
   const watchStatus = watch('status');
   const watchMerknad = watch('merknad');
 
@@ -35,7 +36,7 @@ const Form = () => {
     if (hasErrors(errors)) {
       feiloppsummeringRef?.current?.focus();
     }
-  }, [errors]);
+  }, [errors, formState, feiloppsummeringRef]);
 
   const ferdigstillOppgave = async (result: FormShape) => {
     if (!enhet) {
@@ -74,7 +75,7 @@ const Form = () => {
             return 'Oppgaven mangler vurdering';
           },
         }}
-        render={({ onChange, value }) => (
+        render={({ field: { onChange, value } }) => (
           <RadioPanelGruppe
             className="form__radio-group"
             name="status"
@@ -97,13 +98,13 @@ const Form = () => {
             name="merknad"
             rules={{
               validate: (value) => {
-                if (['UGYLDIG_TILBAKEDATERING', 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER'].includes(value)) {
+                if (value && ['UGYLDIG_TILBAKEDATERING', 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER'].includes(value)) {
                   return true;
                 }
                 return 'Mangler merknad';
               },
             }}
-            render={({ onChange, value }) => (
+            render={({ field: { onChange, value } }) => (
               <RadioPanelGruppe
                 className="form__radio-group"
                 name="merknad"
