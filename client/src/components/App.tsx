@@ -43,7 +43,7 @@ const App = () => {
         }
       })();
     }
-  }, [manuellOppgave]);
+  }, [manuellOppgave, dispatch]);
 
   useEffect(() => {
     if (isCompleted) {
@@ -62,7 +62,7 @@ const App = () => {
         });
       }
     }
-  }, [isCompleted]);
+  }, [isCompleted, dispatch]);
 
   if (error) {
     return (

@@ -4,7 +4,7 @@ import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import { Flatknapp } from 'nav-frontend-knapper';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';
 import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse';
-import Form, { FormShape } from './form/Form';
+import Form from './form/Form';
 import { ManuellOppgave } from '../types/manuellOppgave';
 
 interface MainContentProps {
