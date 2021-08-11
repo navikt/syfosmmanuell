@@ -33,6 +33,12 @@ spec:
     requests:
       cpu: 100m
       memory: 128Mi
+  azure:
+    application:
+      enabled: true
+      tenant: nav.no
+      replyURLs:
+        - "https://syfosmmanuell.nais.adeo.no/callback"
   vault:
     enabled: true
     paths:
