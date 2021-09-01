@@ -81,7 +81,7 @@ jobs:
         env:
           NODE_ENV: production
           REACT_APP_HEAD_URL: https://app.adeo.no
-          REACT_APP_GOSYS_URL: https://gosys-nais.nais.adeo.no/gosys/bruker/brukeroversikt.jsf
+          REACT_APP_GOSYS_URL: https://gosys.intern.nav.no/gosys/bruker/brukeroversikt.jsf
         run: |
           npm run build
         working-directory: ./client
