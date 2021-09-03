@@ -1,57 +1,38 @@
 # syfosmmanuell
 
-![Deploy to master](https://github.com/navikt/syfosmmanuell/workflows/Deploy%20to%20prod/badge.svg?branch=master)
+Saksbehandlerfrontend for manuell behandling av tilbakedaterte sykemeldinger. Tillater saksbehandler å `godkjenne` eller `godkjenne med merknad`. Merknader vises for bruker sluttbruker.
 
-## Om syfosmmanuell
+Applikasjonen har to hovedoppgaver:
+- React (CRA) frontend for UI. Lever under `/client`
+- Express-server som server statisk frontendbygg, brukerautentisering mot Azure AD og reverse proxy for bakomliggende tjenester. Lever under `/server`
 
-Frontend for manuell behandling av sykemeldinger. Laget med React og Typescript. Statiske build-filer hostes fra en express-server, som tar hånd om autentisering mot Azure AD og fungerer som en proxy for kall downstream til API. Serveren er basert på dette [eksempelet](https://github.com/navikt/security-blueprints/tree/master/examples/oidc-login-azuread/login-proxy-nodejs).
+`client browser --> syfosmmanuell (auth/reverse-proxy) --> downstream API's`
 
-### Environment-variable
+En demoside er offentlig tilgjengelig på: https://syfosmmanuell.labs.nais.io/
 
-Frontend-appen bruker en pakke som er bakt inn i react-scripts til å "inject'e" environment-variable i de statiske filene som bygges. Alle environment-variable som skal være tilgjengelige client-side må derfor defineres i `/.github/workflows/deploy` / `/.github/workflows/devdeploy`, og må prefixes med `REACT_APP_`.
 
-Alle variable som skal være tilgjengelige server-side må defineres i `/naiserator-prod` / `/naiserator-dev`.
-
-## Demo-side for appen kan besøkes på:
-
-https://syfosmmanuell.labs.nais.io
-
-## Installering
-
-Klon bibliotek og last ned avhengigheter
-
+## Utvikling
+### Client:
 ```bash
-git clone <repo-link>
-npm install
+$ cd /client
+$ npm i
+$ npm start
+```
+Vil laste miljøvariabler fra `/client/.env.development`
+
+### Server:
+```bash
+$ cd /server
+$ npm i
+$ npm run dev
+```
+Vil laste miljøvariabler fra `/server/.env.development`
+
+## Test
+Bruker React Testing Library for
+```bash
+$ npm test
 ```
 
-## Bruk
-
-### Start local dev-server
-
-Dette vil starte en web-server med "hot reloading". Her vil environmentvariabelen `NODE_ENV` settes automatisk til `development`. Mockdata vil da lastes inn fra `src/mock`-mappen.
-
-```bash
-npm start
-```
-
-Det er også mulig å starte den express-serveren med Autentisering og proxy, men det vil ikke fungere ettersom "redirect url" for lokal bruk ikke er registrert hos Azure og API-et ikke kjører lokalt. Dersom man fortsatt vil kjøre opp express-serveren kan man kjøre
-
-```bash
-cd server
-npm run start-dev
-```
-
-### Kjør tester med jest
-
-```bash
-npm test
-```
-
-### Bygg for produksjon
-
-```bash
-npm build
-```
-
-Genererer statiske filer til "/build"-mappen
+## Testing av tjenesteflyt i testmiljø
+Applikasjonen er tilgjengelig i testmiljø på https://syfosmmanuell.dev.adeo.no/?oppgaveid={oppgaveid} lokalt via `naisdevice` eller via utviklerimage. `oppgaveid` referer til oppgaven som opprettes i `syfosmmanuell-backend` og lagres i tilhørende database.
