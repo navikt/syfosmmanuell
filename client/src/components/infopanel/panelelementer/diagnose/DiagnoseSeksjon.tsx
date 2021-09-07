@@ -3,7 +3,6 @@ import DiagnoseKodeSeksjon from './DiagnoseKodeSeksjon';
 
 import EtikettMedTekst from '../../layout/EtikettMedTekst';
 
-import './diagnoseseksjon.less';
 import { Diagnose } from '../../../../types/sykmelding';
 
 interface DiagnoseSeksjonProps {

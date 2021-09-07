@@ -2,7 +2,6 @@ import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { tilLesbarPeriodeMedArstall, countDaysBetweenTwoDatesIncludingFom } from '../../../../utils/datoUtils';
-import './periodeseksjon.less';
 import { periodeUndertekst } from '../../../../utils/tekstUtils';
 import { Periode } from '../../../../types/sykmelding';
 

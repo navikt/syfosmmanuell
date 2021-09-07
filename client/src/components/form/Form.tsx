@@ -6,7 +6,6 @@ import { StoreContext } from '../../data/store';
 import { ApiError, vurderOppgave } from '../../utils/dataUtils';
 import { logger } from '../../utils/logger';
 import FeiloppsummeringContainer from './FeiloppsummeringContainer';
-import './Form.less';
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
 type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST';

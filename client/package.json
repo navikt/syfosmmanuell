@@ -44,9 +44,13 @@
     "zod": "^3.8.2"
   },
   "scripts": {
+    "start:next": "next dev",
+    "start:next:prod": "next start",
+    "build:next": "next build",
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "postinstall": "./scripts/strip-less"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -71,7 +75,9 @@
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-collapse": "^5.0.1",
-    "@types/react-dom": "^17.0.9"
+    "@types/react-dom": "^17.0.9",
+    "next": "^11.1.2",
+    "next-with-less": "^1.0.1"
   },
   "engines": {
     "node": "16"

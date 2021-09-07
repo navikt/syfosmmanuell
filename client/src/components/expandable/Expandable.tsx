@@ -1,5 +1,3 @@
-import './Expandable.less';
-
 import Chevron from 'nav-frontend-chevron';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import React, { useEffect, useRef, useState } from 'react';

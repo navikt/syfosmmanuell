@@ -8,7 +8,6 @@ import { Flatknapp } from 'nav-frontend-knapper';
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
 
-import './HeleSykmeldingen.less';
 import MeldingTilNAVSection from '../../infopanel/utdypendeelementer/MeldingTilNAVSection';
 import MeldingTilArbeidsgiverSection from '../../infopanel/utdypendeelementer/MeldingTilArbeidsgiverSection';
 import Diagnoser from '../../infopanel/utdypendeelementer/Diagnoser';

@@ -2,8 +2,6 @@ import React from 'react';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import HjelpetekstWrapper from '../../../hjelpetekst/HjelpetekstWrapper';
 
-import './diagnoseseksjon.less';
-
 interface DiagnoseKodeSeksjonProps {
   kode: string;
   system: string;

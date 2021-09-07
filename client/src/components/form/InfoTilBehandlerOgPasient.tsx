@@ -1,6 +1,5 @@
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import React from 'react';
-import './InfoTilBehandlerOgPasient.less';
 import Expandable from '../expandable/Expandable';
 import { Merknad } from './Form';
 

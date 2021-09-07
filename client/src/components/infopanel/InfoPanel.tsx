@@ -3,8 +3,6 @@ import { Undertittel } from 'nav-frontend-typografi';
 
 import plaster from '../../svg/plaster.svg';
 
-import './infopanel.less';
-
 type Fargetema = 'feil' | 'info' | 'advarsel';
 
 interface InfoPanelProps {

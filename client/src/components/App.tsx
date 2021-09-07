@@ -28,6 +28,7 @@ const App = () => {
           }
         } catch (error) {
           // TODO don't any?
+          // TODO actually fix logging
           logger.error(error as any);
           if (error instanceof ApiError) {
             dispatch({ type: 'ERROR', payload: error });

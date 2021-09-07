@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './MainContent.less';
 import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import { Flatknapp } from 'nav-frontend-knapper';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';

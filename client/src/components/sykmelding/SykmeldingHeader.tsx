@@ -1,7 +1,6 @@
 import React from 'react';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import dayjs from 'dayjs';
-import './SykmeldingHeader.less';
 
 interface SykmeldingheaderProps {
   arbeidsgiverNavn: string | null;

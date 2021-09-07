@@ -1,8 +1,6 @@
 import React from 'react';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 
-import './hjelpetekstwrapper.less';
-
 interface HjelpetekstWrapperProps {
     tekst: string;
 }
