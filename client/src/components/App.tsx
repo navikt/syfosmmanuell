@@ -27,7 +27,8 @@ const App = () => {
             dispatch({ type: 'TASK_LOADED', payload: manuellOppgave });
           }
         } catch (error) {
-          logger.error({ ...error, message: error.message ?? 'Unknown error message' });
+          // TODO don't any?
+          logger.error(error as any);
           if (error instanceof ApiError) {
             dispatch({ type: 'ERROR', payload: error });
           } else if (error instanceof TypeError) {

@@ -40,7 +40,8 @@ const Form = () => {
         dispatch({ type: 'TASK_COMPLETED' });
         logger.info('Submit success');
       } catch (error) {
-        logger.error({ ...error, message: error.message ?? 'Unknown error message while submitting' });
+        // TODO don't any
+        logger.error(error as any);
         if (error instanceof ApiError) {
           dispatch({ type: 'ERROR', payload: error });
         } else {
