@@ -1,14 +1,28 @@
-import { createFrontendLogger, createMockFrontendLogger, setUpErrorReporting } from '@navikt/frontendlogger/lib';
+import pino, { Logger } from 'pino';
 
-const frontendloggerApiUrl = 'https://app.adeo.no/frontendlogger/api';
+const getFrontendLogger = (): Logger =>
+  pino({
+    browser: {
+      transmit: {
+        send: async (level, logEvent) => {
+          try {
+            await fetch('/api/logger', {
+              method: 'POST',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify(logEvent),
+            });
+          } catch (e) {
+            console.warn(e);
+            console.warn('Unable to log to backend', logEvent);
+          }
+        },
+      },
+    },
+  });
 
-export const logger =
-  process.env.NODE_ENV === 'production'
-    ? createFrontendLogger('syfosmmanuell', frontendloggerApiUrl)
-    : createMockFrontendLogger('syfosmmanuell');
+const createBackendLogger = (): Logger =>
+  pino({
+    prettyPrint: process.env.NODE_ENV !== 'production',
+  });
 
-export function setupLogger() {
-  if (process.env.NODE_ENV === 'production') {
-    setUpErrorReporting(logger);
-  }
-}
+export const logger = typeof window !== 'undefined' ? getFrontendLogger() : createBackendLogger();

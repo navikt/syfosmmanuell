@@ -2,12 +2,6 @@ import { FormShape } from '../components/form/Form';
 
 export class ApiError extends Error {}
 
-/**
- * Makes a GET request for the task
- * @param {string} oppgaveid
- * @return {Promise<unknown>} Promise resolving in an unknown json object.
- * @throws {ApiError} Something went wrong with the request.
- */
 export async function hentOppgave(oppgaveid: string): Promise<unknown> {
   const OPPGAVE_URL = `/backend/api/v1/manuellOppgave/${oppgaveid}`;
 
@@ -28,34 +22,31 @@ export async function hentOppgave(oppgaveid: string): Promise<unknown> {
   return await response.json();
 }
 
-/**
- * Makes a POST request to solve the task
- * @param {string} oppgaveid
- * @param {string} enhet NAV enhet chosen by the logged in user.
- * @param {FormShape} result The result from the form to send in the body of the request.
- * @return {Promise<void>} Promise resolving to null if request is successfull.
- * @throws {ApiError} Something went wrong with the request.
- */
-export async function vurderOppgave(oppgaveid: string, enhet: string, result: FormShape): Promise<void> {
-  // const VURDERING_URL = `/backend/api/v1/vurderingmanuelloppgave/${oppgaveid}`;
+export async function vurderOppgave(oppgaveid: number, aktivEnhet: string, formValues: FormShape): Promise<void> {
   const VURDERING_URL = `/api/submitOppgave`;
+
+  const createBody = (): SubmitOppgaveBody => ({ oppgaveid, aktivEnhet, formValues });
 
   const response = await fetch(VURDERING_URL, {
     method: 'POST',
     credentials: 'same-origin',
-    headers: { 'Content-Type': 'application/json', 'X-Nav-Enhet': enhet },
-    body: JSON.stringify(result),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(createBody()),
   });
 
   if (response.ok) {
-    return Promise.resolve();
+    return;
   } else if (response.status === 401) {
-    return Promise.reject(
-      new ApiError(
-        'Kunne ikke vurdere oppgaven på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
-      ),
+    throw new ApiError(
+      'Kunne ikke vurdere oppgaven på grunn av autorisasjonsfeil. Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver',
     );
   } else {
-    return Promise.reject(new ApiError(`Feil ved ferdigstilling av oppgaven. Feilkode: ${response.status}`));
+    throw new ApiError(`Feil ved ferdigstilling av oppgaven. Feilkode: ${response.status}`);
   }
+}
+
+export interface SubmitOppgaveBody {
+  oppgaveid: number;
+  aktivEnhet: string;
+  formValues: FormShape;
 }

@@ -23,13 +23,6 @@ export interface BasePageRequiredProps {
 }
 
 export default function MyApp({ Component, pageProps }: AppProps<BasePageRequiredProps>) {
-  // Replace with non-hacky data mocking
-  useLayoutEffect(() => {
-    if (process.env.NODE_ENV === 'development' || process.env.REACT_APP_DEMO === 'true') {
-      require('../mock');
-    }
-  }, []);
-
   return (
     <StoreProvider modiaContext={pageProps.modiaContext}>
       <Component {...pageProps} />

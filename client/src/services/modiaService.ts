@@ -7,8 +7,15 @@ export interface ModiaContext {
   enheter: { enhetId: string; navn: string }[];
 }
 
-export async function getModiaContext(): Promise<ModiaContext> {
-  const [veileder, aktivEnhet] = await Promise.all([getVeileder(), getAktivEnhet()]);
+export async function getModiaContext(userAccessToken: string, oidcClient: any): Promise<ModiaContext> {
+  // exchange user token with modia token
+
+  const modiaContextAccessToken = await getModiaContextAccessToken(userAccessToken, oidcClient);
+
+  const [veileder, aktivEnhet] = await Promise.all([
+    getVeileder(modiaContextAccessToken),
+    getAktivEnhet(modiaContextAccessToken),
+  ]);
 
   return {
     aktivEnhet: aktivEnhet.aktivEnhet,
@@ -18,7 +25,7 @@ export async function getModiaContext(): Promise<ModiaContext> {
   };
 }
 
-async function getVeileder(): Promise<Veileder> {
+async function getVeileder(modiaContextAccessToken: string): Promise<Veileder> {
   if (process.env.NODE_ENV === 'development') {
     return Veileder.parse({
       navn: 'Johan J. Johansson',
@@ -31,9 +38,12 @@ async function getVeileder(): Promise<Veileder> {
   }
 
   throw new Error('TODO: Not yet implemented');
+
+  const url = `${process.env['MODIA_CONTEXT_URL']}/modiacontextholder/api/decorator`;
+  // TODO: do the fetch
 }
 
-async function getAktivEnhet(): Promise<AktivEnhet> {
+async function getAktivEnhet(modiaContextAccessToken: string): Promise<AktivEnhet> {
   if (process.env.NODE_ENV === 'development') {
     return AktivEnhet.parse({
       aktivEnhet: '0314',
@@ -41,6 +51,8 @@ async function getAktivEnhet(): Promise<AktivEnhet> {
   }
 
   throw new Error('TODO: Not yet implemented');
+  const url = `${process.env['MODIA_CONTEXT_URL']}/modiacontextholder/api/aktivenhet`;
+  // TODO: do the fetch
 }
 
 const Veileder = z.object({
@@ -60,3 +72,7 @@ const AktivEnhet = z.object({
 
 type Veileder = z.infer<typeof Veileder>;
 type AktivEnhet = z.infer<typeof AktivEnhet>;
+
+async function getModiaContextAccessToken(userAccessToken: string, oidcClient: any): Promise<string> {
+  throw new Error('not implementy');
+}

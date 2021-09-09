@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import MainContent from '../components/MainContent';
 import { ManuellOppgave } from '../types/manuellOppgave';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
@@ -7,17 +7,25 @@ import { getModiaContext } from '../services/modiaService';
 import ModiaHeader from '../components/modiaheader/ModiaHeader';
 import ErrorFallback from '../components/errorFallback/ErrorFallback';
 import { BasePageRequiredProps } from './_app';
+import { StoreContext } from '../data/store';
+import { logger } from '../utils/logger';
 
 interface IndexProps extends BasePageRequiredProps {
   manuellOppgave: ManuellOppgave | null;
 }
 
 function Index({ manuellOppgave, modiaContext }: IndexProps) {
+  const { aktivEnhet } = useContext(StoreContext);
+
+  if (!aktivEnhet) {
+    return <div>no enhet? :(</div>;
+  }
+
   return (
     <section>
       <ModiaHeader modiaContext={modiaContext} />
       <main>
-        {manuellOppgave && <MainContent manuellOppgave={manuellOppgave} />}
+        {manuellOppgave && <MainContent manuellOppgave={manuellOppgave} aktivEnhet={aktivEnhet} />}
         {!manuellOppgave && <ErrorFallback />}
       </main>
     </section>
@@ -43,8 +51,8 @@ export async function getServerSideProps({
       },
     };
   } catch (e) {
-    // TODO logger
-    // logger.error(e as any);
+    //@ts-expect-error
+    logger.error(e);
 
     return {
       props: {

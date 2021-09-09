@@ -5,7 +5,6 @@
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@navikt/fnrvalidator": "^1.1.4",
-    "@navikt/frontendlogger": "^2.0.0",
     "@navikt/navspa": "^3.0.2",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.3.1",
@@ -32,6 +31,8 @@
     "nav-frontend-spinner-style": "^1.0.2",
     "nav-frontend-typografi": "^4.0.1",
     "nav-frontend-typografi-style": "^2.0.1",
+    "openid-client": "^4.7.5",
+    "pino": "^6.13.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
@@ -39,6 +40,7 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.15.0",
     "react-scripts": "^4.0.3",
+    "tunnel": "^0.0.6",
     "typescript": "^4.4.2",
     "yet-another-fetch-mock": "^3.4.0",
     "zod": "^3.8.2"
@@ -73,11 +75,14 @@
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
+    "@types/pino": "^6.3.11",
     "@types/react": "^17.0.20",
     "@types/react-collapse": "^5.0.1",
     "@types/react-dom": "^17.0.9",
+    "@types/tunnel": "^0.0.3",
     "next": "^11.1.2",
     "next-with-less": "^1.0.1",
+    "pino-pretty": "^7.0.0",
     "prettier": "^2.3.2"
   },
   "engines": {
