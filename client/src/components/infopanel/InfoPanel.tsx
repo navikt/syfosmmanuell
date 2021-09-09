@@ -1,5 +1,6 @@
 import React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
+import Image from 'next/image'
 
 import plaster from '../../svg/plaster.svg';
 
@@ -15,7 +16,7 @@ const InfoPanel = ({ fargetema, tittel, children }: InfoPanelProps) => {
   return (
     <article className="infopanel">
       <header className={`infopanel-header infopanel-${fargetema}`}>
-        <img className="infopanel-header-icon" src={plaster} alt="plasterikon" />{' '}
+        <Image className="infopanel-header-icon" alt="plasterikon" src={plaster} />
         <span className="infopanel-header-tekst">
           <Undertittel>{tittel}</Undertittel>
         </span>

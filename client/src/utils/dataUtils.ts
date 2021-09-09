@@ -37,7 +37,8 @@ export async function hentOppgave(oppgaveid: string): Promise<unknown> {
  * @throws {ApiError} Something went wrong with the request.
  */
 export async function vurderOppgave(oppgaveid: string, enhet: string, result: FormShape): Promise<void> {
-  const VURDERING_URL = `/backend/api/v1/vurderingmanuelloppgave/${oppgaveid}`;
+  // const VURDERING_URL = `/backend/api/v1/vurderingmanuelloppgave/${oppgaveid}`;
+  const VURDERING_URL = `/api/submitOppgave`;
 
   const response = await fetch(VURDERING_URL, {
     method: 'POST',

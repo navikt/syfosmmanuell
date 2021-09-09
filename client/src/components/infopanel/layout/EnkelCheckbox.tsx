@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Innrykk from './Innrykk';
 import Margin from './Margin';
 import sjekkboks from '../../../svg/sjekkboks.svg';
@@ -23,7 +24,9 @@ const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true, lis
   const innhold: JSX.Element = (
     <div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img style={{ marginRight: '1rem' }} src={checked ? sjekkboks : sjekkboksKryss} alt="sjekkboks ikon" />
+          <span style={{marginRight: '1rem'}}>
+        <Image src={checked ? sjekkboks : sjekkboksKryss} alt="sjekkboks ikon" />
+              </span>
         <span>{bold ? <Element>{tittel}</Element> : <Normaltekst>{tittel}</Normaltekst>}</span>
       </div>
       {!!listItems?.length && (

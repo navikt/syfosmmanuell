@@ -6,7 +6,10 @@ import { Periode } from '../types/sykmelding';
 dayjs.locale('nb');
 dayjs.extend(utc);
 
-export const tilLesbarPeriodeMedArstall = (fom: Date, tom: Date): string => {
+export const tilLesbarPeriodeMedArstall = (fomString: string, tomString: string): string => {
+  const fom = new Date(fomString);
+  const tom = new Date(tomString);
+
   const erSammeAar = fom.getFullYear() === tom.getFullYear();
   const erSammeMaaned = fom.getMonth() === tom.getMonth();
 
@@ -52,11 +55,13 @@ export function getSykmeldingStartDate(sykmeldingsperioder: Periode[]): Date {
   if (sykmeldingsperioder.length === 0) {
     throw new Error('sykmeldingsperioder is empty');
   }
-  return sykmeldingsperioder.reduce((acc, value) => {
-    if (dayjs(value.fom).isBefore(dayjs(acc.fom))) {
-      return value;
-    }
+  return new Date(
+    sykmeldingsperioder.reduce((acc, value) => {
+      if (dayjs(value.fom).isBefore(dayjs(acc.fom))) {
+        return value;
+      }
 
-    return acc;
-  }).fom;
+      return acc;
+    }).fom,
+  );
 }

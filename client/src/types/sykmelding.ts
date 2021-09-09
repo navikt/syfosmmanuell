@@ -67,10 +67,8 @@ export const MedisinskVurdering = z.object({
   biDiagnoser: z.array(Diagnose),
   svangerskap: z.boolean(),
   yrkesskade: z.boolean(),
-  yrkesskadeDato: z
-    .string()
-    .transform((arg) => new Date(arg))
-    .nullable(),
+  // TODO
+  yrkesskadeDato: z.string().nullable(),
   annenFraversArsak: AnnenFraversArsak.nullable(),
 });
 export type MedisinskVurdering = z.infer<typeof MedisinskVurdering>;
@@ -121,8 +119,8 @@ const Gradert = z.object({
 });
 
 export const Periode = z.object({
-  fom: z.string().transform((arg) => new Date(arg)),
-  tom: z.string().transform((arg) => new Date(arg)),
+  fom: z.string(), // TODO,
+  tom: z.string(), // TODO,
   aktivitetIkkeMulig: AktivitetIkkeMulig.nullable(),
   avventendeInnspillTilArbeidsgiver: z.string().nullable(),
   behandlingsdager: z.number().nullable(),
@@ -142,11 +140,11 @@ export const Prognose = z.object({
       annetArbeidPaSikt: z.boolean(),
       arbeidFOM: z
         .string()
-        .transform((arg) => new Date(arg))
+        // TODO
         .nullable(),
       vurderingsdato: z
         .string()
-        .transform((arg) => new Date(arg))
+        // TODO
         .nullable(),
     })
     .nullable(),
@@ -155,11 +153,11 @@ export const Prognose = z.object({
       arbeidsforPaSikt: z.boolean(),
       arbeidsforFOM: z
         .string()
-        .transform((arg) => new Date(arg))
+        // TODO
         .nullable(),
       vurderingsdato: z
         .string()
-        .transform((arg) => new Date(arg))
+        // TODO
         .nullable(),
     })
     .nullable(),
@@ -179,10 +177,11 @@ export type MeldingTilNAV = z.infer<typeof MeldingTilNAV>;
 export const KontaktMedPasient = z.object({
   kontaktDato: z
     .string()
-    .transform((arg) => new Date(arg))
+    // TODO
     .nullable(),
   begrunnelseIkkeKontakt: z.string().nullable(),
 });
+
 export type KontaktMedPasient = z.infer<typeof KontaktMedPasient>;
 
 // --------
@@ -254,14 +253,15 @@ export const Sykmelding = z.object({
   meldingTilNAV: MeldingTilNAV.nullable(),
   meldingTilArbeidsgiver: z.string().nullable(),
   kontaktMedPasient: KontaktMedPasient,
-  behandletTidspunkt: z.string().transform((arg) => new Date(arg)),
+  // TODO
+  behandletTidspunkt: z.string(),
   behandler: Behandler,
   avsenderSystem: AvsenderSystem,
-  syketilfelleStartDato: z
-    .string()
-    .transform((arg) => new Date(arg))
-    .nullable(),
-  signaturDato: z.string().transform((arg) => new Date(arg)),
+  // TODO
+  syketilfelleStartDato: z.string().nullable(),
+  // TODO
+  signaturDato: z.string(),
   navnFastlege: z.string().nullable(),
 });
+
 export type Sykmelding = z.infer<typeof Sykmelding>;

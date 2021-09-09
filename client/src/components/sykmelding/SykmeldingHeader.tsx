@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 interface SykmeldingheaderProps {
   arbeidsgiverNavn: string | null;
   sykmelder: string | null;
-  mottattDato: Date;
+  mottattDato: string;
   personNrPasient: string;
 }
 
