@@ -3,12 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.2.0",
     "@navikt/fnrvalidator": "^1.1.4",
-    "@navikt/navspa": "^3.0.2",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.3.1",
-    "craco-less": "^1.20.0",
     "dayjs": "^1.10.6",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-chevron": "^1.0.30",
@@ -35,27 +32,18 @@
     "pino": "^6.13.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
-    "react-app-polyfill": "^2.0.0",
-    "react-collapse": "^5.1.0",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.15.0",
-    "react-scripts": "^4.0.3",
     "tunnel": "^0.0.6",
     "typescript": "^4.4.2",
-    "yet-another-fetch-mock": "^3.4.0",
     "zod": "^3.8.2"
   },
   "scripts": {
-    "start:next": "next dev",
-    "start:next:prod": "next start",
-    "build:next": "next build",
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "next dev",
+    "start:prod": "next start",
+    "build": "next build",
+    "test": "TODO test",
     "postinstall": "./scripts/strip-less"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [

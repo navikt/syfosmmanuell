@@ -1,5 +1,5 @@
 import { ManuellOppgave } from '../types/manuellOppgave';
-import { manuellOppgave } from '../mock/data/manuellOppgave';
+import { manuellOppgave } from '../mock/manuellOppgave';
 import { FormShape } from '../components/form/Form';
 
 export async function getOppgave(oppgaveId: string): Promise<ManuellOppgave> {

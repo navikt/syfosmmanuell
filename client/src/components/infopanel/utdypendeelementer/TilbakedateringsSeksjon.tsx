@@ -5,7 +5,7 @@ import ElementMedTekst from '../layout/ElementMedTekst';
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
 
 interface TilbakedateringsSeksjonProps {
-  kontaktDato: Date | null;
+  kontaktDato: string | null;
   begrunnelseIkkeKontakt: string | null;
 }
 

@@ -10,7 +10,7 @@ import { ArbeidsrelatertArsakTypeValues, MedisinskArsakTypeValues, Periode } fro
 interface MulighetForArbeidProps {
   perioder: Periode[];
 }
-
+2
 const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
   const avventendeSykmeldingPerioder = perioder.filter((periode) => periode.avventendeInnspillTilArbeidsgiver);
   const gradertSykmeldingPerioder = perioder.filter((periode) => periode.gradert);

@@ -43,6 +43,7 @@ const Form = ({ onSubmit }: Props) => {
             checked={value}
             feil={errors.status?.message}
             radios={[
+              // TODO vise enhet her en plass?
               { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
               { id: 'b-status-godkjent-med-merknad', label: 'Registrer med merknad', value: 'GODKJENT_MED_MERKNAD' },
             ]}

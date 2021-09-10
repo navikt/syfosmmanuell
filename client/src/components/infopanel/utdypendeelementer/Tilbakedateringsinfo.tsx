@@ -6,8 +6,8 @@ import { Periode } from '../../../types/sykmelding';
 
 interface TilbakedateringsinfoProps {
   perioder: Periode[];
-  behandletTidspunkt: Date;
-  kontaktDato: Date | null;
+  behandletTidspunkt: string;
+  kontaktDato: string | null;
   begrunnelseIkkeKontakt: string | null;
 }
 

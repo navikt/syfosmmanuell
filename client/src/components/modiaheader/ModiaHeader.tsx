@@ -1,35 +1,27 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Select } from 'nav-frontend-skjema';
 
 import { ModiaContext } from '../../services/modiaService';
 
-import styles from './ModiaHeader.module.css';
 import { StoreContext } from '../../data/store';
+import styles from './ModiaHeader.module.css';
 
 interface Props {
   modiaContext: ModiaContext | null;
 }
 
 function ModiaHeader({ modiaContext }: Props): JSX.Element {
-  const { setAktivEnhet } = useContext(StoreContext);
-  useEffect(() => {
-    if (!modiaContext) return;
-
-    const initialAktivEnhet = getDefaultSelectValue(modiaContext.enheter, modiaContext.aktivEnhet);
-    if (initialAktivEnhet) {
-      setAktivEnhet(initialAktivEnhet);
-    }
-  }, []);
+  const { aktivEnhet, setAktivEnhet } = useContext(StoreContext);
 
   return (
     <header className={styles.root}>
       <div>LOGO | syfosmmanuell</div>
       <div>
-        {modiaContext && (
+        {modiaContext && aktivEnhet && (
           <Select
-            defaultValue={getDefaultSelectValue(modiaContext.enheter, modiaContext.aktivEnhet)}
+            value={aktivEnhet}
             onChange={(event) => {
-              console.log('Ey changar', event.target.value);
+              setAktivEnhet(event.target.value);
             }}
           >
             {modiaContext.enheter.map((it) => (
@@ -43,15 +35,6 @@ function ModiaHeader({ modiaContext }: Props): JSX.Element {
       <div>Navn</div>
     </header>
   );
-}
-
-function getDefaultSelectValue(
-  enheter: ModiaContext['enheter'],
-  aktivEnhet: ModiaContext['aktivEnhet'],
-): string | undefined {
-  if (!aktivEnhet) return undefined;
-
-  return enheter.some((it) => it.enhetId === aktivEnhet) ? aktivEnhet : undefined;
 }
 
 export default ModiaHeader;

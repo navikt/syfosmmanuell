@@ -1,4 +1,6 @@
 import { z } from 'zod';
+import { getModiaContextOboAccessToken } from './tokenService';
+import { logger } from '../utils/logger';
 
 export interface ModiaContext {
   navn: string;
@@ -7,10 +9,20 @@ export interface ModiaContext {
   enheter: { enhetId: string; navn: string }[];
 }
 
-export async function getModiaContext(userAccessToken: string, oidcClient: any): Promise<ModiaContext> {
-  // exchange user token with modia token
+export async function getModiaContext(userAccessToken: string): Promise<ModiaContext> {
+  if (process.env.NODE_ENV === 'development') {
+    return {
+      navn: 'Johan J. Johansson',
+      ident: '0129381203',
+      enheter: [
+        { enhetId: '0312', navn: 'NAV Sagene' },
+        { enhetId: '0314', navn: 'NAV Fagene' },
+      ],
+      aktivEnhet: '0314',
+    };
+  }
 
-  const modiaContextAccessToken = await getModiaContextAccessToken(userAccessToken, oidcClient);
+  const modiaContextAccessToken = await getModiaContextOboAccessToken(userAccessToken);
 
   const [veileder, aktivEnhet] = await Promise.all([
     getVeileder(modiaContextAccessToken),
@@ -25,34 +37,66 @@ export async function getModiaContext(userAccessToken: string, oidcClient: any):
   };
 }
 
+// TODO rødde
 async function getVeileder(modiaContextAccessToken: string): Promise<Veileder> {
-  if (process.env.NODE_ENV === 'development') {
-    return Veileder.parse({
-      navn: 'Johan J. Johansson',
-      ident: '0129381203',
-      enheter: [
-        { enhetId: '0312', navn: 'NAV Sagene' },
-        { enhetId: '0314', navn: 'NAV Fagene' },
-      ],
-    });
-  }
-
-  throw new Error('TODO: Not yet implemented');
-
   const url = `${process.env['MODIA_CONTEXT_URL']}/modiacontextholder/api/decorator`;
-  // TODO: do the fetch
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${modiaContextAccessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      // TODO EDB
+      throw new Error(`Modia context responded with ${response.status} ${response.statusText}`);
+    }
+
+    const maybeVeileder = Veileder.safeParse(await response.json());
+
+    if (maybeVeileder.success) {
+      return maybeVeileder.data;
+    } else {
+      // TODO EDB
+      throw new Error(`Unable to parse modia context response: ${maybeVeileder.error.message}`);
+    }
+  } catch (e) {
+    logger.error('Unable to get veileder from modia context');
+    throw e;
+  }
 }
 
+// TODO rødde
 async function getAktivEnhet(modiaContextAccessToken: string): Promise<AktivEnhet> {
-  if (process.env.NODE_ENV === 'development') {
-    return AktivEnhet.parse({
-      aktivEnhet: '0314',
-    });
-  }
-
-  throw new Error('TODO: Not yet implemented');
   const url = `${process.env['MODIA_CONTEXT_URL']}/modiacontextholder/api/aktivenhet`;
-  // TODO: do the fetch
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${modiaContextAccessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      // TODO EDB
+      throw new Error(`Modia aktiv enhet responded with ${response.status} ${response.statusText}`);
+    }
+
+    const maybeAktivEnhet = AktivEnhet.safeParse(await response.json());
+
+    if (maybeAktivEnhet.success) {
+      return maybeAktivEnhet.data;
+    } else {
+      // TODO EDB
+      throw new Error(`Unable to parse modia aktiv enhet response: ${maybeAktivEnhet.error.message}`);
+    }
+  } catch (e) {
+    logger.error('Unable to get aktiv enhet from modia context');
+    throw e;
+  }
 }
 
 const Veileder = z.object({
@@ -72,7 +116,3 @@ const AktivEnhet = z.object({
 
 type Veileder = z.infer<typeof Veileder>;
 type AktivEnhet = z.infer<typeof AktivEnhet>;
-
-async function getModiaContextAccessToken(userAccessToken: string, oidcClient: any): Promise<string> {
-  throw new Error('not implementy');
-}

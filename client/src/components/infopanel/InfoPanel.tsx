@@ -1,6 +1,6 @@
 import React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
-import Image from 'next/image'
+import Image from 'next/image';
 
 import plaster from '../../svg/plaster.svg';
 

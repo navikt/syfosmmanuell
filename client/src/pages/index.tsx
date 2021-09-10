@@ -18,6 +18,7 @@ function Index({ manuellOppgave, modiaContext }: IndexProps) {
   const { aktivEnhet } = useContext(StoreContext);
 
   if (!aktivEnhet) {
+    // TODO vise noe info om at man ikke har noe gyldig enheter
     return <div>no enhet? :(</div>;
   }
 
@@ -41,8 +42,15 @@ export async function getServerSideProps({
     };
   }
 
+  // TODO applySession
+  // if no sessy & not valid, redirect to login
+
   try {
-    const [modiaContext, manuellOppgave] = await Promise.all([getModiaContext(), getOppgave(query.oppgaveid)]);
+    const [modiaContext, manuellOppgave] = await Promise.all([
+      // TODO her er valid token over
+      getModiaContext('TODO'),
+      getOppgave(query.oppgaveid),
+    ]);
 
     return {
       props: {
