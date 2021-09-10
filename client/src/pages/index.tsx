@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import MainContent from '../components/MainContent';
 import { ManuellOppgave } from '../types/manuellOppgave';
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import { GetServerSidePropsResult } from 'next';
 import { getOppgave } from '../services/oppgaveService';
 import { getModiaContext } from '../services/modiaService';
 import ModiaHeader from '../components/modiaheader/ModiaHeader';
@@ -9,6 +9,7 @@ import ErrorFallback from '../components/errorFallback/ErrorFallback';
 import { BasePageRequiredProps } from './_app';
 import { StoreContext } from '../data/store';
 import { logger } from '../utils/logger';
+import { withAuthenticatedPage } from '../auth/session';
 
 interface IndexProps extends BasePageRequiredProps {
   manuellOppgave: ManuellOppgave | null;
@@ -33,42 +34,40 @@ function Index({ manuellOppgave, modiaContext }: IndexProps) {
   );
 }
 
-export async function getServerSideProps({
-  query,
-}: GetServerSidePropsContext): Promise<GetServerSidePropsResult<IndexProps>> {
-  if (!query?.oppgaveid || typeof query.oppgaveid !== 'string') {
-    return {
-      notFound: true,
-    };
-  }
+export const getServerSideProps = withAuthenticatedPage(
+  async ({ req, query }): Promise<GetServerSidePropsResult<IndexProps>> => {
+    if (!query?.oppgaveid || typeof query.oppgaveid !== 'string') {
+      return {
+        notFound: true,
+      };
+    }
 
-  // TODO applySession
-  // if no sessy & not valid, redirect to login
+    try {
+      console.log(req.session.get('tokenSet').access_token);
+      const [modiaContext, manuellOppgave] = await Promise.all([
+        // TODO code better, kun access token, ikke hele takenset
+        getModiaContext(req.session.get('tokenSet').access_token),
+        getOppgave(query.oppgaveid),
+      ]);
 
-  try {
-    const [modiaContext, manuellOppgave] = await Promise.all([
-      // TODO her er valid token over
-      getModiaContext('TODO'),
-      getOppgave(query.oppgaveid),
-    ]);
+      return {
+        props: {
+          modiaContext,
+          manuellOppgave,
+        },
+      };
+    } catch (e) {
+      //@ts-expect-error
+      logger.error(e);
 
-    return {
-      props: {
-        modiaContext,
-        manuellOppgave,
-      },
-    };
-  } catch (e) {
-    //@ts-expect-error
-    logger.error(e);
-
-    return {
-      props: {
-        manuellOppgave: null,
-        modiaContext: null,
-      },
-    };
-  }
-}
+      return {
+        props: {
+          manuellOppgave: null,
+          modiaContext: null,
+        },
+      };
+    }
+  },
+);
 
 export default Index;

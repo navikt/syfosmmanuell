@@ -28,6 +28,7 @@
     "nav-frontend-spinner-style": "^1.0.2",
     "nav-frontend-typografi": "^4.0.1",
     "nav-frontend-typografi-style": "^2.0.1",
+    "next-iron-session": "^4.2.0",
     "openid-client": "^4.7.5",
     "pino": "^6.13.2",
     "prop-types": "^15.7.2",
