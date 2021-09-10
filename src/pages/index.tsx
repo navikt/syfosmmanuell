@@ -43,7 +43,6 @@ export const getServerSideProps = withAuthenticatedPage(
     }
 
     try {
-      console.log(req.session.get('tokenSet').access_token);
       const [modiaContext, manuellOppgave] = await Promise.all([
         // TODO code better, kun access token, ikke hele takenset
         getModiaContext(req.session.get('tokenSet').access_token),
