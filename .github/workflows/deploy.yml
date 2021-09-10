@@ -23,7 +23,7 @@ jobs:
         env:
           CI: true
         run: |
-          npm test
+          npm run test:ci
 
   build-push-deploy:
     name: Checkout code and create docker tag

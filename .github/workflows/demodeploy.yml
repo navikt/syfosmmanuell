@@ -24,7 +24,7 @@ jobs:
         env:
           CI: true
         run: |
-          npm test
+          npm run test:ci
         working-directory: ./client
       - name: Build client
         env:

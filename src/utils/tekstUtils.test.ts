@@ -3,8 +3,8 @@ import { periodeUndertekst } from './tekstUtils';
 
 describe('Periode undertekst', () => {
   let periode: Periode = {
-    fom: new Date('2018-10-18'),
-    tom: new Date('2018-11-12'),
+    fom: '2018-10-18',
+    tom: '2018-11-12',
     aktivitetIkkeMulig: null,
     avventendeInnspillTilArbeidsgiver: null,
     behandlingsdager: null,
@@ -14,8 +14,8 @@ describe('Periode undertekst', () => {
 
   beforeEach(() => {
     periode = {
-      fom: new Date('2018-10-18'),
-      tom: new Date('2018-11-12'),
+      fom: '2018-10-18',
+      tom: '2018-11-12',
       aktivitetIkkeMulig: null,
       avventendeInnspillTilArbeidsgiver: null,
       behandlingsdager: null,

@@ -119,8 +119,8 @@ const Gradert = z.object({
 });
 
 export const Periode = z.object({
-  fom: z.string(), // TODO,
-  tom: z.string(), // TODO,
+  fom: z.string(), // TODO verify?
+  tom: z.string(), // TODO verify?
   aktivitetIkkeMulig: AktivitetIkkeMulig.nullable(),
   avventendeInnspillTilArbeidsgiver: z.string().nullable(),
   behandlingsdager: z.number().nullable(),

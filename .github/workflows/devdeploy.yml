@@ -24,7 +24,7 @@ jobs:
         env:
           CI: true
         run: |
-          npm test
+          npm run test:ci
 
   build-push-deploy:
     name: Checkout code and create docker tag
@@ -37,25 +37,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      - name: Install deps for client
+      - name: Install deps
         run: |
           npm install
-        working-directory: ./client
-      - name: Build client
+      - name: Build app
         env:
           NODE_ENV: production
           REACT_APP_GOSYS_URL: https://gosys-q1.dev.intern.nav.no/gosys/bruker/brukeroversikt.jsf
         run: |
           npm run build
-        working-directory: ./client
-      - name: Install deps for server
-        run: |
-          npm install
-        working-directory: ./server
-      - name: Build server
-        run: |
-          npm run compile
-        working-directory: ./server
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
