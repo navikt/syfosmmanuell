@@ -10,6 +10,8 @@ Applikasjonen har to hovedoppgaver:
 
 En demoside er offentlig tilgjengelig på: https://syfosmmanuell.labs.nais.io/
 
+test
+
 
 ## Utvikling
 ### Client:
