@@ -21,10 +21,11 @@ jobs:
         run: |
           npm install
       - name: Run unit tests
-        env:
-          CI: true
         run: |
           npm run test:ci
+      - name: Lint
+        run: |
+          npm run lint
 
   build-push-deploy:
     name: Checkout code and create docker tag
@@ -39,11 +40,11 @@ jobs:
           node-version: '16.x'
       - name: Install deps
         run: |
-          npm install
+          npm ci
       - name: Build app
         env:
           NODE_ENV: production
-          REACT_APP_GOSYS_URL: https://gosys-q1.dev.intern.nav.no/gosys/bruker/brukeroversikt.jsf
+          NEXT_PUBLIC_GOSYS_URL: https://gosys-q1.dev.intern.nav.no/gosys/bruker/brukeroversikt.jsf
         run: |
           npm run build
       - name: Build and publish Docker image

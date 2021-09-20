@@ -1,5 +1,6 @@
 import React from 'react';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+
 import HjelpetekstWrapper from '../../../hjelpetekst/HjelpetekstWrapper';
 
 interface DiagnoseKodeSeksjonProps {

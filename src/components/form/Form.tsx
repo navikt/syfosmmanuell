@@ -1,6 +1,9 @@
 import { Knapp } from 'nav-frontend-knapper';
 import { RadioPanelGruppe, Label } from 'nav-frontend-skjema';
 import { useForm, Controller } from 'react-hook-form';
+
+import { clientEnvs } from '../../utils/env';
+
 import FeiloppsummeringContainer from './FeiloppsummeringContainer';
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
 
@@ -43,7 +46,7 @@ const Form = ({ onSubmit }: Props) => {
             checked={value}
             feil={errors.status?.message}
             radios={[
-              // TODO vise enhet her en plass?
+              // TODO vise enhet her sammen med knappen?
               { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
               { id: 'b-status-godkjent-med-merknad', label: 'Registrer med merknad', value: 'GODKJENT_MED_MERKNAD' },
             ]}
@@ -99,7 +102,7 @@ const Form = ({ onSubmit }: Props) => {
       <Knapp id="submit-button" type="hoved" htmlType="submit">
         Registrer
       </Knapp>
-      <a href={process.env.REACT_APP_GOSYS_URL} className="knapp knapp--flat form__cancel">
+      <a href={clientEnvs.NEXT_PUBLIC_GOSYS_URL} className="knapp knapp--flat form__cancel">
         Avbryt
       </a>
     </form>

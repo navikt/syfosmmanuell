@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
-
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-
 import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
 import { Prognose } from '../../../types/sykmelding';

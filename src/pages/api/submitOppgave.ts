@@ -1,9 +1,9 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { submitOppgave } from '../../services/oppgaveService';
-import { SubmitOppgaveBody } from '../../utils/dataUtils';
+import { SubmitOppgaveBody } from '../../utils/submitUtils';
 import { logger } from '../../utils/logger';
+import { withAuthenticatedApi } from '../../auth/session';
 
-export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+export default withAuthenticatedApi(async (req, res, accessToken): Promise<void> => {
   if (req.method !== 'POST') {
     res.status(405).json({ message: 'Method not supported' });
     return;
@@ -12,13 +12,12 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
   const body: SubmitOppgaveBody = req.body;
 
   try {
-    await submitOppgave(body.oppgaveid, body.aktivEnhet, body.formValues);
+    await submitOppgave(body.oppgaveid, body.aktivEnhet, body.formValues, accessToken);
     res.status(200).json({ message: 'Oppgave submitted successfully' });
     return;
   } catch (e) {
-    //@ts-expect-error
     logger.error(e);
-    res.status(500).json({ message: 'something went wrong' });
+    res.status(500).json({ message: 'Unable to submit oppgave' });
     return;
   }
-};
+});

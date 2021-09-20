@@ -1,8 +1,12 @@
+import { Agent } from 'http';
+
 import tunnel from 'tunnel';
 import { Client, ClientMetadata, custom, Issuer } from 'openid-client';
+
 import { logger } from '../utils/logger';
-import { Agent } from 'http';
-import getAzureConfig, { envVar } from './azureConfig';
+import { env } from '../utils/env';
+
+import getAzureConfig from './azureConfig';
 
 let client: Client | null = null;
 
@@ -22,6 +26,7 @@ async function getAuthClient(): Promise<Client> {
     return client;
   }
 
+  logger.info('Getting azure config');
   const azureConfig = getAzureConfig();
 
   const metadata: ClientMetadata = {
@@ -29,20 +34,20 @@ async function getAuthClient(): Promise<Client> {
     client_secret: azureConfig.clientSecret,
     redirect_uris: [azureConfig.redirectUri],
     token_endpoint_auth_method: azureConfig.tokenEndpointAuthMethod,
+    response_types: azureConfig.responseTypes,
+    response_mode: azureConfig.responseMode,
   };
 
-  const webProxyUrl = envVar('HTTP_PROXY');
+  const webProxyUrl = env('HTTP_PROXY');
   const agent = getHttpProxyAgent(webProxyUrl);
   custom.setHttpOptionsDefaults({
-    // TODO: Dragon?
-    agent: {
-      http: agent,
-    },
+    // TODO: Figure out how to use newest version. Figure out why proxy is needed.
+    agent: agent,
   });
   const issuer = await Issuer.discover(azureConfig.discoveryUrl);
 
   logger.info(`Discovered issuer ${issuer.issuer}`);
-
+  logger.info('Creating auth client');
   client = new issuer.Client(metadata);
   return client;
 }

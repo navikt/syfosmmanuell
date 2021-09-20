@@ -1,5 +1,6 @@
 import React from 'react';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+
 import Innrykk from './Innrykk';
 import Margin from './Margin';
 

@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+
 import { Periode } from '../types/sykmelding';
 
 export function sorterPerioderEldsteFoerst(perioder: Periode[]) {

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-
 import ElementMedTekst from '../layout/ElementMedTekst';
 import EnkelCheckbox from '../layout/EnkelCheckbox';
 import { tilLesbarPeriodeMedArstall } from '../../../utils/datoUtils';

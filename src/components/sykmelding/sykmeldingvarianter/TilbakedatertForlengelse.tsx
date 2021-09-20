@@ -1,4 +1,5 @@
 import React from 'react';
+
 import DiagnoseSeksjon from '../../infopanel/panelelementer/diagnose/DiagnoseSeksjon';
 import InfoPanel from '../../infopanel/InfoPanel';
 import SykmeldingPerioder from '../../infopanel/panelelementer/periode/SykmeldingPerioder';
@@ -7,16 +8,15 @@ import { Sykmelding } from '../../../types/sykmelding';
 
 interface TilbakedatertForlengelseProps {
   sykmelding: Sykmelding;
-  personNrPasient: string;
 }
 
-const TilbakedatertForlengelse = ({ sykmelding, personNrPasient }: TilbakedatertForlengelseProps) => {
+const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps) => {
   return (
     <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
       <SykmeldingPerioder perioder={sykmelding.perioder} />
       <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
-      {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose, index) => (
-        <DiagnoseSeksjon key={index.toString()} diagnose={diagnose} bidiagnose />
+      {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose) => (
+        <DiagnoseSeksjon key={diagnose.kode} diagnose={diagnose} bidiagnose />
       ))}
 
       <Tilbakedateringsinfo

@@ -1,19 +1,32 @@
-import {TokenSet} from 'openid-client';
-import {envVar} from '../auth/azureConfig';
-import getAuthClient from '../auth/oidcClient';
-import {Session} from "next-iron-session";
-import {NextIronRequest} from "../auth/session";
+import { TokenSet } from 'openid-client';
+import { Session } from 'next-iron-session';
 
-export function hasValidAccessToken(tokenSet: TokenSet): boolean {
+import { env } from '../utils/env';
+import { NextIronRequest } from '../auth/session';
+import getAuthClient from '../auth/oidcClient';
+import { logger } from '../utils/logger';
+import azureConfig from '../auth/azureConfig';
+
+export function hasValidAccessToken(accessToken: string, expiresAt: number): boolean {
+  if (process.env.NODE_ENV === 'development') {
+    logger.warn('In development mode, fake local token is always valid');
+    return true;
+  }
+
+  const tokenSet = new TokenSet({
+    access_token: accessToken,
+    expires_at: expiresAt,
+  });
+
   return !tokenSet.expired();
 }
 
-// Requires valid userToken
 async function getOboAccessToken(userToken: string, scope: string): Promise<string> {
   const oidcClient = await getAuthClient();
+
   const oboTokenSet = await oidcClient.grant({
     grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-    client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+    assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
     requested_token_use: 'on_behalf_of',
     scope,
     assertion: userToken,
@@ -23,20 +36,23 @@ async function getOboAccessToken(userToken: string, scope: string): Promise<stri
     throw new Error('Modia Context OBO Access token is undefined');
   }
 
+  logger.info(`oboTokenSet successfully fetched (${oboTokenSet.access_token.length})`);
   return oboTokenSet.access_token;
 }
 
 export async function getModiaContextOboAccessToken(userToken: string): Promise<string> {
-  return getOboAccessToken(userToken, 'https://graph.microsoft.com/.default');
+  return getOboAccessToken(userToken, env('GRAPH_API_SCOPES'));
 }
+
 export async function getOppgaveOboAccessToken(userToken: string): Promise<string> {
-  return getOboAccessToken(userToken, `api://${envVar('DOWNSTREAM_API_CLIENT_ID')}./default`);
+  return getOboAccessToken(userToken, `api://${env('SYFOSMMANUELL_BACKEND_SCOPE')}/.default`);
 }
 
 export async function getAuthUrl(session: Session): Promise<string> {
   const client = await getAuthClient();
 
   return client.authorizationUrl({
+    scope: `openid ${azureConfig().clientId}/.default`,
     nonce: session.get('nonce'),
     state: session.get('state'),
   });
@@ -52,5 +68,5 @@ export async function getTokenSet(req: NextIronRequest): Promise<TokenSet> {
       aud: idportenClient.issuer.metadata.issuer,
     },
   };
-  return idportenClient.callback(envVar('IDPORTEN_REDIRECT_URI'), params, {nonce, state}, additionalClaims);
+  return idportenClient.callback(azureConfig().redirectUri, params, { nonce, state }, additionalClaims);
 }

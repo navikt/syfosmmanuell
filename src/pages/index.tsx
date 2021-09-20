@@ -1,71 +1,65 @@
 import React, { useContext } from 'react';
-import MainContent from '../components/MainContent';
-import { ManuellOppgave } from '../types/manuellOppgave';
 import { GetServerSidePropsResult } from 'next';
-import { getOppgave } from '../services/oppgaveService';
+
+import { ManuellOppgave } from '../types/manuellOppgave';
+import MainContent from '../components/MainContent';
+import { getOppgave, OppgaveFetchingError } from '../services/oppgaveService';
 import { getModiaContext } from '../services/modiaService';
-import ModiaHeader from '../components/modiaheader/ModiaHeader';
-import ErrorFallback from '../components/errorFallback/ErrorFallback';
-import { BasePageRequiredProps } from './_app';
 import { StoreContext } from '../data/store';
-import { logger } from '../utils/logger';
 import { withAuthenticatedPage } from '../auth/session';
+import getAuthClient from '../auth/oidcClient';
+import NoEnhetError from '../components/NoEnhetError';
+import ManuellOppgaveErrors from '../components/ManuellOppgaveErrors';
+
+import { BasePageRequiredProps } from './_app';
 
 interface IndexProps extends BasePageRequiredProps {
-  manuellOppgave: ManuellOppgave | null;
+  manuellOppgave: ManuellOppgave | OppgaveFetchingError;
 }
 
-function Index({ manuellOppgave, modiaContext }: IndexProps) {
+function Index({ manuellOppgave }: IndexProps) {
   const { aktivEnhet } = useContext(StoreContext);
 
   if (!aktivEnhet) {
-    // TODO vise noe info om at man ikke har noe gyldig enheter
-    return <div>no enhet? :(</div>;
+    return <NoEnhetError />;
+  } else if ('errorType' in manuellOppgave) {
+    return <ManuellOppgaveErrors errors={manuellOppgave} />;
+  } else {
+    return <MainContent manuellOppgave={manuellOppgave} aktivEnhet={aktivEnhet} />;
   }
-
-  return (
-    <section>
-      <ModiaHeader modiaContext={modiaContext} />
-      <main>
-        {manuellOppgave && <MainContent manuellOppgave={manuellOppgave} aktivEnhet={aktivEnhet} />}
-        {!manuellOppgave && <ErrorFallback />}
-      </main>
-    </section>
-  );
 }
 
 export const getServerSideProps = withAuthenticatedPage(
-  async ({ req, query }): Promise<GetServerSidePropsResult<IndexProps>> => {
+  async ({ req, query }, accessToken): Promise<GetServerSidePropsResult<IndexProps>> => {
     if (!query?.oppgaveid || typeof query.oppgaveid !== 'string') {
       return {
         notFound: true,
       };
     }
 
-    try {
-      const [modiaContext, manuellOppgave] = await Promise.all([
-        // TODO code better, kun access token, ikke hele takenset
-        getModiaContext(req.session.get('tokenSet').access_token),
-        getOppgave(query.oppgaveid),
-      ]);
-
-      return {
-        props: {
-          modiaContext,
-          manuellOppgave,
-        },
-      };
-    } catch (e) {
-      //@ts-expect-error
-      logger.error(e);
-
-      return {
-        props: {
-          manuellOppgave: null,
-          modiaContext: null,
-        },
-      };
+    if (process.env.NODE_ENV !== 'development') {
+      await getAuthClient();
     }
+
+    const [modiaContext, manuellOppgave] = await Promise.all([
+      getModiaContext(accessToken),
+      getOppgave(query.oppgaveid, accessToken),
+    ]);
+
+    if ('errorType' in manuellOppgave) {
+      if (manuellOppgave.errorType === 'OPPGAVE_NOT_FOUND') {
+        return {
+          notFound: true,
+        };
+      }
+    }
+
+    return {
+      props: {
+        modiaContext,
+        manuellOppgave,
+      },
+    };
   },
 );
 

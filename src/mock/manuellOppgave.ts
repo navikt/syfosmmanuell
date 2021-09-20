@@ -81,7 +81,7 @@ export const manuellOppgave = {
       },
       {
         fom: '2018-10-18',
-        tom: '2018-11-12',
+        tom: '2018-11-13',
         aktivitetIkkeMulig: {
           medisinskArsak: {
             beskrivelse: 'Dette er en beskrivelse på en medisinsk årsak',
@@ -99,7 +99,7 @@ export const manuellOppgave = {
       },
       {
         fom: '2018-10-18',
-        tom: '2018-11-12',
+        tom: '2018-11-14',
         aktivitetIkkeMulig: null,
         avventendeInnspillTilArbeidsgiver: null,
         behandlingsdager: 20,
@@ -108,7 +108,7 @@ export const manuellOppgave = {
       },
       {
         fom: '2018-10-18',
-        tom: '2018-11-12',
+        tom: '2018-11-15',
         aktivitetIkkeMulig: null,
         avventendeInnspillTilArbeidsgiver: null,
         behandlingsdager: null,

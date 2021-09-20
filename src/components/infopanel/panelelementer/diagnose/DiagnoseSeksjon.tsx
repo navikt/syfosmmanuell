@@ -1,9 +1,10 @@
 import React from 'react';
-import DiagnoseKodeSeksjon from './DiagnoseKodeSeksjon';
+
 
 import EtikettMedTekst from '../../layout/EtikettMedTekst';
-
 import { Diagnose } from '../../../../types/sykmelding';
+
+import DiagnoseKodeSeksjon from './DiagnoseKodeSeksjon';
 
 interface DiagnoseSeksjonProps {
   diagnose: Diagnose | null;

@@ -1,11 +1,13 @@
-import { logger } from '../utils/logger';
+import {ResponseType} from "openid-client";
+
+import { env } from '../utils/env';
 
 export interface AzureConfig {
   discoveryUrl: string;
   clientId: string;
   clientSecret: string;
   redirectUri: string;
-  responseTypes: string[];
+  responseTypes: ResponseType[];
   tokenEndpointAuthMethod:
     | 'client_secret_post'
     | 'client_secret_basic'
@@ -19,24 +21,13 @@ export interface AzureConfig {
   logoutRedirectUri?: string;
 }
 
-export function envVar(name: string, required: false): string | undefined;
-export function envVar(name: string, required: true): string;
-export function envVar(name: string, required?: true): string;
-export function envVar(name: string, required: boolean = true) {
-  if (!process.env[name] && required) {
-    logger.error(`Missing required environment variable '${name}'`);
-    process.exit(1);
-  }
-  return process.env[name];
-}
-
 function getAzureConfig(): AzureConfig {
   const azureAd: AzureConfig = {
-    discoveryUrl: envVar('AAD_DISCOVERY_URL'),
-    clientId: envVar('CLIENT_ID'),
-    clientSecret: envVar('CLIENT_SECRET'),
-    redirectUri: envVar('AAD_REDIRECT_URL'),
-    logoutRedirectUri: envVar('AAD_LOGOUT_REDIRECT_URL', false),
+    clientId: env('AZURE_APP_CLIENT_ID'),
+    clientSecret: env('AZURE_APP_CLIENT_SECRET'),
+    discoveryUrl: env('AZURE_APP_WELL_KNOWN_URL'),
+    redirectUri: env('AAD_REDIRECT_URL'),
+    logoutRedirectUri: env('AAD_LOGOUT_REDIRECT_URL', false),
     tokenEndpointAuthMethod: 'client_secret_post',
     responseTypes: ['code'],
     responseMode: 'query',

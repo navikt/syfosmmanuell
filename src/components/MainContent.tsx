@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import { Flatknapp } from 'nav-frontend-knapper';
+import { useRouter } from 'next/router';
+import { Normaltekst } from 'nav-frontend-typografi';
+
+import { ManuellOppgave } from '../types/manuellOppgave';
+import { vurderOppgave } from '../utils/submitUtils';
+import { logger } from '../utils/logger';
+
+import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';
 import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse';
 import Form, { FormShape } from './form/Form';
-import { ManuellOppgave } from '../types/manuellOppgave';
-import { vurderOppgave } from '../utils/dataUtils';
-import { logger } from '../utils/logger';
 
 interface MainContentProps {
   manuellOppgave: ManuellOppgave;
@@ -14,6 +18,7 @@ interface MainContentProps {
 }
 
 const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
+  const router = useRouter();
   const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
   const { sykmelding, personNrPasient, mottattDato } = manuellOppgave;
   const [error, setError] = useState<string | null>(null);
@@ -21,8 +26,8 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
   const handleSubmit = async (formState: FormShape) => {
     try {
       await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState);
+      await router.push('/kvittering');
     } catch (e) {
-      // @ts-expect-error
       logger.error(e);
       if (e instanceof Error) {
         setError(e.message);
@@ -40,9 +45,13 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
         mottattDato={mottattDato}
         personNrPasient={personNrPasient}
       />
-      <TilbakedatertForlengelse sykmelding={sykmelding} personNrPasient={personNrPasient} />
+      <TilbakedatertForlengelse sykmelding={sykmelding} />
       <Form onSubmit={handleSubmit} />
-      {error && <div>Noko er jo feil her: {error}</div>}
+      {error && (
+        <div className="margin-top--2">
+          <Normaltekst>{error}</Normaltekst>
+        </div>
+      )}
       <div className="hele-sykmeldingen-visning">
         <Flatknapp
           form="kompakt"

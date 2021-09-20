@@ -1,4 +1,5 @@
 import { Periode } from '../types/sykmelding';
+
 import {
   countDaysBetweenTwoDatesIncludingFom,
   tilLesbarDatoUtenAarstall,

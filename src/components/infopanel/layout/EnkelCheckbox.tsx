@@ -1,10 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
-import Innrykk from './Innrykk';
-import Margin from './Margin';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
+
 import sjekkboks from '../../../svg/sjekkboks.svg';
 import sjekkboksKryss from '../../../svg/sjekkboksKryss.svg';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
+
+import Innrykk from './Innrykk';
+import Margin from './Margin';
+
 
 interface EnkelCheckboxProps {
   tittel: string;
@@ -32,7 +35,7 @@ const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true, lis
       {!!listItems?.length && (
         <ul style={{ marginTop: '1rem', marginLeft: '2.5rem' }}>
           {listItems.map((item) => (
-            <li>
+            <li key={item}>
               <Normaltekst>{item}</Normaltekst>
             </li>
           ))}

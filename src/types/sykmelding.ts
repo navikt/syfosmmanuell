@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-redeclare */
 import { z } from 'zod';
+
+import { DateString } from './shared';
 
 const HarArbeidsgiver = z.enum(['EN_ARBEIDSGIVER', 'FLERE_ARBEIDSGIVERE', 'INGEN_ARBEIDSGIVER']);
 type HarArbeidsgiver = z.infer<typeof HarArbeidsgiver>;
@@ -17,8 +18,6 @@ export const Arbeidsgiver = z.object({
   stillingsprosent: z.number().nullable(),
 });
 export type Arbeidsgiver = z.infer<typeof Arbeidsgiver>;
-
-// --------
 
 export const Diagnose = z.object({
   system: z.string(),
@@ -67,8 +66,7 @@ export const MedisinskVurdering = z.object({
   biDiagnoser: z.array(Diagnose),
   svangerskap: z.boolean(),
   yrkesskade: z.boolean(),
-  // TODO
-  yrkesskadeDato: z.string().nullable(),
+  yrkesskadeDato: DateString.nullable(),
   annenFraversArsak: AnnenFraversArsak.nullable(),
 });
 export type MedisinskVurdering = z.infer<typeof MedisinskVurdering>;
@@ -119,8 +117,8 @@ const Gradert = z.object({
 });
 
 export const Periode = z.object({
-  fom: z.string(), // TODO verify?
-  tom: z.string(), // TODO verify?
+  fom: DateString,
+  tom: DateString,
   aktivitetIkkeMulig: AktivitetIkkeMulig.nullable(),
   avventendeInnspillTilArbeidsgiver: z.string().nullable(),
   behandlingsdager: z.number().nullable(),
@@ -138,27 +136,15 @@ export const Prognose = z.object({
     .object({
       egetArbeidPaSikt: z.boolean(),
       annetArbeidPaSikt: z.boolean(),
-      arbeidFOM: z
-        .string()
-        // TODO
-        .nullable(),
-      vurderingsdato: z
-        .string()
-        // TODO
-        .nullable(),
+      arbeidFOM: DateString.nullable(),
+      vurderingsdato: DateString.nullable(),
     })
     .nullable(),
   erIkkeIArbeid: z
     .object({
       arbeidsforPaSikt: z.boolean(),
-      arbeidsforFOM: z
-        .string()
-        // TODO
-        .nullable(),
-      vurderingsdato: z
-        .string()
-        // TODO
-        .nullable(),
+      arbeidsforFOM: DateString.nullable(),
+      vurderingsdato: DateString.nullable(),
     })
     .nullable(),
 });
@@ -175,10 +161,7 @@ export type MeldingTilNAV = z.infer<typeof MeldingTilNAV>;
 // --------
 
 export const KontaktMedPasient = z.object({
-  kontaktDato: z
-    .string()
-    // TODO
-    .nullable(),
+  kontaktDato: DateString.nullable(),
   begrunnelseIkkeKontakt: z.string().nullable(),
 });
 
@@ -253,14 +236,11 @@ export const Sykmelding = z.object({
   meldingTilNAV: MeldingTilNAV.nullable(),
   meldingTilArbeidsgiver: z.string().nullable(),
   kontaktMedPasient: KontaktMedPasient,
-  // TODO
-  behandletTidspunkt: z.string(),
+  behandletTidspunkt: DateString,
   behandler: Behandler,
   avsenderSystem: AvsenderSystem,
-  // TODO
-  syketilfelleStartDato: z.string().nullable(),
-  // TODO
-  signaturDato: z.string(),
+  syketilfelleStartDato: DateString.nullable(),
+  signaturDato: DateString,
   navnFastlege: z.string().nullable(),
 });
 

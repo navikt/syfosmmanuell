@@ -1,6 +1,17 @@
-const withLess = require("next-with-less");
+const withLess = require('next-with-less');
 
-// TODO!!!!!!!!!! HUSK PUBLIC PATH!!!!!!!!
 module.exports = withLess({
-    lessLoaderOptions: {},
+  lessLoaderOptions: {},
+  async rewrites() {
+    return [
+      {
+        source: '/callback',
+        destination: '/api/callback',
+      },
+      {
+        source: '/login',
+        destination: '/api/login',
+      },
+    ];
+  },
 });

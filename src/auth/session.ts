@@ -1,16 +1,23 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult, NextApiRequest, NextApiResponse } from 'next';
 import { applySession as applyIronSession, Session } from 'next-iron-session';
-import { envVar } from './azureConfig';
 import { TokenSet } from 'openid-client';
+
 import { logger } from '../utils/logger';
 import { BasePageRequiredProps } from '../pages/_app';
+import { hasValidAccessToken } from '../services/tokenService';
+import { env } from '../utils/env';
 
 export type NextIronRequest = NextApiRequest & { session: Session };
 export type ServerSideContext = GetServerSidePropsContext & { req: NextIronRequest };
 
-export type IronApiHandler = (req: NextIronRequest, res: NextApiResponse) => void | Promise<unknown>;
+export type IronApiHandler = (
+  req: NextIronRequest,
+  res: NextApiResponse,
+  accessToken: string,
+) => void | Promise<unknown>;
 export type IronSsrHandler = (
   context: ServerSideContext,
+  accessToken: string,
 ) => void | Promise<GetServerSidePropsResult<BasePageRequiredProps>>;
 
 export async function applySession(
@@ -18,7 +25,7 @@ export async function applySession(
   res: NextApiResponse | GetServerSidePropsContext['res'],
 ): Promise<void> {
   await applyIronSession(req, res, {
-    password: envVar('SECRET_COOKIE_PASSWORD'),
+    password: env('SECRET_COOKIE_PASSWORD'),
     cookieName: 'syfosmmanuell-azure',
     cookieOptions: {
       secure: process.env.NODE_ENV === 'production',
@@ -36,20 +43,46 @@ export function withAuthenticatedPage(handler: IronSsrHandler) {
     }
 
     // If user is logged out or cookie has expired, redirect to login, but only during SSR.
-    const tokenSet: TokenSet | string | null | undefined = request?.session?.get('tokenSet');
-    if (!tokenSet) {
+    const accessToken: TokenSet['access_token'] | null | undefined = request?.session?.get('access_token');
+    const accessTokenExpiry: TokenSet['expires_at'] | null | undefined = request?.session?.get('access_token_expiry');
+    if (!accessToken || !accessTokenExpiry || !hasValidAccessToken(accessToken, accessTokenExpiry)) {
       logger.debug('Session exists, but token does not. Redirecting to login.');
 
-      // Todo sett session for where to return?
+      if (!request.url) {
+        throw new Error('No request URL');
+      }
+
+      const requestUrl = new URL(request.url, `https://${request.headers.host}`);
+      const redirectPath = requestUrl.pathname + requestUrl.search;
 
       return {
         redirect: {
-          destination: `/api/login`,
+          destination: `/login?redirect_path=${encodeURI(redirectPath)}`,
           permanent: false,
         },
       };
     }
 
-    return handler(context);
+    return handler(context, accessToken);
+  };
+}
+
+export function withAuthenticatedApi(handler: IronApiHandler) {
+  return async function withIronSessionHandler(
+    req: NextIronRequest,
+    res: NextApiResponse,
+  ): Promise<ReturnType<typeof handler>> {
+    await applySession(req, res);
+
+    // If user is logged out or cookie has expired, redirect to login, but only during SSR.
+    const accessToken: TokenSet['access_token'] | null | undefined = req?.session?.get('access_token');
+    const accessTokenExpiry: TokenSet['expires_at'] | null | undefined = req?.session?.get('access_token_expiry');
+    if (!accessToken || !accessTokenExpiry || !hasValidAccessToken(accessToken, accessTokenExpiry)) {
+      res.status(403);
+      res.json({ message: 'Session has expired' });
+      return;
+    }
+
+    return handler(req, res, accessToken);
   };
 }

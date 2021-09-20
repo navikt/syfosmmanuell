@@ -1,6 +1,8 @@
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import React from 'react';
+
 import Expandable from '../expandable/Expandable';
+
 import { Merknad } from './Form';
 
 const BeskjedTilPasient: Record<Merknad, string> = {
@@ -20,7 +22,7 @@ const InfoTilBehandlerOgPasient = ({ type }: InfoTilBehandlerOgPasientProps) => 
   }
 
   return (
-    <Expandable className="info-til" erApen={false} tittel="Se hva vi sier til pasienten" type="intern">
+    <Expandable className="info-til" erApen={false} tittel="Se hva vi sier til pasienten">
       <div className="info-til__pasient">
         <Undertittel>Beskjed til pasienten</Undertittel>
         <Normaltekst className="info-til__paragraph">{BeskjedTilPasient[type]}</Normaltekst>

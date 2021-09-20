@@ -3,24 +3,37 @@ import { generators } from 'openid-client';
 
 import { applySession, NextIronRequest } from '../../auth/session';
 import { getAuthUrl } from '../../services/tokenService';
+import { logger } from '../../utils/logger';
 
-// TODO ta stilling te denna om den ska være i API
 const login = async (req: NextIronRequest, res: NextApiResponse): Promise<void> => {
   await applySession(req, res);
 
-  if (process.env.NODE_ENV === 'production') {
-    const session = req.session;
-    session.set('nonce', generators.nonce());
-    session.set('state', generators.state());
-    await session.save();
-    res.redirect(await getAuthUrl(session));
+  const redirectPath = req.query.redirect_path;
+  if (!redirectPath || Array.isArray(redirectPath)) {
+    res.status(400);
+    res.json({ message: 'Missing or malformed redirect_path' });
     return;
   }
 
+  if (process.env.NODE_ENV === 'production') {
+    logger.info('Creating session and setting nonce and state');
+    const session = req.session;
+    session.set('nonce', generators.nonce());
+    session.set('state', generators.state());
+    session.set('redirect_path', decodeURI(redirectPath));
+    await session.save();
+    const redirectUrl = await getAuthUrl(session);
+    console.info(`Redirect url: ${redirectUrl}`);
+    res.redirect(redirectUrl);
+    return;
+  }
+
+  logger.warn('Using dev login, creating empty session and redirecting directly to /callback');
   const session = req.session;
+  session.set('redirect_path', decodeURI(redirectPath));
   await session.save();
-  // TODO use base path
-  res.redirect('/api/callback');
+
+  res.redirect('/callback');
   return;
 };
 

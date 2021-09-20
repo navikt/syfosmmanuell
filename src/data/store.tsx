@@ -1,5 +1,6 @@
 import React, { createContext, PropsWithChildren, useCallback, useState } from 'react';
-import { ModiaContext } from '../services/modiaService';
+
+import { ModiaContext, ModiaContextError } from '../services/modiaService';
 
 interface Store {
   aktivEnhet: string | null;
@@ -11,8 +12,12 @@ export const StoreContext = createContext<Store>({
   setAktivEnhet: () => void 0,
 });
 
-const StoreProvider = ({ children, modiaContext }: PropsWithChildren<{ modiaContext: ModiaContext | null }>) => {
-  const defaultAktivSelectValue = getDefaultSelectValue(modiaContext?.enheter, modiaContext?.aktivEnhet);
+type StoreProviderProps = {
+  modiaContext: ModiaContext | ModiaContextError;
+};
+
+const StoreProvider = ({ children, modiaContext }: PropsWithChildren<StoreProviderProps>) => {
+  const defaultAktivSelectValue = getDefaultSelectValue(modiaContext);
   const [aktivEnhet, setAktivEnhet] = useState<string | null>(defaultAktivSelectValue);
   const handleAktivEnhetChange = useCallback((aktivEnhet) => {
     setAktivEnhet(aktivEnhet);
@@ -25,10 +30,12 @@ const StoreProvider = ({ children, modiaContext }: PropsWithChildren<{ modiaCont
   );
 };
 
-function getDefaultSelectValue(
-  enheter: ModiaContext['enheter'] | undefined,
-  aktivEnhet: ModiaContext['aktivEnhet'] | undefined,
-): string | null {
+function getDefaultSelectValue(modiaContext: ModiaContext | ModiaContextError): string | null {
+  if (!modiaContext || 'errorType' in modiaContext) {
+    return null;
+  }
+
+  const { aktivEnhet, enheter } = modiaContext;
   if (!aktivEnhet || !enheter || enheter.length === 0) return null;
 
   return enheter.some((it) => it.enhetId === aktivEnhet) ? aktivEnhet : enheter[0].enhetId;
