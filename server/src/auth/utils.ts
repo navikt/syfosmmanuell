@@ -52,6 +52,7 @@ const createOnBehalfOfScope = (proxyConfig: ProxyConfig) => {
 
 const getTokenSetsFromSession = (req: Request) => {
   if (req && req.user) {
+    console.log(JSON.stringify(req.user.tokenSets));
     return req.user.tokenSets;
   }
   return null;
