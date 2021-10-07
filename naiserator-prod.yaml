@@ -44,7 +44,7 @@ spec:
   vault:
     enabled: true
     paths:
-      - kvPath: /kv/preprod/fss/syfosmmanuell/teamsykmelding
+      - kvPath: /kv/prod/fss/syfosmmanuell/teamsykmelding
         mountPath: /secrets/syfosmmanuell
   webproxy: true
   ingresses:
