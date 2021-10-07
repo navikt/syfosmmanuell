@@ -10,6 +10,7 @@ import { withAuthenticatedPage } from '../auth/session';
 import getAuthClient from '../auth/oidcClient';
 import NoEnhetError from '../components/NoEnhetError';
 import ManuellOppgaveErrors from '../components/ManuellOppgaveErrors';
+import { isDevOrDemo } from '../utils/env';
 
 import { BasePageRequiredProps } from './_app';
 
@@ -37,7 +38,7 @@ export const getServerSideProps = withAuthenticatedPage(
       };
     }
 
-    if (process.env.NODE_ENV !== 'development') {
+    if (!isDevOrDemo) {
       await getAuthClient();
     }
 

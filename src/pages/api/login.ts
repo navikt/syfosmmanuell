@@ -4,6 +4,7 @@ import { generators } from 'openid-client';
 import { applySession, NextIronRequest } from '../../auth/session';
 import { getAuthUrl } from '../../services/tokenService';
 import { logger } from '../../utils/logger';
+import { isDevOrDemo } from '../../utils/env';
 
 const login = async (req: NextIronRequest, res: NextApiResponse): Promise<void> => {
   await applySession(req, res);
@@ -15,26 +16,22 @@ const login = async (req: NextIronRequest, res: NextApiResponse): Promise<void> 
     return;
   }
 
-  if (process.env.NODE_ENV === 'production') {
-    logger.info('Creating session and setting nonce and state');
+  if (isDevOrDemo) {
+    logger.warn('Using dev login, creating session and redirecting directly to /callback');
     const session = req.session;
-    session.set('nonce', generators.nonce());
-    session.set('state', generators.state());
     session.set('redirect_path', decodeURI(redirectPath));
     await session.save();
-    const redirectUrl = await getAuthUrl(session);
-    console.info(`Redirect url: ${redirectUrl}`);
-    res.redirect(redirectUrl);
+    res.redirect('/callback');
     return;
   }
 
-  logger.warn('Using dev login, creating empty session and redirecting directly to /callback');
   const session = req.session;
+  session.set('nonce', generators.nonce());
+  session.set('state', generators.state());
   session.set('redirect_path', decodeURI(redirectPath));
   await session.save();
-
-  res.redirect('/callback');
-  return;
+  const redirectUrl = await getAuthUrl(session);
+  res.redirect(redirectUrl);
 };
 
 export default login;

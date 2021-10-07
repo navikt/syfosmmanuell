@@ -1,15 +1,17 @@
 import { TokenSet } from 'openid-client';
 import { Session } from 'next-iron-session';
 
-import { env } from '../utils/env';
+import { env, isDevOrDemo } from '../utils/env';
 import { NextIronRequest } from '../auth/session';
 import getAuthClient from '../auth/oidcClient';
 import { logger } from '../utils/logger';
 import azureConfig from '../auth/azureConfig';
 
 export function hasValidAccessToken(accessToken: string, expiresAt: number): boolean {
-  if (process.env.NODE_ENV === 'development') {
-    logger.warn('In development mode, fake local token is always valid');
+  if (isDevOrDemo) {
+    logger.warn(
+      `In ${process.env.IS_NAIS_LABS_DEMO === 'true' ? 'demo' : 'development'} mode, fake local token is always valid`,
+    );
     return true;
   }
 
@@ -36,7 +38,6 @@ async function getOboAccessToken(userToken: string, scope: string): Promise<stri
     throw new Error('Modia Context OBO Access token is undefined');
   }
 
-  logger.info(`oboTokenSet successfully fetched (${oboTokenSet.access_token.length})`);
   return oboTokenSet.access_token;
 }
 

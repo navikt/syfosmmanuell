@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import { logger } from '../utils/logger';
 import { ClientError } from '../utils/typeUtils';
+import { isDevOrDemo } from '../utils/env';
 
 import { getModiaContextOboAccessToken } from './tokenService';
 
@@ -15,8 +16,8 @@ export interface ModiaContext {
 export type ModiaContextError = ClientError<'MODIA_ERROR' | 'PARSE_ERROR'>;
 
 export async function getModiaContext(userAccessToken: string): Promise<ModiaContext | ModiaContextError> {
-  if (process.env.NODE_ENV === 'development') {
-    logger.warn('Using mocked modia context for local development');
+  if (isDevOrDemo) {
+    logger.warn('Using mocked modia context for local development (or demo)');
     return {
       navn: 'Johan J. Johansson',
       ident: '0129381203',

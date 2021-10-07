@@ -26,7 +26,6 @@ async function getAuthClient(): Promise<Client> {
     return client;
   }
 
-  logger.info('Getting azure config');
   const azureConfig = getAzureConfig();
 
   const metadata: ClientMetadata = {
@@ -44,10 +43,8 @@ async function getAuthClient(): Promise<Client> {
     // TODO: Figure out how to use newest version. Figure out why proxy is needed.
     agent: agent,
   });
-  const issuer = await Issuer.discover(azureConfig.discoveryUrl);
 
-  logger.info(`Discovered issuer ${issuer.issuer}`);
-  logger.info('Creating auth client');
+  const issuer = await Issuer.discover(azureConfig.discoveryUrl);
   client = new issuer.Client(metadata);
   return client;
 }

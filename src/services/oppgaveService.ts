@@ -1,7 +1,7 @@
 import { ManuellOppgave } from '../types/manuellOppgave';
 import { manuellOppgave } from '../mock/manuellOppgave';
 import { FormShape } from '../components/form/Form';
-import { env } from '../utils/env';
+import { env, isDevOrDemo } from '../utils/env';
 import { logger } from '../utils/logger';
 import { ClientError } from '../utils/typeUtils';
 
@@ -15,7 +15,7 @@ export async function getOppgave(
   oppgaveid: string,
   accessToken: string,
 ): Promise<ManuellOppgave | OppgaveFetchingError> {
-  if (process.env.NODE_ENV === 'development') {
+  if (isDevOrDemo) {
     return ManuellOppgave.parse(manuellOppgave);
   }
 
@@ -70,7 +70,7 @@ export async function submitOppgave(
   body: FormShape,
   accessToken: string,
 ): Promise<void> {
-  if (process.env.NODE_ENV === 'development') {
+  if (isDevOrDemo) {
     logger.warn(`Mocking submit for development, valgt enhet: ${aktivEnhet}, oppgaveid: ${oppgaveid}`);
     return;
   }

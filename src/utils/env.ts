@@ -9,6 +9,8 @@ if (missingEnvs.length) {
   );
 }
 
+/* Only to be used in SRR */
+export const isDevOrDemo = process.env.NODE_ENV !== 'production' || process.env.IS_NAIS_LABS_DEMO === 'true';
 export const clientEnvs = unverifiedClientEnvs as Record<keyof typeof unverifiedClientEnvs, string>;
 
 export function env(name: string, required: false): string | undefined;

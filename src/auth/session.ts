@@ -46,8 +46,6 @@ export function withAuthenticatedPage(handler: IronSsrHandler) {
     const accessToken: TokenSet['access_token'] | null | undefined = request?.session?.get('access_token');
     const accessTokenExpiry: TokenSet['expires_at'] | null | undefined = request?.session?.get('access_token_expiry');
     if (!accessToken || !accessTokenExpiry || !hasValidAccessToken(accessToken, accessTokenExpiry)) {
-      logger.debug('Session exists, but token does not. Redirecting to login.');
-
       if (!request.url) {
         throw new Error('No request URL');
       }
