@@ -19,7 +19,7 @@ jobs:
           node-version: '16.x'
       - name: Install deps
         run: |
-          npm install
+          npm ci
       - name: Run unit tests
         run: |
           npm run test:ci
