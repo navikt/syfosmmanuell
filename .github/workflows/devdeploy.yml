@@ -2,31 +2,11 @@ name: Deploy to dev
 on:
   push:
     branches:
-      - '*'
+      - '**'
       - '!master'
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/syfosmmanuell-dev:${{ github.sha }}
 jobs:
-  # JOB to run change detection
-  changes:
-    name: Change detection
-    runs-on: ubuntu-latest
-    # Set job outputs to values from filter step
-    outputs:
-      backend: ${{ steps.filter.outputs.backend }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Detect changed paths
-        uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            backend:
-              - 'server/**'
-              - 'redis.yaml'
-              - 'naiserator-dev.yaml'
-
   test:
     name: Run tests
     runs-on: ubuntu-latest
@@ -37,31 +17,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      - name: Install deps for client
+      - name: Install deps
         run: |
           npm install
-        working-directory: ./client
-      - name: Run unit tests for client
-        env:
-          CI: true
+      - name: Run unit tests
         run: |
-          npm test
-        working-directory: ./client
-
-  deploy-redis:
-    name: Deploy redis to dev-fss
-    needs: [changes, test]
-    if: ${{ needs.changes.outputs.backend == 'true' }} # Only run on changes related to backend
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Deploy Redis to dev-fss
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY_TEAMSYKMELDING }}
-          CLUSTER: dev-fss
-          RESOURCE: redis.yaml
+          npm run test:ci
+      - name: Lint
+        run: |
+          npm run lint
 
   build-push-deploy:
     name: Checkout code and create docker tag
@@ -74,26 +38,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      - name: Install deps for client
+      - name: Install deps
         run: |
-          npm install
-        working-directory: ./client
-      - name: Build client
+          npm ci
+      - name: Build app
         env:
           NODE_ENV: production
-          REACT_APP_HEAD_URL: https://app-q1.dev.adeo.no
-          REACT_APP_GOSYS_URL: https://gosys-q1.dev.intern.nav.no/gosys/bruker/brukeroversikt.jsf
+          NEXT_PUBLIC_GOSYS_URL: https://gosys-q1.dev.intern.nav.no/gosys/bruker/brukeroversikt.jsf
         run: |
           npm run build
-        working-directory: ./client
-      - name: Install deps for server
-        run: |
-          npm install
-        working-directory: ./server
-      - name: Build server
-        run: |
-          npm run compile
-        working-directory: ./server
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

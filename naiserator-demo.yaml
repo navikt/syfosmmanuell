@@ -1,25 +1,27 @@
-apiVersion: "nais.io/v1alpha1"
-kind: "Application"
+apiVersion: 'nais.io/v1alpha1'
+kind: 'Application'
 metadata:
   name: syfosmmanuell
   namespace: teamsykmelding
   labels:
     team: teamsykmelding
+  annotations:
+    nais.io/read-only-file-system: 'false'
 spec:
-  image: {{ image }}
+  image: {{image}}
   replicas:
     min: 1
     max: 1
     cpuThresholdPercentage: 90
   port: 3000
   liveness:
-    path: /is_alive
+    path: /api/is_alive
     initialDelay: 10
     timeout: 5
     periodSeconds: 5
     failureThreshold: 30
   readiness:
-    path: /is_ready
+    path: /api/is_ready
     initialDelay: 30
     periodSeconds: 5
     timeout: 5
@@ -31,9 +33,12 @@ spec:
       cpu: 100m
       memory: 128Mi
   ingresses:
-    - "https://syfosmmanuell.labs.nais.io"
+    - 'https://syfosmmanuell.labs.nais.io'
   env:
     - name: PORT
       value: '3000'
     - name: IS_NAIS_LABS_DEMO
       value: 'true'
+    # Not an actual secret value for labs/demo
+    - name: SECRET_COOKIE_PASSWORD
+      value: '7ebb1043-9880-48ae-8931-de797040c46c-321032f5-a9da-491a-a99c-6a300e641e28'

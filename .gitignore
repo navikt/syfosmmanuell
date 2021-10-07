@@ -54,6 +54,5 @@ typings/
 *.iml
 .idea/
 
-# Media
-*/cypress/screenshots/
-*/cypress/videos/
+# next
+.next

@@ -1,22 +1,24 @@
-FROM navikt/node-express:12.2.0-alpine
+FROM node:16-alpine
 
-# Copy init script for loading vault credentials into environment variables.
-# Runs at container start
-COPY init.sh /init-scripts/init.sh
+RUN apk add --no-cache bash
 
-# Copy client production build to image
-COPY ./client/build ./client/build
+RUN addgroup -g 1069 user && \
+    adduser -u 1069 -G user -s /bin/sh -D user
 
-# Copy transpiled Typescript server files to image as Javascript files
-COPY ./server/build ./server/build
-COPY ./server/package.json ./server/
+WORKDIR /app
 
-RUN pwd
-# Change working directory to the server
-WORKDIR /var/server/server
+copy init.sh /app/
+COPY package*.json /app/
+COPY scripts /app/scripts
 
-# Install dependencies for server
-RUN npm install
+RUN npm ci
 
-# Start the web server
-CMD ["npm", "start"]
+COPY .next /app/.next/
+COPY public /app/public/
+COPY next.config.js /app/
+
+RUN chown user:user -R .next
+USER user
+
+ENTRYPOINT ["./init.sh"]
+CMD ["npm", "run", "start:prod"]

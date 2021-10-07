@@ -2,12 +2,13 @@ name: Deploy demo to nais labs
 on:
   push:
     branches:
-      - 'master'
+      - master
+      - chore/explore-next
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/syfosmmanuell-demo:${{ github.sha }}
 jobs:
-  build-push-deploy:
-    name: Checkout code and create docker tag
+  test:
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -16,31 +17,36 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      - name: Install deps for client
+      - name: Install deps
         run: |
           npm install
-        working-directory: ./client
-      - name: Run unit tests for client
-        env:
-          CI: true
+      - name: Run unit tests
         run: |
-          npm test
-        working-directory: ./client
-      - name: Build client
+          npm run test:ci
+      - name: Lint
+        run: |
+          npm run lint
+
+  build-push-deploy:
+    name: Checkout code and create docker tag
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Use Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - name: Install deps
+        run: |
+          npm ci
+      - name: Build app
         env:
-          REACT_APP_DEMO: 'true'
-          REACT_APP_HEAD_URL: https://navikt.github.io
+          NODE_ENV: production
+          NEXT_PUBLIC_GOSYS_URL: https://example.com/dummy
         run: |
           npm run build
-        working-directory: ./client
-      - name: Install deps for server
-        run: |
-          npm install
-        working-directory: ./server
-      - name: Build server
-        run: |
-          npm run compile
-        working-directory: ./server
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

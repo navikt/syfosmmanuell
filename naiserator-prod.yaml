@@ -1,25 +1,27 @@
-apiVersion: "nais.io/v1alpha1"
-kind: "Application"
+apiVersion: 'nais.io/v1alpha1'
+kind: 'Application'
 metadata:
   name: syfosmmanuell
   namespace: teamsykmelding
   labels:
     team: teamsykmelding
+  annotations:
+    nais.io/read-only-file-system: 'false'
 spec:
-  image: {{ image }}
+  image: {{image}}
   replicas:
     min: 1
     max: 1
     cpuThresholdPercentage: 90
   port: 3000
   liveness:
-    path: /is_alive
+    path: /api/is_alive
     initialDelay: 10
     timeout: 5
     periodSeconds: 5
     failureThreshold: 30
   readiness:
-    path: /is_ready
+    path: /api/is_ready
     initialDelay: 30
     periodSeconds: 5
     timeout: 5
@@ -38,40 +40,25 @@ spec:
       enabled: true
       tenant: nav.no
       replyURLs:
-        - "https://syfosmmanuell.nais.adeo.no/callback"
+        - 'https://syfosmmanuell.nais.adeo.no/callback'
   vault:
     enabled: true
     paths:
-      - kvPath: /azuread/data/prod/creds/syfosmmanuell
-        mountPath: /secrets/azuread/syfosmmanuell
-      - kvPath: /azuread/data/prod/creds/syfosmmanuell-backend
-        mountPath: /secrets/azuread/syfosmmanuell-backend
-      - kvPath: /kv/prod/fss/syfosmmanuell/teamsykmelding
-        mountPath: /secrets/default/syfosmmanuell
+      - kvPath: /kv/preprod/fss/syfosmmanuell/teamsykmelding
+        mountPath: /secrets/syfosmmanuell
   webproxy: true
   ingresses:
-    - "https://syfosmmanuell.nais.adeo.no"
+    - 'https://syfosmmanuell.nais.adeo.no'
   env:
-    - name: AAD_DISCOVERY_URL
-      value: https://login.microsoftonline.com/62366534-1ec3-4962-8869-9b5535279d0b/v2.0/.well-known/openid-configuration
     - name: AAD_REDIRECT_URL
       value: https://syfosmmanuell.nais.adeo.no/callback
-    - name: DOWNSTREAM_API_PATH
-      value: backend
     - name: DOWNSTREAM_API_URL
       value: https://syfosmmanuell-backend.nais.adeo.no/
-    - name: GRAPH_API_CLIENT_ID
-      value: https://graph.microsoft.com
     - name: GRAPH_API_SCOPES
       value: https://graph.microsoft.com/.default
-    - name: MODIA_CONTEXT_PATH
-      value: modiacontextholder/api
     - name: MODIA_CONTEXT_URL
       value: https://modiacontextholder.nais.adeo.no
-    - name: REDIS_HOST
-      value: syfosmmanuell-redis.teamsykmelding.svc.nais.local
-    - name: REDIS_PORT
-      value: '6379'
+    - name: SYFOSMMANUELL_BACKEND_SCOPE
+      value: prod-fss.teamsykmelding.syfosmmanuell-backend
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem
-      
