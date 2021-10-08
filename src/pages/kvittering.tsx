@@ -7,6 +7,7 @@ import { getModiaContext, ModiaContext, ModiaContextError } from '../services/mo
 import { StoreContext } from '../data/store';
 import NoEnhetError from '../components/NoEnhetError';
 import { clientEnvs, isDevOrDemo } from '../utils/env';
+import { logger } from '../utils/logger';
 
 import { BasePageRequiredProps } from './_app';
 
@@ -19,15 +20,20 @@ const Kvittering = ({ isDemo }: Props): JSX.Element => {
 
   useEffect(() => {
     // No aktivEnhet means that modiaContext failed to load
-    if (!aktivEnhet) return;
+    if (!aktivEnhet) {
+      logger.error('On kvittering page with no context loaded');
+      return;
+    }
 
     if (isDemo) {
+      logger.warn('In demo, redirecting back to dummy oppgave');
       setTimeout(() => {
         window.location.href = '/?oppgaveid=123456';
       }, 2000);
       return;
     }
 
+    logger.warn('On kvittering page, user will be redirected to GOSYS');
     setTimeout(() => {
       window.location.href = clientEnvs.NEXT_PUBLIC_GOSYS_URL;
     }, 2000);

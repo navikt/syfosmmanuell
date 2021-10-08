@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@navikt/fnrvalidator": "^1.1.4",
+    "@sentry/nextjs": "^6.13.3",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.3.1",
     "dayjs": "^1.10.6",
@@ -41,6 +42,7 @@
     "zod": "^3.8.2"
   },
   "scripts": {
+    "auth:sentry": "npx sentry-cli -url https://sentry.gc.nav.no/ login",
     "start": "next dev",
     "start:prod": "NODE_OPTIONS='-r next-logger/presets/next-only' next start",
     "build": "next build",

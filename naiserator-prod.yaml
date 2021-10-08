@@ -60,5 +60,7 @@ spec:
       value: https://modiacontextholder.nais.adeo.no
     - name: SYFOSMMANUELL_BACKEND_SCOPE
       value: prod-fss.teamsykmelding.syfosmmanuell-backend
+    - name: NEXT_PUBLIC_ENVIRONMENT
+      value: production
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem
