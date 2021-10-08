@@ -61,6 +61,7 @@ export async function getOppgave(
     };
   }
 
+  logger.info(`Oppgave med id ${oppgaveid} hentet OK`);
   return parseResult.data;
 }
 
@@ -84,6 +85,7 @@ export async function submitOppgave(
   });
 
   if (result.ok) {
+    logger.info(`Oppgave med id ${oppgaveid} ferdigstilt OK`);
     return;
   } else {
     throw new Error(`Unable to submit oppgave: ${result.status} ${result.statusText}`);
