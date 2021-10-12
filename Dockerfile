@@ -7,11 +7,14 @@ RUN addgroup -g 1069 user && \
 
 WORKDIR /app
 
+COPY .yarn /app/.yarn
+COPY .yarnrc.yml /app/
+COPY yarn.lock /app/
 copy init.sh /app/
-COPY package*.json /app/
+COPY package.json /app/
 COPY scripts /app/scripts
 
-RUN npm ci
+RUN yarn install --immutable
 
 COPY .next /app/.next/
 COPY public /app/public/
@@ -21,4 +24,4 @@ RUN chown user:user -R .next
 USER user
 
 ENTRYPOINT ["./init.sh"]
-CMD ["npm", "run", "start:prod"]
+CMD ["yarn", "start:prod"]
