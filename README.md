@@ -2,36 +2,30 @@
 
 Saksbehandlerfrontend for manuell behandling av tilbakedaterte sykemeldinger. Tillater saksbehandler å `godkjenne` eller `godkjenne med merknad`. Merknader vises for bruker sluttbruker.
 
-Applikasjonen har to hovedoppgaver:
-- React (CRA) frontend for UI. Lever under `/client`
-- Express-server som server statisk frontendbygg, brukerautentisering mot Azure AD og reverse proxy for bakomliggende tjenester. Lever under `/server`
+Applikasjonen er en NextJS app med API routes for data fetching og lagring.
+- Frontenden rendres og prepopuleres med en sykmelding som skal behandles (SSR).
+- Dataen er fetched fra modiacontextholder og syfosmmanuell-backend. For hver av disse veksles inn i en token spesifikt for tjenesten som skal prates med.
+- Når behandlingen er gjennomført utføres det et POST kall til syfosmmanuell-backend, her veksles også token.
 
-`client browser --> syfosmmanuell (auth/reverse-proxy) --> downstream API's`
+`client browser --> next API routes som veksler tokens --> downstream APIs`
 
 En demoside er offentlig tilgjengelig på: https://syfosmmanuell.labs.nais.io/
 
-
 ## Utvikling
-### Client:
-```bash
-$ cd /client
-$ npm i
-$ npm start
-```
-Vil laste miljøvariabler fra `/client/.env.development`
 
-### Server:
+Pass på at du har yarn installert, om du ikke har det: `npm i -g yarn`
+
+### Utvikling:
 ```bash
-$ cd /server
-$ npm i
-$ npm run dev
+$ yarn
+$ yarn start
 ```
-Vil laste miljøvariabler fra `/server/.env.development`
+Vil laste miljøvariabler fra `/.env.development`
 
 ## Test
 Bruker React Testing Library for
 ```bash
-$ npm test
+$ yarn test
 ```
 
 ## Testing av tjenesteflyt i testmiljø

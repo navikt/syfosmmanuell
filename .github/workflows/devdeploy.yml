@@ -19,13 +19,13 @@ jobs:
           node-version: '16.x'
       - name: Install deps
         run: |
-          npm install
+          yarn --immutable
       - name: Run unit tests
         run: |
-          npm run test:ci
+          yarn test:ci
       - name: Lint
         run: |
-          npm run lint
+          yarn lint
 
   build-push-deploy:
     name: Checkout code and create docker tag
@@ -40,7 +40,7 @@ jobs:
           node-version: '16.x'
       - name: Install deps
         run: |
-          npm ci
+          yarn --immutable
       - name: Build app
         env:
           NODE_ENV: production
@@ -48,7 +48,7 @@ jobs:
           NEXT_PUBLIC_ENVIRONMENT: dev
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: |
-          npm run build
+          yarn build
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
