@@ -5,10 +5,11 @@ import { FormState } from 'react-hook-form';
 import { FormShape } from './Form';
 
 interface FeiloppsummeringContainerProps {
+  className?: string;
   formState: FormState<FormShape>; // Must pass in whole state object to be able to react to changes
 }
 
-function FeiloppsummeringContainer({ formState }: FeiloppsummeringContainerProps): JSX.Element | null {
+function FeiloppsummeringContainer({ className, formState }: FeiloppsummeringContainerProps): JSX.Element | null {
   const { errors } = formState;
   const feiloppsummeringRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +28,7 @@ function FeiloppsummeringContainer({ formState }: FeiloppsummeringContainerProps
   return (
     <Feiloppsummering
       id="feiloppsummering"
-      className="form__feiloppsummering"
+      className={className}
       innerRef={feiloppsummeringRef}
       tittel="For å gå videre må du rette opp følgende"
       feil={feiloppsummeringsfeil}

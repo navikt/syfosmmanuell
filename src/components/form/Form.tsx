@@ -1,17 +1,20 @@
 import { Knapp } from 'nav-frontend-knapper';
 import { RadioPanelGruppe, Label } from 'nav-frontend-skjema';
+import Spinner from 'nav-frontend-spinner';
 import { useForm, Controller } from 'react-hook-form';
 
 import { clientEnvs } from '../../utils/env';
 
 import FeiloppsummeringContainer from './FeiloppsummeringContainer';
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
+import classes from './Form.module.css';
 
 type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST';
 export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER';
 
 interface Props {
   onSubmit: (values: FormShape) => void;
+  submitting: boolean;
 }
 
 export interface FormShape {
@@ -19,14 +22,14 @@ export interface FormShape {
   merknad?: Merknad; // should be set if status === GODKJENT_MED_MERKNAD
 }
 
-const Form = ({ onSubmit }: Props) => {
+const Form = ({ onSubmit, submitting }: Props) => {
   const { control, handleSubmit, formState, watch } = useForm<FormShape>();
   const { errors } = formState;
   const watchStatus = watch('status');
   const watchMerknad = watch('merknad');
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
         control={control}
         name="status"
@@ -40,7 +43,7 @@ const Form = ({ onSubmit }: Props) => {
         }}
         render={({ field: { onChange, value } }) => (
           <RadioPanelGruppe
-            className="form__radio-group"
+            className={classes.radioGroup}
             name="status"
             onChange={onChange}
             checked={value}
@@ -70,7 +73,7 @@ const Form = ({ onSubmit }: Props) => {
             }}
             render={({ field: { onChange, value } }) => (
               <RadioPanelGruppe
-                className="form__radio-group"
+                className={classes.radioGroup}
                 name="merknad"
                 onChange={onChange}
                 checked={value}
@@ -93,16 +96,17 @@ const Form = ({ onSubmit }: Props) => {
         </>
       )}
 
-      <div className="form__info-til-behandler-og-pasient">
+      <div className={classes.infoTilBehandlerOgPasient}>
         <InfoTilBehandlerOgPasient type={watchMerknad} />
       </div>
 
-      <FeiloppsummeringContainer formState={formState} />
+      <FeiloppsummeringContainer className={classes.feiloppsummering} formState={formState} />
 
-      <Knapp id="submit-button" type="hoved" htmlType="submit">
+      <Knapp id="submit-button" type="hoved" htmlType="submit" disabled={submitting}>
         Registrer
+        {submitting && <Spinner className={classes.submitSpinner} />}
       </Knapp>
-      <a href={clientEnvs.NEXT_PUBLIC_GOSYS_URL} className="knapp knapp--flat form__cancel">
+      <a href={clientEnvs.NEXT_PUBLIC_GOSYS_URL} className={`knapp knapp--flat ${classes.cancel}`}>
         Avbryt
       </a>
     </form>

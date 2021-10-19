@@ -8,7 +8,6 @@ import ModiaHeader from '../components/modiaheader/ModiaHeader';
 import '../basic.less';
 import '../components/MainContent.less';
 import '../components/expandable/Expandable.less';
-import '../components/form/Form.less';
 import '../components/form/InfoTilBehandlerOgPasient.less';
 import '../components/hjelpetekst/hjelpetekstwrapper.less';
 import '../components/infopanel/infopanel.less';

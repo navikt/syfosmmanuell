@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { useRouter } from 'next/router';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -21,21 +21,27 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
   const router = useRouter();
   const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
   const { sykmelding, personNrPasient, mottattDato } = manuellOppgave;
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (formState: FormShape) => {
-    try {
-      await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState);
-      await router.push('/kvittering');
-    } catch (e) {
-      logger.error(e);
-      if (e instanceof Error) {
-        setError(e.message);
-      } else {
-        setError('Ukjent feil');
+  const handleSubmit = useCallback(
+    async (formState: FormShape) => {
+      try {
+        setSubmitting(true);
+        await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState);
+        await router.push('/kvittering');
+      } catch (e) {
+        logger.error(e);
+        setSubmitting(false);
+        if (e instanceof Error) {
+          setError(e.message);
+        } else {
+          setError('Ukjent feil');
+        }
       }
-    }
-  };
+    },
+    [aktivEnhet, manuellOppgave.oppgaveid, router],
+  );
 
   return (
     <div className="panel">
@@ -46,7 +52,7 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
         personNrPasient={personNrPasient}
       />
       <TilbakedatertForlengelse sykmelding={sykmelding} />
-      <Form onSubmit={handleSubmit} />
+      <Form onSubmit={handleSubmit} submitting={submitting} />
       {error && (
         <div className="margin-top--2">
           <Normaltekst>{error}</Normaltekst>
