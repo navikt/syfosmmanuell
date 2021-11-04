@@ -57,6 +57,13 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
             vis
           />
           <ElementMedTekst
+            vis={erIArbeid.annetArbeidPaSikt && !!erIArbeid.arbeidFOM}
+            tittel="Anslå når du tror dette kan skje"
+            tekst={tilLesbarDatoMedArstall(erIArbeid.arbeidFOM)}
+            margin
+            innrykk
+          />
+          <ElementMedTekst
             vis={erIArbeid.annetArbeidPaSikt && !!erIArbeid.vurderingsdato}
             tittel="Når antar du å kunne gi tilbakemelding på dette?"
             tekst={tilLesbarDatoMedArstall(erIArbeid.vurderingsdato)}
