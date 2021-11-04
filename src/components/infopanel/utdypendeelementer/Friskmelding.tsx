@@ -30,6 +30,7 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
         tittel="5.1.1. Beskriv eventuelle hensyn som må tas på arbeidsplassen"
         tekst={hensynArbeidsplassen}
         margin
+        innrykk
         vis={!!hensynArbeidsplassen}
       />
 
