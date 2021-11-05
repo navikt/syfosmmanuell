@@ -20,6 +20,8 @@ Pass på at du har yarn installert, om du ikke har det: `npm i -g yarn`
 $ yarn
 $ yarn start
 ```
+URL: http://localhost:3000/?oppgaveid=123456
+
 Vil laste miljøvariabler fra `/.env.development`
 
 ## Test

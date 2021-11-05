@@ -30,6 +30,7 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
         tittel="5.1.1. Beskriv eventuelle hensyn som må tas på arbeidsplassen"
         tekst={hensynArbeidsplassen}
         margin
+        innrykk
         vis={!!hensynArbeidsplassen}
       />
 
@@ -55,6 +56,13 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
             margin
             bold
             vis
+          />
+          <ElementMedTekst
+            vis={erIArbeid.annetArbeidPaSikt && !!erIArbeid.arbeidFOM}
+            tittel="Anslå når du tror dette kan skje"
+            tekst={tilLesbarDatoMedArstall(erIArbeid.arbeidFOM)}
+            margin
+            innrykk
           />
           <ElementMedTekst
             vis={erIArbeid.annetArbeidPaSikt && !!erIArbeid.vurderingsdato}
