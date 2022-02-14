@@ -9,7 +9,7 @@ Applikasjonen er en NextJS app med API routes for data fetching og lagring.
 
 `client browser --> next API routes som veksler tokens --> downstream APIs`
 
-En demoside er offentlig tilgjengelig på: https://syfosmmanuell.labs.nais.io/
+En demoside er offentlig tilgjengelig på: https://syfosmmanuell.labs.nais.io/?oppgaveid=1
 
 ## Utvikling
 
