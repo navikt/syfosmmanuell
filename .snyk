@@ -5,8 +5,8 @@ ignore:
   SNYK-JS-ANSIREGEX-1583908:
     - '@sentry/nextjs > @sentry/webpack-plugin > @sentry/cli > npmlog > gauge > wide-align > string-width > strip-ansi > ansi-regex':
         reason: None given
-        expires: '2022-01-13T10:30:59.089Z'
+        expires: '2022-03-16T10:23:56.549Z'
     - node-gyp > npmlog > gauge > wide-align > string-width > strip-ansi > ansi-regex:
         reason: None given
-        expires: '2022-01-13T10:30:59.089Z'
+        expires: '2022-03-16T10:23:56.549Z'
 patch: {}
