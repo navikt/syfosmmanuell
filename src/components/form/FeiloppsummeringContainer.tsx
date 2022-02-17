@@ -18,8 +18,8 @@ function FeiloppsummeringContainer({ className, formState }: FeiloppsummeringCon
   }, [formState]);
 
   const feiloppsummeringsfeil: FeiloppsummeringFeil[] = Object.entries(errors)
-    .filter(([_key, value]) => value !== undefined)
-    .map(([key, value]) => ({ skjemaelementId: `b-${key}`, feilmelding: value.message! }));
+    .filter(([, value]) => value !== undefined)
+    .map(([key, value]) => ({ skjemaelementId: `b-${key}`, feilmelding: value.message ?? '' }));
 
   if (feiloppsummeringsfeil.length === 0) {
     return null;

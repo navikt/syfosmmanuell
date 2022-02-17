@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import pino from 'pino';
 
 const getFrontendLogger = (): pino.Logger =>
@@ -6,7 +7,7 @@ const getFrontendLogger = (): pino.Logger =>
       transmit: {
         send: async (level, logEvent) => {
           try {
-            await fetch('/api/logger', {
+            await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/api/logger`, {
               method: 'POST',
               headers: { 'content-type': 'application/json' },
               body: JSON.stringify(logEvent),
@@ -20,15 +21,6 @@ const getFrontendLogger = (): pino.Logger =>
     },
   });
 
-const createBackendLogger = (): pino.Logger =>
-  pino({
-    prettyPrint: process.env.NODE_ENV !== 'production',
-    timestamp: false,
-    formatters: {
-      level: (label) => {
-        return { level: label };
-      },
-    },
-  });
+const createBackendLogger = require('../../next-logger.config').logger;
 
 export const logger = typeof window !== 'undefined' ? getFrontendLogger() : createBackendLogger();

@@ -1,4 +1,5 @@
 import { Periode } from '../types/sykmelding';
+
 import { periodeUndertekst } from './tekstUtils';
 
 describe('Periode undertekst', () => {

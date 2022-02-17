@@ -1,4 +1,5 @@
 import { Periode } from '../types/sykmelding';
+
 import { sorterPerioderEldsteFoerst } from './sorterSykmeldingUtils';
 
 const periodeDefaultValues = {

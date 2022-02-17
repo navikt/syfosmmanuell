@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import EtikettMedTekst from '../../layout/EtikettMedTekst';
 import { Diagnose } from '../../../../types/sykmelding';
 

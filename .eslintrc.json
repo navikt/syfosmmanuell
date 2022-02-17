@@ -1,7 +1,8 @@
 {
-  "extends": "next/core-web-vitals",
-  "plugins": ["import"],
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier", "next/core-web-vitals"],
+  "plugins": ["prettier"],
   "rules": {
+    "prettier/prettier": "warn",
     "import/no-extraneous-dependencies": "error",
     "import/order": ["warn", { "newlines-between": "always" }],
     "import/no-anonymous-default-export": "off"

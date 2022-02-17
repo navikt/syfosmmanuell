@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 
 import { OppgaveFetchingError } from '../services/oppgaveService';

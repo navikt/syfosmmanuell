@@ -131,14 +131,12 @@ export const manuellOppgave = {
       '6.3': {
         '6.3.1': {
           sporsmal: 'Er pasienten frisk?',
-          svar:
-            'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
+          svar: 'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
           restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
         },
         '6.3.2': {
           sporsmal: 'Er pasienten klar for å jobbe?',
-          svar:
-            'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
+          svar: 'word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word',
           restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
         },
       },

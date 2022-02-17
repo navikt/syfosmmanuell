@@ -8,7 +8,6 @@ import sjekkboksKryss from '../../../svg/sjekkboksKryss.svg';
 import Innrykk from './Innrykk';
 import Margin from './Margin';
 
-
 interface EnkelCheckboxProps {
   tittel: string;
   checked: boolean;
@@ -27,9 +26,9 @@ const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true, lis
   const innhold: JSX.Element = (
     <div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{marginRight: '1rem'}}>
-        <Image src={checked ? sjekkboks : sjekkboksKryss} alt="sjekkboks ikon" />
-              </span>
+        <span style={{ marginRight: '1rem' }}>
+          <Image src={checked ? sjekkboks : sjekkboksKryss} alt="sjekkboks ikon" />
+        </span>
         <span>{bold ? <Element>{tittel}</Element> : <Normaltekst>{tittel}</Normaltekst>}</span>
       </div>
       {!!listItems?.length && (

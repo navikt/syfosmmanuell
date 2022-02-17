@@ -17,8 +17,6 @@ import '../components/infopanel/utdypendeelementer/Tilbakedateringsinfo.less';
 import '../components/sykmelding/SykmeldingHeader.less';
 import '../components/sykmelding/sykmeldingvarianter/HeleSykmeldingen.less';
 
-
-
 export interface BasePageRequiredProps {
   modiaContext: ModiaContext | ModiaContextError;
 }

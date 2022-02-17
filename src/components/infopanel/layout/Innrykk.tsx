@@ -1,15 +1,11 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-interface InnrykkProps {
-    children: any | any[];
-}
+const Innrykk = ({ children }: PropsWithChildren<unknown>) => {
+  if (!children) {
+    return null;
+  }
 
-const Innrykk = ({ children }: InnrykkProps) => {
-    if (!children) {
-        return null;
-    }
-
-    return <div style={{ marginLeft: '2.5rem' }}>{children}</div>;
+  return <div style={{ marginLeft: '2.5rem' }}>{children}</div>;
 };
 
 export default Innrykk;

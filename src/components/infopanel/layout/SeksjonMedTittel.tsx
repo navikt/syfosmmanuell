@@ -1,26 +1,25 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Systemtittel } from 'nav-frontend-typografi';
 
 interface SeksjonMedTittelProps {
-    tittel?: string;
-    children: any /* JSX.Element | (JSX.Element | null)[]; */
-    understrek?: boolean;
+  tittel?: string;
+  understrek?: boolean;
 }
 
-const SeksjonMedTittel = ({ tittel, children, understrek }: SeksjonMedTittelProps) => {
-    return (
-        <>
-            {tittel && (
-                <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
-                    <Systemtittel>{tittel}</Systemtittel>
-                </div>
-            )}
+const SeksjonMedTittel = ({ tittel, children, understrek }: PropsWithChildren<SeksjonMedTittelProps>) => {
+  return (
+    <>
+      {tittel && (
+        <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+          <Systemtittel>{tittel}</Systemtittel>
+        </div>
+      )}
 
-            {children}
+      {children}
 
-            {understrek && <hr />}
-        </>
-    );
+      {understrek && <hr />}
+    </>
+  );
 };
 
 export default SeksjonMedTittel;

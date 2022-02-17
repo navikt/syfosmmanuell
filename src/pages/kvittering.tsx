@@ -56,7 +56,7 @@ const Kvittering = ({ isDemo }: Props): JSX.Element => {
 };
 
 export const getServerSideProps = withAuthenticatedPage(
-  async ({ req }, accessToken): Promise<GetServerSidePropsResult<Props>> => {
+  async (_, accessToken): Promise<GetServerSidePropsResult<Props>> => {
     const modiaContext: ModiaContext | ModiaContextError = await getModiaContext(accessToken);
 
     return {

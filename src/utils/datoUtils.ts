@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/nb';
 import utc from 'dayjs/plugin/utc';
+
 import { Periode } from '../types/sykmelding';
 
 dayjs.locale('nb');

@@ -8,6 +8,10 @@ const SentryWebpackPluginOptions = {
 module.exports = withSentryConfig(
   withLess({
     lessLoaderOptions: {},
+    eslint: {
+      ignoreDuringBuilds: true,
+      dirs: ['src'],
+    },
     async rewrites() {
       return [
         {

@@ -31,7 +31,7 @@ function Index({ manuellOppgave }: IndexProps) {
 }
 
 export const getServerSideProps = withAuthenticatedPage(
-  async ({ req, query }, accessToken): Promise<GetServerSidePropsResult<IndexProps>> => {
+  async ({ query }, accessToken): Promise<GetServerSidePropsResult<IndexProps>> => {
     if (!query?.oppgaveid || typeof query.oppgaveid !== 'string') {
       return {
         notFound: true,

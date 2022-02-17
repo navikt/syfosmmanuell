@@ -1,4 +1,4 @@
-import {ResponseType} from "openid-client";
+import { ResponseType } from 'openid-client';
 
 import { env } from '../utils/env';
 

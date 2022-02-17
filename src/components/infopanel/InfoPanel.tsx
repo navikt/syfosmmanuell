@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import Image from 'next/image';
 
@@ -9,10 +9,9 @@ type Fargetema = 'feil' | 'info' | 'advarsel';
 interface InfoPanelProps {
   fargetema: Fargetema;
   tittel: string;
-  children: any | any[];
 }
 
-const InfoPanel = ({ fargetema, tittel, children }: InfoPanelProps) => {
+const InfoPanel = ({ fargetema, tittel, children }: PropsWithChildren<InfoPanelProps>) => {
   return (
     <article className="infopanel">
       <header className={`infopanel-header infopanel-${fargetema}`}>

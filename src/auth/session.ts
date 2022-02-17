@@ -2,7 +2,6 @@ import { GetServerSidePropsContext, GetServerSidePropsResult, NextApiRequest, Ne
 import { applySession as applyIronSession, Session } from 'next-iron-session';
 import { TokenSet } from 'openid-client';
 
-import { logger } from '../utils/logger';
 import { BasePageRequiredProps } from '../pages/_app';
 import { hasValidAccessToken } from '../services/tokenService';
 import { env } from '../utils/env';

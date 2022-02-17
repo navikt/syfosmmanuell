@@ -19,11 +19,12 @@ const Expandable = (props: ExpandableProps) => {
 
   useEffect(() => {
     setErApen(props.erApen);
-    setInnholdHeight(innhold.current!.offsetHeight);
+    setInnholdHeight(innhold.current?.offsetHeight ?? 0);
   }, [props.erApen]);
 
   const onButtonClick = () => {
-    expandable.current!.focus();
+    if (!expandable.current) return;
+    expandable.current.focus();
     setErApen(!erApen);
   };
 

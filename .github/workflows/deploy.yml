@@ -47,7 +47,7 @@ jobs:
           yarn --immutable
       - name: Run unit tests
         run: |
-          yarn test:ci
+          yarn test
       - name: Lint
         run: |
           yarn lint
