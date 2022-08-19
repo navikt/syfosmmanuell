@@ -45,7 +45,8 @@
     "zod": "^3.11.6"
   },
   "resolutions": {
-    "ansi-regex": "5.0.1"
+    "ansi-regex": "5.0.1",
+    "unset-value": "2.0.1"
   },
   "scripts": {
     "auth:sentry": "npx sentry-cli -url https://sentry.gc.nav.no/ login",
