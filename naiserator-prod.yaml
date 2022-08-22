@@ -53,13 +53,13 @@ spec:
     - name: AAD_REDIRECT_URL
       value: https://syfosmmanuell.nais.adeo.no/callback
     - name: DOWNSTREAM_API_URL
-      value: https://syfosmmanuell-backend.nais.adeo.no/
+      value: https://syfosmmanuell-backend.intern.nav.no/
     - name: GRAPH_API_SCOPES
       value: https://graph.microsoft.com/.default
     - name: MODIA_CONTEXT_URL
       value: https://modiacontextholder.nais.adeo.no
     - name: SYFOSMMANUELL_BACKEND_SCOPE
-      value: prod-fss.teamsykmelding.syfosmmanuell-backend
+      value: prod-gcp.teamsykmelding.syfosmmanuell-backend
     - name: NEXT_PUBLIC_ENVIRONMENT
       value: production
     - name: NODE_EXTRA_CA_CERTS
