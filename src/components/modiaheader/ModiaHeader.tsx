@@ -10,7 +10,7 @@ import styles from './ModiaHeader.module.css';
 import navLogo from './nav-logo.svg';
 
 interface Props {
-  modiaContext: ModiaContext | ModiaContextError;
+  modiaContext?: ModiaContext | ModiaContextError;
 }
 
 function ModiaHeader({ modiaContext }: Props): JSX.Element {

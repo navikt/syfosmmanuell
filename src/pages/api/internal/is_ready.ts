@@ -5,7 +5,6 @@ type Data = {
 };
 
 const isReady = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
-  // TODO verify enviroment variables
   res.status(200).json({ message: `I'm ready!` });
 };
 

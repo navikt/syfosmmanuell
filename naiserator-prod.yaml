@@ -15,19 +15,9 @@ spec:
     cpuThresholdPercentage: 90
   port: 3000
   liveness:
-    path: /api/is_alive
-    initialDelay: 10
-    timeout: 5
-    periodSeconds: 5
-    failureThreshold: 30
+    path: /api/internal/is_alive
   readiness:
-    path: /api/is_ready
-    initialDelay: 30
-    periodSeconds: 5
-    timeout: 5
-  prometheus:
-    enabled: true
-    path: /prometheus
+    path: /api/internal/is_ready
   resources:
     limits:
       cpu: 500m
@@ -39,28 +29,18 @@ spec:
     application:
       enabled: true
       tenant: nav.no
-      replyURLs:
-        - 'https://syfosmmanuell.nais.adeo.no/callback'
-  vault:
-    enabled: true
-    paths:
-      - kvPath: /kv/prod/fss/syfosmmanuell/teamsykmelding
-        mountPath: /secrets/syfosmmanuell
-  webproxy: true
+    sidecar:
+      enabled: true
   ingresses:
-    - 'https://syfosmmanuell.nais.adeo.no'
+    - 'https://syfosmmanuell.intern.nav.no'
   env:
-    - name: AAD_REDIRECT_URL
-      value: https://syfosmmanuell.nais.adeo.no/callback
     - name: DOWNSTREAM_API_URL
       value: https://syfosmmanuell-backend.intern.nav.no/
-    - name: GRAPH_API_SCOPES
-      value: https://graph.microsoft.com/.default
+    - name: MODIA_CONTEXT_SCOPE
+      value: api://prod-fss.personoversikt.modiacontextholder/.default
     - name: MODIA_CONTEXT_URL
-      value: https://modiacontextholder.nais.adeo.no
+      value: https://modiacontextholder.prod-fss-pub.nais.io
     - name: SYFOSMMANUELL_BACKEND_SCOPE
       value: prod-gcp.teamsykmelding.syfosmmanuell-backend
     - name: NEXT_PUBLIC_ENVIRONMENT
       value: production
-    - name: NODE_EXTRA_CA_CERTS
-      value: /etc/ssl/ca-bundle.pem

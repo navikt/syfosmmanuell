@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 import { logger } from '../utils/logger';
 import { ClientError } from '../utils/typeUtils';
-import { isDevOrDemo } from '../utils/env';
+import { isLocalOrDemo } from '../utils/env';
 
-import { getModiaContextOboAccessToken } from './tokenService';
+import { getModiaContextOboAccessToken } from '../auth/azureTokens';
 
 export interface ModiaContext {
   navn: string;
@@ -16,7 +16,7 @@ export interface ModiaContext {
 export type ModiaContextError = ClientError<'MODIA_ERROR' | 'PARSE_ERROR'>;
 
 export async function getModiaContext(userAccessToken: string): Promise<ModiaContext | ModiaContextError> {
-  if (isDevOrDemo) {
+  if (isLocalOrDemo) {
     logger.warn('Using mocked modia context for local development (or demo)');
     return {
       navn: 'Johan J. Johansson',
@@ -31,8 +31,8 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
 
   const modiaContextAccessToken = await getModiaContextOboAccessToken(userAccessToken);
   const [veileder, aktivEnhet] = await Promise.all([
-    getVeileder(userAccessToken, modiaContextAccessToken),
-    getAktivEnhet(userAccessToken, modiaContextAccessToken),
+    getVeileder(modiaContextAccessToken),
+    getAktivEnhet(modiaContextAccessToken),
   ]);
 
   if ('errorType' in aktivEnhet) {
@@ -50,16 +50,14 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
 }
 
 async function getVeileder(
-  accessToken: string,
-  modiaContextAccessToken: string,
+  oboToken: string,
 ): Promise<Veileder | ModiaContextError> {
   const url = `${process.env['MODIA_CONTEXT_URL']}/modiacontextholder/api/decorator/v2`;
 
   try {
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
-        Cookie: `isso-accesstoken=${modiaContextAccessToken}`,
+        Authorization: `Bearer ${oboToken}`,
       },
     });
 
@@ -93,16 +91,14 @@ async function getVeileder(
 }
 
 async function getAktivEnhet(
-  userAccessToken: string,
-  modiaContextAccessToken: string,
+  oboToken: string,
 ): Promise<AktivEnhet | ModiaContextError> {
   const url = `${process.env['MODIA_CONTEXT_URL']}/modiacontextholder/api/context/aktivenhet`;
 
   try {
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${userAccessToken}`,
-        Cookie: `isso-accesstoken=${modiaContextAccessToken}`,
+        Authorization: `Bearer ${oboToken}`,
       },
     });
 

@@ -10,13 +10,13 @@ if (missingEnvs.length) {
 }
 
 /* Only to be used in SRR */
-export const isDevOrDemo = process.env.NODE_ENV !== 'production' || process.env.IS_NAIS_LABS_DEMO === 'true';
+export const isLocalOrDemo = process.env.NODE_ENV !== 'production' || process.env.IS_NAIS_LABS_DEMO === 'true';
 export const clientEnvs = unverifiedClientEnvs as Record<keyof typeof unverifiedClientEnvs, string>;
 
 export function env(name: string, required: false): string | undefined;
 export function env(name: string, required: true): string;
 export function env(name: string, required?: true): string;
-export function env(name: string, required: boolean = true) {
+export function env(name: string, required = true) {
   if (!process.env[name] && required) {
     throw new Error(`Missing required environment variable '${name}'`);
   }

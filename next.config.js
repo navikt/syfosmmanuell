@@ -1,25 +1,31 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const withLess = require('next-with-less');
 const { withSentryConfig } = require('@sentry/nextjs');
 
-const SentryWebpackPluginOptions = {
-  silent: true, // Suppresses all logs
-};
-
-module.exports = withSentryConfig(
-  withLess({
+const nextConfig = withLess({
     lessLoaderOptions: {},
     async rewrites() {
-      return [
-        {
-          source: '/callback',
-          destination: '/api/callback',
-        },
-        {
-          source: '/login',
-          destination: '/api/login',
-        },
-      ];
+        return [
+            {
+                source: '/callback',
+                destination: '/api/callback',
+            },
+            {
+                source: '/login',
+                destination: '/api/login',
+            },
+        ];
     },
-  }),
-  SentryWebpackPluginOptions,
-);
+    eslint: {
+        ignoreDuringBuilds: true,
+        dirs: ['src'],
+    },
+});
+
+module.exports =
+    process.env.SENTRY_ENABLED === 'true'
+        ? withSentryConfig(nextConfig, {
+              silent: true,
+          })
+        : nextConfig;

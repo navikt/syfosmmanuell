@@ -1,11 +1,11 @@
 import { ManuellOppgave } from '../types/manuellOppgave';
 import { manuellOppgave } from '../mock/manuellOppgave';
 import { FormShape } from '../components/form/Form';
-import { env, isDevOrDemo } from '../utils/env';
+import { env, isLocalOrDemo } from '../utils/env';
 import { logger } from '../utils/logger';
 import { ClientError } from '../utils/typeUtils';
 
-import { getOppgaveOboAccessToken } from './tokenService';
+import { getOppgaveOboAccessToken } from '../auth/azureTokens';
 
 export type OppgaveFetchingError = ClientError<
   'AUTHORIZATION' | 'OPPGAVE_NOT_FOUND' | 'ALREADY_RESOLVED' | 'GENERAL_ERROR' | 'PARSE_ERROR'
@@ -15,7 +15,7 @@ export async function getOppgave(
   oppgaveid: string,
   accessToken: string,
 ): Promise<ManuellOppgave | OppgaveFetchingError> {
-  if (isDevOrDemo) {
+  if (isLocalOrDemo) {
     return ManuellOppgave.parse(manuellOppgave);
   }
 
@@ -71,7 +71,7 @@ export async function submitOppgave(
   body: FormShape,
   accessToken: string,
 ): Promise<void> {
-  if (isDevOrDemo) {
+  if (isLocalOrDemo) {
     logger.warn(`Mocking submit for development, valgt enhet: ${aktivEnhet}, oppgaveid: ${oppgaveid}`);
     return;
   }
