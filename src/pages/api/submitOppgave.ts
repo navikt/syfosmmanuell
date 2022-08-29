@@ -1,7 +1,7 @@
 import { submitOppgave } from '../../services/oppgaveService';
 import { SubmitOppgaveBody } from '../../utils/submitUtils';
 import { logger } from '../../utils/logger';
-import { withAuthenticatedApi } from '../../auth/session';
+import { withAuthenticatedApi } from '../../auth/withAuth';
 
 export default withAuthenticatedApi(async (req, res, accessToken): Promise<void> => {
   if (req.method !== 'POST') {

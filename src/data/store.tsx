@@ -13,13 +13,13 @@ export const StoreContext = createContext<Store>({
 });
 
 type StoreProviderProps = {
-  modiaContext: ModiaContext | ModiaContextError;
+  modiaContext?: ModiaContext | ModiaContextError;
 };
 
 const StoreProvider = ({ children, modiaContext }: PropsWithChildren<StoreProviderProps>) => {
   const defaultAktivSelectValue = getDefaultSelectValue(modiaContext);
   const [aktivEnhet, setAktivEnhet] = useState<string | null>(defaultAktivSelectValue);
-  const handleAktivEnhetChange = useCallback((aktivEnhet) => {
+  const handleAktivEnhetChange = useCallback((aktivEnhet: string) => {
     setAktivEnhet(aktivEnhet);
   }, []);
 
@@ -30,7 +30,7 @@ const StoreProvider = ({ children, modiaContext }: PropsWithChildren<StoreProvid
   );
 };
 
-function getDefaultSelectValue(modiaContext: ModiaContext | ModiaContextError): string | null {
+function getDefaultSelectValue(modiaContext?: ModiaContext | ModiaContextError): string | null {
   if (!modiaContext || 'errorType' in modiaContext) {
     return null;
   }

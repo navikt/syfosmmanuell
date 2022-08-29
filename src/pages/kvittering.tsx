@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { GetServerSidePropsResult } from 'next';
 
-import { withAuthenticatedPage } from '../auth/session';
+import { withAuthenticatedPage } from '../auth/withAuth';
 import { getModiaContext, ModiaContext, ModiaContextError } from '../services/modiaService';
 import { StoreContext } from '../data/store';
 import NoEnhetError from '../components/NoEnhetError';
-import { clientEnvs, isDevOrDemo } from '../utils/env';
+import { clientEnvs, isLocalOrDemo } from '../utils/env';
 import { logger } from '../utils/logger';
 
 import { BasePageRequiredProps } from './_app';
@@ -62,7 +62,7 @@ export const getServerSideProps = withAuthenticatedPage(
     return {
       props: {
         modiaContext,
-        isDemo: isDevOrDemo,
+        isDemo: isLocalOrDemo,
       },
     };
   },

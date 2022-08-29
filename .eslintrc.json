@@ -1,9 +1,0 @@
-{
-  "extends": "next/core-web-vitals",
-  "plugins": ["import"],
-  "rules": {
-    "import/no-extraneous-dependencies": "error",
-    "import/order": ["warn", { "newlines-between": "always" }],
-    "import/no-anonymous-default-export": "off"
-  }
-}
