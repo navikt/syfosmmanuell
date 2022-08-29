@@ -7,7 +7,7 @@
   },
   "packageManager": "yarn@3.2.2",
   "dependencies": {
-    "@navikt/eslint-config-teamsykmelding": "^0.18.0",
+    "@navikt/eslint-config-teamsykmelding": "^0.20.0",
     "@navikt/fnrvalidator": "^1.3.0",
     "@sentry/nextjs": "^7.11.1",
     "classnames": "^2.3.1",
@@ -37,7 +37,7 @@
     "next-logger": "^2.2.0",
     "node-cache": "^5.1.2",
     "openid-client": "^3.15.10",
-    "pino": "^7.5.1",
+    "pino": "^8.4.2",
     "prop-types": "^15.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -51,8 +51,8 @@
   },
   "scripts": {
     "auth:sentry": "npx sentry-cli -url https://sentry.gc.nav.no/ login",
-    "start": "next dev",
-    "start:prod": "NODE_OPTIONS='-r next-logger/presets/next-only' next start",
+    "start": "next dev | pino-pretty",
+    "start:prod": "NODE_OPTIONS='-r next-logger' next start",
     "build": "next build",
     "test": "jest --watch",
     "test:ci": "jest --ci",
@@ -89,7 +89,7 @@
     "less-loader": "^10.2.0",
     "next": "^12.2.5",
     "next-with-less": "^2.0.4",
-    "pino-pretty": "^7.3.0",
+    "pino-pretty": "^9.1.0",
     "prettier": "^2.7.1"
   },
   "prettier": "@navikt/eslint-config-teamsykmelding/prettier",
