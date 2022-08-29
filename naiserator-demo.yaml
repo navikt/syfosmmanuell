@@ -15,16 +15,9 @@ spec:
     cpuThresholdPercentage: 90
   port: 3000
   liveness:
-    path: /api/is_alive
-    initialDelay: 10
-    timeout: 5
-    periodSeconds: 5
-    failureThreshold: 30
+    path: /api/internal/is_alive
   readiness:
-    path: /api/is_ready
-    initialDelay: 30
-    periodSeconds: 5
-    timeout: 5
+    path: /api/internal/is_ready
   resources:
     limits:
       cpu: 500m
