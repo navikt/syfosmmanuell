@@ -15,7 +15,7 @@ En demoside er offentlig tilgjengelig på: https://syfosmmanuell.labs.nais.io/?o
 ## Oversikt over applikasjonens houved flyt
 ```mermaid
     graph LR;
-        gosys -- saksbehnadler trykker paa ''play knappen'' --- syfosmmanuell-bakcend;
+        gosys -- "saksbehnadler trykker på ''play knappen''" --- syfosmmanuell;
         syfosmmanuell --- syfosmmanuell-bakcend ;
         syfosmmanuell --- syfosmmanuell-bakcend ;
         syfosmmanuell -- hent token --- azure-AD;
