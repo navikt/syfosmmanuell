@@ -33,14 +33,18 @@ spec:
       enabled: true
   ingresses:
     - 'https://syfosmmanuell.intern.nav.no'
+  accessPolicy:
+    outbound:
+      rules:
+        - application: syfosmmanuell-backend
   env:
-    - name: DOWNSTREAM_API_URL
-      value: https://syfosmmanuell-backend.intern.nav.no/
+    - name: SYFOSMMANUELL_BACKEND_SCOPE
+      value: api://prod-gcp.teamsykmelding.syfosmmanuell-backend/.default
+    - name: SYFOSMMANUELL_BACKEND_URL
+      value: http://syfosmmanuell-backend
     - name: MODIA_CONTEXT_SCOPE
       value: api://prod-fss.personoversikt.modiacontextholder/.default
     - name: MODIA_CONTEXT_URL
       value: https://modiacontextholder.prod-fss-pub.nais.io
-    - name: SYFOSMMANUELL_BACKEND_SCOPE
-      value: prod-gcp.teamsykmelding.syfosmmanuell-backend
     - name: NEXT_PUBLIC_ENVIRONMENT
       value: production

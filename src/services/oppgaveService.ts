@@ -20,7 +20,7 @@ export async function getOppgave(
   }
 
   const token: string = await getOppgaveOboAccessToken(accessToken);
-  const OPPGAVE_URL = `${env('DOWNSTREAM_API_URL', true)}/api/v1/manuellOppgave/${oppgaveid}`;
+  const OPPGAVE_URL = `${env('SYFOSMMANUELL_BACKEND_URL', true)}/api/v1/manuellOppgave/${oppgaveid}`;
   const response = await fetch(OPPGAVE_URL, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ export async function submitOppgave(
   }
 
   const token = await getOppgaveOboAccessToken(accessToken);
-  const VURDE_OPPGAVE_URL = `${env('DOWNSTREAM_API_URL', true)}/api/v1/vurderingmanuelloppgave/${oppgaveid}`;
+  const VURDE_OPPGAVE_URL = `${env('SYFOSMMANUELL_BACKEND_URL', true)}/api/v1/vurderingmanuelloppgave/${oppgaveid}`;
   const result = await fetch(VURDE_OPPGAVE_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Nav-Enhet': aktivEnhet, Authorization: `Bearer ${token}` },
