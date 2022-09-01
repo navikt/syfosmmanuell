@@ -32,5 +32,5 @@ export async function getModiaContextOboAccessToken(userToken: string): Promise<
 }
 
 export async function getOppgaveOboAccessToken(userToken: string): Promise<string> {
-  return getOboAccessToken(userToken, `api://${env('SYFOSMMANUELL_BACKEND_SCOPE')}/.default`);
+  return getOboAccessToken(userToken, env('SYFOSMMANUELL_BACKEND_SCOPE'));
 }
