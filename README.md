@@ -11,6 +11,16 @@ Applikasjonen er en NextJS app med API routes for data fetching og lagring.
 
 En demoside er offentlig tilgjengelig på: https://syfosmmanuell.labs.nais.io/?oppgaveid=1
 
+
+## Oversikt over applikasjonens houved flyt
+```mermaid
+    graph LR;
+        gosys -- saksbehnadler trykker paa ''play knappen'' --- syfosmmanuell-bakcend;
+        syfosmmanuell --- syfosmmanuell-bakcend ;
+        syfosmmanuell --- syfosmmanuell-bakcend ;
+        syfosmmanuell -- hent token --- azure-AD;
+```
+
 ## Utvikling
 
 Pass på at du har yarn installert, om du ikke har det: `npm i -g yarn`
