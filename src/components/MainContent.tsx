@@ -26,19 +26,24 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
 
   const handleSubmit = useCallback(
     async (formState: FormShape) => {
-      try {
-        setSubmitting(true);
-        await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState);
-        await router.push('/kvittering');
-      } catch (e) {
-        logger.error(e);
-        setSubmitting(false);
-        if (e instanceof Error) {
-          setError(e.message);
-        } else {
-          setError('Ukjent feil');
+        try {
+            setSubmitting(true);
+            await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState);
+            await router.push('/kvittering');
+        } catch (e) {
+            if (e instanceof Error && e.message === 'Kunne ikke vurdere oppgaven på grunn av autorisasjonsfeil.' +
+                ' Sjekk med din leder om du har tilgang til å vurdere manuelle oppgaver') {
+                logger.warn(e)
+            } else {
+            logger.error(e);
+            setSubmitting(false);
+            if (e instanceof Error) {
+                setError(e.message);
+            } else {
+                setError('Ukjent feil');
+            }
         }
-      }
+    }
     },
     [aktivEnhet, manuellOppgave.oppgaveid, router],
   );
