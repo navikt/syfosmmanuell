@@ -28,16 +28,17 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
     async (formState: FormShape) => {
       try {
         setSubmitting(true);
-        await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState);
-        await router.push('/kvittering');
+        const vurderingsResultat = await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState);
+        if (vurderingsResultat == 'ok') {
+            await router.push('/kvittering');
+        } else {
+            setError(vurderingsResultat.message);
+            setSubmitting(false);
+        }
       } catch (e) {
         logger.error(e);
         setSubmitting(false);
-        if (e instanceof Error) {
-          setError(e.message);
-        } else {
-          setError('Ukjent feil');
-        }
+        setError('Ukjent feil');
       }
     },
     [aktivEnhet, manuellOppgave.oppgaveid, router],
