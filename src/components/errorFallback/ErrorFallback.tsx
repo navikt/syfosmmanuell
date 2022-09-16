@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { logger } from '../../utils/logger';
+import { logger } from '@navikt/next-logger';
 
 const ErrorFallback: React.FC = () => {
   useEffect(() => {

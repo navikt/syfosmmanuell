@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult, NextApiRequest, NextApiResponse } from 'next';
 
-import { logger } from '../utils/logger';
+import { logger } from '@navikt/next-logger';
 import { isLocalOrDemo } from '../utils/env';
 import { BasePageRequiredProps } from '../pages/_app';
 

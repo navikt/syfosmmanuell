@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { logger } from '../utils/logger';
+import { logger } from '@navikt/next-logger';
 import { ClientError } from '../utils/typeUtils';
 import { isLocalOrDemo } from '../utils/env';
 

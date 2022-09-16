@@ -5,7 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { ManuellOppgave } from '../types/manuellOppgave';
 import { vurderOppgave } from '../utils/submitUtils';
-import { logger } from '../utils/logger';
+import { logger } from '@navikt/next-logger';
 
 import Sykmeldingheader from './sykmelding/SykmeldingHeader';
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';

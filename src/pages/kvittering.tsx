@@ -7,7 +7,7 @@ import { getModiaContext, ModiaContext, ModiaContextError } from '../services/mo
 import { StoreContext } from '../data/store';
 import NoEnhetError from '../components/NoEnhetError';
 import { clientEnvs, isLocalOrDemo } from '../utils/env';
-import { logger } from '../utils/logger';
+import { logger } from '@navikt/next-logger';
 
 import { BasePageRequiredProps } from './_app';
 

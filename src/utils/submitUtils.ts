@@ -1,6 +1,6 @@
 import { FormShape } from '../components/form/Form';
 
-import { logger } from './logger';
+import { logger } from '@navikt/next-logger';
 
 interface VurderOppgaveError {
     message: string;

@@ -2,7 +2,7 @@ import { ManuellOppgave } from '../types/manuellOppgave';
 import { manuellOppgave } from '../mock/manuellOppgave';
 import { FormShape } from '../components/form/Form';
 import { env, isLocalOrDemo } from '../utils/env';
-import { logger } from '../utils/logger';
+import { logger } from '@navikt/next-logger';
 import { ClientError } from '../utils/typeUtils';
 
 import { getOppgaveOboAccessToken } from '../auth/azureTokens';
