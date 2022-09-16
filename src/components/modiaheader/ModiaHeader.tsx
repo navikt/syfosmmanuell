@@ -10,43 +10,43 @@ import styles from './ModiaHeader.module.css';
 import navLogo from './nav-logo.svg';
 
 interface Props {
-  modiaContext?: ModiaContext | ModiaContextError;
+    modiaContext?: ModiaContext | ModiaContextError;
 }
 
 function ModiaHeader({ modiaContext }: Props): JSX.Element {
-  const { aktivEnhet, setAktivEnhet } = useContext(StoreContext);
+    const { aktivEnhet, setAktivEnhet } = useContext(StoreContext);
 
-  return (
-    <header className={styles.root}>
-      <div className={styles.titleWrapper}>
-        <Image src={navLogo} alt="NAV logo" />
-        <Undertittel>syfosmmanuell</Undertittel>
-      </div>
-      {modiaContext && !('errorType' in modiaContext) && (
-        <div className={styles.enhetPicker}>
-          {aktivEnhet && modiaContext.enheter.length ? (
-            <Select
-              value={aktivEnhet}
-              onChange={(event) => {
-                setAktivEnhet(event.target.value);
-              }}
-            >
-              {modiaContext.enheter.map((it) => (
-                <option key={it.enhetId} value={it.enhetId}>
-                  {it.enhetId} {it.navn}
-                </option>
-              ))}
-            </Select>
-          ) : (
-            <Element>Fant ingen enheter</Element>
-          )}
-          <Undertittel>|</Undertittel>
-          <div>{modiaContext.navn}</div>
-        </div>
-      )}
-      {modiaContext && 'errorType' in modiaContext && <Undertittel>⚠ Feil ved lasting av enheter</Undertittel>}
-    </header>
-  );
+    return (
+        <header className={styles.root}>
+            <div className={styles.titleWrapper}>
+                <Image src={navLogo} alt="NAV logo" />
+                <Undertittel>syfosmmanuell</Undertittel>
+            </div>
+            {modiaContext && !('errorType' in modiaContext) && (
+                <div className={styles.enhetPicker}>
+                    {aktivEnhet && modiaContext.enheter.length ? (
+                        <Select
+                            value={aktivEnhet}
+                            onChange={(event) => {
+                                setAktivEnhet(event.target.value);
+                            }}
+                        >
+                            {modiaContext.enheter.map((it) => (
+                                <option key={it.enhetId} value={it.enhetId}>
+                                    {it.enhetId} {it.navn}
+                                </option>
+                            ))}
+                        </Select>
+                    ) : (
+                        <Element>Fant ingen enheter</Element>
+                    )}
+                    <Undertittel>|</Undertittel>
+                    <div>{modiaContext.navn}</div>
+                </div>
+            )}
+            {modiaContext && 'errorType' in modiaContext && <Undertittel>⚠ Feil ved lasting av enheter</Undertittel>}
+        </header>
+    );
 }
 
 export default ModiaHeader;

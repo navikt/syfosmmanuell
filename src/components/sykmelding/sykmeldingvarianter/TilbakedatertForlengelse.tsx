@@ -7,26 +7,26 @@ import Tilbakedateringsinfo from '../../infopanel/utdypendeelementer/Tilbakedate
 import { Sykmelding } from '../../../types/sykmelding';
 
 interface TilbakedatertForlengelseProps {
-  sykmelding: Sykmelding;
+    sykmelding: Sykmelding;
 }
 
 const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps) => {
-  return (
-    <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
-      <SykmeldingPerioder perioder={sykmelding.perioder} />
-      <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
-      {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose) => (
-        <DiagnoseSeksjon key={diagnose.kode} diagnose={diagnose} bidiagnose />
-      ))}
+    return (
+        <InfoPanel tittel="Utdrag fra sykmeldingen" fargetema="advarsel">
+            <SykmeldingPerioder perioder={sykmelding.perioder} />
+            <DiagnoseSeksjon diagnose={sykmelding.medisinskVurdering.hovedDiagnose} />
+            {sykmelding.medisinskVurdering.biDiagnoser.map((diagnose) => (
+                <DiagnoseSeksjon key={diagnose.kode} diagnose={diagnose} bidiagnose />
+            ))}
 
-      <Tilbakedateringsinfo
-        perioder={sykmelding.perioder}
-        kontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
-        behandletTidspunkt={sykmelding.behandletTidspunkt}
-        begrunnelseIkkeKontakt={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
-      />
-    </InfoPanel>
-  );
+            <Tilbakedateringsinfo
+                perioder={sykmelding.perioder}
+                kontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
+                behandletTidspunkt={sykmelding.behandletTidspunkt}
+                begrunnelseIkkeKontakt={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
+            />
+        </InfoPanel>
+    );
 };
 
 export default TilbakedatertForlengelse;
