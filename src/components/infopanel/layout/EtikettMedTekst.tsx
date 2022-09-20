@@ -5,26 +5,26 @@ import Innrykk from './Innrykk';
 import Margin from './Margin';
 
 interface EtikettMedTekstProps {
-  tittel: string;
-  tekst?: string | JSX.Element;
-  undertekst?: string;
-  margin?: boolean;
-  innrykk?: boolean;
+    tittel: string;
+    tekst?: string | JSX.Element;
+    undertekst?: string;
+    margin?: boolean;
+    innrykk?: boolean;
 }
 
 const EtikettMedTekst = ({ tittel, tekst, undertekst, margin, innrykk }: EtikettMedTekstProps) => {
-  const innhold = (
-    <>
-      <Element>{tittel}</Element>
-      <Normaltekst>{tekst}</Normaltekst>
-      {undertekst && <Undertekst>{undertekst}</Undertekst>}
-    </>
-  );
+    const innhold = (
+        <>
+            <Element>{tittel}</Element>
+            <Normaltekst>{tekst}</Normaltekst>
+            {undertekst && <Undertekst>{undertekst}</Undertekst>}
+        </>
+    );
 
-  const medMargin = margin ? <Margin>{innhold}</Margin> : innhold;
-  const medInnrykk = innrykk ? <Innrykk>{medMargin}</Innrykk> : medMargin;
+    const medMargin = margin ? <Margin>{innhold}</Margin> : innhold;
+    const medInnrykk = innrykk ? <Innrykk>{medMargin}</Innrykk> : medMargin;
 
-  return <div style={{ flex: '1 1 auto' }}>{medInnrykk}</div>;
+    return <div style={{ flex: '1 1 auto' }}>{medInnrykk}</div>;
 };
 
 export default EtikettMedTekst;

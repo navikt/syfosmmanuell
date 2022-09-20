@@ -1,4 +1,4 @@
 export interface ClientError<T> {
-  errorType: T;
-  message: string;
+    errorType: T;
+    message: string;
 }

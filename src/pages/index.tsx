@@ -15,53 +15,53 @@ import { isLocalOrDemo } from '../utils/env';
 import { BasePageRequiredProps } from './_app';
 
 interface IndexProps extends BasePageRequiredProps {
-  manuellOppgave: ManuellOppgave | OppgaveFetchingError;
+    manuellOppgave: ManuellOppgave | OppgaveFetchingError;
 }
 
 function Index({ manuellOppgave }: IndexProps) {
-  const { aktivEnhet } = useContext(StoreContext);
+    const { aktivEnhet } = useContext(StoreContext);
 
-  if (!aktivEnhet) {
-    return <NoEnhetError />;
-  } else if ('errorType' in manuellOppgave) {
-    return <ManuellOppgaveErrors errors={manuellOppgave} />;
-  } else {
-    return <MainContent manuellOppgave={manuellOppgave} aktivEnhet={aktivEnhet} />;
-  }
+    if (!aktivEnhet) {
+        return <NoEnhetError />;
+    } else if ('errorType' in manuellOppgave) {
+        return <ManuellOppgaveErrors errors={manuellOppgave} />;
+    } else {
+        return <MainContent manuellOppgave={manuellOppgave} aktivEnhet={aktivEnhet} />;
+    }
 }
 
 export const getServerSideProps = withAuthenticatedPage(
-  async ({ req, query }, accessToken): Promise<GetServerSidePropsResult<IndexProps>> => {
-    if (!query?.oppgaveid || typeof query.oppgaveid !== 'string') {
-      return {
-        notFound: true,
-      };
-    }
+    async ({ req, query }, accessToken): Promise<GetServerSidePropsResult<IndexProps>> => {
+        if (!query?.oppgaveid || typeof query.oppgaveid !== 'string') {
+            return {
+                notFound: true,
+            };
+        }
 
-    if (!isLocalOrDemo) {
-      await getAuthClient();
-    }
+        if (!isLocalOrDemo) {
+            await getAuthClient();
+        }
 
-    const [modiaContext, manuellOppgave] = await Promise.all([
-      getModiaContext(accessToken),
-      getOppgave(query.oppgaveid, accessToken),
-    ]);
+        const [modiaContext, manuellOppgave] = await Promise.all([
+            getModiaContext(accessToken),
+            getOppgave(query.oppgaveid, accessToken),
+        ]);
 
-    if ('errorType' in manuellOppgave) {
-      if (manuellOppgave.errorType === 'OPPGAVE_NOT_FOUND') {
+        if ('errorType' in manuellOppgave) {
+            if (manuellOppgave.errorType === 'OPPGAVE_NOT_FOUND') {
+                return {
+                    notFound: true,
+                };
+            }
+        }
+
         return {
-          notFound: true,
+            props: {
+                modiaContext,
+                manuellOppgave,
+            },
         };
-      }
-    }
-
-    return {
-      props: {
-        modiaContext,
-        manuellOppgave,
-      },
-    };
-  },
+    },
 );
 
 export default Index;
