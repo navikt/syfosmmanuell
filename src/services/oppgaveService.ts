@@ -28,7 +28,7 @@ export async function getOppgave(
     });
 
     if (response.status === 401) {
-        logger.error(`API responded with 401 when fetching oppgaveid ${oppgaveid}`);
+        logger.warn(`API responded with 401 when fetching oppgaveid ${oppgaveid}`);
         return {
             errorType: 'AUTHORIZATION',
             message:
