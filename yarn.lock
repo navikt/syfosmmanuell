@@ -5636,10 +5636,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^4.9.0":
-  version: 4.9.0
-  resolution: "jose@npm:4.9.0"
-  checksum: fc1e71f49327206eb58b23a2c5d463c3b1c84cd60ba2b8f8ab74db4a96ec079915fc71bc8b7d57d77b25d1426cd02eb218bf426738e803ab1a52adc1d96d0912
+"jose@npm:^4.9.2":
+  version: 4.11.0
+  resolution: "jose@npm:4.11.0"
+  checksum: 8d81e978e0da306911b61b1de1e2d78bd4903b4aa68a4b338b7c89c41edc3d56aea4d5ef4784a078a630dd6aa81f6328901ae3ce215f33b90d51ee8ebf4c9dbd
   languageName: node
   linkType: hard
 
@@ -8678,7 +8678,7 @@ __metadata:
     eslint: ^8.15.0
     eslint-config-next: ^12.2.5
     jest: ^27.4.5
-    jose: ^4.9.0
+    jose: ^4.9.2
     less: ^4.1.2
     less-loader: ^10.2.0
     lodash.throttle: ^4.1.1
