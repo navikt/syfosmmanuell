@@ -1,11 +1,11 @@
 import { logger } from '@navikt/next-logger';
+import { grantAzureOboToken, isInvalidTokenSet } from '@navikt/next-auth-wonderwall';
 
 import { ManuellOppgave } from '../types/manuellOppgave';
 import { manuellOppgave } from '../mock/manuellOppgave';
 import { FormShape } from '../components/form/Form';
 import { env, isLocalOrDemo } from '../utils/env';
 import { ClientError } from '../utils/typeUtils';
-import { getOppgaveOboAccessToken } from '../auth/azureTokens';
 
 export type OppgaveFetchingError = ClientError<
     'AUTHORIZATION' | 'OPPGAVE_NOT_FOUND' | 'ALREADY_RESOLVED' | 'GENERAL_ERROR' | 'PARSE_ERROR'
@@ -19,7 +19,14 @@ export async function getOppgave(
         return ManuellOppgave.parse(manuellOppgave);
     }
 
-    const token: string = await getOppgaveOboAccessToken(accessToken);
+    const token = await grantAzureOboToken(accessToken, env('SYFOSMMANUELL_BACKEND_SCOPE'));
+    if (isInvalidTokenSet(token)) {
+        return {
+            errorType: 'AUTHORIZATION',
+            message: `Unable to get access token: ${token.message}`,
+        };
+    }
+
     const OPPGAVE_URL = `${env('SYFOSMMANUELL_BACKEND_URL', true)}/api/v1/manuellOppgave/${oppgaveid}`;
     const response = await fetch(OPPGAVE_URL, {
         headers: {
@@ -78,9 +85,13 @@ export async function submitOppgave(
         return;
     }
 
-    const token = await getOppgaveOboAccessToken(accessToken);
-    const VURDE_OPPGAVE_URL = `${env('SYFOSMMANUELL_BACKEND_URL', true)}/api/v1/vurderingmanuelloppgave/${oppgaveid}`;
-    const result = await fetch(VURDE_OPPGAVE_URL, {
+    const token = await grantAzureOboToken(accessToken, env('SYFOSMMANUELL_BACKEND_SCOPE'));
+    if (isInvalidTokenSet(token)) {
+        throw new Error(`Unable to get access token: ${token.message}`);
+    }
+
+    const VURDERE_OPPGAVE_URL = `${env('SYFOSMMANUELL_BACKEND_URL', true)}/api/v1/vurderingmanuelloppgave/${oppgaveid}`;
+    const result = await fetch(VURDERE_OPPGAVE_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Nav-Enhet': aktivEnhet, Authorization: `Bearer ${token}` },
         body: JSON.stringify(body),
