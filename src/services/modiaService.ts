@@ -2,8 +2,8 @@ import { z } from 'zod';
 import { logger } from '@navikt/next-logger';
 
 import { ClientError } from '../utils/typeUtils';
-import { isLocalOrDemo } from '../utils/env';
-import { getModiaContextOboAccessToken } from '../auth/azureTokens';
+import { env, isLocalOrDemo } from '../utils/env';
+import { grantAzureOboToken, isInvalidTokenSet } from '@navikt/next-auth-wonderwall';
 
 export interface ModiaContext {
     navn: string;
@@ -12,7 +12,7 @@ export interface ModiaContext {
     enheter: { enhetId: string; navn: string }[];
 }
 
-export type ModiaContextError = ClientError<'MODIA_ERROR' | 'PARSE_ERROR'>;
+export type ModiaContextError = ClientError<'MODIA_ERROR' | 'PARSE_ERROR' | 'AUTH_ERROR'>;
 
 export async function getModiaContext(userAccessToken: string): Promise<ModiaContext | ModiaContextError> {
     if (isLocalOrDemo) {
@@ -28,7 +28,14 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
         };
     }
 
-    const modiaContextAccessToken = await getModiaContextOboAccessToken(userAccessToken);
+    const modiaContextAccessToken = await grantAzureOboToken(userAccessToken, env('MODIA_CONTEXT_SCOPE'));
+    if (isInvalidTokenSet(modiaContextAccessToken)) {
+        return {
+            errorType: 'MODIA_ERROR',
+            message: `Unable to get modia context access token: ${modiaContextAccessToken.message}`,
+        };
+    }
+
     const [veileder, aktivEnhet] = await Promise.all([
         getVeileder(modiaContextAccessToken),
         getAktivEnhet(modiaContextAccessToken),

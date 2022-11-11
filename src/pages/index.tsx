@@ -7,7 +7,6 @@ import { getOppgave, OppgaveFetchingError } from '../services/oppgaveService';
 import { getModiaContext } from '../services/modiaService';
 import { StoreContext } from '../data/store';
 import { withAuthenticatedPage } from '../auth/withAuth';
-import getAuthClient from '../auth/oidcClient';
 import NoEnhetError from '../components/NoEnhetError';
 import ManuellOppgaveErrors from '../components/ManuellOppgaveErrors';
 import { isLocalOrDemo } from '../utils/env';
@@ -36,10 +35,6 @@ export const getServerSideProps = withAuthenticatedPage(
             return {
                 notFound: true,
             };
-        }
-
-        if (!isLocalOrDemo) {
-            await getAuthClient();
         }
 
         const [modiaContext, manuellOppgave] = await Promise.all([
