@@ -3,9 +3,6 @@ version: v1.22.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   SNYK-JS-ANSIREGEX-1583908:
-    - '@sentry/nextjs > @sentry/webpack-plugin > @sentry/cli > npmlog > gauge > wide-align > string-width > strip-ansi > ansi-regex':
-        reason: None given
-        expires: '2022-03-16T10:23:56.549Z'
     - node-gyp > npmlog > gauge > wide-align > string-width > strip-ansi > ansi-regex:
         reason: None given
         expires: '2022-03-16T10:23:56.549Z'

@@ -56,8 +56,6 @@ jobs:
           NODE_ENV: production
           NEXT_PUBLIC_GOSYS_URL: https://gosys.intern.nav.no/gosys/bruker/brukeroversikt.jsf
           NEXT_PUBLIC_ENVIRONMENT: production
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ENABLED: 'true'
         run: |
           yarn build
       - name: Build and publish Docker image

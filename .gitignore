@@ -53,9 +53,6 @@ typings/
 # next
 .next
 
-# Sentry
-.sentryclirc
-
 # yarn non-pnp
 .pnp.*
 .yarn/*
