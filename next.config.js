@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const withLess = require('next-with-less');
-const { withSentryConfig } = require('@sentry/nextjs');
 
 const nextConfig = withLess({
     lessLoaderOptions: {},
@@ -23,9 +22,4 @@ const nextConfig = withLess({
     },
 });
 
-module.exports =
-    process.env.SENTRY_ENABLED === 'true'
-        ? withSentryConfig(nextConfig, {
-              silent: true,
-          })
-        : nextConfig;
+module.exports = nextConfig;
