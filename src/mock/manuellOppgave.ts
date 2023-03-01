@@ -4,20 +4,20 @@ export const manuellOppgave = {
         status: 'MANUAL_PROCESSING',
         ruleHits: [
             {
-                ruleName: 'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',
+                ruleName: 'OVER_30_DAGER_MED_BEGRUNNELSE',
                 ruleStatus: 'MANUAL_PROCESSING',
                 messageForUser:
-                    'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
+                    'Sykmeldingen blir manuell behandlet fordi den er tilbakedatert',
                 messageForSender:
-                    'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
+                    'Sykmeldingen er tilbakedatert og felt 11.2 (begrunnelse) er utfylt',
             },
             {
-                ruleName: 'TILBAKEDATERT_MED_BEGRUNNELSE_FORLENGELSE',
+                ruleName: 'OVER_30_DAGER_SPESIALISTHELSETJENESTEN',
                 ruleStatus: 'MANUAL_PROCESSING',
                 messageForUser:
-                    'Sykmeldingen er tilbakedatert uten at det kommer tydelig frem hvorfor dette var nødvendig.',
+                    'Sykmeldingen blir manuelt behandlet fordi den er tilbakedatert',
                 messageForSender:
-                    'Sykmeldingen er tilbakedatert uten at det kommer tydelig nok frem hvorfor dette var nødvendig. Sykmeldingen er derfor avvist. Pasienten har fått beskjed.',
+                    'Sykmeldingen er tilbakedatert over 30 dager og er fra spesialisthelsetjenesten',
             },
         ],
     },
