@@ -49,4 +49,4 @@ $ yarn test
 ```
 
 ## Testing av tjenesteflyt i testmiljø
-Applikasjonen er tilgjengelig i testmiljø på https://syfosmmanuell.dev.intern.nav.no/?oppgaveid={oppgaveid} lokalt via `naisdevice` eller via utviklerimage. `oppgaveid` referer til oppgaven som opprettes i `syfosmmanuell-backend` og lagres i tilhørende database.
+Applikasjonen er tilgjengelig i testmiljø på https://syfosmmanuell.intern.dev.nav.no/?oppgaveid={oppgaveid} lokalt via `naisdevice` eller via utviklerimage. `oppgaveid` referer til oppgaven som opprettes i `syfosmmanuell-backend` og lagres i tilhørende database.
