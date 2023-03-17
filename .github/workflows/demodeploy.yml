@@ -2,7 +2,9 @@ name: Deploy demo to nais labs
 on:
   push:
     branches:
-      - master
+      #      - master
+      - nothing
+
 env:
   NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 jobs:
