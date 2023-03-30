@@ -1,6 +1,6 @@
 # syfosmmanuell
 
-Saksbehandlerfrontend for manuell behandling av tilbakedaterte sykemeldinger. Tillater saksbehandler å `godkjenne` eller `godkjenne med merknad`. Merknader vises for bruker sluttbruker.
+Saksbehandlerfrontend for manuell behandling av tilbakedaterte sykemeldinger. Tillater saksbehandler å `godkjenne` eller `godkjenne med merknad`. Merknader som vises for bruker sluttbruker.
 
 Applikasjonen er en NextJS app med API routes for data fetching og lagring.
 - Frontenden rendres og prepopuleres med en sykmelding som skal behandles (SSR).
