@@ -38,6 +38,8 @@ spec:
     outbound:
       rules:
         - application: syfosmmanuell-backend
+      external:
+        - host: modiacontextholder.prod-fss-pub.nais.io
   env:
     - name: SYFOSMMANUELL_BACKEND_SCOPE
       value: api://prod-gcp.teamsykmelding.syfosmmanuell-backend/.default
