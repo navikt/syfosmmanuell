@@ -7,7 +7,7 @@ import { withAuthenticatedPage } from '../auth/withAuth'
 import { getModiaContext, ModiaContext, ModiaContextError } from '../services/modiaService'
 import { StoreContext } from '../data/store'
 import NoEnhetError from '../components/NoEnhetError'
-import { clientEnvs, isLocalOrDemo } from '../utils/env'
+import { browserEnv, isLocalOrDemo } from '../utils/env'
 
 import { BasePageRequiredProps } from './_app'
 
@@ -35,7 +35,7 @@ const Kvittering = ({ isDemo }: Props): JSX.Element => {
 
         logger.warn('On kvittering page, user will be redirected to GOSYS')
         setTimeout(() => {
-            window.location.href = clientEnvs.NEXT_PUBLIC_GOSYS_URL
+            window.location.href = browserEnv.NEXT_PUBLIC_GOSYS_URL
         }, 2000)
     }, [aktivEnhet, isDemo])
 

@@ -4,7 +4,7 @@ import { grantAzureOboToken, isInvalidTokenSet } from '@navikt/next-auth-wonderw
 import { ManuellOppgave } from '../types/manuellOppgave'
 import { manuellOppgave } from '../mock/manuellOppgave'
 import { FormShape } from '../components/form/Form'
-import { env, isLocalOrDemo } from '../utils/env'
+import { getServerEnv, isLocalOrDemo } from '../utils/env'
 import { ClientError } from '../utils/typeUtils'
 
 export type OppgaveFetchingError = ClientError<
@@ -19,7 +19,8 @@ export async function getOppgave(
         return ManuellOppgave.parse(manuellOppgave)
     }
 
-    const token = await grantAzureOboToken(accessToken, env('SYFOSMMANUELL_BACKEND_SCOPE'))
+    const serverEnv = getServerEnv()
+    const token = await grantAzureOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
     if (isInvalidTokenSet(token)) {
         return {
             errorType: 'AUTHORIZATION',
@@ -27,7 +28,7 @@ export async function getOppgave(
         }
     }
 
-    const OPPGAVE_URL = `${env('SYFOSMMANUELL_BACKEND_URL', true)}/api/v1/manuellOppgave/${oppgaveid}`
+    const OPPGAVE_URL = `${serverEnv.SYFOSMMANUELL_BACKEND_URL}/api/v1/manuellOppgave/${oppgaveid}`
     const response = await fetch(OPPGAVE_URL, {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -85,12 +86,13 @@ export async function submitOppgave(
         return
     }
 
-    const token = await grantAzureOboToken(accessToken, env('SYFOSMMANUELL_BACKEND_SCOPE'))
+    const serverEnv = getServerEnv()
+    const token = await grantAzureOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
     if (isInvalidTokenSet(token)) {
         throw new Error(`Unable to get access token: ${token.message}`)
     }
 
-    const VURDERE_OPPGAVE_URL = `${env('SYFOSMMANUELL_BACKEND_URL', true)}/api/v1/vurderingmanuelloppgave/${oppgaveid}`
+    const VURDERE_OPPGAVE_URL = `${serverEnv.SYFOSMMANUELL_BACKEND_URL}/api/v1/vurderingmanuelloppgave/${oppgaveid}`
     const result = await fetch(VURDERE_OPPGAVE_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Nav-Enhet': aktivEnhet, Authorization: `Bearer ${token}` },

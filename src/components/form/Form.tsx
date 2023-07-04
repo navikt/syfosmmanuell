@@ -3,7 +3,7 @@ import { RadioPanelGruppe, Label } from 'nav-frontend-skjema'
 import Spinner from 'nav-frontend-spinner'
 import { useForm, Controller } from 'react-hook-form'
 
-import { clientEnvs } from '../../utils/env'
+import { browserEnv } from '../../utils/env'
 
 import FeiloppsummeringContainer from './FeiloppsummeringContainer'
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient'
@@ -45,7 +45,7 @@ const Form = ({ onSubmit, submitting }: Props) => {
                     <RadioPanelGruppe
                         className={classes.radioGroup}
                         name="status"
-                        onChange={onChange}
+                        onChange={(event, value) => onChange(value)}
                         checked={value}
                         feil={errors.status?.message}
                         radios={[
@@ -84,7 +84,7 @@ const Form = ({ onSubmit, submitting }: Props) => {
                             <RadioPanelGruppe
                                 className={classes.radioGroup}
                                 name="merknad"
-                                onChange={onChange}
+                                onChange={(event, value) => onChange(value)}
                                 checked={value}
                                 feil={errors.merknad?.message}
                                 radios={[
@@ -115,7 +115,7 @@ const Form = ({ onSubmit, submitting }: Props) => {
                 Registrer
                 {submitting && <Spinner className={classes.submitSpinner} />}
             </Knapp>
-            <a href={clientEnvs.NEXT_PUBLIC_GOSYS_URL} className={`knapp knapp--flat ${classes.cancel}`}>
+            <a href={browserEnv.NEXT_PUBLIC_GOSYS_URL} className={`knapp knapp--flat ${classes.cancel}`}>
                 Avbryt
             </a>
         </form>
