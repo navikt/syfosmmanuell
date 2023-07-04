@@ -49,5 +49,3 @@ spec:
       value: api://prod-fss.personoversikt.modiacontextholder/.default
     - name: MODIA_CONTEXT_URL
       value: https://modiacontextholder.prod-fss-pub.nais.io
-    - name: NEXT_PUBLIC_ENVIRONMENT
-      value: production

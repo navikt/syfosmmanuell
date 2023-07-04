@@ -3,7 +3,7 @@ import { logger } from '@navikt/next-logger'
 import { grantAzureOboToken, isInvalidTokenSet } from '@navikt/next-auth-wonderwall'
 
 import { ClientError } from '../utils/typeUtils'
-import { env, isLocalOrDemo } from '../utils/env'
+import { getServerEnv, isLocalOrDemo } from '../utils/env'
 
 export interface ModiaContext {
     navn: string
@@ -28,7 +28,7 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
         }
     }
 
-    const modiaContextAccessToken = await grantAzureOboToken(userAccessToken, env('MODIA_CONTEXT_SCOPE'))
+    const modiaContextAccessToken = await grantAzureOboToken(userAccessToken, getServerEnv().MODIA_CONTEXT_SCOPE)
     if (isInvalidTokenSet(modiaContextAccessToken)) {
         return {
             errorType: 'MODIA_ERROR',
