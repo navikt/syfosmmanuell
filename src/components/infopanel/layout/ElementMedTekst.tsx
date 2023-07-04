@@ -1,20 +1,20 @@
-import React from 'react';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import React from 'react'
+import { Element, Normaltekst } from 'nav-frontend-typografi'
 
-import Innrykk from './Innrykk';
-import Margin from './Margin';
+import Innrykk from './Innrykk'
+import Margin from './Margin'
 
 interface ElementMedTekstProps {
-    vis?: boolean;
-    tittel: string;
-    tekst?: string | null;
-    innrykk?: boolean;
-    margin?: boolean;
+    vis?: boolean
+    tittel: string
+    tekst?: string | null
+    innrykk?: boolean
+    margin?: boolean
 }
 
 const ElementMedTekst = ({ vis, tittel, tekst, innrykk, margin }: ElementMedTekstProps) => {
     if (vis === false) {
-        return null;
+        return null
     }
 
     const innhold = (
@@ -22,12 +22,12 @@ const ElementMedTekst = ({ vis, tittel, tekst, innrykk, margin }: ElementMedTeks
             <Element>{tittel}</Element>
             {tekst && <Normaltekst>{tekst}</Normaltekst>}
         </>
-    );
+    )
 
-    const medMargin = margin ? <Margin>{innhold}</Margin> : innhold;
-    const medInnrykk = innrykk ? <Innrykk>{medMargin}</Innrykk> : medMargin;
+    const medMargin = margin ? <Margin>{innhold}</Margin> : innhold
+    const medInnrykk = innrykk ? <Innrykk>{medMargin}</Innrykk> : medMargin
 
-    return medInnrykk;
-};
+    return medInnrykk
+}
 
-export default ElementMedTekst;
+export default ElementMedTekst

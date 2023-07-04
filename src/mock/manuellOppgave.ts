@@ -6,18 +6,14 @@ export const manuellOppgave = {
             {
                 ruleName: 'OVER_30_DAGER_MED_BEGRUNNELSE',
                 ruleStatus: 'MANUAL_PROCESSING',
-                messageForUser:
-                    'Sykmeldingen blir manuell behandlet fordi den er tilbakedatert',
-                messageForSender:
-                    'Sykmeldingen er tilbakedatert og felt 11.2 (begrunnelse) er utfylt',
+                messageForUser: 'Sykmeldingen blir manuell behandlet fordi den er tilbakedatert',
+                messageForSender: 'Sykmeldingen er tilbakedatert og felt 11.2 (begrunnelse) er utfylt',
             },
             {
                 ruleName: 'OVER_30_DAGER_SPESIALISTHELSETJENESTEN',
                 ruleStatus: 'MANUAL_PROCESSING',
-                messageForUser:
-                    'Sykmeldingen blir manuelt behandlet fordi den er tilbakedatert',
-                messageForSender:
-                    'Sykmeldingen er tilbakedatert over 30 dager og er fra spesialisthelsetjenesten',
+                messageForUser: 'Sykmeldingen blir manuelt behandlet fordi den er tilbakedatert',
+                messageForSender: 'Sykmeldingen er tilbakedatert over 30 dager og er fra spesialisthelsetjenesten',
             },
         ],
     },
@@ -71,8 +67,8 @@ export const manuellOppgave = {
                 reisetilskudd: false,
             },
             {
-                fom: '2018-10-18',
-                tom: '2018-11-12',
+                fom: '2018-11-13',
+                tom: '2018-11-18',
                 aktivitetIkkeMulig: null,
                 avventendeInnspillTilArbeidsgiver: null,
                 behandlingsdager: null,
@@ -187,4 +183,4 @@ export const manuellOppgave = {
     },
     mottattDato: '2020-02-24T15:27:54',
     personNrPasient: '12345678910',
-};
+}

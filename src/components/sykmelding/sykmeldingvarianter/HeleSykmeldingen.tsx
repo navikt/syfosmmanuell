@@ -1,23 +1,23 @@
-import React from 'react';
-import { Flatknapp } from 'nav-frontend-knapper';
+import React from 'react'
+import { Flatknapp } from 'nav-frontend-knapper'
 
-import MulighetForArbeid from '../../infopanel/utdypendeelementer/MulighetForArbeid';
-import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding';
-import UtdypendeOpplysninger from '../../infopanel/utdypendeelementer/UtdypendeOpplysninger';
-import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne';
-import Annet from '../../infopanel/utdypendeelementer/Annet';
-import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
-import ElementMedTekst from '../../infopanel/layout/ElementMedTekst';
-import MeldingTilNAVSection from '../../infopanel/utdypendeelementer/MeldingTilNAVSection';
-import MeldingTilArbeidsgiverSection from '../../infopanel/utdypendeelementer/MeldingTilArbeidsgiverSection';
-import Diagnoser from '../../infopanel/utdypendeelementer/Diagnoser';
-import TilbakedateringsSeksjon from '../../infopanel/utdypendeelementer/TilbakedateringsSeksjon';
-import ArbeidsgiverSection from '../../infopanel/utdypendeelementer/ArbeidsgiverSection';
-import { Sykmelding } from '../../../types/sykmelding';
+import MulighetForArbeid from '../../infopanel/utdypendeelementer/MulighetForArbeid'
+import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding'
+import UtdypendeOpplysninger from '../../infopanel/utdypendeelementer/UtdypendeOpplysninger'
+import Arbeidsevne from '../../infopanel/utdypendeelementer/Arbeidsevne'
+import Annet from '../../infopanel/utdypendeelementer/Annet'
+import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils'
+import ElementMedTekst from '../../infopanel/layout/ElementMedTekst'
+import MeldingTilNAVSection from '../../infopanel/utdypendeelementer/MeldingTilNAVSection'
+import MeldingTilArbeidsgiverSection from '../../infopanel/utdypendeelementer/MeldingTilArbeidsgiverSection'
+import Diagnoser from '../../infopanel/utdypendeelementer/Diagnoser'
+import TilbakedateringsSeksjon from '../../infopanel/utdypendeelementer/TilbakedateringsSeksjon'
+import ArbeidsgiverSection from '../../infopanel/utdypendeelementer/ArbeidsgiverSection'
+import { Sykmelding } from '../../../types/sykmelding'
 
 interface HeleSykmeldingenProps {
-    sykmelding: Sykmelding;
-    setVisHeleSykmeldingen: (value: boolean) => void;
+    sykmelding: Sykmelding
+    setVisHeleSykmeldingen: (value: boolean) => void
 }
 
 const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmeldingenProps) => {
@@ -72,7 +72,7 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
                 </Flatknapp>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default HeleSykmeldingen;
+export default HeleSykmeldingen

@@ -1,15 +1,15 @@
-import React from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
-import Image from 'next/image';
+import React, { ReactNode } from 'react'
+import { Undertittel } from 'nav-frontend-typografi'
+import Image from 'next/image'
 
-import plaster from '../../svg/plaster.svg';
+import plaster from '../../svg/plaster.svg'
 
-type Fargetema = 'feil' | 'info' | 'advarsel';
+type Fargetema = 'feil' | 'info' | 'advarsel'
 
 interface InfoPanelProps {
-    fargetema: Fargetema;
-    tittel: string;
-    children: any | any[];
+    fargetema: Fargetema
+    tittel: string
+    children: ReactNode
 }
 
 const InfoPanel = ({ fargetema, tittel, children }: InfoPanelProps) => {
@@ -23,7 +23,7 @@ const InfoPanel = ({ fargetema, tittel, children }: InfoPanelProps) => {
             </header>
             <div className="infopanel-content">{children}</div>
         </article>
-    );
-};
+    )
+}
 
-export default InfoPanel;
+export default InfoPanel

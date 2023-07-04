@@ -1,32 +1,32 @@
-import { Knapp } from 'nav-frontend-knapper';
-import { RadioPanelGruppe, Label } from 'nav-frontend-skjema';
-import Spinner from 'nav-frontend-spinner';
-import { useForm, Controller } from 'react-hook-form';
+import { Knapp } from 'nav-frontend-knapper'
+import { RadioPanelGruppe, Label } from 'nav-frontend-skjema'
+import Spinner from 'nav-frontend-spinner'
+import { useForm, Controller } from 'react-hook-form'
 
-import { clientEnvs } from '../../utils/env';
+import { clientEnvs } from '../../utils/env'
 
-import FeiloppsummeringContainer from './FeiloppsummeringContainer';
-import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient';
-import classes from './Form.module.css';
+import FeiloppsummeringContainer from './FeiloppsummeringContainer'
+import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient'
+import classes from './Form.module.css'
 
-type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST';
-export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER';
+type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST'
+export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER'
 
 interface Props {
-    onSubmit: (values: FormShape) => void;
-    submitting: boolean;
+    onSubmit: (values: FormShape) => void
+    submitting: boolean
 }
 
 export interface FormShape {
-    status: Status;
-    merknad?: Merknad; // should be set if status === GODKJENT_MED_MERKNAD
+    status: Status
+    merknad?: Merknad // should be set if status === GODKJENT_MED_MERKNAD
 }
 
 const Form = ({ onSubmit, submitting }: Props) => {
-    const { control, handleSubmit, formState, watch } = useForm<FormShape>();
-    const { errors } = formState;
-    const watchStatus = watch('status');
-    const watchMerknad = watch('merknad');
+    const { control, handleSubmit, formState, watch } = useForm<FormShape>()
+    const { errors } = formState
+    const watchStatus = watch('status')
+    const watchMerknad = watch('merknad')
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -36,9 +36,9 @@ const Form = ({ onSubmit, submitting }: Props) => {
                 rules={{
                     validate: (value) => {
                         if (['GODKJENT', 'GODKJENT_MED_MERKNAD'].includes(value)) {
-                            return true;
+                            return true
                         }
-                        return 'Oppgaven mangler vurdering';
+                        return 'Oppgaven mangler vurdering'
                     },
                 }}
                 render={({ field: { onChange, value } }) => (
@@ -75,9 +75,9 @@ const Form = ({ onSubmit, submitting }: Props) => {
                                         value,
                                     )
                                 ) {
-                                    return true;
+                                    return true
                                 }
-                                return 'Mangler merknad';
+                                return 'Mangler merknad'
                             },
                         }}
                         render={({ field: { onChange, value } }) => (
@@ -119,7 +119,7 @@ const Form = ({ onSubmit, submitting }: Props) => {
                 Avbryt
             </a>
         </form>
-    );
-};
+    )
+}
 
-export default Form;
+export default Form

@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import React from 'react'
+import { Undertittel } from 'nav-frontend-typografi'
 
-import { OppgaveFetchingError } from '../services/oppgaveService';
+import { OppgaveFetchingError } from '../services/oppgaveService'
 
-import styles from './ManuellOppgaveErrors.module.css';
+import styles from './ManuellOppgaveErrors.module.css'
 
 interface Props {
-    errors: OppgaveFetchingError;
+    errors: OppgaveFetchingError
 }
 
 const ManuellOppgaveErrors = ({ errors }: Props): JSX.Element => {
@@ -14,7 +14,7 @@ const ManuellOppgaveErrors = ({ errors }: Props): JSX.Element => {
         <div className={styles.root}>
             <Undertittel>{errors.message}</Undertittel>
         </div>
-    );
-};
+    )
+}
 
-export default ManuellOppgaveErrors;
+export default ManuellOppgaveErrors

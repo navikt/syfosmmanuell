@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-import ElementMedTekst from '../layout/ElementMedTekst';
-import { Arbeidsgiver, HarArbeidsgiverValues } from '../../../types/sykmelding';
+import SeksjonMedTittel from '../layout/SeksjonMedTittel'
+import ElementMedTekst from '../layout/ElementMedTekst'
+import { Arbeidsgiver, HarArbeidsgiverValues } from '../../../types/sykmelding'
 
 interface ArbeidsgiverSectionProps {
-    arbeidsgiver: Arbeidsgiver;
+    arbeidsgiver: Arbeidsgiver
 }
 
 const ArbeidsgiverSection = ({ arbeidsgiver }: ArbeidsgiverSectionProps) => {
@@ -35,7 +35,7 @@ const ArbeidsgiverSection = ({ arbeidsgiver }: ArbeidsgiverSectionProps) => {
                 margin
             />
         </SeksjonMedTittel>
-    );
-};
+    )
+}
 
-export default ArbeidsgiverSection;
+export default ArbeidsgiverSection

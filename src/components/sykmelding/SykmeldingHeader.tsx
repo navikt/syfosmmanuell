@@ -1,12 +1,12 @@
-import React from 'react';
-import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import dayjs from 'dayjs';
+import React from 'react'
+import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi'
+import dayjs from 'dayjs'
 
 interface SykmeldingheaderProps {
-    arbeidsgiverNavn: string | null;
-    sykmelder: string | null;
-    mottattDato: string;
-    personNrPasient: string;
+    arbeidsgiverNavn: string | null
+    sykmelder: string | null
+    mottattDato: string
+    personNrPasient: string
 }
 
 const Sykmeldingheader = ({ personNrPasient, arbeidsgiverNavn, sykmelder, mottattDato }: SykmeldingheaderProps) => {
@@ -39,7 +39,7 @@ const Sykmeldingheader = ({ personNrPasient, arbeidsgiverNavn, sykmelder, mottat
                 <Normaltekst>{dayjs(mottattDato).format('DD.MM.YYYY kl. HH:mm:ss')}</Normaltekst>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Sykmeldingheader;
+export default Sykmeldingheader

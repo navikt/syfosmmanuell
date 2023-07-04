@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-import ElementMedTekst from '../layout/ElementMedTekst';
+import SeksjonMedTittel from '../layout/SeksjonMedTittel'
+import ElementMedTekst from '../layout/ElementMedTekst'
 
 interface MeldingTilArbeidsgiverSectionProps {
-    meldingTilArbeidsgiver: string | null;
+    meldingTilArbeidsgiver: string | null
 }
 
 const MeldingTilArbeidsgiverSection = ({ meldingTilArbeidsgiver }: MeldingTilArbeidsgiverSectionProps) => {
     if (!meldingTilArbeidsgiver) {
-        return null;
+        return null
     }
 
     return (
@@ -21,7 +21,7 @@ const MeldingTilArbeidsgiverSection = ({ meldingTilArbeidsgiver }: MeldingTilArb
                 tekst={meldingTilArbeidsgiver}
             />
         </SeksjonMedTittel>
-    );
-};
+    )
+}
 
-export default MeldingTilArbeidsgiverSection;
+export default MeldingTilArbeidsgiverSection

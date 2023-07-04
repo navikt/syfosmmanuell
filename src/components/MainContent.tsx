@@ -1,48 +1,48 @@
-import React, { useCallback, useState } from 'react';
-import { Flatknapp } from 'nav-frontend-knapper';
-import { useRouter } from 'next/router';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { logger } from '@navikt/next-logger';
+import React, { useCallback, useState } from 'react'
+import { Flatknapp } from 'nav-frontend-knapper'
+import { useRouter } from 'next/router'
+import { Normaltekst } from 'nav-frontend-typografi'
+import { logger } from '@navikt/next-logger'
 
-import { ManuellOppgave } from '../types/manuellOppgave';
-import { vurderOppgave } from '../utils/submitUtils';
+import { ManuellOppgave } from '../types/manuellOppgave'
+import { vurderOppgave } from '../utils/submitUtils'
 
-import Sykmeldingheader from './sykmelding/SykmeldingHeader';
-import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen';
-import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse';
-import Form, { FormShape } from './form/Form';
+import Sykmeldingheader from './sykmelding/SykmeldingHeader'
+import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen'
+import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse'
+import Form, { FormShape } from './form/Form'
 
 interface MainContentProps {
-    manuellOppgave: ManuellOppgave;
-    aktivEnhet: string;
+    manuellOppgave: ManuellOppgave
+    aktivEnhet: string
 }
 
 const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
-    const router = useRouter();
-    const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false);
-    const { sykmelding, personNrPasient, mottattDato } = manuellOppgave;
-    const [submitting, setSubmitting] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
+    const router = useRouter()
+    const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false)
+    const { sykmelding, personNrPasient, mottattDato } = manuellOppgave
+    const [submitting, setSubmitting] = useState<boolean>(false)
+    const [error, setError] = useState<string | null>(null)
 
     const handleSubmit = useCallback(
         async (formState: FormShape) => {
             try {
-                setSubmitting(true);
-                const vurderingsResultat = await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState);
+                setSubmitting(true)
+                const vurderingsResultat = await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState)
                 if (vurderingsResultat == 'ok') {
-                    await router.push('/kvittering');
+                    await router.push('/kvittering')
                 } else {
-                    setError(vurderingsResultat.message);
-                    setSubmitting(false);
+                    setError(vurderingsResultat.message)
+                    setSubmitting(false)
                 }
             } catch (e) {
-                logger.error(e);
-                setSubmitting(false);
-                setError('Ukjent feil');
+                logger.error(e)
+                setSubmitting(false)
+                setError('Ukjent feil')
             }
         },
         [aktivEnhet, manuellOppgave.oppgaveid, router],
-    );
+    )
 
     return (
         <div className="panel">
@@ -72,7 +72,7 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
                 <HeleSykmeldingen sykmelding={sykmelding} setVisHeleSykmeldingen={setVisHeleSykmeldingen} />
             )}
         </div>
-    );
-};
+    )
+}
 
-export default MainContent;
+export default MainContent

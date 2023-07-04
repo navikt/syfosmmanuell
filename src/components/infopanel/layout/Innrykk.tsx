@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { ReactNode } from 'react'
 
 interface InnrykkProps {
-    children: any | any[];
+    children: ReactNode
 }
 
 const Innrykk = ({ children }: InnrykkProps) => {
     if (!children) {
-        return null;
+        return null
     }
 
-    return <div style={{ marginLeft: '2.5rem' }}>{children}</div>;
-};
+    return <div style={{ marginLeft: '2.5rem' }}>{children}</div>
+}
 
-export default Innrykk;
+export default Innrykk

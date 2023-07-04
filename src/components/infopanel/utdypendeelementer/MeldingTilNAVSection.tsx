@@ -1,25 +1,25 @@
-import React from 'react';
+import React from 'react'
 
-import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-import ElementMedTekst from '../layout/ElementMedTekst';
-import Margin from '../layout/Margin';
-import EnkelCheckbox from '../layout/EnkelCheckbox';
-import { MeldingTilNAV } from '../../../types/sykmelding';
+import SeksjonMedTittel from '../layout/SeksjonMedTittel'
+import ElementMedTekst from '../layout/ElementMedTekst'
+import Margin from '../layout/Margin'
+import EnkelCheckbox from '../layout/EnkelCheckbox'
+import { MeldingTilNAV } from '../../../types/sykmelding'
 
 interface MeldingTilNAVSectionProps {
-    meldingTilNAV: MeldingTilNAV | null;
+    meldingTilNAV: MeldingTilNAV | null
 }
 
 const MeldingTilNAVSection = ({ meldingTilNAV }: MeldingTilNAVSectionProps) => {
     if (!meldingTilNAV) {
-        return null;
+        return null
     }
 
     return (
         <SeksjonMedTittel understrek tittel="8. Melding til NAV">
             <Margin>
                 <EnkelCheckbox
-                    tittel={'8.1. Ønskes bistand fra NAV nå?'}
+                    tittel="8.1. Ønskes bistand fra NAV nå?"
                     bold
                     margin
                     checked={!!meldingTilNAV?.bistandUmiddelbart}
@@ -33,7 +33,7 @@ const MeldingTilNAVSection = ({ meldingTilNAV }: MeldingTilNAVSectionProps) => {
                 tekst={meldingTilNAV?.beskrivBistand}
             />
         </SeksjonMedTittel>
-    );
-};
+    )
+}
 
-export default MeldingTilNAVSection;
+export default MeldingTilNAVSection

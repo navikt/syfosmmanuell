@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-import DiagnoseSeksjon from '../../infopanel/panelelementer/diagnose/DiagnoseSeksjon';
-import InfoPanel from '../../infopanel/InfoPanel';
-import SykmeldingPerioder from '../../infopanel/panelelementer/periode/SykmeldingPerioder';
-import Tilbakedateringsinfo from '../../infopanel/utdypendeelementer/Tilbakedateringsinfo';
-import { Sykmelding } from '../../../types/sykmelding';
+import DiagnoseSeksjon from '../../infopanel/panelelementer/diagnose/DiagnoseSeksjon'
+import InfoPanel from '../../infopanel/InfoPanel'
+import SykmeldingPerioder from '../../infopanel/panelelementer/periode/SykmeldingPerioder'
+import Tilbakedateringsinfo from '../../infopanel/utdypendeelementer/Tilbakedateringsinfo'
+import { Sykmelding } from '../../../types/sykmelding'
 
 interface TilbakedatertForlengelseProps {
-    sykmelding: Sykmelding;
+    sykmelding: Sykmelding
 }
 
 const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps) => {
@@ -26,7 +26,7 @@ const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps)
                 begrunnelseIkkeKontakt={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
             />
         </InfoPanel>
-    );
-};
+    )
+}
 
-export default TilbakedatertForlengelse;
+export default TilbakedatertForlengelse

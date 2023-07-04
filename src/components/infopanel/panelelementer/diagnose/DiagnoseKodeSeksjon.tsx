@@ -1,12 +1,12 @@
-import React from 'react';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import React from 'react'
+import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi'
 
-import HjelpetekstWrapper from '../../../hjelpetekst/HjelpetekstWrapper';
+import HjelpetekstWrapper from '../../../hjelpetekst/HjelpetekstWrapper'
 
 interface DiagnoseKodeSeksjonProps {
-    kode: string;
-    system: string;
-    visHjelp: boolean;
+    kode: string
+    system: string
+    visHjelp: boolean
 }
 
 const DiagnoseKodeSeksjon = ({ kode, system, visHjelp }: DiagnoseKodeSeksjonProps) => {
@@ -22,7 +22,7 @@ const DiagnoseKodeSeksjon = ({ kode, system, visHjelp }: DiagnoseKodeSeksjonProp
             <Normaltekst>{kode}</Normaltekst>
             <Undertekst>{system}</Undertekst>
         </>
-    );
-};
+    )
+}
 
-export default DiagnoseKodeSeksjon;
+export default DiagnoseKodeSeksjon

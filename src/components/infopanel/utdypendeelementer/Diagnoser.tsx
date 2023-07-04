@@ -1,22 +1,22 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { AnnenFraverGrunnValues, MedisinskVurdering } from '../../../types/sykmelding';
-import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
-import ElementMedTekst from '../layout/ElementMedTekst';
-import EnkelCheckbox from '../layout/EnkelCheckbox';
-import Margin from '../layout/Margin';
-import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-import DiagnoseSeksjon from '../panelelementer/diagnose/DiagnoseSeksjon';
+import { AnnenFraverGrunnValues, MedisinskVurdering } from '../../../types/sykmelding'
+import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils'
+import ElementMedTekst from '../layout/ElementMedTekst'
+import EnkelCheckbox from '../layout/EnkelCheckbox'
+import Margin from '../layout/Margin'
+import SeksjonMedTittel from '../layout/SeksjonMedTittel'
+import DiagnoseSeksjon from '../panelelementer/diagnose/DiagnoseSeksjon'
 
 interface DiagnoserProps {
-    medisinskVurdering: MedisinskVurdering;
-    skjermesForPasient: boolean;
+    medisinskVurdering: MedisinskVurdering
+    skjermesForPasient: boolean
 }
 
 const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) => {
     if (!medisinskVurdering) {
-        return null;
+        return null
     }
 
     return (
@@ -80,7 +80,7 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
                 />
             </Margin>
         </SeksjonMedTittel>
-    );
-};
+    )
+}
 
-export default Diagnoser;
+export default Diagnoser

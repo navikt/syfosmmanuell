@@ -1,17 +1,17 @@
-import React from 'react';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import React from 'react'
+import { Element, Normaltekst } from 'nav-frontend-typografi'
 
-import { tilLesbarPeriodeMedArstall, countDaysBetweenTwoDatesIncludingFom } from '../../../../utils/datoUtils';
-import { periodeUndertekst } from '../../../../utils/tekstUtils';
-import { Periode } from '../../../../types/sykmelding';
+import { tilLesbarPeriodeMedArstall, countDaysBetweenTwoDatesIncludingFom } from '../../../../utils/datoUtils'
+import { periodeUndertekst } from '../../../../utils/tekstUtils'
+import { Periode } from '../../../../types/sykmelding'
 
 interface PeriodeSeksjonProps {
-    periode: Periode;
-    understrek: boolean;
+    periode: Periode
+    understrek: boolean
 }
 
 const PeriodeSeksjon = ({ periode, understrek }: PeriodeSeksjonProps) => {
-    const antallDager = countDaysBetweenTwoDatesIncludingFom(periode.fom, periode.tom);
+    const antallDager = countDaysBetweenTwoDatesIncludingFom(periode.fom, periode.tom)
     return (
         <div className="periodeseksjon">
             <Element>Sykmeldingsperiode</Element>
@@ -26,7 +26,7 @@ const PeriodeSeksjon = ({ periode, understrek }: PeriodeSeksjonProps) => {
             <Normaltekst>{periodeUndertekst(periode)}</Normaltekst>
             {understrek && <hr />}
         </div>
-    );
-};
+    )
+}
 
-export default PeriodeSeksjon;
+export default PeriodeSeksjon

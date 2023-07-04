@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 
-import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
-import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-import ElementMedTekst from '../layout/ElementMedTekst';
-import EnkelCheckbox from '../layout/EnkelCheckbox';
-import { Prognose } from '../../../types/sykmelding';
+import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils'
+import SeksjonMedTittel from '../layout/SeksjonMedTittel'
+import ElementMedTekst from '../layout/ElementMedTekst'
+import EnkelCheckbox from '../layout/EnkelCheckbox'
+import { Prognose } from '../../../types/sykmelding'
 
 interface FriskmeldingProps {
-    prognose: Prognose | null;
+    prognose: Prognose | null
 }
 
 const Friskmelding = ({ prognose }: FriskmeldingProps) => {
     if (!prognose) {
-        return null;
+        return null
     }
 
-    const { erIArbeid, erIkkeIArbeid, hensynArbeidsplassen, arbeidsforEtterPeriode } = prognose;
+    const { erIArbeid, erIkkeIArbeid, hensynArbeidsplassen, arbeidsforEtterPeriode } = prognose
 
     return (
         <SeksjonMedTittel understrek tittel="5. Friskmelding/prognose">
@@ -98,7 +98,7 @@ const Friskmelding = ({ prognose }: FriskmeldingProps) => {
                 </>
             )}
         </SeksjonMedTittel>
-    );
-};
+    )
+}
 
-export default Friskmelding;
+export default Friskmelding

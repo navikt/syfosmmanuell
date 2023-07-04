@@ -1,10 +1,10 @@
-import React from 'react';
-import { Systemtittel } from 'nav-frontend-typografi';
+import React, { ReactNode } from 'react'
+import { Systemtittel } from 'nav-frontend-typografi'
 
 interface SeksjonMedTittelProps {
-    tittel?: string;
-    children: any /* JSX.Element | (JSX.Element | null)[]; */;
-    understrek?: boolean;
+    tittel?: string
+    children: ReactNode
+    understrek?: boolean
 }
 
 const SeksjonMedTittel = ({ tittel, children, understrek }: SeksjonMedTittelProps) => {
@@ -20,7 +20,7 @@ const SeksjonMedTittel = ({ tittel, children, understrek }: SeksjonMedTittelProp
 
             {understrek && <hr />}
         </>
-    );
-};
+    )
+}
 
-export default SeksjonMedTittel;
+export default SeksjonMedTittel

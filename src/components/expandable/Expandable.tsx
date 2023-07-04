@@ -1,31 +1,33 @@
-import Chevron from 'nav-frontend-chevron';
-import { Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect, useRef, useState } from 'react';
+import Chevron from 'nav-frontend-chevron'
+import { Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect, useRef, useState } from 'react'
 
 interface ExpandableProps {
-    erApen: boolean;
-    tittel: React.ReactNode | string;
-    children: React.ReactNode;
-    className?: string;
+    erApen: boolean
+    tittel: React.ReactNode | string
+    children: React.ReactNode
+    className?: string
 }
 
 const Expandable = (props: ExpandableProps) => {
-    const [erApen, setErApen] = useState<boolean>(props.erApen);
-    const [innholdHeight, setInnholdHeight] = useState<number>(0);
-    const expandable = useRef<HTMLDivElement>(null);
-    const jsToggle = useRef<HTMLButtonElement>(null);
-    const container = useRef<HTMLDivElement>(null);
-    const innhold = useRef<HTMLDivElement>(null);
+    const [erApen, setErApen] = useState<boolean>(props.erApen)
+    const [innholdHeight, setInnholdHeight] = useState<number>(0)
+    const expandable = useRef<HTMLDivElement>(null)
+    const jsToggle = useRef<HTMLButtonElement>(null)
+    const container = useRef<HTMLDivElement>(null)
+    const innhold = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        setErApen(props.erApen);
-        setInnholdHeight(innhold.current!.offsetHeight);
-    }, [props.erApen]);
+        setErApen(props.erApen)
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        setInnholdHeight(innhold.current!.offsetHeight)
+    }, [props.erApen])
 
     const onButtonClick = () => {
-        expandable.current!.focus();
-        setErApen(!erApen);
-    };
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        expandable.current!.focus()
+        setErApen(!erApen)
+    }
 
     return (
         <div
@@ -37,7 +39,7 @@ const Expandable = (props: ExpandableProps) => {
                 aria-expanded={erApen}
                 ref={jsToggle}
                 onClick={onButtonClick}
-                type={'button'}
+                type="button"
                 className="expandable__toggle"
             >
                 <Normaltekst tag="h3" className="expandable__tittel">
@@ -58,7 +60,7 @@ const Expandable = (props: ExpandableProps) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Expandable;
+export default Expandable

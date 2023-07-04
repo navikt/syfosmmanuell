@@ -1,20 +1,20 @@
-import React, { useContext } from 'react';
-import { Select } from 'nav-frontend-skjema';
-import Image from 'next/image';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import React, { useContext } from 'react'
+import { Select } from 'nav-frontend-skjema'
+import Image from 'next/image'
+import { Element, Undertittel } from 'nav-frontend-typografi'
 
-import { ModiaContext, ModiaContextError } from '../../services/modiaService';
-import { StoreContext } from '../../data/store';
+import { ModiaContext, ModiaContextError } from '../../services/modiaService'
+import { StoreContext } from '../../data/store'
 
-import styles from './ModiaHeader.module.css';
-import navLogo from './nav-logo.svg';
+import styles from './ModiaHeader.module.css'
+import navLogo from './nav-logo.svg'
 
 interface Props {
-    modiaContext?: ModiaContext | ModiaContextError;
+    modiaContext?: ModiaContext | ModiaContextError
 }
 
 function ModiaHeader({ modiaContext }: Props): JSX.Element {
-    const { aktivEnhet, setAktivEnhet } = useContext(StoreContext);
+    const { aktivEnhet, setAktivEnhet } = useContext(StoreContext)
 
     return (
         <header className={styles.root}>
@@ -26,9 +26,10 @@ function ModiaHeader({ modiaContext }: Props): JSX.Element {
                 <div className={styles.enhetPicker}>
                     {aktivEnhet && modiaContext.enheter.length ? (
                         <Select
+                            id="modia-header"
                             value={aktivEnhet}
                             onChange={(event) => {
-                                setAktivEnhet(event.target.value);
+                                setAktivEnhet(event.target.value)
                             }}
                         >
                             {modiaContext.enheter.map((it) => (
@@ -46,7 +47,7 @@ function ModiaHeader({ modiaContext }: Props): JSX.Element {
             )}
             {modiaContext && 'errorType' in modiaContext && <Undertittel>⚠ Feil ved lasting av enheter</Undertittel>}
         </header>
-    );
+    )
 }
 
-export default ModiaHeader;
+export default ModiaHeader

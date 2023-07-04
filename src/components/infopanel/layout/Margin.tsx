@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { ReactNode } from 'react'
 
 interface MarginProps {
-    children: any | any[];
-    liten?: boolean;
-    stor?: boolean;
+    children: ReactNode
+    liten?: boolean
+    stor?: boolean
 }
 
 const Margin = ({ children, liten, stor }: MarginProps) => {
     if (!children) {
-        return null;
+        return null
     }
 
-    const marginBottom = liten ? '1rem' : stor ? '4rem' : '2rem';
+    const marginBottom = liten ? '1rem' : stor ? '4rem' : '2rem'
 
-    return <div style={{ marginBottom }}>{children}</div>;
-};
+    return <div style={{ marginBottom }}>{children}</div>
+}
 
-export default Margin;
+export default Margin

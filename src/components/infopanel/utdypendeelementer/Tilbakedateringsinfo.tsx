@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import ElementMedTekst from '../layout/ElementMedTekst';
-import { tilLesbarDatoMedArstall, daysBetweenDates, getSykmeldingStartDate } from '../../../utils/datoUtils';
-import { Periode } from '../../../types/sykmelding';
+import ElementMedTekst from '../layout/ElementMedTekst'
+import { tilLesbarDatoMedArstall, daysBetweenDates, getSykmeldingStartDate } from '../../../utils/datoUtils'
+import { Periode } from '../../../types/sykmelding'
 
 interface TilbakedateringsinfoProps {
-    perioder: Periode[];
-    behandletTidspunkt: string;
-    kontaktDato: string | null;
-    begrunnelseIkkeKontakt: string | null;
+    perioder: Periode[]
+    behandletTidspunkt: string
+    kontaktDato: string | null
+    begrunnelseIkkeKontakt: string | null
 }
 
 const Tilbakedateringsinfo = ({
@@ -17,8 +17,8 @@ const Tilbakedateringsinfo = ({
     behandletTidspunkt,
     begrunnelseIkkeKontakt,
 }: TilbakedateringsinfoProps) => {
-    const fom = getSykmeldingStartDate(perioder);
-    const tilbakedatertDuration = daysBetweenDates(fom, behandletTidspunkt);
+    const fom = getSykmeldingStartDate(perioder)
+    const tilbakedatertDuration = daysBetweenDates(fom, behandletTidspunkt)
 
     return (
         <div className="tilbakedateringsinfo">
@@ -54,7 +54,7 @@ const Tilbakedateringsinfo = ({
                 />
             )}
         </div>
-    );
-};
+    )
+}
 
-export default Tilbakedateringsinfo;
+export default Tilbakedateringsinfo

@@ -1,26 +1,26 @@
-import React from 'react';
-import Image from 'next/image';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
+import React from 'react'
+import Image from 'next/image'
+import { Normaltekst, Element } from 'nav-frontend-typografi'
 
-import sjekkboks from '../../../svg/sjekkboks.svg';
-import sjekkboksKryss from '../../../svg/sjekkboksKryss.svg';
+import sjekkboks from '../../../svg/sjekkboks.svg'
+import sjekkboksKryss from '../../../svg/sjekkboksKryss.svg'
 
-import Innrykk from './Innrykk';
-import Margin from './Margin';
+import Innrykk from './Innrykk'
+import Margin from './Margin'
 
 interface EnkelCheckboxProps {
-    tittel: string;
-    checked: boolean;
-    margin?: boolean;
-    innrykk?: boolean;
-    bold?: boolean;
-    vis?: boolean;
-    listItems?: string[];
+    tittel: string
+    checked: boolean
+    margin?: boolean
+    innrykk?: boolean
+    bold?: boolean
+    vis?: boolean
+    listItems?: string[]
 }
 
 const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true, listItems }: EnkelCheckboxProps) => {
     if (!vis) {
-        return null;
+        return null
     }
 
     const innhold: JSX.Element = (
@@ -41,12 +41,12 @@ const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true, lis
                 </ul>
             )}
         </div>
-    );
+    )
 
-    const medMargin = margin ? <Margin>{innhold}</Margin> : innhold;
-    const medInnrykk = innrykk ? <Innrykk>{medMargin}</Innrykk> : medMargin;
+    const medMargin = margin ? <Margin>{innhold}</Margin> : innhold
+    const medInnrykk = innrykk ? <Innrykk>{medMargin}</Innrykk> : medMargin
 
-    return <div style={{ flex: '1' }}>{medInnrykk}</div>;
-};
+    return <div style={{ flex: '1' }}>{medInnrykk}</div>
+}
 
-export default EnkelCheckbox;
+export default EnkelCheckbox

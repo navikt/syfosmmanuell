@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-import ElementMedTekst from '../layout/ElementMedTekst';
+import SeksjonMedTittel from '../layout/SeksjonMedTittel'
+import ElementMedTekst from '../layout/ElementMedTekst'
 
 interface AnnetProps {
-    behandlerTelefon: string | null;
+    behandlerTelefon: string | null
 }
 
 const Annet = ({ behandlerTelefon }: AnnetProps) => {
     if (!behandlerTelefon) {
-        return null;
+        return null
     }
 
     return (
@@ -21,7 +21,7 @@ const Annet = ({ behandlerTelefon }: AnnetProps) => {
                 tekst={behandlerTelefon}
             />
         </SeksjonMedTittel>
-    );
-};
+    )
+}
 
-export default Annet;
+export default Annet

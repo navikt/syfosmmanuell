@@ -1,30 +1,30 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
-import { DateString } from './shared';
+import { DateString } from './shared'
 
-const HarArbeidsgiver = z.enum(['EN_ARBEIDSGIVER', 'FLERE_ARBEIDSGIVERE', 'INGEN_ARBEIDSGIVER']);
-type HarArbeidsgiver = z.infer<typeof HarArbeidsgiver>;
+const HarArbeidsgiver = z.enum(['EN_ARBEIDSGIVER', 'FLERE_ARBEIDSGIVERE', 'INGEN_ARBEIDSGIVER'])
+type HarArbeidsgiver = z.infer<typeof HarArbeidsgiver>
 
 export const HarArbeidsgiverValues: Record<HarArbeidsgiver, string> = {
     EN_ARBEIDSGIVER: 'Én arbeidsgiver',
     FLERE_ARBEIDSGIVERE: 'Flere arbeidsgivere',
     INGEN_ARBEIDSGIVER: 'Ingen arbeidsgiver',
-};
+}
 
 export const Arbeidsgiver = z.object({
     harArbeidsgiver: HarArbeidsgiver,
     navn: z.string().nullable(),
     yrkesbetegnelse: z.string().nullable(),
     stillingsprosent: z.number().nullable(),
-});
-export type Arbeidsgiver = z.infer<typeof Arbeidsgiver>;
+})
+export type Arbeidsgiver = z.infer<typeof Arbeidsgiver>
 
 export const Diagnose = z.object({
     system: z.string(),
     kode: z.string(),
     tekst: z.string(),
-});
-export type Diagnose = z.infer<typeof Diagnose>;
+})
+export type Diagnose = z.infer<typeof Diagnose>
 
 const AnnenFraverGrunn = z.enum([
     'GODKJENT_HELSEINSTITUSJON',
@@ -37,8 +37,8 @@ const AnnenFraverGrunn = z.enum([
     'UFOR_GRUNNET_BARNLOSHET',
     'DONOR',
     'BEHANDLING_STERILISERING',
-]);
-type AnnenFraverGrunn = z.infer<typeof AnnenFraverGrunn>;
+])
+type AnnenFraverGrunn = z.infer<typeof AnnenFraverGrunn>
 
 export const AnnenFraverGrunnValues: Record<AnnenFraverGrunn, string> = {
     GODKJENT_HELSEINSTITUSJON: 'Når vedkommende er innlagt i en godkjent helseinstitusjon',
@@ -54,12 +54,12 @@ export const AnnenFraverGrunnValues: Record<AnnenFraverGrunn, string> = {
     UFOR_GRUNNET_BARNLOSHET: 'Når vedkommende er arbeidsufør som følge av behandling for barnløshet',
     DONOR: 'Når vedkommende er donor eller er under vurdering som donor',
     BEHANDLING_STERILISERING: 'Når vedkommende er arbeidsufør som følge av behandling i forbindelse med sterilisering',
-};
+}
 
 const AnnenFraversArsak = z.object({
     beskrivelse: z.string().nullable(),
     grunn: z.array(AnnenFraverGrunn),
-});
+})
 
 export const MedisinskVurdering = z.object({
     hovedDiagnose: Diagnose.nullable(),
@@ -68,8 +68,8 @@ export const MedisinskVurdering = z.object({
     yrkesskade: z.boolean(),
     yrkesskadeDato: DateString.nullable(),
     annenFraversArsak: AnnenFraversArsak.nullable(),
-});
-export type MedisinskVurdering = z.infer<typeof MedisinskVurdering>;
+})
+export type MedisinskVurdering = z.infer<typeof MedisinskVurdering>
 
 // --------
 
@@ -78,43 +78,43 @@ const MedisinskArsakType = z.enum([
     'AKTIVITET_FORVERRER_TILSTAND',
     'AKTIVITET_FORHINDRER_BEDRING',
     'ANNET',
-]);
-type MedisinskArsakType = z.infer<typeof MedisinskArsakType>;
+])
+type MedisinskArsakType = z.infer<typeof MedisinskArsakType>
 
 export const MedisinskArsakTypeValues: Record<MedisinskArsakType, string> = {
     TILSTAND_HINDRER_AKTIVITET: 'Helsetilstanden hindrer pasienten i å være i aktivitet',
     AKTIVITET_FORVERRER_TILSTAND: 'Aktivitet vil forverre helsetilstanden',
     AKTIVITET_FORHINDRER_BEDRING: 'Aktivitet vil hindre/forsinke bedring av helsetilstanden',
     ANNET: 'Annet',
-};
+}
 
 const MedisinskArsak = z.object({
     beskrivelse: z.string().nullable(),
     arsak: z.array(MedisinskArsakType),
-});
+})
 
-const ArbeidsrelatertArsakType = z.enum(['MANGLENDE_TILRETTELEGGING', 'ANNET']);
-type ArbeidsrelatertArsakType = z.infer<typeof ArbeidsrelatertArsakType>;
+const ArbeidsrelatertArsakType = z.enum(['MANGLENDE_TILRETTELEGGING', 'ANNET'])
+type ArbeidsrelatertArsakType = z.infer<typeof ArbeidsrelatertArsakType>
 
 export const ArbeidsrelatertArsakTypeValues: Record<ArbeidsrelatertArsakType, string> = {
     MANGLENDE_TILRETTELEGGING: 'Manglende tilrettelegging på arbeidsplassen',
     ANNET: 'Annet',
-};
+}
 
 const ArbeidsrelatertArsak = z.object({
     beskrivelse: z.string().nullable(),
     arsak: z.array(ArbeidsrelatertArsakType),
-});
+})
 
 const AktivitetIkkeMulig = z.object({
     medisinskArsak: MedisinskArsak.nullable(),
     arbeidsrelatertArsak: ArbeidsrelatertArsak.nullable(),
-});
+})
 
 const Gradert = z.object({
     reisetilskudd: z.boolean(),
     grad: z.number().nullable(),
-});
+})
 
 export const Periode = z.object({
     fom: DateString,
@@ -124,8 +124,8 @@ export const Periode = z.object({
     behandlingsdager: z.number().nullable(),
     gradert: Gradert.nullable(),
     reisetilskudd: z.boolean(),
-});
-export type Periode = z.infer<typeof Periode>;
+})
+export type Periode = z.infer<typeof Periode>
 
 // --------
 
@@ -147,25 +147,25 @@ export const Prognose = z.object({
             vurderingsdato: DateString.nullable(),
         })
         .nullable(),
-});
-export type Prognose = z.infer<typeof Prognose>;
+})
+export type Prognose = z.infer<typeof Prognose>
 
 // --------
 
 export const MeldingTilNAV = z.object({
     bistandUmiddelbart: z.boolean(),
     beskrivBistand: z.string().nullable(),
-});
-export type MeldingTilNAV = z.infer<typeof MeldingTilNAV>;
+})
+export type MeldingTilNAV = z.infer<typeof MeldingTilNAV>
 
 // --------
 
 export const KontaktMedPasient = z.object({
     kontaktDato: DateString.nullable(),
     begrunnelseIkkeKontakt: z.string().nullable(),
-});
+})
 
-export type KontaktMedPasient = z.infer<typeof KontaktMedPasient>;
+export type KontaktMedPasient = z.infer<typeof KontaktMedPasient>
 
 // --------
 
@@ -175,7 +175,7 @@ const Adresse = z.object({
     kommune: z.string().nullable(),
     postboks: z.string().nullable(),
     land: z.string().nullable(),
-});
+})
 
 export const Behandler = z.object({
     fornavn: z.string(),
@@ -187,36 +187,36 @@ export const Behandler = z.object({
     her: z.string().nullable(),
     adresse: Adresse,
     tlf: z.string().nullable(),
-});
-export type Behandler = z.infer<typeof Behandler>;
+})
+export type Behandler = z.infer<typeof Behandler>
 
 // --------
 
-const SvarRestriksjon = z.enum(['SKJERMET_FOR_ARBEIDSGIVER', 'SKJERMET_FOR_PASIENT', 'SKJERMET_FOR_NAV']);
-type SvarRestriksjon = z.infer<typeof SvarRestriksjon>;
+const SvarRestriksjon = z.enum(['SKJERMET_FOR_ARBEIDSGIVER', 'SKJERMET_FOR_PASIENT', 'SKJERMET_FOR_NAV'])
+type SvarRestriksjon = z.infer<typeof SvarRestriksjon>
 
 export const SvarRestriksjonValues: Record<SvarRestriksjon, string> = {
     SKJERMET_FOR_ARBEIDSGIVER: 'Informasjonen skal ikke vises arbeidsgiver',
     SKJERMET_FOR_PASIENT: 'Informasjonen skal ikke vises pasient',
     SKJERMET_FOR_NAV: 'Informasjonen skal ikke vises NAV',
-};
+}
 
 export const SporsmalSvar = z.object({
     sporsmal: z.string(),
     svar: z.string(),
     restriksjoner: z.array(SvarRestriksjon),
-});
-export type SporsmalSvar = z.infer<typeof SporsmalSvar>;
+})
+export type SporsmalSvar = z.infer<typeof SporsmalSvar>
 
-export const UtdypendeOpplysninger = z.record(z.record(SporsmalSvar));
-export type UtdypendeOpplysninger = z.infer<typeof UtdypendeOpplysninger>;
+export const UtdypendeOpplysninger = z.record(z.record(SporsmalSvar))
+export type UtdypendeOpplysninger = z.infer<typeof UtdypendeOpplysninger>
 
 // --------
 
 const AvsenderSystem = z.object({
     navn: z.string(),
     versjon: z.string(),
-});
+})
 
 // --------
 
@@ -242,6 +242,6 @@ export const Sykmelding = z.object({
     syketilfelleStartDato: DateString.nullable(),
     signaturDato: DateString,
     navnFastlege: z.string().nullable(),
-});
+})
 
-export type Sykmelding = z.infer<typeof Sykmelding>;
+export type Sykmelding = z.infer<typeof Sykmelding>

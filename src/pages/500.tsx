@@ -1,5 +1,5 @@
-import React from 'react';
-import { Systemtittel, Undertittel } from 'nav-frontend-typografi';
+import React from 'react'
+import { Systemtittel, Undertittel } from 'nav-frontend-typografi'
 
 function NotFound(): JSX.Element {
     return (
@@ -9,7 +9,7 @@ function NotFound(): JSX.Element {
                 <Undertittel>Dersom problemet fortsetter, kan du kontakte oss.</Undertittel>
             </main>
         </section>
-    );
+    )
 }
 
-export default NotFound;
+export default NotFound

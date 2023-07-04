@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-import ElementMedTekst from '../layout/ElementMedTekst';
-import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
+import SeksjonMedTittel from '../layout/SeksjonMedTittel'
+import ElementMedTekst from '../layout/ElementMedTekst'
+import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils'
 
 interface TilbakedateringsSeksjonProps {
-    kontaktDato: string | null;
-    begrunnelseIkkeKontakt: string | null;
+    kontaktDato: string | null
+    begrunnelseIkkeKontakt: string | null
 }
 
 const TilbakedateringsSeksjon = ({ kontaktDato, begrunnelseIkkeKontakt }: TilbakedateringsSeksjonProps) => {
@@ -25,7 +25,7 @@ const TilbakedateringsSeksjon = ({ kontaktDato, begrunnelseIkkeKontakt }: Tilbak
                 margin
             />
         </SeksjonMedTittel>
-    );
-};
+    )
+}
 
-export default TilbakedateringsSeksjon;
+export default TilbakedateringsSeksjon

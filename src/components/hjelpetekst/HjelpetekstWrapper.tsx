@@ -1,8 +1,8 @@
-import React from 'react';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import React from 'react'
+import Hjelpetekst from 'nav-frontend-hjelpetekst'
 
 interface HjelpetekstWrapperProps {
-    tekst: string;
+    tekst: string
 }
 
 const HjelpetekstWrapper = ({ tekst }: HjelpetekstWrapperProps) => {
@@ -12,7 +12,7 @@ const HjelpetekstWrapper = ({ tekst }: HjelpetekstWrapperProps) => {
                 <div className="hjelpetekst-container__tekst">{tekst}</div>
             </Hjelpetekst>
         </div>
-    );
-};
+    )
+}
 
-export default HjelpetekstWrapper;
+export default HjelpetekstWrapper

@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-import ElementMedTekst from '../layout/ElementMedTekst';
+import SeksjonMedTittel from '../layout/SeksjonMedTittel'
+import ElementMedTekst from '../layout/ElementMedTekst'
 
 interface ArbeidsevneProps {
-    tiltakArbeidsplassen: string | null;
-    tiltakNAV: string | null;
-    andreTiltak: string | null;
+    tiltakArbeidsplassen: string | null
+    tiltakNAV: string | null
+    andreTiltak: string | null
 }
 
 const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV, andreTiltak }: ArbeidsevneProps) => {
     if (!tiltakArbeidsplassen && !tiltakNAV && !andreTiltak) {
-        return null;
+        return null
     }
 
     return (
@@ -30,7 +30,7 @@ const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV, andreTiltak }: Arbeidsev
                 margin
             />
         </SeksjonMedTittel>
-    );
-};
+    )
+}
 
-export default Arbeidsevne;
+export default Arbeidsevne

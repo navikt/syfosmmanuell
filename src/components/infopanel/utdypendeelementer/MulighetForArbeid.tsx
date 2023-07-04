@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 
-import SeksjonMedTittel from '../layout/SeksjonMedTittel';
-import ElementMedTekst from '../layout/ElementMedTekst';
-import EnkelCheckbox from '../layout/EnkelCheckbox';
-import { tilLesbarPeriodeMedArstall } from '../../../utils/datoUtils';
-import { ArbeidsrelatertArsakTypeValues, MedisinskArsakTypeValues, Periode } from '../../../types/sykmelding';
+import SeksjonMedTittel from '../layout/SeksjonMedTittel'
+import ElementMedTekst from '../layout/ElementMedTekst'
+import EnkelCheckbox from '../layout/EnkelCheckbox'
+import { tilLesbarPeriodeMedArstall } from '../../../utils/datoUtils'
+import { ArbeidsrelatertArsakTypeValues, MedisinskArsakTypeValues, Periode } from '../../../types/sykmelding'
 
 interface MulighetForArbeidProps {
-    perioder: Periode[];
+    perioder: Periode[]
 }
 
 const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
-    const avventendeSykmeldingPerioder = perioder.filter((periode) => periode.avventendeInnspillTilArbeidsgiver);
-    const gradertSykmeldingPerioder = perioder.filter((periode) => periode.gradert);
-    const fullSykmeldingPerioder = perioder.filter((periode) => periode.aktivitetIkkeMulig);
-    const behandlingsdagerSykmeldingPerioder = perioder.filter((periode) => periode.behandlingsdager);
-    const reisetilskuddSykmeldingPerioder = perioder.filter((periode) => periode.reisetilskudd);
+    const avventendeSykmeldingPerioder = perioder.filter((periode) => periode.avventendeInnspillTilArbeidsgiver)
+    const gradertSykmeldingPerioder = perioder.filter((periode) => periode.gradert)
+    const fullSykmeldingPerioder = perioder.filter((periode) => periode.aktivitetIkkeMulig)
+    const behandlingsdagerSykmeldingPerioder = perioder.filter((periode) => periode.behandlingsdager)
+    const reisetilskuddSykmeldingPerioder = perioder.filter((periode) => periode.reisetilskudd)
 
     return (
         <SeksjonMedTittel understrek tittel="4. Mulighet for arbeid">
@@ -135,7 +135,7 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
                 </>
             ))}
         </SeksjonMedTittel>
-    );
-};
+    )
+}
 
-export default MulighetForArbeid;
+export default MulighetForArbeid

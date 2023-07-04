@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-import { sorterPerioderEldsteFoerst } from '../../../../utils/sorterSykmeldingUtils';
-import Margin from '../../layout/Margin';
-import { Periode } from '../../../../types/sykmelding';
+import { sorterPerioderEldsteFoerst } from '../../../../utils/sorterSykmeldingUtils'
+import Margin from '../../layout/Margin'
+import { Periode } from '../../../../types/sykmelding'
 
-import PeriodeSeksjon from './PeriodeSeksjon';
+import PeriodeSeksjon from './PeriodeSeksjon'
 
 interface SykmeldingPerioderProps {
-    perioder: Periode[];
+    perioder: Periode[]
 }
 
 const SykmeldingPerioder = ({ perioder }: SykmeldingPerioderProps) => {
-    const sortert = sorterPerioderEldsteFoerst(perioder);
+    const sortert = sorterPerioderEldsteFoerst(perioder)
     return (
         <>
             {sortert.map((periode) => (
@@ -20,7 +20,7 @@ const SykmeldingPerioder = ({ perioder }: SykmeldingPerioderProps) => {
                 </Margin>
             ))}
         </>
-    );
-};
+    )
+}
 
-export default SykmeldingPerioder;
+export default SykmeldingPerioder

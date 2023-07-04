@@ -1,7 +1,7 @@
-import React from 'react';
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import React from 'react'
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 
-import styles from '../components/NoEnhetError.module.css';
+import styles from '../components/NoEnhetError.module.css'
 
 const NoEnhetError = (): JSX.Element => {
     return (
@@ -13,7 +13,7 @@ const NoEnhetError = (): JSX.Element => {
                 <Normaltekst>Ta kontakt dersom feilen fortsetter.</Normaltekst>
             </main>
         </section>
-    );
-};
+    )
+}
 
-export default NoEnhetError;
+export default NoEnhetError
