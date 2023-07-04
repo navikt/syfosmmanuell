@@ -2,7 +2,7 @@ name: Deploy redirect ingress to dev
 on:
   push:
     paths:
-      - 'redirect-dev.yaml'
+      - 'nais/redirect-dev.yaml'
       - '.github/workflows/deploy-redirect-dev**'
     branches:
       - '**'
@@ -17,4 +17,4 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY_TEAMSYKMELDING }}
           CLUSTER: dev-gcp
-          RESOURCE: redirect-dev.yaml
+          RESOURCE: nais/redirect-dev.yaml
