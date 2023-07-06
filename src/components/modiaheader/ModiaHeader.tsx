@@ -1,33 +1,28 @@
-import React, { useContext } from 'react'
-import { Select } from 'nav-frontend-skjema'
-import Image from 'next/image'
-import { Element, Undertittel } from 'nav-frontend-typografi'
+import React, { ReactElement, useContext } from 'react'
+import { InternalHeader } from '@navikt/ds-react'
+import { Heading, Label, Select } from '@navikt/ds-react'
 
 import { ModiaContext, ModiaContextError } from '../../services/modiaService'
 import { StoreContext } from '../../data/store'
-
-import styles from './ModiaHeader.module.css'
-import navLogo from './nav-logo.svg'
 
 interface Props {
     modiaContext?: ModiaContext | ModiaContextError
 }
 
-function ModiaHeader({ modiaContext }: Props): JSX.Element {
+function ModiaHeader({ modiaContext }: Props): ReactElement {
     const { aktivEnhet, setAktivEnhet } = useContext(StoreContext)
 
     return (
-        <header className={styles.root}>
-            <div className={styles.titleWrapper}>
-                <Image src={navLogo} alt="NAV logo" />
-                <Undertittel>syfosmmanuell</Undertittel>
-            </div>
+        <InternalHeader className="justify-between">
+            <InternalHeader.Title as="div">syfosmmanuell</InternalHeader.Title>
             {modiaContext && !('errorType' in modiaContext) && (
-                <div className={styles.enhetPicker}>
+                <div className="-mt-2 ml-auto mr-2 flex items-center">
                     {aktivEnhet && modiaContext.enheter.length ? (
                         <Select
                             id="modia-header"
                             value={aktivEnhet}
+                            label=""
+                            size="small"
                             onChange={(event) => {
                                 setAktivEnhet(event.target.value)
                             }}
@@ -39,14 +34,21 @@ function ModiaHeader({ modiaContext }: Props): JSX.Element {
                             ))}
                         </Select>
                     ) : (
-                        <Element>Fant ingen enheter</Element>
+                        <div className="mr-4 mt-2 flex items-center justify-center">
+                            <Label>Fant ingen enheter</Label>
+                        </div>
                     )}
-                    <Undertittel>|</Undertittel>
-                    <div>{modiaContext.navn}</div>
                 </div>
             )}
-            {modiaContext && 'errorType' in modiaContext && <Undertittel>⚠ Feil ved lasting av enheter</Undertittel>}
-        </header>
+            {modiaContext && 'errorType' in modiaContext && (
+                <div className="mr-4 flex items-center justify-center">
+                    <Heading size="small" level="3">
+                        ⚠ Feil ved lasting av enheter
+                    </Heading>
+                </div>
+            )}
+            {modiaContext && !('errorType' in modiaContext) && <InternalHeader.User name={modiaContext.navn} />}
+        </InternalHeader>
     )
 }
 

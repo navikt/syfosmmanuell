@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel'
 import ElementMedTekst from '../layout/ElementMedTekst'
@@ -7,16 +7,12 @@ import EnkelCheckbox from '../layout/EnkelCheckbox'
 import { MeldingTilNAV } from '../../../types/sykmelding'
 
 interface MeldingTilNAVSectionProps {
-    meldingTilNAV: MeldingTilNAV | null
+    meldingTilNAV: MeldingTilNAV
 }
 
-const MeldingTilNAVSection = ({ meldingTilNAV }: MeldingTilNAVSectionProps) => {
-    if (!meldingTilNAV) {
-        return null
-    }
-
+function MeldingTilNAVSection({ meldingTilNAV }: MeldingTilNAVSectionProps): ReactElement {
     return (
-        <SeksjonMedTittel understrek tittel="8. Melding til NAV">
+        <SeksjonMedTittel tittel="8. Melding til NAV">
             <Margin>
                 <EnkelCheckbox
                     tittel="8.1. Ønskes bistand fra NAV nå?"

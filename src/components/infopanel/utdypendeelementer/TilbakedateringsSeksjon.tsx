@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel'
 import ElementMedTekst from '../layout/ElementMedTekst'
@@ -9,9 +9,9 @@ interface TilbakedateringsSeksjonProps {
     begrunnelseIkkeKontakt: string | null
 }
 
-const TilbakedateringsSeksjon = ({ kontaktDato, begrunnelseIkkeKontakt }: TilbakedateringsSeksjonProps) => {
+function TilbakedateringsSeksjon({ kontaktDato, begrunnelseIkkeKontakt }: TilbakedateringsSeksjonProps): ReactElement {
     return (
-        <SeksjonMedTittel understrek tittel="11. Tilbakedatering">
+        <SeksjonMedTittel tittel="11. Tilbakedatering">
             <ElementMedTekst
                 vis={!!kontaktDato}
                 tittel="11.1. Datoen for dokumenterbar kontakt med pasienten"

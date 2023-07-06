@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils'
 import SeksjonMedTittel from '../layout/SeksjonMedTittel'
@@ -7,18 +7,14 @@ import EnkelCheckbox from '../layout/EnkelCheckbox'
 import { Prognose } from '../../../types/sykmelding'
 
 interface FriskmeldingProps {
-    prognose: Prognose | null
+    prognose: Prognose
 }
 
-const Friskmelding = ({ prognose }: FriskmeldingProps) => {
-    if (!prognose) {
-        return null
-    }
-
+const Friskmelding = ({ prognose }: FriskmeldingProps): ReactElement | null => {
     const { erIArbeid, erIkkeIArbeid, hensynArbeidsplassen, arbeidsforEtterPeriode } = prognose
 
     return (
-        <SeksjonMedTittel understrek tittel="5. Friskmelding/prognose">
+        <SeksjonMedTittel tittel="5. Friskmelding/prognose">
             <EnkelCheckbox
                 tittel="5.1. Pasienten er 100 prosent arbeidsfør etter denne perioden"
                 checked={arbeidsforEtterPeriode}

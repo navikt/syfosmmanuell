@@ -1,13 +1,10 @@
-import { Knapp } from 'nav-frontend-knapper'
-import { RadioPanelGruppe, Label } from 'nav-frontend-skjema'
-import Spinner from 'nav-frontend-spinner'
 import { useForm, Controller } from 'react-hook-form'
+import { Button, Radio, RadioGroup } from '@navikt/ds-react'
 
 import { browserEnv } from '../../utils/env'
 
 import FeiloppsummeringContainer from './FeiloppsummeringContainer'
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient'
-import classes from './Form.module.css'
 
 type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST'
 export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER'
@@ -24,46 +21,44 @@ export interface FormShape {
 
 const Form = ({ onSubmit, submitting }: Props) => {
     const { control, handleSubmit, formState, watch } = useForm<FormShape>()
-    const { errors } = formState
     const watchStatus = watch('status')
     const watchMerknad = watch('merknad')
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-                control={control}
-                name="status"
-                rules={{
-                    validate: (value) => {
-                        if (['GODKJENT', 'GODKJENT_MED_MERKNAD'].includes(value)) {
-                            return true
-                        }
-                        return 'Oppgaven mangler vurdering'
-                    },
-                }}
-                render={({ field: { onChange, value } }) => (
-                    <RadioPanelGruppe
-                        className={classes.radioGroup}
-                        name="status"
-                        onChange={(event, value) => onChange(value)}
-                        checked={value}
-                        feil={errors.status?.message}
-                        radios={[
-                            // TODO vise enhet her sammen med knappen?
-                            { id: 'b-status', label: 'Godkjenn tilbakedatering', value: 'GODKJENT' },
-                            {
-                                id: 'b-status-godkjent-med-merknad',
-                                label: 'Registrer med merknad',
-                                value: 'GODKJENT_MED_MERKNAD',
-                            },
-                        ]}
-                    />
-                )}
-            />
+            <div className="mb-8 ml-4">
+                <Controller
+                    control={control}
+                    name="status"
+                    rules={{
+                        validate: (value) => {
+                            if (['GODKJENT', 'GODKJENT_MED_MERKNAD'].includes(value)) {
+                                return true
+                            }
+                            return 'Oppgaven mangler vurdering'
+                        },
+                    }}
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <RadioGroup
+                            className="mt-4"
+                            name="status"
+                            legend=""
+                            onChange={(value: 'GODKJENT_MED_MERKNAD' | 'GODKJENT') => onChange(value)}
+                            value={value}
+                            error={error?.message}
+                        >
+                            {/* // TODO vise enhet her sammen med knappen? */}
+                            <Radio id="b-status" value="GODKJENT">
+                                Godkjenn tilbakedatering
+                            </Radio>
+                            <Radio id="b-status-godkjent-med-merknad" value="GODKJENT_MED_MERKNAD">
+                                Registrer med merknad
+                            </Radio>
+                        </RadioGroup>
+                    )}
+                />
 
-            {watchStatus === 'GODKJENT_MED_MERKNAD' && (
-                <>
-                    <Label htmlFor="b-merknad">Velg merknadtype</Label>
+                {watchStatus === 'GODKJENT_MED_MERKNAD' && (
                     <Controller
                         control={control}
                         name="merknad"
@@ -80,44 +75,43 @@ const Form = ({ onSubmit, submitting }: Props) => {
                                 return 'Mangler merknad'
                             },
                         }}
-                        render={({ field: { onChange, value } }) => (
-                            <RadioPanelGruppe
-                                className={classes.radioGroup}
+                        render={({ field: { onChange, value }, fieldState: { error } }) => (
+                            <RadioGroup
+                                className="mt-4"
                                 name="merknad"
-                                onChange={(event, value) => onChange(value)}
-                                checked={value}
-                                feil={errors.merknad?.message}
-                                radios={[
-                                    {
-                                        id: 'b-merknad',
-                                        label: 'Avslå tilbakedatering, hele eller deler av sykmeldingen er ugyldig.',
-                                        value: 'UGYLDIG_TILBAKEDATERING',
-                                    },
-                                    {
-                                        id: 'b-merknad-tilbakedatering-krever-flere-opplysninger',
-                                        label: 'Behov for flere opplysninger.',
-                                        value: 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
-                                    },
-                                ]}
-                            />
+                                onChange={(
+                                    value: 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
+                                ) => onChange(value)}
+                                value={value}
+                                error={error?.message}
+                                legend="Velg merknadtype"
+                            >
+                                <Radio id="b-merknad" value="UGYLDIG_TILBAKEDATERING">
+                                    Avslå tilbakedatering, hele eller deler av sykmeldingen er ugyldig.
+                                </Radio>
+                                <Radio
+                                    id="b-merknad-tilbakedatering-krever-flere-opplysninger"
+                                    value="TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER"
+                                >
+                                    Behov for flere opplysninger.
+                                </Radio>
+                            </RadioGroup>
                         )}
                     />
-                </>
-            )}
-
-            <div className={classes.infoTilBehandlerOgPasient}>
-                <InfoTilBehandlerOgPasient type={watchMerknad} />
+                )}
             </div>
 
-            <FeiloppsummeringContainer className={classes.feiloppsummering} formState={formState} />
+            <InfoTilBehandlerOgPasient type={watchMerknad} />
+            <FeiloppsummeringContainer formState={formState} />
 
-            <Knapp id="submit-button" type="hoved" htmlType="submit" disabled={submitting}>
-                Registrer
-                {submitting && <Spinner className={classes.submitSpinner} />}
-            </Knapp>
-            <a href={browserEnv.NEXT_PUBLIC_GOSYS_URL} className={`knapp knapp--flat ${classes.cancel}`}>
-                Avbryt
-            </a>
+            <div className="mb-8 mt-16 flex gap-4">
+                <Button id="submit-button" variant="primary" type="submit" loading={submitting}>
+                    Registrer
+                </Button>
+                <Button as="a" variant="secondary" href={browserEnv.NEXT_PUBLIC_GOSYS_URL}>
+                    Avbryt
+                </Button>
+            </div>
         </form>
     )
 }

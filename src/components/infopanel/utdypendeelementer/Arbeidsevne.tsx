@@ -15,7 +15,7 @@ const Arbeidsevne = ({ tiltakArbeidsplassen, tiltakNAV, andreTiltak }: Arbeidsev
     }
 
     return (
-        <SeksjonMedTittel understrek tittel="7. Hva skal til for å bedre arbeidsevnen?">
+        <SeksjonMedTittel tittel="7. Hva skal til for å bedre arbeidsevnen?">
             <ElementMedTekst
                 vis={!!tiltakArbeidsplassen}
                 tittel="7.1. Tilrettelegging/hensyn som bør tas på arbeidsplassen"

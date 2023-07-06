@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import Image from 'next/image'
-import { Normaltekst, Element } from 'nav-frontend-typografi'
+import { BodyShort, Label } from '@navikt/ds-react'
 
 import sjekkboks from '../../../svg/sjekkboks.svg'
 import sjekkboksKryss from '../../../svg/sjekkboksKryss.svg'
@@ -23,19 +23,19 @@ const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true, lis
         return null
     }
 
-    const innhold: JSX.Element = (
+    const innhold: ReactElement = (
         <div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ marginRight: '1rem' }}>
                     <Image src={checked ? sjekkboks : sjekkboksKryss} alt="sjekkboks ikon" />
                 </span>
-                <span>{bold ? <Element>{tittel}</Element> : <Normaltekst>{tittel}</Normaltekst>}</span>
+                <span>{bold ? <Label>{tittel}</Label> : <BodyShort>{tittel}</BodyShort>}</span>
             </div>
             {!!listItems?.length && (
                 <ul style={{ marginTop: '1rem', marginLeft: '2.5rem' }}>
                     {listItems.map((item) => (
                         <li key={item}>
-                            <Normaltekst>{item}</Normaltekst>
+                            <BodyShort>{item}</BodyShort>
                         </li>
                     ))}
                 </ul>

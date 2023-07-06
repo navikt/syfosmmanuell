@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { GetServerSidePropsResult } from 'next'
 import dynamic from 'next/dynamic'
-import Spinner from 'nav-frontend-spinner'
+import { Loader } from '@navikt/ds-react'
 
 import { ManuellOppgave } from '../types/manuellOppgave'
 import { getOppgave, OppgaveFetchingError } from '../services/oppgaveService'
@@ -15,7 +15,7 @@ import { BasePageRequiredProps } from './_app'
 
 const MainContent = dynamic(() => import('../components/MainContent'), {
     ssr: false,
-    loading: () => <Spinner type="XL" />,
+    loading: () => <Loader size="3xlarge" />,
 })
 
 interface IndexProps extends BasePageRequiredProps {

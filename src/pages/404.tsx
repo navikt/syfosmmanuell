@@ -1,10 +1,12 @@
-import React from 'react'
-import { Systemtittel } from 'nav-frontend-typografi'
+import React, { ReactElement } from 'react'
+import { Heading } from '@navikt/ds-react'
 
-function NotFound(): JSX.Element {
+function NotFound(): ReactElement {
     return (
         <div style={{ marginTop: '32px' }}>
-            <Systemtittel>Vi klarte ikke å finne denne oppgaven.</Systemtittel>
+            <Heading size="medium" level="3">
+                Vi klarte ikke å finne denne oppgaven.
+            </Heading>
         </div>
     )
 }

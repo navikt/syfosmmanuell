@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import ElementMedTekst from '../layout/ElementMedTekst'
 import { tilLesbarDatoMedArstall, daysBetweenDates, getSykmeldingStartDate } from '../../../utils/datoUtils'
@@ -11,18 +11,18 @@ interface TilbakedateringsinfoProps {
     begrunnelseIkkeKontakt: string | null
 }
 
-const Tilbakedateringsinfo = ({
+function Tilbakedateringsinfo({
     perioder,
     kontaktDato,
     behandletTidspunkt,
     begrunnelseIkkeKontakt,
-}: TilbakedateringsinfoProps) => {
+}: TilbakedateringsinfoProps): ReactElement {
     const fom = getSykmeldingStartDate(perioder)
     const tilbakedatertDuration = daysBetweenDates(fom, behandletTidspunkt)
 
     return (
-        <div className="tilbakedateringsinfo">
-            <div className="tilbakedateringsinfo__kontaktMedPasient">
+        <div className="bg-surface-warning-subtle p-8">
+            <div className="mb-8 border-b border-border-divider pb-8">
                 <ElementMedTekst
                     vis={!!kontaktDato}
                     tittel="11.1 Dato for dokumenterbar kontakt med pasienten"

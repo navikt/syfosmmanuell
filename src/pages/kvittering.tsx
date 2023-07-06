@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react'
-import { Normaltekst } from 'nav-frontend-typografi'
+import React, { ReactElement, useContext, useEffect } from 'react'
 import { GetServerSidePropsResult } from 'next'
 import { logger } from '@navikt/next-logger'
+import { BodyShort } from '@navikt/ds-react'
 
 import { withAuthenticatedPage } from '../auth/withAuth'
 import { getModiaContext, ModiaContext, ModiaContextError } from '../services/modiaService'
@@ -15,7 +15,7 @@ interface Props extends BasePageRequiredProps {
     isDemo: boolean
 }
 
-const Kvittering = ({ isDemo }: Props): JSX.Element => {
+const Kvittering = ({ isDemo }: Props): ReactElement => {
     const { aktivEnhet } = useContext(StoreContext)
 
     useEffect(() => {
@@ -45,11 +45,11 @@ const Kvittering = ({ isDemo }: Props): JSX.Element => {
 
     return (
         <div style={{ marginTop: '32px' }}>
-            <Normaltekst>Oppgaven er registrert. Du videresendes automatisk til GOSYS.</Normaltekst>
+            <BodyShort>Oppgaven er registrert. Du videresendes automatisk til GOSYS.</BodyShort>
             {isDemo && (
-                <Normaltekst>
+                <BodyShort>
                     Dette er bare en demo, du blir sendt tilbake til oppgaven. Ingenting har blitt lagret.
-                </Normaltekst>
+                </BodyShort>
             )}
         </div>
     )

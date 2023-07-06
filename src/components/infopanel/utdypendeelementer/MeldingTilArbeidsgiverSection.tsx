@@ -1,19 +1,15 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel'
 import ElementMedTekst from '../layout/ElementMedTekst'
 
 interface MeldingTilArbeidsgiverSectionProps {
-    meldingTilArbeidsgiver: string | null
+    meldingTilArbeidsgiver: string
 }
 
-const MeldingTilArbeidsgiverSection = ({ meldingTilArbeidsgiver }: MeldingTilArbeidsgiverSectionProps) => {
-    if (!meldingTilArbeidsgiver) {
-        return null
-    }
-
+function MeldingTilArbeidsgiverSection({ meldingTilArbeidsgiver }: MeldingTilArbeidsgiverSectionProps): ReactElement {
     return (
-        <SeksjonMedTittel understrek tittel="9. Melding til arbeidsgiver">
+        <SeksjonMedTittel tittel="9. Melding til arbeidsgiver">
             <ElementMedTekst
                 vis={!!meldingTilArbeidsgiver}
                 margin

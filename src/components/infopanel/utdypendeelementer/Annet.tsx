@@ -13,7 +13,7 @@ const Annet = ({ behandlerTelefon }: AnnetProps) => {
     }
 
     return (
-        <SeksjonMedTittel understrek tittel="Annet">
+        <SeksjonMedTittel tittel="Annet">
             <ElementMedTekst
                 vis={!!behandlerTelefon}
                 margin

@@ -1,6 +1,6 @@
-import React from 'react'
-import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi'
+import React, { ReactElement } from 'react'
 import dayjs from 'dayjs'
+import { BodyShort, Heading, Label } from '@navikt/ds-react'
 
 interface SykmeldingheaderProps {
     arbeidsgiverNavn: string | null
@@ -9,34 +9,39 @@ interface SykmeldingheaderProps {
     personNrPasient: string
 }
 
-const Sykmeldingheader = ({ personNrPasient, arbeidsgiverNavn, sykmelder, mottattDato }: SykmeldingheaderProps) => {
+function Sykmeldingheader({
+    personNrPasient,
+    arbeidsgiverNavn,
+    sykmelder,
+    mottattDato,
+}: SykmeldingheaderProps): ReactElement {
     return (
-        <div className="sykmelding-header">
-            <Innholdstittel className="sykmelding-header__title">
+        <div>
+            <Heading size="large" level="2" spacing>
                 Manuell vurdering av tilbakedatert sykmelding
-            </Innholdstittel>
+            </Heading>
 
-            <div className="sykmelding-header__section">
-                <Element>Fødselsnummer:</Element>
-                <Normaltekst> {personNrPasient}</Normaltekst>
+            <div className="my-8">
+                <Label>Fødselsnummer:</Label>
+                <BodyShort> {personNrPasient}</BodyShort>
             </div>
 
-            <div className="sykmelding-header__section">
+            <div className="my-8">
                 {arbeidsgiverNavn && (
-                    <Normaltekst>
+                    <BodyShort>
                         <b>Arbeidsgiver:</b> {arbeidsgiverNavn}
-                    </Normaltekst>
+                    </BodyShort>
                 )}
                 {sykmelder && (
-                    <Normaltekst>
+                    <BodyShort>
                         <b>Sykmelder:</b> {sykmelder}
-                    </Normaltekst>
+                    </BodyShort>
                 )}
             </div>
 
-            <div className="sykmelding-header__section">
-                <Element>Datoen NAV mottok sykmeldingen:</Element>
-                <Normaltekst>{dayjs(mottattDato).format('DD.MM.YYYY kl. HH:mm:ss')}</Normaltekst>
+            <div className="my-8">
+                <Label>Datoen NAV mottok sykmeldingen:</Label>
+                <BodyShort>{dayjs(mottattDato).format('DD.MM.YYYY kl. HH:mm:ss')}</BodyShort>
             </div>
         </div>
     )

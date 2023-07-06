@@ -1,5 +1,5 @@
 import React from 'react'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { BodyShort, Label } from '@navikt/ds-react'
 
 import Innrykk from './Innrykk'
 import Margin from './Margin'
@@ -19,8 +19,8 @@ const ElementMedTekst = ({ vis, tittel, tekst, innrykk, margin }: ElementMedTeks
 
     const innhold = (
         <>
-            <Element>{tittel}</Element>
-            {tekst && <Normaltekst>{tekst}</Normaltekst>}
+            <Label>{tittel}</Label>
+            {tekst && <BodyShort>{tekst}</BodyShort>}
         </>
     )
 
