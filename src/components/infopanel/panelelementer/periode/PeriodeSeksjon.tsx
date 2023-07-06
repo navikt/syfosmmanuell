@@ -15,7 +15,7 @@ function PeriodeSeksjon({ periode, understrek }: PeriodeSeksjonProps): ReactElem
     return (
         <div>
             <Label>Sykmeldingsperiode</Label>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div className="flex flex-wrap">
                 <BodyShort>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</BodyShort>
                 {antallDager && (
                     <BodyShort>

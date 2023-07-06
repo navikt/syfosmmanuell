@@ -6,6 +6,9 @@ const nextConfig = {
         ignoreDuringBuilds: true,
         dirs: ['src'],
     },
+    experimental: {
+        serverActions: true,
+    },
     output: 'standalone',
     assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX,
 }

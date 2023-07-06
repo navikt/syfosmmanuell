@@ -57,8 +57,8 @@ export const manuellOppgave = {
         },
         perioder: [
             {
-                fom: '2018-10-18',
-                tom: '2018-11-12',
+                fom: '2020-01-15',
+                tom: '2020-01-30',
                 aktivitetIkkeMulig: null,
                 avventendeInnspillTilArbeidsgiver:
                     'Pasienten bør bruke hev/senk pult og få seg frisk luft en gang i blant.',
@@ -67,8 +67,8 @@ export const manuellOppgave = {
                 reisetilskudd: false,
             },
             {
-                fom: '2018-11-13',
-                tom: '2018-11-18',
+                fom: '2020-02-01',
+                tom: '2020-02-23',
                 aktivitetIkkeMulig: null,
                 avventendeInnspillTilArbeidsgiver: null,
                 behandlingsdager: null,
@@ -79,8 +79,8 @@ export const manuellOppgave = {
                 reisetilskudd: false,
             },
             {
-                fom: '2018-10-18',
-                tom: '2018-11-13',
+                fom: '2020-02-24',
+                tom: '2020-03-04',
                 aktivitetIkkeMulig: {
                     medisinskArsak: {
                         beskrivelse: 'Dette er en beskrivelse på en medisinsk årsak',
@@ -97,8 +97,8 @@ export const manuellOppgave = {
                 reisetilskudd: false,
             },
             {
-                fom: '2018-10-18',
-                tom: '2018-11-14',
+                fom: '2020-03-15',
+                tom: '2020-03-20',
                 aktivitetIkkeMulig: null,
                 avventendeInnspillTilArbeidsgiver: null,
                 behandlingsdager: 20,
@@ -106,8 +106,8 @@ export const manuellOppgave = {
                 reisetilskudd: false,
             },
             {
-                fom: '2018-10-18',
-                tom: '2018-11-15',
+                fom: '2020-03-20',
+                tom: '2020-04-02',
                 aktivitetIkkeMulig: null,
                 avventendeInnspillTilArbeidsgiver: null,
                 behandlingsdager: null,

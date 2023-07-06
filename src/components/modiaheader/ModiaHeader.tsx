@@ -1,3 +1,5 @@
+'use client'
+
 import React, { ReactElement, useContext } from 'react'
 import { InternalHeader } from '@navikt/ds-react'
 import { Heading, Label, Select } from '@navikt/ds-react'

@@ -4,11 +4,11 @@ import { z } from 'zod'
 
 import { ManuellOppgave } from '../types/manuellOppgave'
 import { manuellOppgave } from '../mock/manuellOppgave'
-import { FormShape } from '../components/form/Form'
 import { getServerEnv, isLocalOrDemo } from '../utils/env'
 import { ClientError } from '../utils/typeUtils'
 import { UlostOppgave, UlostOppgaveSchema } from '../types/ulost-oppgave'
 import { ulosteOppgaver } from '../mock/ulosteOppgaver'
+import { ValidatedFormValues } from '../components/submit-oppgave-action'
 
 export type OppgaveFetchingError = ClientError<
     'AUTHORIZATION' | 'OPPGAVE_NOT_FOUND' | 'ALREADY_RESOLVED' | 'GENERAL_ERROR' | 'PARSE_ERROR'
@@ -130,7 +130,7 @@ export async function getUlosteOppgaver(accessToken: string): Promise<UlostOppga
 export async function submitOppgave(
     oppgaveid: number,
     aktivEnhet: string,
-    body: FormShape,
+    body: ValidatedFormValues,
     accessToken: string,
 ): Promise<void> {
     if (isLocalOrDemo) {
