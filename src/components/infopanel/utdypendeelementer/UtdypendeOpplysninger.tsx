@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel'
 import Margin from '../layout/Margin'
@@ -20,7 +20,7 @@ interface UtdypendeOpplysningerProps {
     opplysninger: UtdypendeOpplysningerType
 }
 
-const UtdypendeOpplysninger = ({ opplysninger }: UtdypendeOpplysningerProps) => {
+function UtdypendeOpplysninger({ opplysninger }: UtdypendeOpplysningerProps): ReactElement | null {
     if (Object.keys(opplysninger).length === 0) {
         return null
     }
@@ -31,11 +31,7 @@ const UtdypendeOpplysninger = ({ opplysninger }: UtdypendeOpplysningerProps) => 
         </Margin>
     ))
 
-    return (
-        <SeksjonMedTittel understrek tittel="6. Utdypende opplysninger">
-            {opplysningGrupper}
-        </SeksjonMedTittel>
-    )
+    return <SeksjonMedTittel tittel="6. Utdypende opplysninger">{opplysningGrupper}</SeksjonMedTittel>
 }
 
 export default UtdypendeOpplysninger

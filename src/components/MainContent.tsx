@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react'
-import { Flatknapp } from 'nav-frontend-knapper'
 import { useRouter } from 'next/router'
-import { Normaltekst } from 'nav-frontend-typografi'
 import { logger } from '@navikt/next-logger'
+import { Alert, BodyShort, Button } from '@navikt/ds-react'
 
 import { ManuellOppgave } from '../types/manuellOppgave'
 import { vurderOppgave } from '../utils/submitUtils'
@@ -45,7 +44,7 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
     )
 
     return (
-        <div className="panel">
+        <div className="max-w-[50rem] bg-white p-8">
             <Sykmeldingheader
                 arbeidsgiverNavn={sykmelding.arbeidsgiver.navn}
                 sykmelder={sykmelding.navnFastlege}
@@ -55,18 +54,14 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
             <TilbakedatertForlengelse sykmelding={sykmelding} />
             <Form onSubmit={handleSubmit} submitting={submitting} />
             {error && (
-                <div className="margin-top--2">
-                    <Normaltekst>{error}</Normaltekst>
-                </div>
+                <Alert variant="error">
+                    <BodyShort>{error}</BodyShort>
+                </Alert>
             )}
-            <div className="hele-sykmeldingen-visning">
-                <Flatknapp
-                    form="kompakt"
-                    onClick={() => setVisHeleSykmeldingen(!visHeleSykmeldingen)}
-                    className="hele-sykmeldingen-visning__knapp"
-                >
+            <div className="mb-4 flex justify-center">
+                <Button size="small" variant="tertiary" onClick={() => setVisHeleSykmeldingen(!visHeleSykmeldingen)}>
                     {visHeleSykmeldingen ? 'Skjul hele sykmeldingen' : 'Vis hele sykmeldingen'}
-                </Flatknapp>
+                </Button>
             </div>
             {visHeleSykmeldingen && (
                 <HeleSykmeldingen sykmelding={sykmelding} setVisHeleSykmeldingen={setVisHeleSykmeldingen} />

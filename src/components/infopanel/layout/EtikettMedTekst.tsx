@@ -1,12 +1,12 @@
-import React from 'react'
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi'
+import React, { ReactNode } from 'react'
+import { BodyShort, Detail, Label } from '@navikt/ds-react'
 
 import Innrykk from './Innrykk'
 import Margin from './Margin'
 
 interface EtikettMedTekstProps {
     tittel: string
-    tekst?: string | JSX.Element
+    tekst?: string | ReactNode
     undertekst?: string
     margin?: boolean
     innrykk?: boolean
@@ -14,11 +14,11 @@ interface EtikettMedTekstProps {
 
 const EtikettMedTekst = ({ tittel, tekst, undertekst, margin, innrykk }: EtikettMedTekstProps) => {
     const innhold = (
-        <>
-            <Element>{tittel}</Element>
-            <Normaltekst>{tekst}</Normaltekst>
-            {undertekst && <Undertekst>{undertekst}</Undertekst>}
-        </>
+        <div>
+            <Label>{tittel}</Label>
+            <BodyShort>{tekst}</BodyShort>
+            {undertekst && <Detail>{undertekst}</Detail>}
+        </div>
     )
 
     const medMargin = margin ? <Margin>{innhold}</Margin> : innhold

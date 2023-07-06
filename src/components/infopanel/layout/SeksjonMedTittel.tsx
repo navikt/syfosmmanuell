@@ -1,25 +1,24 @@
 import React, { ReactNode } from 'react'
-import { Systemtittel } from 'nav-frontend-typografi'
+import { Heading } from '@navikt/ds-react'
 
 interface SeksjonMedTittelProps {
     tittel?: string
     children: ReactNode
-    understrek?: boolean
 }
 
-const SeksjonMedTittel = ({ tittel, children, understrek }: SeksjonMedTittelProps) => {
+function SeksjonMedTittel({ tittel, children }: SeksjonMedTittelProps) {
     return (
-        <>
+        <div className="border-b border-border-divider">
             {tittel && (
                 <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
-                    <Systemtittel>{tittel}</Systemtittel>
+                    <Heading size="medium" level="3">
+                        {tittel}
+                    </Heading>
                 </div>
             )}
 
             {children}
-
-            {understrek && <hr />}
-        </>
+        </div>
     )
 }
 

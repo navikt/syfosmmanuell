@@ -1,21 +1,11 @@
 import { AppProps as NextAppProps } from 'next/app'
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, ReactElement } from 'react'
 
-import styles from '../index.module.css'
+import '../global.css'
+
 import StoreProvider from '../data/store'
 import { ModiaContext, ModiaContextError } from '../services/modiaService'
 import ModiaHeader from '../components/modiaheader/ModiaHeader'
-import '../basic.less'
-import '../components/MainContent.less'
-import '../components/expandable/Expandable.less'
-import '../components/form/InfoTilBehandlerOgPasient.less'
-import '../components/hjelpetekst/hjelpetekstwrapper.less'
-import '../components/infopanel/infopanel.less'
-import '../components/infopanel/panelelementer/diagnose/diagnoseseksjon.less'
-import '../components/infopanel/panelelementer/periode/periodeseksjon.less'
-import '../components/infopanel/utdypendeelementer/Tilbakedateringsinfo.less'
-import '../components/sykmelding/SykmeldingHeader.less'
-import '../components/sykmelding/sykmeldingvarianter/HeleSykmeldingen.less'
 
 export interface BasePageRequiredProps {
     modiaContext?: ModiaContext | ModiaContextError
@@ -25,11 +15,11 @@ export interface AppProps<T> extends Omit<NextAppProps<T>, 'pageProps'> {
     pageProps: PropsWithChildren<unknown> & Partial<BasePageRequiredProps>
 }
 
-export default function MyApp({ Component, pageProps }: AppProps<BasePageRequiredProps>): JSX.Element {
+export default function MyApp({ Component, pageProps }: AppProps<BasePageRequiredProps>): ReactElement {
     return (
         <StoreProvider modiaContext={pageProps.modiaContext}>
             <ModiaHeader modiaContext={pageProps.modiaContext} />
-            <section className={styles.rootSection}>
+            <section className="flex justify-center">
                 <main>
                     <Component {...pageProps} />
                 </main>

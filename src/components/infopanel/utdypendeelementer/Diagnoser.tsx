@@ -1,5 +1,5 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React from 'react'
+import React, { ReactElement } from 'react'
+import { BodyShort, Label } from '@navikt/ds-react'
 
 import { AnnenFraverGrunnValues, MedisinskVurdering } from '../../../types/sykmelding'
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils'
@@ -14,24 +14,21 @@ interface DiagnoserProps {
     skjermesForPasient: boolean
 }
 
-const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) => {
-    if (!medisinskVurdering) {
-        return null
-    }
-
+function Diagnoser({ medisinskVurdering, skjermesForPasient }: DiagnoserProps): ReactElement {
     return (
-        <SeksjonMedTittel understrek tittel="3. Diagnose">
-            <DiagnoseSeksjon diagnose={medisinskVurdering.hovedDiagnose} withPrefix />
+        <SeksjonMedTittel tittel="3. Diagnose">
+            {medisinskVurdering.hovedDiagnose && (
+                <DiagnoseSeksjon diagnose={medisinskVurdering.hovedDiagnose} withPrefix />
+            )}
             {medisinskVurdering.biDiagnoser.map((diagnose, index) => (
                 <DiagnoseSeksjon key={index} diagnose={diagnose} bidiagnose withPrefix />
             ))}
-
             {medisinskVurdering.annenFraversArsak && (
                 <>
                     <Margin>
-                        <Element>3.3.1. Lovfestet fraværsgrunn</Element>
+                        <Label>3.3.1. Lovfestet fraværsgrunn</Label>
                         {medisinskVurdering.annenFraversArsak.grunn.map((grunn) => (
-                            <Normaltekst key={grunn}>- {AnnenFraverGrunnValues[grunn]}</Normaltekst>
+                            <BodyShort key={grunn}>- {AnnenFraverGrunnValues[grunn]}</BodyShort>
                         ))}
                     </Margin>
                     <ElementMedTekst
@@ -42,41 +39,37 @@ const Diagnoser = ({ medisinskVurdering, skjermesForPasient }: DiagnoserProps) =
                     />
                 </>
             )}
-
             <Margin>
                 <EnkelCheckbox
                     tittel="3.4. Sykdommen er svangerskapsrelatert"
                     margin
                     checked
                     bold
-                    vis={!!medisinskVurdering.svangerskap}
+                    vis={medisinskVurdering.svangerskap}
                 />
             </Margin>
-
             <Margin>
                 <EnkelCheckbox
                     tittel="3.5. Sykmeldingen kan skyldes en yrkesskade/yrkessykdom"
                     margin
                     checked
                     bold
-                    vis={!!medisinskVurdering.yrkesskade}
+                    vis={medisinskVurdering.yrkesskade}
                 />
             </Margin>
-
             <ElementMedTekst
                 vis={!!medisinskVurdering.yrkesskadeDato}
                 tittel="3.6. Eventuell skadedato"
                 tekst={tilLesbarDatoMedArstall(medisinskVurdering.yrkesskadeDato)}
                 margin
             />
-
             <Margin>
                 <EnkelCheckbox
                     tittel="3.7. Det er påtrengende nødvendig å skjerme pasienten for medisinske opplysninger"
                     margin
                     checked
                     bold
-                    vis={!!skjermesForPasient}
+                    vis={skjermesForPasient}
                 />
             </Margin>
         </SeksjonMedTittel>

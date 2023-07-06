@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import { sorterPerioderEldsteFoerst } from '../../../../utils/sorterSykmeldingUtils'
-import Margin from '../../layout/Margin'
 import { Periode } from '../../../../types/sykmelding'
 
 import PeriodeSeksjon from './PeriodeSeksjon'
@@ -10,16 +9,16 @@ interface SykmeldingPerioderProps {
     perioder: Periode[]
 }
 
-const SykmeldingPerioder = ({ perioder }: SykmeldingPerioderProps) => {
+function SykmeldingPerioder({ perioder }: SykmeldingPerioderProps): ReactElement {
     const sortert = sorterPerioderEldsteFoerst(perioder)
     return (
-        <>
+        <div className="flex flex-col gap-4">
             {sortert.map((periode) => (
-                <Margin key={`${periode.fom}-${periode.tom}`}>
+                <div key={`${periode.fom}-${periode.tom}`}>
                     <PeriodeSeksjon periode={periode} understrek={false} />
-                </Margin>
+                </div>
             ))}
-        </>
+        </div>
     )
 }
 

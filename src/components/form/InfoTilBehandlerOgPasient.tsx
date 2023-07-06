@@ -1,7 +1,5 @@
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
-
-import Expandable from '../expandable/Expandable'
+import { BodyLong, ExpansionCard, Heading } from '@navikt/ds-react'
 
 import { Merknad } from './Form'
 
@@ -22,12 +20,17 @@ const InfoTilBehandlerOgPasient = ({ type }: InfoTilBehandlerOgPasientProps) => 
     }
 
     return (
-        <Expandable className="info-til" erApen={false} tittel="Se hva vi sier til pasienten">
-            <div className="info-til__pasient">
-                <Undertittel>Beskjed til pasienten</Undertittel>
-                <Normaltekst className="info-til__paragraph">{BeskjedTilPasient[type]}</Normaltekst>
-            </div>
-        </Expandable>
+        <ExpansionCard aria-labelledby="hva-vi-sier-til-pasienten" size="small">
+            <ExpansionCard.Header>
+                <ExpansionCard.Title id="hva-vi-sier-til-pasienten">Se hva vi sier til pasienten</ExpansionCard.Title>
+            </ExpansionCard.Header>
+            <ExpansionCard.Content>
+                <Heading size="small" level="4" spacing>
+                    Beskjed til pasienten
+                </Heading>
+                <BodyLong>{BeskjedTilPasient[type]}</BodyLong>
+            </ExpansionCard.Content>
+        </ExpansionCard>
     )
 }
 

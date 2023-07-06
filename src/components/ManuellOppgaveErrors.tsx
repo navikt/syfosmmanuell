@@ -1,18 +1,16 @@
-import React from 'react'
-import { Undertittel } from 'nav-frontend-typografi'
+import React, { ReactElement } from 'react'
+import { Alert } from '@navikt/ds-react'
 
 import { OppgaveFetchingError } from '../services/oppgaveService'
-
-import styles from './ManuellOppgaveErrors.module.css'
 
 interface Props {
     errors: OppgaveFetchingError
 }
 
-const ManuellOppgaveErrors = ({ errors }: Props): JSX.Element => {
+const ManuellOppgaveErrors = ({ errors }: Props): ReactElement => {
     return (
-        <div className={styles.root}>
-            <Undertittel>{errors.message}</Undertittel>
+        <div className="mt-12">
+            <Alert variant="error">{errors.message}</Alert>
         </div>
     )
 }

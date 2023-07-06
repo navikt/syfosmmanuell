@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flatknapp } from 'nav-frontend-knapper'
+import { Button } from '@navikt/ds-react'
 
 import MulighetForArbeid from '../../infopanel/utdypendeelementer/MulighetForArbeid'
 import Friskmelding from '../../infopanel/utdypendeelementer/Friskmelding'
@@ -22,54 +22,53 @@ interface HeleSykmeldingenProps {
 
 const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmeldingenProps) => {
     return (
-        <div className="helesykmeldingen">
-            <ElementMedTekst
-                vis={!!sykmelding.signaturDato}
-                tittel="Datoen sykmeldingen ble skrevet"
-                tekst={tilLesbarDatoMedArstall(sykmelding.signaturDato)}
-                margin
-            />
-            <ElementMedTekst
-                vis={!!sykmelding.kontaktMedPasient.kontaktDato}
-                tittel="Datoen for dokumenterbar kontakt med pasienten"
-                tekst={tilLesbarDatoMedArstall(sykmelding.kontaktMedPasient.kontaktDato)}
-                margin
-            />
-            <ElementMedTekst
-                vis={!!sykmelding.navnFastlege}
-                tittel="Sykmelder"
-                tekst={sykmelding.navnFastlege}
-                margin
-            />
-            <hr />
+        <div className="p-4">
+            <div className="border-b border-border-divider">
+                <ElementMedTekst
+                    vis={!!sykmelding.signaturDato}
+                    tittel="Datoen sykmeldingen ble skrevet"
+                    tekst={tilLesbarDatoMedArstall(sykmelding.signaturDato)}
+                    margin
+                />
+                <ElementMedTekst
+                    vis={!!sykmelding.kontaktMedPasient.kontaktDato}
+                    tittel="Datoen for dokumenterbar kontakt med pasienten"
+                    tekst={tilLesbarDatoMedArstall(sykmelding.kontaktMedPasient.kontaktDato)}
+                    margin
+                />
+                <ElementMedTekst
+                    vis={!!sykmelding.navnFastlege}
+                    tittel="Sykmelder"
+                    tekst={sykmelding.navnFastlege}
+                    margin
+                />
+            </div>
             <ArbeidsgiverSection arbeidsgiver={sykmelding.arbeidsgiver} />
             <Diagnoser
                 medisinskVurdering={sykmelding.medisinskVurdering}
                 skjermesForPasient={sykmelding.skjermesForPasient}
             />
             <MulighetForArbeid perioder={sykmelding.perioder} />
-            <Friskmelding prognose={sykmelding.prognose} />
+            {sykmelding.prognose && <Friskmelding prognose={sykmelding.prognose} />}
             <UtdypendeOpplysninger opplysninger={sykmelding.utdypendeOpplysninger} />
             <Arbeidsevne
                 tiltakArbeidsplassen={sykmelding.tiltakArbeidsplassen}
                 tiltakNAV={sykmelding.tiltakNAV}
                 andreTiltak={sykmelding.andreTiltak}
             />
-            <MeldingTilNAVSection meldingTilNAV={sykmelding.meldingTilNAV} />
-            <MeldingTilArbeidsgiverSection meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver} />
+            {sykmelding.meldingTilNAV && <MeldingTilNAVSection meldingTilNAV={sykmelding.meldingTilNAV} />}
+            {sykmelding.meldingTilArbeidsgiver && (
+                <MeldingTilArbeidsgiverSection meldingTilArbeidsgiver={sykmelding.meldingTilArbeidsgiver} />
+            )}
             <TilbakedateringsSeksjon
                 kontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
                 begrunnelseIkkeKontakt={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
             />
             <Annet behandlerTelefon={sykmelding.behandler.tlf} />
             <div style={{ textAlign: 'center' }}>
-                <Flatknapp
-                    form="kompakt"
-                    onClick={() => setVisHeleSykmeldingen(false)}
-                    style={{ marginTop: '1rem', marginBottom: '1rem' }}
-                >
+                <Button size="small" variant="tertiary" onClick={() => setVisHeleSykmeldingen(false)} className="my-4">
                     Skjul hele sykmeldingen
-                </Flatknapp>
+                </Button>
             </div>
         </div>
     )

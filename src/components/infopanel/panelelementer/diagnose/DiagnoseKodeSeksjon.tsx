@@ -1,7 +1,5 @@
-import React from 'react'
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi'
-
-import HjelpetekstWrapper from '../../../hjelpetekst/HjelpetekstWrapper'
+import React, { ReactElement } from 'react'
+import { BodyShort, HelpText, Label } from '@navikt/ds-react'
 
 interface DiagnoseKodeSeksjonProps {
     kode: string
@@ -9,19 +7,21 @@ interface DiagnoseKodeSeksjonProps {
     visHjelp: boolean
 }
 
-const DiagnoseKodeSeksjon = ({ kode, system, visHjelp }: DiagnoseKodeSeksjonProps) => {
+function DiagnoseKodeSeksjon({ kode, system, visHjelp }: DiagnoseKodeSeksjonProps): ReactElement {
     return (
-        <>
-            <div className="diagnose-seksjon-kode-tittel-container">
-                <Element>Diagnosekode</Element>
+        <div>
+            <div className="flex gap-3">
+                <Label>Diagnosekode</Label>
                 {visHjelp && (
-                    <HjelpetekstWrapper tekst="Diagnosekoden henviser til de internasjonale kodeverkene som klassifiserer sykdom og symptomer. De ulike diagnosekodene brukes for å gi en mest mulig presis diagnose." />
+                    <HelpText>
+                        Diagnosekoden henviser til de internasjonale kodeverkene som klassifiserer sykdom og symptomer.
+                        De ulike diagnosekodene brukes for å gi en mest mulig presis diagnose.
+                    </HelpText>
                 )}
             </div>
-
-            <Normaltekst>{kode}</Normaltekst>
-            <Undertekst>{system}</Undertekst>
-        </>
+            <BodyShort>{kode}</BodyShort>
+            <BodyShort size="small">{system}</BodyShort>
+        </div>
     )
 }
 

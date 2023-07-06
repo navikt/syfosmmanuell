@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import SeksjonMedTittel from '../layout/SeksjonMedTittel'
 import ElementMedTekst from '../layout/ElementMedTekst'
@@ -10,7 +10,7 @@ interface MulighetForArbeidProps {
     perioder: Periode[]
 }
 
-const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
+function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
     const avventendeSykmeldingPerioder = perioder.filter((periode) => periode.avventendeInnspillTilArbeidsgiver)
     const gradertSykmeldingPerioder = perioder.filter((periode) => periode.gradert)
     const fullSykmeldingPerioder = perioder.filter((periode) => periode.aktivitetIkkeMulig)
@@ -18,7 +18,7 @@ const MulighetForArbeid = ({ perioder }: MulighetForArbeidProps) => {
     const reisetilskuddSykmeldingPerioder = perioder.filter((periode) => periode.reisetilskudd)
 
     return (
-        <SeksjonMedTittel understrek tittel="4. Mulighet for arbeid">
+        <SeksjonMedTittel tittel="4. Mulighet for arbeid">
             {avventendeSykmeldingPerioder.map((periode) => (
                 <>
                     <ElementMedTekst tittel="4.1. Pasienten kan benytte avventende sykmelding" margin />

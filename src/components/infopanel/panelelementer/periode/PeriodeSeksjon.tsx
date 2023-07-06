@@ -1,5 +1,5 @@
-import React from 'react'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React, { ReactElement } from 'react'
+import { BodyShort, Label } from '@navikt/ds-react'
 
 import { tilLesbarPeriodeMedArstall, countDaysBetweenTwoDatesIncludingFom } from '../../../../utils/datoUtils'
 import { periodeUndertekst } from '../../../../utils/tekstUtils'
@@ -10,20 +10,20 @@ interface PeriodeSeksjonProps {
     understrek: boolean
 }
 
-const PeriodeSeksjon = ({ periode, understrek }: PeriodeSeksjonProps) => {
+function PeriodeSeksjon({ periode, understrek }: PeriodeSeksjonProps): ReactElement {
     const antallDager = countDaysBetweenTwoDatesIncludingFom(periode.fom, periode.tom)
     return (
-        <div className="periodeseksjon">
-            <Element>Sykmeldingsperiode</Element>
+        <div>
+            <Label>Sykmeldingsperiode</Label>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                <Normaltekst>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</Normaltekst>
+                <BodyShort>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</BodyShort>
                 {antallDager && (
-                    <Normaltekst>
+                    <BodyShort>
                         &nbsp;&bull; {antallDager} {antallDager === 1 ? 'dag' : 'dager'}
-                    </Normaltekst>
+                    </BodyShort>
                 )}
             </div>
-            <Normaltekst>{periodeUndertekst(periode)}</Normaltekst>
+            <BodyShort>{periodeUndertekst(periode)}</BodyShort>
             {understrek && <hr />}
         </div>
     )

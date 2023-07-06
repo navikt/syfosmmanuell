@@ -1,6 +1,6 @@
-import { Feiloppsummering, FeiloppsummeringFeil } from 'nav-frontend-skjema'
-import { useEffect, useRef } from 'react'
+import { ReactElement, useEffect, useRef } from 'react'
 import { FormState } from 'react-hook-form'
+import { ErrorSummary } from '@navikt/ds-react'
 
 import { FormShape } from './Form'
 
@@ -9,7 +9,7 @@ interface FeiloppsummeringContainerProps {
     formState: FormState<FormShape> // Must pass in whole state object to be able to react to changes
 }
 
-function FeiloppsummeringContainer({ className, formState }: FeiloppsummeringContainerProps): JSX.Element | null {
+function FeiloppsummeringContainer({ className, formState }: FeiloppsummeringContainerProps): ReactElement | null {
     const { errors } = formState
     const feiloppsummeringRef = useRef<HTMLDivElement>(null)
 
@@ -17,23 +17,22 @@ function FeiloppsummeringContainer({ className, formState }: FeiloppsummeringCon
         feiloppsummeringRef.current?.focus()
     }, [formState])
 
-    const feiloppsummeringsfeil: FeiloppsummeringFeil[] = Object.entries(errors)
+    const feiloppsummeringsfeil = Object.entries(errors)
         .filter(([, value]) => value !== undefined)
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        .map(([key, value]) => ({ skjemaelementId: `b-${key}`, feilmelding: value.message! }))
+        .map(([key, value]) => ({ skjemaelementId: `b-${key}`, feilmelding: value.message ?? 'Ukjent feil' }))
 
     if (feiloppsummeringsfeil.length === 0) {
         return null
     }
 
     return (
-        <Feiloppsummering
-            id="feiloppsummering"
-            className={className}
-            innerRef={feiloppsummeringRef}
-            tittel="For å gå videre må du rette opp følgende"
-            feil={feiloppsummeringsfeil}
-        />
+        <ErrorSummary id="feiloppsummering" className={className} heading="For å gå videre må du rette opp følgende">
+            {feiloppsummeringsfeil.map((feil) => (
+                <ErrorSummary.Item key={feil.skjemaelementId} href={`#${feil.skjemaelementId}`}>
+                    {feil.feilmelding}
+                </ErrorSummary.Item>
+            ))}
+        </ErrorSummary>
     )
 }
 
