@@ -1,50 +1,49 @@
-import React, { useCallback, useState } from 'react'
-import { useRouter } from 'next/router'
+'use client'
+
+import React, { useCallback, useContext, useState, useTransition } from 'react'
 import { logger } from '@navikt/next-logger'
 import { Alert, BodyShort, Button } from '@navikt/ds-react'
 
 import { ManuellOppgave } from '../types/manuellOppgave'
-import { vurderOppgave } from '../utils/submitUtils'
+import { StoreContext } from '../data/store'
 
 import Sykmeldingheader from './sykmelding/SykmeldingHeader'
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen'
 import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse'
 import Form, { FormShape } from './form/Form'
+import { submitOppgaveAction } from './submit-oppgave-action'
 
 interface MainContentProps {
     manuellOppgave: ManuellOppgave
-    aktivEnhet: string
 }
 
-const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
-    const router = useRouter()
+const MainContent = ({ manuellOppgave: { oppgaveid, sykmelding, personNrPasient, mottattDato } }: MainContentProps) => {
+    const { aktivEnhet } = useContext(StoreContext)
     const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false)
-    const { sykmelding, personNrPasient, mottattDato } = manuellOppgave
-    const [submitting, setSubmitting] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null)
 
+    const [isPending, startTransition] = useTransition()
     const handleSubmit = useCallback(
         async (formState: FormShape) => {
-            try {
-                setSubmitting(true)
-                const vurderingsResultat = await vurderOppgave(manuellOppgave.oppgaveid, aktivEnhet, formState)
-                if (vurderingsResultat == 'ok') {
-                    await router.push('/kvittering')
-                } else {
-                    setError(vurderingsResultat.message)
-                    setSubmitting(false)
-                }
-            } catch (e) {
-                logger.error(e)
-                setSubmitting(false)
-                setError('Ukjent feil')
+            if (!aktivEnhet) {
+                setError('Mangler valgt enhet')
+                return
             }
+
+            startTransition(async () => {
+                try {
+                    await submitOppgaveAction(oppgaveid, aktivEnhet, formState)
+                } catch (e) {
+                    logger.error(new Error('Vurdering av oppgave feilet', { cause: e }))
+                    setError('Kunne ikke vurdere oppgave. Prøv igjen senere.')
+                }
+            })
         },
-        [aktivEnhet, manuellOppgave.oppgaveid, router],
+        [aktivEnhet, oppgaveid],
     )
 
     return (
-        <div className="max-w-[50rem] bg-white p-8">
+        <div>
             <Sykmeldingheader
                 arbeidsgiverNavn={sykmelding.arbeidsgiver.navn}
                 sykmelder={sykmelding.navnFastlege}
@@ -52,9 +51,9 @@ const MainContent = ({ manuellOppgave, aktivEnhet }: MainContentProps) => {
                 personNrPasient={personNrPasient}
             />
             <TilbakedatertForlengelse sykmelding={sykmelding} />
-            <Form onSubmit={handleSubmit} submitting={submitting} />
+            <Form onSubmit={handleSubmit} submitting={isPending} />
             {error && (
-                <Alert variant="error">
+                <Alert variant="error" className="mb-8">
                     <BodyShort>{error}</BodyShort>
                 </Alert>
             )}
