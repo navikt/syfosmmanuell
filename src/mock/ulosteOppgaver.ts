@@ -19,5 +19,5 @@ export const ulosteOppgaver: UlostOppgave[] = [
     { oppgaveId: 139, mottattDato: '2021-01-17' },
     { oppgaveId: 136, mottattDato: '2021-01-14' },
     { oppgaveId: 141, mottattDato: '2021-01-19' },
-    { oppgaveId: 140, mottattDato: '2021-01-18' },
+    { oppgaveId: 140, mottattDato: new Date().toISOString() },
 ]

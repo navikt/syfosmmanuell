@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react'
 import { GetServerSidePropsResult } from 'next'
-import { Button, Heading, LinkPanel } from '@navikt/ds-react'
+import { Button, Heading, LinkPanel, Tag } from '@navikt/ds-react'
 import Link from 'next/link'
 
 import { withAuthenticatedPage } from '../auth/withAuth'
@@ -33,19 +33,7 @@ function Oppgaver({ oppgaver }: OppgaveProps): ReactElement {
                     .slice(0, showRest ? oppgaver.length : 100)
                     .sort((a, b) => a.mottattDato.localeCompare(b.mottattDato))
                     .map((oppgave) => (
-                        <LinkPanel
-                            as={Link}
-                            key={oppgave.oppgaveId}
-                            href={`/?oppgaveid=${oppgave.oppgaveId}`}
-                            className="w-[600px]"
-                        >
-                            <LinkPanel.Title>
-                                {oppgave.oppgaveId}: {tilLesbarDatoMedArstall(oppgave.mottattDato)}
-                            </LinkPanel.Title>
-                            <LinkPanel.Description>
-                                {daysBetweenDates(oppgave.mottattDato, new Date().toISOString())} dager siden mottatt
-                            </LinkPanel.Description>
-                        </LinkPanel>
+                        <OppgaveLinkPanel key={oppgave.oppgaveId} oppgave={oppgave} />
                     ))}
             </div>
             {!showRest && oppgaver.length > 100 ? (
@@ -57,6 +45,43 @@ function Oppgaver({ oppgaver }: OppgaveProps): ReactElement {
             ) : null}
         </div>
     )
+}
+
+function OppgaveLinkPanel({ oppgave }: { oppgave: UlostOppgave }) {
+    const diffInDays = daysBetweenDates(oppgave.mottattDato, new Date().toISOString())
+
+    return (
+        <LinkPanel
+            as={Link}
+            key={oppgave.oppgaveId}
+            href={`/?oppgaveid=${oppgave.oppgaveId}`}
+            className="w-[600px] [&>div]:w-full"
+        >
+            <div className="flex items-center justify-between">
+                <div className="w-full">
+                    <LinkPanel.Title>
+                        {oppgave.oppgaveId}: {tilLesbarDatoMedArstall(oppgave.mottattDato)}
+                    </LinkPanel.Title>
+                    <LinkPanel.Description className="flex w-full justify-between">
+                        {diffInDays > 0 ? <div>Mottatt for {diffInDays} dager siden</div> : <div>Mottatt i dag</div>}
+                    </LinkPanel.Description>
+                </div>
+                <div className="shrink-0">
+                    <UlostOppgaveTag oppgave={oppgave} />
+                </div>
+            </div>
+        </LinkPanel>
+    )
+}
+
+function UlostOppgaveTag({ oppgave }: { oppgave: UlostOppgave }) {
+    // TODO: oppgave.status av noe slag
+    switch ('todo') {
+        // case 'EN STATUS':
+        //     return <Tag variant="info">Tag forklaring</Tag>
+        default:
+            return null
+    }
 }
 
 export const getServerSideProps = withAuthenticatedPage(
