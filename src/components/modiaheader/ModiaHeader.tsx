@@ -4,6 +4,7 @@ import { Heading, Label, Select } from '@navikt/ds-react'
 
 import { ModiaContext, ModiaContextError } from '../../services/modiaService'
 import { StoreContext } from '../../data/store'
+import Link from 'next/link'
 
 interface Props {
     modiaContext?: ModiaContext | ModiaContextError
@@ -14,7 +15,9 @@ function ModiaHeader({ modiaContext }: Props): ReactElement {
 
     return (
         <InternalHeader className="justify-between">
-            <InternalHeader.Title as="div">syfosmmanuell</InternalHeader.Title>
+            <InternalHeader.Title as={Link} href="/oppgaver">
+                syfosmmanuell
+            </InternalHeader.Title>
             {modiaContext && !('errorType' in modiaContext) && (
                 <div className="-mt-2 ml-auto mr-2 flex items-center">
                     {aktivEnhet && modiaContext.enheter.length ? (

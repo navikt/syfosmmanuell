@@ -26,7 +26,7 @@ function Oppgaver({ oppgaver }: OppgaveProps): ReactElement {
     return (
         <div className="max-w-[50rem] bg-white p-8">
             <Heading size="large" spacing>
-                Uløste oppgaver
+                Uløste oppgaver ({oppgaver.length})
             </Heading>
             <div className="flex w-full flex-col gap-3">
                 {oppgaver
