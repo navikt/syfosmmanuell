@@ -15,10 +15,16 @@ export async function verifyUserLoggedIn(): Promise<void> {
         return
     }
 
+    const redirectPath = requestHeaders.get('x-path')
+    if (!redirectPath == null) {
+        logger.warn("Missing 'x-path' header, is middleware middlewaring?")
+    }
+    logger.info(`Redirect path is ${redirectPath}`)
+
     const bearerToken: string | null | undefined = requestHeaders.get('authorization')
     if (!bearerToken) {
         logger.info('Found no token, redirecting to login')
-        redirect(`/oauth2/login`)
+        redirect(`/oauth2/login?redirect=${redirectPath}`)
     }
 
     const validationResult = await validateAzureToken(bearerToken)
@@ -31,7 +37,7 @@ export async function verifyUserLoggedIn(): Promise<void> {
                 ),
             )
         }
-        redirect(`/oauth2/login`)
+        redirect(`/oauth2/login?redirect=${redirectPath}`)
     }
 }
 
