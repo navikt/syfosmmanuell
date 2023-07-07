@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { GetServerSidePropsResult } from 'next'
-import { Heading, LinkPanel } from '@navikt/ds-react'
+import { Button, Heading, LinkPanel } from '@navikt/ds-react'
 import Link from 'next/link'
 
 import { withAuthenticatedPage } from '../auth/withAuth'
@@ -17,6 +17,8 @@ type OppgaveProps = BasePageRequiredProps & {
 }
 
 function Oppgaver({ oppgaver }: OppgaveProps): ReactElement {
+    const [showRest, setShowRest] = useState(false)
+
     if ('errorType' in oppgaver) {
         return <ManuellOppgaveErrors errors={oppgaver} />
     }
@@ -27,10 +29,16 @@ function Oppgaver({ oppgaver }: OppgaveProps): ReactElement {
                 Uløste oppgaver
             </Heading>
             <div className="flex w-full flex-col gap-3">
-                {[...oppgaver]
+                {oppgaver
+                    .slice(0, showRest ? oppgaver.length : 100)
                     .sort((a, b) => a.mottattDato.localeCompare(b.mottattDato))
                     .map((oppgave) => (
-                        <LinkPanel as={Link} key={oppgave.oppgaveId} href={`/?oppgaveid=${oppgave.oppgaveId}`}>
+                        <LinkPanel
+                            as={Link}
+                            key={oppgave.oppgaveId}
+                            href={`/?oppgaveid=${oppgave.oppgaveId}`}
+                            className="w-[600px]"
+                        >
                             <LinkPanel.Title>
                                 {oppgave.oppgaveId}: {tilLesbarDatoMedArstall(oppgave.mottattDato)}
                             </LinkPanel.Title>
@@ -40,6 +48,13 @@ function Oppgaver({ oppgaver }: OppgaveProps): ReactElement {
                         </LinkPanel>
                     ))}
             </div>
+            {!showRest && oppgaver.length > 100 ? (
+                <div className="flex justify-center p-4">
+                    <Button variant="secondary-neutral" onClick={() => setShowRest(true)}>
+                        Vis alle oppgavene
+                    </Button>
+                </div>
+            ) : null}
         </div>
     )
 }
