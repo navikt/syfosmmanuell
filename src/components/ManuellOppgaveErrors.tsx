@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react'
 import { Alert } from '@navikt/ds-react'
 
-import { OppgaveFetchingError } from '../services/oppgaveService'
+import { OppgaveFetchingError, UlosteOppgaverFetchingError } from '../services/oppgaveService'
 
 interface Props {
-    errors: OppgaveFetchingError
+    errors: OppgaveFetchingError | UlosteOppgaverFetchingError
 }
 
 const ManuellOppgaveErrors = ({ errors }: Props): ReactElement => {
