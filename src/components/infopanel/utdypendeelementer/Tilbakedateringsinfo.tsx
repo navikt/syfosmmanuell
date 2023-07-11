@@ -9,6 +9,7 @@ interface TilbakedateringsinfoProps {
     behandletTidspunkt: string
     kontaktDato: string | null
     begrunnelseIkkeKontakt: string | null
+    genereringsDato: string
 }
 
 function Tilbakedateringsinfo({
@@ -16,9 +17,10 @@ function Tilbakedateringsinfo({
     kontaktDato,
     behandletTidspunkt,
     begrunnelseIkkeKontakt,
+    genereringsDato,
 }: TilbakedateringsinfoProps): ReactElement {
     const fom = getSykmeldingStartDate(perioder)
-    const tilbakedatertDuration = daysBetweenDates(fom, behandletTidspunkt)
+    const tilbakedatertDuration = daysBetweenDates(fom, genereringsDato)
 
     return (
         <div className="bg-surface-warning-subtle p-8">
@@ -43,6 +45,11 @@ function Tilbakedateringsinfo({
             <ElementMedTekst
                 tittel="Startdato for sykmeldingen (første fom. i perioden)"
                 tekst={`${tilLesbarDatoMedArstall(fom)}`}
+                margin
+            />
+            <ElementMedTekst
+                tittel="Dato sykmeldingen ble generert"
+                tekst={tilLesbarDatoMedArstall(genereringsDato)}
                 margin
             />
             {tilbakedatertDuration && (

@@ -36,6 +36,7 @@ const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps)
                     kontaktDato={sykmelding.kontaktMedPasient.kontaktDato}
                     behandletTidspunkt={sykmelding.behandletTidspunkt}
                     begrunnelseIkkeKontakt={sykmelding.kontaktMedPasient.begrunnelseIkkeKontakt}
+                    genereringsDato={sykmelding.signaturDato}
                 />
             </div>
         </Panel>
