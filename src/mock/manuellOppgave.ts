@@ -178,7 +178,7 @@ export const manuellOppgave = {
             versjon: '1.0',
         },
         syketilfelleStartDato: '2018-10-10',
-        signaturDato: '2019-04-29T08:34:16',
+        signaturDato: '2018-10-25T08:34:16',
         navnFastlege: 'Doktor Legesen',
     },
     mottattDato: '2020-02-24T15:27:54',
