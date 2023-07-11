@@ -6,7 +6,7 @@ interface SykmeldingheaderProps {
     arbeidsgiverNavn: string | null
     sykmelder: string | null
     mottattDato: string
-    personNrPasient: string,
+    personNrPasient: string
 }
 
 function Sykmeldingheader({
