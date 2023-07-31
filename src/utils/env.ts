@@ -44,7 +44,7 @@ const getRawServerConfig = (): Partial<unknown> =>
         AZURE_OPENID_CONFIG_TOKEN_ENDPOINT: process.env.AZURE_OPENID_CONFIG_TOKEN_ENDPOINT,
         AZURE_APP_WELL_KNOWN_URL: process.env.AZURE_APP_WELL_KNOWN_URL,
         AZURE_APP_PRE_AUTHORIZED_APPS: process.env.AZURE_APP_PRE_AUTHORIZED_APPS,
-    } satisfies Record<keyof ServerEnv, string | undefined>)
+    }) satisfies Record<keyof ServerEnv, string | undefined>
 
 /**
  * Server envs are lazy loaded and verified using Zod.

@@ -3,10 +3,10 @@
 import React, { ReactElement, useContext } from 'react'
 import { InternalHeader } from '@navikt/ds-react'
 import { Heading, Label, Select } from '@navikt/ds-react'
+import Link from 'next/link'
 
 import { ModiaContext, ModiaContextError } from '../../services/modiaService'
 import { StoreContext } from '../../data/store'
-import Link from 'next/link'
 
 interface Props {
     modiaContext?: ModiaContext | ModiaContextError

@@ -1,20 +1,11 @@
-import React, { ReactElement, useState, useMemo } from 'react'
-import { GetServerSidePropsResult } from 'next'
+'use client'
+
+import { ReactElement, useMemo, useState } from 'react'
 import { Button, Chips, Heading, LinkPanel, Tag } from '@navikt/ds-react'
 import Link from 'next/link'
 
-import { withAuthenticatedPage } from '../auth/withAuth'
-import { getModiaContext } from '../services/modiaService'
-import { getUlosteOppgaver, UlosteOppgaverFetchingError } from '../services/oppgaveService'
-import { UlostOppgave } from '../types/ulost-oppgave'
-import ManuellOppgaveErrors from '../components/ManuellOppgaveErrors'
-import { daysBetweenDates, tilLesbarDatoMedArstall } from '../utils/datoUtils'
-
-import { BasePageRequiredProps } from './_app'
-
-type OppgaveProps = BasePageRequiredProps & {
-    oppgaver: UlostOppgave[] | UlosteOppgaverFetchingError
-}
+import { UlostOppgave } from '../../types/ulost-oppgave'
+import { daysBetweenDates, tilLesbarDatoMedArstall } from '../../utils/datoUtils'
 
 const OPTIONS = ['ALL', 'APEN', 'FEILREGISTRERT']
 
@@ -33,24 +24,20 @@ function getFilterText(status: string | null | undefined): string {
     }
 }
 
-function Oppgaver({ oppgaver }: OppgaveProps): ReactElement {
+interface Props {
+    oppgaver: UlostOppgave[]
+}
+
+export function Oppgaver({ oppgaver }: Props): ReactElement {
     const [showRest, setShowRest] = useState(false)
     const [statusFilter, setStatusFilter] = useState('FEILREGISTRERT')
     const options = OPTIONS
 
     const filteredOppgaver = useMemo(() => {
-        let tasks: UlostOppgave[] = oppgaver as UlostOppgave[]
+        if (statusFilter === 'ALL') return oppgaver
 
-        if (statusFilter !== 'ALL') {
-            tasks = tasks.filter((oppgave) => oppgave.status === statusFilter)
-        }
-
-        return tasks
+        return oppgaver.filter((oppgave) => oppgave.status === statusFilter)
     }, [oppgaver, statusFilter])
-
-    if ('errorType' in oppgaver) {
-        return <ManuellOppgaveErrors errors={oppgaver} />
-    }
 
     return (
         <div className="max-w-[50rem] bg-white p-8">
@@ -73,13 +60,13 @@ function Oppgaver({ oppgaver }: OppgaveProps): ReactElement {
             </div>
             <div className="flex w-full flex-col gap-3">
                 {filteredOppgaver
-                    .slice(0, showRest ? oppgaver.length : 100)
+                    .slice(0, showRest ? filteredOppgaver.length : 100)
                     .sort((a, b) => a.mottattDato.localeCompare(b.mottattDato))
                     .map((oppgave) => (
                         <OppgaveLinkPanel key={oppgave.oppgaveId} oppgave={oppgave} />
                     ))}
             </div>
-            {!showRest && oppgaver.length > 100 ? (
+            {!showRest && filteredOppgaver.length > 100 ? (
                 <div className="flex justify-center p-4">
                     <Button variant="secondary-neutral" onClick={() => setShowRest(true)}>
                         Vis alle oppgavene
@@ -102,6 +89,7 @@ function OppgaveLinkPanel({ oppgave }: { oppgave: UlostOppgave }) {
             key={oppgave.oppgaveId}
             href={`/?oppgaveid=${oppgave.oppgaveId}`}
             className="w-[600px] [&>div]:w-full"
+            prefetch={false}
         >
             <div className="flex items-center justify-between">
                 <div className="w-full">
@@ -131,21 +119,5 @@ function UlostOppgaveTag({ oppgave }: { oppgave: UlostOppgave }) {
             return <></>
     }
 }
-
-export const getServerSideProps = withAuthenticatedPage(
-    async (context, accessToken): Promise<GetServerSidePropsResult<OppgaveProps>> => {
-        const [modiaContext, oppgaver] = await Promise.all([
-            getModiaContext(accessToken),
-            getUlosteOppgaver(accessToken),
-        ])
-
-        return {
-            props: {
-                modiaContext,
-                oppgaver,
-            },
-        }
-    },
-)
 
 export default Oppgaver
