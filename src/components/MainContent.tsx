@@ -3,6 +3,7 @@
 import React, { useCallback, useContext, useState, useTransition } from 'react'
 import { logger } from '@navikt/next-logger'
 import { Alert, BodyShort, Button } from '@navikt/ds-react'
+import { useRouter } from 'next/navigation'
 
 import { ManuellOppgave } from '../types/manuellOppgave'
 import { StoreContext } from '../data/store'
@@ -18,6 +19,7 @@ interface MainContentProps {
 }
 
 const MainContent = ({ manuellOppgave: { oppgaveid, sykmelding, personNrPasient, mottattDato } }: MainContentProps) => {
+    const router = useRouter()
     const { aktivEnhet } = useContext(StoreContext)
     const [visHeleSykmeldingen, setVisHeleSykmeldingen] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -33,13 +35,14 @@ const MainContent = ({ manuellOppgave: { oppgaveid, sykmelding, personNrPasient,
             startTransition(async () => {
                 try {
                     await submitOppgaveAction(oppgaveid, aktivEnhet, formState)
+                    router.push('/kvittering')
                 } catch (e) {
                     logger.error(new Error('Vurdering av oppgave feilet', { cause: e }))
                     setError('Kunne ikke vurdere oppgave. Prøv igjen senere.')
                 }
             })
         },
-        [aktivEnhet, oppgaveid],
+        [aktivEnhet, oppgaveid, router],
     )
 
     return (
