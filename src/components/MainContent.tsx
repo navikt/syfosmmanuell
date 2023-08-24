@@ -35,6 +35,7 @@ const MainContent = ({ manuellOppgave: { oppgaveid, sykmelding, personNrPasient,
             startTransition(async () => {
                 try {
                     await submitOppgaveAction(oppgaveid, aktivEnhet, formState)
+                    router.push('/kvittering')
                 } catch (e) {
                     logger.error(new Error('Vurdering av oppgave feilet', { cause: e }))
                     setError('Kunne ikke vurdere oppgave. Prøv igjen senere.')
