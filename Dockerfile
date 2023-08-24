@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs18-debian11
+FROM gcr.io/distroless/nodejs18-debian11@true
 
 WORKDIR /app
 
