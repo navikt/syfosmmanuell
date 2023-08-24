@@ -2,6 +2,7 @@
 
 import { headers } from 'next/headers'
 import { z } from 'zod'
+import { redirect } from 'next/navigation'
 
 import { submitOppgave } from '../services/oppgaveService'
 import { getToken } from '../auth/authentication'
@@ -21,4 +22,6 @@ export async function submitOppgaveAction(oppgaveId: number, aktivEnhet: string,
     const formValues = FormSchema.parse(formData)
 
     await submitOppgave(oppgaveId, aktivEnhet, formValues, token)
+
+    redirect('/kvittering')
 }
