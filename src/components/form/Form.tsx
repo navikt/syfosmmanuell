@@ -44,7 +44,7 @@ const Form = ({ onSubmit, submitting }: Props) => {
                             name="status"
                             legend=""
                             onChange={(value: 'GODKJENT_MED_MERKNAD' | 'GODKJENT') => onChange(value)}
-                            value={value}
+                            value={value ?? ''}
                             error={error?.message}
                         >
                             {/* // TODO vise enhet her sammen med knappen? */}
@@ -82,7 +82,7 @@ const Form = ({ onSubmit, submitting }: Props) => {
                                 onChange={(
                                     value: 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
                                 ) => onChange(value)}
-                                value={value}
+                                value={value ?? ''}
                                 error={error?.message}
                                 legend="Velg merknadtype"
                             >
