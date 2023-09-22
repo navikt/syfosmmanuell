@@ -20,7 +20,7 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
     return (
         <SeksjonMedTittel tittel="4. Mulighet for arbeid">
             {avventendeSykmeldingPerioder.map((periode) => (
-                <>
+                <div key={periode.fom}>
                     <ElementMedTekst tittel="4.1. Pasienten kan benytte avventende sykmelding" margin />
                     <ElementMedTekst
                         tittel="4.1.1. f.o.m. - 4.1.2. t.o.m."
@@ -34,10 +34,10 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         margin
                         innrykk
                     />
-                </>
+                </div>
             ))}
             {gradertSykmeldingPerioder.map((periode) => (
-                <>
+                <div key={periode.fom}>
                     <ElementMedTekst tittel="4.2. Pasienten kan være delvis i arbeid (gradert sykmelding)" margin />
                     <ElementMedTekst
                         tittel="4.2.1. f.o.m. - 4.2.2. t.o.m."
@@ -58,10 +58,10 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         bold
                         vis
                     />
-                </>
+                </div>
             ))}
             {fullSykmeldingPerioder.map((periode) => (
-                <>
+                <div key={periode.fom}>
                     <ElementMedTekst tittel="4.3. Pasienten kan ikke være i arbeid (100 % sykmelding)" margin />
                     <ElementMedTekst
                         tittel="4.3.1. f.o.m. - 4.3.2. t.o.m."
@@ -103,10 +103,10 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         margin
                         innrykk
                     />
-                </>
+                </div>
             ))}
             {behandlingsdagerSykmeldingPerioder.map((periode) => (
-                <>
+                <div key={periode.fom}>
                     <ElementMedTekst tittel="4.4. Pasienten kan ikke være i arbeid på behandlingsdager" margin />
                     <ElementMedTekst
                         tittel="4.4.1. f.o.m. - 4.4.2. t.o.m."
@@ -121,10 +121,10 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         margin
                         innrykk
                     />
-                </>
+                </div>
             ))}
             {reisetilskuddSykmeldingPerioder.map((periode) => (
-                <>
+                <div key={periode.fom}>
                     <ElementMedTekst tittel="4.5. Pasienten kan være i fullt arbeid ved bruk av reisetilskudd" margin />
                     <ElementMedTekst
                         tittel="4.5.1. f.o.m. - 4.5.2. t.o.m."
@@ -132,7 +132,7 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         margin
                         innrykk
                     />
-                </>
+                </div>
             ))}
         </SeksjonMedTittel>
     )
