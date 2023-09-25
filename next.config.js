@@ -7,6 +7,7 @@ const nextConfig = {
         dirs: ['src'],
     },
     experimental: {
+        serverComponentsExternalPackages: ['@navikt/next-logger', 'next-logger'],
         serverActions: true,
     },
     output: 'standalone',
