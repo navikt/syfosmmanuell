@@ -1,3 +1,4 @@
+import 'next-logger'
 import '../global.css'
 
 import React, { PropsWithChildren } from 'react'
