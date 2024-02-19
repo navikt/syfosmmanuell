@@ -7,7 +7,7 @@ import FeiloppsummeringContainer from './FeiloppsummeringContainer'
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient'
 
 type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST'
-export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER'
+export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER' | 'DELVIS_GODKJENT'
 
 interface Props {
     onSubmit: (values: FormShape) => void

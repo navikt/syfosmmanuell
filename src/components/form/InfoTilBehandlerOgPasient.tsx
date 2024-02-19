@@ -8,6 +8,7 @@ const BeskjedTilPasient: Record<Merknad, string> = {
         'Vanligvis starter sykmeldingen den datoen du er hos behandleren. I enkelte tilfeller kan datoen i sykmeldingen settes tilbake i tid, det vi kaller tilbakedatering. NAV vurderer om det er en gyldig grunn for tilbakedateringen.\n\nSykmeldingen din startet før du oppsøkte behandleren, og det er ikke oppgitt noen gyldig grunn. Derfor vil du ikke få sykepenger for disse dagene.\n\nDu kan likevel sende inn sykmeldingen. Når perioden er over, sender du søknaden om sykepenger. Når søknaden er behandlet, vil du få en begrunnelse for hvorfor du ikke kan få sykepenger for de tilbakedaterte dagene, og du får samtidig mulighet til å klage.',
     TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER:
         'Sykmeldingen din starter tidligere enn den dagen du var hos behandleren. Vi innhenter opplysninger om hvorfor sykmeldingen er tilbakedatert.\n\nDu kan likevel sende inn søknaden om sykepenger.',
+    DELVIS_GODKJENT: 'TODO',
 }
 
 interface InfoTilBehandlerOgPasientProps {
