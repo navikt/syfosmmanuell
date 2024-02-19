@@ -7,7 +7,7 @@ import FeiloppsummeringContainer from './FeiloppsummeringContainer'
 import InfoTilBehandlerOgPasient from './InfoTilBehandlerOgPasient'
 
 type Status = 'GODKJENT' | 'GODKJENT_MED_MERKNAD' | 'AVVIST'
-export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER'
+export type Merknad = 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER' | 'DELVIS_GODKJENT'
 
 interface Props {
     onSubmit: (values: FormShape) => void
@@ -66,9 +66,11 @@ const Form = ({ onSubmit, submitting }: Props) => {
                             validate: (value) => {
                                 if (
                                     value &&
-                                    ['UGYLDIG_TILBAKEDATERING', 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER'].includes(
-                                        value,
-                                    )
+                                    [
+                                        'UGYLDIG_TILBAKEDATERING',
+                                        'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
+                                        'DELVIS_GODKJENT',
+                                    ].includes(value)
                                 ) {
                                     return true
                                 }
@@ -79,15 +81,16 @@ const Form = ({ onSubmit, submitting }: Props) => {
                             <RadioGroup
                                 className="mt-4"
                                 name="merknad"
-                                onChange={(
-                                    value: 'UGYLDIG_TILBAKEDATERING' | 'TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER',
-                                ) => onChange(value)}
+                                onChange={(value: Merknad) => onChange(value)}
                                 value={value ?? ''}
                                 error={error?.message}
                                 legend="Velg merknadtype"
                             >
                                 <Radio id="b-merknad" value="UGYLDIG_TILBAKEDATERING">
-                                    Avslå tilbakedatering, hele eller deler av sykmeldingen er ugyldig.
+                                    Avslå hele tilbakedateringen som ugyldig.
+                                </Radio>
+                                <Radio id="b-merknad-delvis-godkjent" value="DELVIS_GODKJENT">
+                                    Godkjenn deler av tilbakedateringen.
                                 </Radio>
                                 <Radio
                                     id="b-merknad-tilbakedatering-krever-flere-opplysninger"
