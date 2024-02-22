@@ -4,7 +4,7 @@ import { headers } from 'next/headers'
 import { z } from 'zod'
 
 import { submitOppgave } from '../services/oppgaveService'
-import { getToken } from '../auth/authentication'
+import { getUserToken } from '../auth/authentication'
 
 import { FormShape } from './form/Form'
 
@@ -17,7 +17,7 @@ const FormSchema = z.object({
 })
 
 export async function submitOppgaveAction(oppgaveId: number, aktivEnhet: string, formData: FormShape) {
-    const token = getToken(headers())
+    const token = getUserToken(headers())
     const formValues = FormSchema.parse(formData)
 
     await submitOppgave(oppgaveId, aktivEnhet, formValues, token)

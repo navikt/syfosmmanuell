@@ -1,5 +1,5 @@
 import { logger } from '@navikt/next-logger'
-import { grantAzureOboToken, isInvalidTokenSet } from '@navikt/next-auth-wonderwall'
+import { requestOboToken } from '@navikt/oasis'
 import { z } from 'zod'
 
 import { ManuellOppgave } from '../types/manuellOppgave'
@@ -23,18 +23,18 @@ export async function getOppgave(
     }
 
     const serverEnv = getServerEnv()
-    const token = await grantAzureOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
-    if (isInvalidTokenSet(token)) {
+    const oboResult = await requestOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
+    if (!oboResult.ok) {
         return {
             errorType: 'AUTHORIZATION',
-            message: `Unable to get access token: ${token.message}`,
+            message: `Unable to get access token: ${oboResult.error.message}`,
         }
     }
 
     const OPPGAVE_URL = `${serverEnv.SYFOSMMANUELL_BACKEND_URL}/api/v1/manuellOppgave/${oppgaveid}`
     const response = await fetch(OPPGAVE_URL, {
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${oboResult.token}`,
         },
     })
 
@@ -87,15 +87,15 @@ export async function getUlosteOppgaver(accessToken: string): Promise<UlostOppga
     }
 
     const serverEnv = getServerEnv()
-    const token = await grantAzureOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
-    if (isInvalidTokenSet(token)) {
-        throw new Error(`Unable to get access token: ${token.message}`)
+    const oboResult = await requestOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
+    if (!oboResult.ok) {
+        throw new Error(`Unable to get access token: ${oboResult.error.message}`)
     }
 
     const OPPGAVE_URL = `${serverEnv.SYFOSMMANUELL_BACKEND_URL}/api/v1/oppgaver`
     const response = await fetch(OPPGAVE_URL, {
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${oboResult.token}`,
         },
     })
 
@@ -139,15 +139,19 @@ export async function submitOppgave(
     }
 
     const serverEnv = getServerEnv()
-    const token = await grantAzureOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
-    if (isInvalidTokenSet(token)) {
-        throw new Error(`Unable to get access token: ${token.message}`)
+    const oboResult = await requestOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
+    if (!oboResult.ok) {
+        throw new Error(`Unable to get access token: ${oboResult.error.message}`)
     }
 
     const VURDERE_OPPGAVE_URL = `${serverEnv.SYFOSMMANUELL_BACKEND_URL}/api/v1/vurderingmanuelloppgave/${oppgaveid}`
     const result = await fetch(VURDERE_OPPGAVE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Nav-Enhet': aktivEnhet, Authorization: `Bearer ${token}` },
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Nav-Enhet': aktivEnhet,
+            Authorization: `Bearer ${oboResult.token}`,
+        },
         body: JSON.stringify(body),
     })
 

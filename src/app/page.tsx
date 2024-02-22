@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import { notFound } from 'next/navigation'
 
 import { getOppgave } from '../services/oppgaveService'
-import { getToken } from '../auth/authentication'
+import { getUserToken } from '../auth/authentication'
 import { Alert } from '../components/ds'
 import { Heading, BodyShort, Skeleton } from '../components/ds/rsc'
 import ManuellOppgaveErrors from '../components/ManuellOppgaveErrors'
@@ -50,7 +50,7 @@ async function Page({ searchParams }: { searchParams: { oppgaveid: string | unde
 }
 
 async function Oppgave({ oppgaveId }: { oppgaveId: string }) {
-    const oppgave = await getOppgave(oppgaveId, getToken(headers()))
+    const oppgave = await getOppgave(oppgaveId, getUserToken(headers()))
 
     if ('errorType' in oppgave && oppgave.errorType === 'OPPGAVE_NOT_FOUND') {
         notFound()
