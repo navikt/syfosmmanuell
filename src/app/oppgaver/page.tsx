@@ -2,7 +2,7 @@ import React, { ReactElement, Suspense } from 'react'
 import { headers } from 'next/headers'
 
 import { getUlosteOppgaver } from '../../services/oppgaveService'
-import { getToken } from '../../auth/authentication'
+import { getUserToken } from '../../auth/authentication'
 import { Skeleton } from '../../components/ds/rsc'
 import Oppgaver from '../../components/oppgaver/Oppgaver'
 import ManuellOppgaveErrors from '../../components/ManuellOppgaveErrors'
@@ -24,7 +24,7 @@ function Page(): ReactElement {
 }
 
 async function UlosteOppgaver(): Promise<ReactElement> {
-    const ulosteOppgaver = await getUlosteOppgaver(getToken(headers()))
+    const ulosteOppgaver = await getUlosteOppgaver(getUserToken(headers()))
 
     if ('errorType' in ulosteOppgaver) {
         return <ManuellOppgaveErrors errors={ulosteOppgaver} />

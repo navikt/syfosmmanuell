@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { logger } from '@navikt/next-logger'
-import { grantAzureOboToken, isInvalidTokenSet } from '@navikt/next-auth-wonderwall'
+import { requestOboToken } from '@navikt/oasis'
 
 import { ClientError } from '../utils/typeUtils'
 import { getServerEnv, isLocalOrDemo } from '../utils/env'
@@ -28,17 +28,17 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
         }
     }
 
-    const modiaContextAccessToken = await grantAzureOboToken(userAccessToken, getServerEnv().MODIA_CONTEXT_SCOPE)
-    if (isInvalidTokenSet(modiaContextAccessToken)) {
+    const modiaContextAccessToken = await requestOboToken(userAccessToken, getServerEnv().MODIA_CONTEXT_SCOPE)
+    if (!modiaContextAccessToken.ok) {
         return {
             errorType: 'MODIA_ERROR',
-            message: `Unable to get modia context access token: ${modiaContextAccessToken.message}`,
+            message: `Unable to get modia context access token: ${modiaContextAccessToken.error.message}`,
         }
     }
 
     const [veileder, aktivEnhet] = await Promise.all([
-        getVeileder(modiaContextAccessToken),
-        getAktivEnhet(modiaContextAccessToken),
+        getVeileder(modiaContextAccessToken.token),
+        getAktivEnhet(modiaContextAccessToken.token),
     ])
 
     if ('errorType' in aktivEnhet) {
