@@ -1,9 +1,9 @@
 import React from 'react'
 import { BodyLong, ExpansionCard, Heading } from '@navikt/ds-react'
 
-import { Merknad } from './Form'
+import { Status } from './Form'
 
-const BeskjedTilPasient: Record<Merknad, string> = {
+const BeskjedTilPasient: Omit<Record<Status, string>, 'GODKJENT'> = {
     UGYLDIG_TILBAKEDATERING:
         'Vanligvis starter sykmeldingen den datoen du er hos behandleren. I enkelte tilfeller kan datoen i sykmeldingen settes tilbake i tid, det vi kaller tilbakedatering. NAV vurderer om det er en gyldig grunn for tilbakedateringen.\n\nSykmeldingen din startet før du oppsøkte behandleren, og det er ikke oppgitt noen gyldig grunn. Derfor vil du ikke få sykepenger for disse dagene.\n\nDu kan likevel sende inn sykmeldingen. Når perioden er over, sender du søknaden om sykepenger. Når søknaden er behandlet, vil du få en begrunnelse for hvorfor du ikke kan få sykepenger for de tilbakedaterte dagene, og du får samtidig mulighet til å klage.',
     TILBAKEDATERING_KREVER_FLERE_OPPLYSNINGER:
@@ -15,13 +15,11 @@ const BeskjedTilPasient: Record<Merknad, string> = {
 }
 
 interface InfoTilBehandlerOgPasientProps {
-    type?: Merknad
+    type: Status
 }
 
 const InfoTilBehandlerOgPasient = ({ type }: InfoTilBehandlerOgPasientProps) => {
-    if (type === undefined) {
-        return null
-    }
+    if (!type || type === 'GODKJENT') return null
 
     return (
         <ExpansionCard aria-labelledby="hva-vi-sier-til-pasienten" size="small">
