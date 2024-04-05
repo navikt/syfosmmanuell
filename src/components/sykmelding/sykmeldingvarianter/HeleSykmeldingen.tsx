@@ -14,6 +14,7 @@ import Diagnoser from '../../infopanel/utdypendeelementer/Diagnoser'
 import TilbakedateringsSeksjon from '../../infopanel/utdypendeelementer/TilbakedateringsSeksjon'
 import ArbeidsgiverSection from '../../infopanel/utdypendeelementer/ArbeidsgiverSection'
 import { Sykmelding } from '../../../types/sykmelding'
+import {tilLesbarSykmelder} from "../../../utils/tekstUtils";
 
 interface HeleSykmeldingenProps {
     sykmelding: Sykmelding
@@ -37,9 +38,9 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
                     margin
                 />
                 <ElementMedTekst
-                    vis={!!sykmelding.navnFastlege}
+                    vis={!!sykmelding.behandler}
                     tittel="Sykmelder"
-                    tekst={sykmelding.navnFastlege}
+                    tekst= {tilLesbarSykmelder(sykmelding.behandler)}
                     margin
                 />
             </div>
