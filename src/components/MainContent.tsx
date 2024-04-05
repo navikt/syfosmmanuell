@@ -13,6 +13,7 @@ import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen'
 import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse'
 import Form, { FormShape } from './form/Form'
 import { submitOppgaveAction } from './submit-oppgave-action'
+import {tilLesbarSykmelder} from "../utils/tekstUtils";
 
 interface MainContentProps {
     manuellOppgave: ManuellOppgave
@@ -49,7 +50,7 @@ const MainContent = ({ manuellOppgave: { oppgaveid, sykmelding, personNrPasient,
         <div>
             <Sykmeldingheader
                 arbeidsgiverNavn={sykmelding.arbeidsgiver.navn}
-                sykmelder={sykmelding.navnFastlege}
+                sykmelder={tilLesbarSykmelder(sykmelding.behandler)}
                 mottattDato={mottattDato}
                 personNrPasient={personNrPasient}
             />
