@@ -5,7 +5,7 @@
     "engines": {
         "node": "20"
     },
-    "packageManager": "yarn@4.0.1",
+    "packageManager": "yarn@4.1.1",
     "dependencies": {
         "@navikt/aksel-icons": "^5.10.1",
         "@navikt/ds-css": "^5.10.1",
