@@ -16,7 +16,7 @@
         "@navikt/next-logger": "^1.21.0",
         "@navikt/oasis": "^3.2.1",
         "dayjs": "^1.11.10",
-        "next-logger": "^3.0.2",
+        "next-logger": "^4.0.0",
         "node-cache": "^5.1.2",
         "pino": "^8.16.1",
         "react": "^18.2.0",
