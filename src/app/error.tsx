@@ -2,10 +2,7 @@
 
 import React, { ReactElement, useEffect } from 'react'
 import { logger } from '@navikt/next-logger'
-import { Link } from '@navikt/ds-react'
-
-import { BodyShort, Heading } from '../components/ds/rsc'
-import { Alert } from '../components/ds'
+import { Alert, BodyShort, Heading, Link } from '@navikt/ds-react'
 
 type Props = {
     error: Error

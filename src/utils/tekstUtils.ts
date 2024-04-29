@@ -1,4 +1,4 @@
-import {Behandler, Periode} from '../types/sykmelding'
+import { Behandler, Periode } from '../types/sykmelding'
 
 export const periodeUndertekst = (periode: Periode): string => {
     if (periode.reisetilskudd) {

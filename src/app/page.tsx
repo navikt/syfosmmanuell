@@ -1,11 +1,10 @@
 import React, { ReactElement, Suspense } from 'react'
 import { headers } from 'next/headers'
 import { notFound } from 'next/navigation'
+import { Alert, Heading, BodyShort, Skeleton } from '@navikt/ds-react'
 
 import { getOppgave } from '../services/oppgaveService'
 import { getUserToken } from '../auth/authentication'
-import { Alert } from '../components/ds'
-import { Heading, BodyShort, Skeleton } from '../components/ds/rsc'
 import ManuellOppgaveErrors from '../components/ManuellOppgaveErrors'
 import MainContent from '../components/MainContent'
 

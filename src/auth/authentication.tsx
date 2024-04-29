@@ -7,7 +7,6 @@ import { isLocalOrDemo } from '../utils/env'
 import { raise } from '../utils/ts-utils'
 
 export async function verifyUserLoggedIn(): Promise<void> {
-    logger.info('Getting headers')
     const requestHeaders = headers()
 
     if (isLocalOrDemo) {
