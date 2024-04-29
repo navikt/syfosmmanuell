@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react'
-
-import { Heading, BodyShort } from '../components/ds/rsc'
-import { Alert } from '../components/ds'
+import { Alert, BodyShort, Heading } from '@navikt/ds-react'
 
 function NotFound(): ReactElement {
     return (

@@ -1,3 +1,5 @@
+import { it, expect } from 'vitest'
+
 import { Periode } from '../types/sykmelding'
 
 import { sorterPerioderEldsteFoerst } from './sorterSykmeldingUtils'

@@ -8,7 +8,7 @@ const nextConfig = {
     },
     experimental: {
         serverComponentsExternalPackages: ['@navikt/next-logger', 'next-logger'],
-        serverActions: true,
+        optimizePackageImports: ['@navikt/ds-react', '@navikt/aksel-icons'],
     },
     output: 'standalone',
     assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX,

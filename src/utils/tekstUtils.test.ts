@@ -1,3 +1,5 @@
+import { describe, beforeEach, it, expect } from 'vitest'
+
 import { Periode } from '../types/sykmelding'
 
 import { periodeUndertekst } from './tekstUtils'

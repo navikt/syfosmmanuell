@@ -7,13 +7,13 @@ import { useRouter } from 'next/navigation'
 
 import { ManuellOppgave } from '../types/manuellOppgave'
 import { StoreContext } from '../data/store'
+import { tilLesbarSykmelder } from '../utils/tekstUtils'
 
 import Sykmeldingheader from './sykmelding/SykmeldingHeader'
 import HeleSykmeldingen from './sykmelding/sykmeldingvarianter/HeleSykmeldingen'
 import TilbakedatertForlengelse from './sykmelding/sykmeldingvarianter/TilbakedatertForlengelse'
 import Form, { FormShape } from './form/Form'
 import { submitOppgaveAction } from './submit-oppgave-action'
-import {tilLesbarSykmelder} from "../utils/tekstUtils";
 
 interface MainContentProps {
     manuellOppgave: ManuellOppgave

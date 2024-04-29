@@ -1,9 +1,9 @@
 import React, { ReactElement, Suspense } from 'react'
 import { headers } from 'next/headers'
+import { Skeleton } from '@navikt/ds-react'
 
 import { getUlosteOppgaver } from '../../services/oppgaveService'
 import { getUserToken } from '../../auth/authentication'
-import { Skeleton } from '../../components/ds/rsc'
 import Oppgaver from '../../components/oppgaver/Oppgaver'
 import ManuellOppgaveErrors from '../../components/ManuellOppgaveErrors'
 
