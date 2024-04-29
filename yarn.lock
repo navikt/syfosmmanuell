@@ -926,10 +926,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/fnrvalidator@npm:^1.3.3":
-  version: 1.3.3
-  resolution: "@navikt/fnrvalidator@npm:1.3.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ffnrvalidator%2F1.3.3%2F8414963a30e59e3056c9befea7bb022498a2a742"
-  checksum: 10/49b2f481e1d5fdd107ba3cfd13a7a6fdb32371da2a634b97d5142d3940b73fe6cc90201c23381484def2859aecbd51b7e897ff3d69be483dafb13f1e2dd3060e
+"@navikt/fnrvalidator@npm:^2.0.7":
+  version: 2.0.7
+  resolution: "@navikt/fnrvalidator@npm:2.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ffnrvalidator%2F2.0.7%2F89ceb6a448fbd068e4ad8ff7a414705bd0ea6315"
+  dependencies:
+    typescript: "npm:^5.4.2"
+  checksum: 10/1034fe95d81a5465dbdabc5449ebed98d4b43fe256dfa75e2a7d40098760d314cf03079c5e972e46577882e7fa3074b1be875841907558e971f8cf5a597c9c51
   languageName: node
   linkType: hard
 
@@ -7007,7 +7009,7 @@ __metadata:
     "@navikt/ds-react": "npm:^5.10.1"
     "@navikt/ds-tailwind": "npm:^5.10.1"
     "@navikt/eslint-config-teamsykmelding": "npm:^5.0.0"
-    "@navikt/fnrvalidator": "npm:^1.3.3"
+    "@navikt/fnrvalidator": "npm:^2.0.7"
     "@navikt/next-logger": "npm:^1.21.0"
     "@navikt/oasis": "npm:^3.2.1"
     "@types/jest": "npm:^29.5.8"
@@ -7333,6 +7335,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^5.4.2":
+  version: 5.4.5
+  resolution: "typescript@npm:5.4.5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/d04a9e27e6d83861f2126665aa8d84847e8ebabcea9125b9ebc30370b98cb38b5dff2508d74e2326a744938191a83a69aa9fddab41f193ffa43eabfdf3f190a5
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@npm%3A^5.2.2#optional!builtin<compat/typescript>":
   version: 5.2.2
   resolution: "typescript@patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"
@@ -7340,6 +7352,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10/f79cc2ba802c94c2b78dbb00d767a10adb67368ae764709737dc277273ec148aa4558033a03ce901406b35fddf4eac46dabc94a1e1d12d2587e2b9cfe5707b4a
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.4.2#optional!builtin<compat/typescript>":
+  version: 5.4.5
+  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/760f7d92fb383dbf7dee2443bf902f4365db2117f96f875cf809167f6103d55064de973db9f78fe8f31ec08fff52b2c969aee0d310939c0a3798ec75d0bca2e1
   languageName: node
   linkType: hard
 
