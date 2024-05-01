@@ -40,7 +40,7 @@
         "prettier": "3.2.5",
         "prettier-plugin-tailwindcss": "^0.5.14",
         "tailwindcss": "^3.4.3",
-        "vitest": "^1.5.2"
+        "vitest": "^1.5.3"
     },
     "resolutions": {
         "eslint-plugin-react-hooks": "5.0.0-canary-7118f5dd7-20230705"
