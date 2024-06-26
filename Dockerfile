@@ -2,15 +2,12 @@ FROM gcr.io/distroless/nodejs20-debian11@sha256:4a1503975e918095da0f588095741c5b
 
 WORKDIR /app
 
-COPY package.json /app/
+COPY next-logger.config.mjs /app/
 COPY .next/standalone /app/
-COPY next-logger.config.js /app/
 COPY public /app/public/
 
 EXPOSE 3000
 
 ENV NODE_ENV=production
-ENV NODE_OPTIONS '-r next-logger'
-ENV HOSTNAME=0.0.0.0
 
 CMD ["server.js"]
