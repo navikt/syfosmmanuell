@@ -14,7 +14,7 @@
         "@navikt/eslint-config-teamsykmelding": "^6.2.0",
         "@navikt/fnrvalidator": "^2.0.7",
         "@navikt/next-logger": "^1.25.0",
-        "@navikt/oasis": "^3.2.4",
+        "@navikt/oasis": "^3.3.0",
         "dayjs": "^1.11.11",
         "next-logger": "^5.0.0",
         "node-cache": "^5.1.2",
