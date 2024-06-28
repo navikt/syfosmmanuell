@@ -105,6 +105,8 @@ async function getAktivEnhet(oboToken: string): Promise<AktivEnhet | ModiaContex
         })
 
         if (!response.ok) {
+            logger.error(`Modia aktiv enhet responded with ${response.status} ${response.statusText}`)
+
             return {
                 errorType: 'MODIA_ERROR',
                 message: `Modia aktiv enhet responded with ${response.status} ${response.statusText}`,
@@ -116,6 +118,8 @@ async function getAktivEnhet(oboToken: string): Promise<AktivEnhet | ModiaContex
         if (maybeAktivEnhet.success) {
             return maybeAktivEnhet.data
         } else {
+            logger.error(`Unable to parse modia aktiv enhet response: ${maybeAktivEnhet.error.message}`)
+
             return {
                 errorType: 'PARSE_ERROR',
                 message: `Unable to parse modia aktiv enhet response: ${maybeAktivEnhet.error.message}`,

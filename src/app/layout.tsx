@@ -9,6 +9,7 @@ import { getModiaContext } from '../services/modiaService'
 import NoEnhetError from '../components/NoEnhetError'
 
 import Providers from './_providers'
+import Preload from './_preload'
 
 export default async function RootLayout({ children }: PropsWithChildren) {
     await verifyUserLoggedIn()
@@ -17,15 +18,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
     return (
         <html lang="en">
-            <head>
-                <link
-                    rel="preload"
-                    href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2"
-                    as="font"
-                    type="font/woff2"
-                    crossOrigin="anonymous"
-                />
-            </head>
+            <Preload />
             <Providers modiaContext={modiaContext}>
                 <body className="bg-bg-subtle">
                     <ModiaHeader modiaContext={modiaContext} />
