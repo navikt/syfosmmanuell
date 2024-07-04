@@ -48,7 +48,7 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
     }
 
     return {
-        aktivEnhet: aktivEnhet.aktivEnhet,
+        aktivEnhet: aktivEnhet.aktivEnhet ?? veileder.enheter[0].enhetId ?? null,
         navn: veileder.navn,
         ident: veileder.ident,
         enheter: veileder.enheter,
