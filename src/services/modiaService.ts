@@ -6,7 +6,8 @@ import { ClientError } from '../utils/typeUtils'
 import { getServerEnv, isLocalOrDemo } from '../utils/env'
 
 export interface ModiaContext {
-    navn: string
+    fornavn: string
+    etternavn: string
     ident: string
     aktivEnhet: string | null
     enheter: { enhetId: string; navn: string }[]
@@ -18,7 +19,8 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
     if (isLocalOrDemo) {
         logger.warn('Using mocked modia context for local development (or demo)')
         return {
-            navn: 'Johan J. Johansson',
+            fornavn: 'Johan J.',
+            etternavn: 'Johansson',
             ident: '0129381203',
             enheter: [
                 { enhetId: '0312', navn: 'NAV Sagene' },
@@ -48,8 +50,9 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
     }
 
     return {
-        aktivEnhet: aktivEnhet.aktivEnhet ?? veileder.enheter[0].enhetId ?? null,
-        navn: veileder.navn,
+        aktivEnhet: aktivEnhet.aktivEnhet,
+        fornavn: veileder.fornavn,
+        etternavn: veileder.etternavn,
         ident: veileder.ident,
         enheter: veileder.enheter,
     }
@@ -133,7 +136,8 @@ async function getAktivEnhet(oboToken: string): Promise<AktivEnhet | ModiaContex
 
 const Veileder = z.object({
     ident: z.string(),
-    navn: z.string(),
+    fornavn: z.string(),
+    etternavn: z.string(),
     enheter: z.array(
         z.object({
             enhetId: z.string(),
