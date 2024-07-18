@@ -44,14 +44,14 @@ spec:
     outbound:
       rules:
         - application: syfosmmanuell-backend
-      external:
-        - host: modiacontextholder-q1.dev-fss-pub.nais.io
+        - application: modiacontextholder
+          namespace: personoversikt
   env:
     - name: SYFOSMMANUELL_BACKEND_SCOPE
       value: api://dev-gcp.teamsykmelding.syfosmmanuell-backend/.default
     - name: SYFOSMMANUELL_BACKEND_URL
       value: http://syfosmmanuell-backend
     - name: MODIA_CONTEXT_SCOPE
-      value: api://dev-fss.personoversikt.modiacontextholder-q1/.default
+      value: api://dev-gcp.personoversikt.modiacontextholder/.default
     - name: MODIA_CONTEXT_URL
-      value: https://modiacontextholder-q1.dev-fss-pub.nais.io
+      value: http://modiacontextholder.personoversikt
