@@ -56,7 +56,7 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
 }
 
 async function getVeileder(oboToken: string): Promise<Veileder | ModiaContextError> {
-    const url = `${process.env['MODIA_CONTEXT_URL']}/modiacontextholder/api/decorator/v2`
+    const url = `${process.env['MODIA_CONTEXT_URL']}/api/decorator/v2`
 
     try {
         const response = await fetch(url, {
@@ -95,7 +95,7 @@ async function getVeileder(oboToken: string): Promise<Veileder | ModiaContextErr
 }
 
 async function getAktivEnhet(oboToken: string): Promise<AktivEnhet | ModiaContextError> {
-    const url = `${process.env['MODIA_CONTEXT_URL']}/modiacontextholder/api/context/aktivenhet`
+    const url = `${process.env['MODIA_CONTEXT_URL']}/api/context/aktivenhet`
 
     try {
         const response = await fetch(url, {
