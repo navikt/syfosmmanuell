@@ -38,8 +38,6 @@ spec:
         - application: syfosmmanuell-backend
         - application: modiacontextholder
           namespace: personoversikt
-      external:
-        - host: modiacontextholder-q1.dev-fss-pub.nais.io
   env:
     - name: SYFOSMMANUELL_BACKEND_SCOPE
       value: api://dev-gcp.teamsykmelding.syfosmmanuell-backend/.default
@@ -48,4 +46,4 @@ spec:
     - name: MODIA_CONTEXT_SCOPE
       value: api://dev-gcp.personoversikt.modiacontextholder/.default
     - name: MODIA_CONTEXT_URL
-      value: modiacontextholder.personoversikt
+      value: http://modiacontextholder.personoversikt
