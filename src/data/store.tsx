@@ -19,6 +19,7 @@ type StoreProviderProps = {
 const StoreProvider = ({ children, modiaContext }: PropsWithChildren<StoreProviderProps>) => {
     const defaultAktivSelectValue = getDefaultSelectValue(modiaContext)
     const [aktivEnhet, setAktivEnhet] = useState<string | null>(defaultAktivSelectValue)
+
     const handleAktivEnhetChange = useCallback((aktivEnhet: string) => {
         setAktivEnhet(aktivEnhet)
     }, [])
@@ -36,6 +37,9 @@ function getDefaultSelectValue(modiaContext?: ModiaContext | ModiaContextError):
     }
 
     const { aktivEnhet, enheter } = modiaContext
+    if (aktivEnhet == null && enheter.length > 0) {
+        return enheter[0].enhetId
+    }
     if (!aktivEnhet || !enheter || enheter.length === 0) return null
 
     return enheter.some((it) => it.enhetId === aktivEnhet) ? aktivEnhet : enheter[0].enhetId

@@ -26,7 +26,7 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
                 { enhetId: '0312', navn: 'NAV Sagene' },
                 { enhetId: '0314', navn: 'NAV Fagene' },
             ],
-            aktivEnhet: '0314',
+            aktivEnhet: '0312',
         }
     }
 
