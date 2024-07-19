@@ -28,7 +28,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                         tabIndex={-1}
                         className="mx-auto min-h-screen max-w-3xl bg-white p-8"
                     >
-                        {'errorType' in modiaContext || modiaContext.aktivEnhet == null ? <NoEnhetError /> : children}
+                        {'errorType' in modiaContext ? <NoEnhetError /> : children}
                     </main>
                 </body>
             </Providers>
