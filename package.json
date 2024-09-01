@@ -15,7 +15,7 @@
         "@navikt/fnrvalidator": "^2.1.0",
         "@navikt/next-logger": "^1.25.0",
         "@navikt/oasis": "^3.4.0",
-        "dayjs": "^1.11.12",
+        "dayjs": "^1.11.13",
         "next-logger": "^5.0.0",
         "node-cache": "^5.1.2",
         "pino": "^9.3.2",
