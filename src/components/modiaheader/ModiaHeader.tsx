@@ -52,7 +52,9 @@ function ModiaHeader({ modiaContext }: Props): ReactElement {
                     </Heading>
                 </div>
             )}
-            {modiaContext && !('errorType' in modiaContext) && <InternalHeader.User name={modiaContext.fornavn + " " + modiaContext.etternavn} />}
+            {modiaContext && !('errorType' in modiaContext) && (
+                <InternalHeader.User name={modiaContext.fornavn + ' ' + modiaContext.etternavn} />
+            )}
         </InternalHeader>
     )
 }
