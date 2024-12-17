@@ -2,7 +2,7 @@ name: Deploy redirect ingress to prod
 on:
   push:
     paths:
-      - 'nais/redirect-prod.yaml'
+      - '.nais/redirect-prod.yaml'
       - '.github/workflows/deploy-redirect-prod**'
     branches:
       - 'main'
@@ -17,4 +17,4 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
-          RESOURCE: nais/redirect-prod.yaml
+          RESOURCE: .nais/redirect-prod.yaml
