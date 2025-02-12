@@ -208,7 +208,7 @@ export const SporsmalSvar = z.object({
 })
 export type SporsmalSvar = z.infer<typeof SporsmalSvar>
 
-export const UtdypendeOpplysninger = z.record(z.record(SporsmalSvar))
+export const UtdypendeOpplysninger = z.record(z.string(), z.record(z.string(), SporsmalSvar))
 export type UtdypendeOpplysninger = z.infer<typeof UtdypendeOpplysninger>
 
 // --------
