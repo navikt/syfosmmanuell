@@ -7,7 +7,7 @@ import { isLocalOrDemo } from '../utils/env'
 import { raise } from '../utils/ts-utils'
 
 export async function verifyUserLoggedIn(): Promise<void> {
-    const requestHeaders = headers()
+    const requestHeaders = await headers()
 
     if (isLocalOrDemo) {
         logger.warn('Is running locally, skipping RSC auth')
