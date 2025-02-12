@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: PropsWithChildren) {
     await verifyUserLoggedIn()
 
-    const modiaContext = await getModiaContext(getUserToken(headers()))
+    const modiaContext = await getModiaContext(getUserToken(await headers()))
 
     return (
         <html lang="no">
