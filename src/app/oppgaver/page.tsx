@@ -24,7 +24,7 @@ function Page(): ReactElement {
 }
 
 async function UlosteOppgaver(): Promise<ReactElement> {
-    const ulosteOppgaver = await getUlosteOppgaver(getUserToken(headers()))
+    const ulosteOppgaver = await getUlosteOppgaver(getUserToken(await headers()))
 
     if ('errorType' in ulosteOppgaver) {
         return <ManuellOppgaveErrors errors={ulosteOppgaver} />
