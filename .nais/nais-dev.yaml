@@ -29,8 +29,8 @@ spec:
       cpu: 500m
       memory: 1Gi
     requests:
-      cpu: 100m
-      memory: 512Mi
+      cpu: 50m
+      memory: 120Mi
   azure:
     application:
       allowAllUsers: true
