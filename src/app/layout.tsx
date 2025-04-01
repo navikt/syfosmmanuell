@@ -14,7 +14,7 @@ import Preload from './_preload'
 export default async function RootLayout({ children }: PropsWithChildren) {
     await verifyUserLoggedIn()
 
-    const modiaContext = await getModiaContext(getUserToken(headers()))
+    const modiaContext = await getModiaContext(getUserToken(await headers()))
 
     return (
         <html lang="en">
