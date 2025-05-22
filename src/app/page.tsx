@@ -8,7 +8,8 @@ import { getUserToken } from '../auth/authentication'
 import ManuellOppgaveErrors from '../components/ManuellOppgaveErrors'
 import MainContent from '../components/MainContent'
 
-async function Page({ searchParams }: { searchParams: { oppgaveid: string | undefined } }): Promise<ReactElement> {
+async function Page(props: { searchParams: Promise<{ oppgaveid: string | undefined }> }): Promise<ReactElement> {
+    const searchParams = await props.searchParams
     if (searchParams.oppgaveid == null) {
         return (
             <Alert variant="error">
@@ -49,7 +50,7 @@ async function Page({ searchParams }: { searchParams: { oppgaveid: string | unde
 }
 
 async function Oppgave({ oppgaveId }: { oppgaveId: string }) {
-    const oppgave = await getOppgave(oppgaveId, getUserToken(headers()))
+    const oppgave = await getOppgave(oppgaveId, getUserToken(await headers()))
 
     if ('errorType' in oppgave && oppgave.errorType === 'OPPGAVE_NOT_FOUND') {
         notFound()
