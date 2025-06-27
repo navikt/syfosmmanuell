@@ -17,7 +17,7 @@ function Sykmeldingheader({
 }: SykmeldingheaderProps): ReactElement {
     return (
         <div>
-            <Heading size="large" level="2" spacing>
+            <Heading size="large" spacing>
                 Manuell vurdering av tilbakedatert sykmelding
             </Heading>
 

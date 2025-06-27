@@ -50,7 +50,8 @@ const Form = ({ onSubmit, submitting }: Props) => {
                         <RadioGroup
                             className="mt-4"
                             name="status"
-                            legend=""
+                            legend="Velg vurdering av sykmelding"
+                            hideLegend
                             onChange={(value) => onChange(value)}
                             value={value ?? ''}
                             error={error?.message}

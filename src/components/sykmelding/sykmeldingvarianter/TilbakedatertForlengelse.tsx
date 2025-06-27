@@ -17,7 +17,7 @@ const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps)
         <Panel border className="relative">
             <div className="absolute left-0 top-0 flex h-12 w-full items-center gap-3 border-b border-border-default bg-surface-warning-moderate p-4">
                 <Image src={plaster} alt="" />
-                <Heading size="medium" level="3">
+                <Heading size="medium" level="2">
                     Utdrag fra sykmeldingen
                 </Heading>
             </div>
