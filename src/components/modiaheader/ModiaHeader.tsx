@@ -26,7 +26,9 @@ function ModiaHeader({ modiaContext }: Props): ReactElement {
                         <Select
                             id="modia-header"
                             value={aktivEnhet}
-                            label=""
+                            label="Velg enhet"
+                            hideLabel
+                            className="mt-2"
                             size="small"
                             onChange={(event) => {
                                 setAktivEnhet(event.target.value)
