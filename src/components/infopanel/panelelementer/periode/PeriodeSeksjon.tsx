@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort, Heading } from '@navikt/ds-react'
 
 import { tilLesbarPeriodeMedArstall, countDaysBetweenTwoDatesIncludingFom } from '../../../../utils/datoUtils'
 import { periodeUndertekst } from '../../../../utils/tekstUtils'
@@ -14,7 +14,9 @@ function PeriodeSeksjon({ periode, understrek }: PeriodeSeksjonProps): ReactElem
     const antallDager = countDaysBetweenTwoDatesIncludingFom(periode.fom, periode.tom)
     return (
         <div>
-            <Label>Sykmeldingsperiode</Label>
+            <Heading size="xsmall" level="3">
+                Sykmeldingsperiode
+            </Heading>
             <div className="flex flex-wrap">
                 <BodyShort>{tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}</BodyShort>
                 {antallDager && (

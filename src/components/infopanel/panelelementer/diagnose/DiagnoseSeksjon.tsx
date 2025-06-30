@@ -18,8 +18,14 @@ function DiagnoseSeksjon({ diagnose: { tekst, kode, system }, bidiagnose, withPr
                 tittel={getDiagnoseTitle(bidiagnose, withPrefix)}
                 tekst={tekst}
                 undertekst="Diagnosen vises ikke til arbeidsgiveren"
+                headingLevel={withPrefix ? '4' : '3'}
             />
-            <DiagnoseKodeSeksjon kode={kode} system={system} visHjelp={!bidiagnose} />
+            <DiagnoseKodeSeksjon
+                kode={kode}
+                system={system}
+                visHjelp={!bidiagnose}
+                headingLevel={withPrefix ? '4' : '3'}
+            />
         </div>
     )
 }
