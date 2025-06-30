@@ -1,17 +1,20 @@
 import React, { ReactElement } from 'react'
-import { BodyShort, HelpText, Label } from '@navikt/ds-react'
+import { BodyShort, Heading, HelpText } from '@navikt/ds-react'
 
 interface DiagnoseKodeSeksjonProps {
     kode: string
     system: string
     visHjelp: boolean
+    headingLevel: '1' | '2' | '3' | '4' | '5' | '6'
 }
 
-function DiagnoseKodeSeksjon({ kode, system, visHjelp }: DiagnoseKodeSeksjonProps): ReactElement {
+function DiagnoseKodeSeksjon({ kode, system, visHjelp, headingLevel }: DiagnoseKodeSeksjonProps): ReactElement {
     return (
         <div>
             <div className="flex gap-3">
-                <Label>Diagnosekode</Label>
+                <Heading size="xsmall" level={headingLevel}>
+                    Diagnosekode
+                </Heading>
                 {visHjelp && (
                     <HelpText>
                         Diagnosekoden henviser til de internasjonale kodeverkene som klassifiserer sykdom og symptomer.

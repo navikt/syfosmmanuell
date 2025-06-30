@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import dayjs from 'dayjs'
-import { BodyShort, Heading, Label } from '@navikt/ds-react'
+import { BodyShort, Heading } from '@navikt/ds-react'
 
 interface SykmeldingheaderProps {
     arbeidsgiverNavn: string | null
@@ -22,25 +22,35 @@ function Sykmeldingheader({
             </Heading>
 
             <div className="my-8">
-                <Label>Fødselsnummer:</Label>
-                <BodyShort> {personNrPasient}</BodyShort>
+                <Heading size="xsmall" level="2">
+                    Fødselsnummer:
+                </Heading>
+                <BodyShort>{personNrPasient}</BodyShort>
             </div>
 
             <div className="my-8">
                 {arbeidsgiverNavn && (
-                    <BodyShort>
-                        <b>Arbeidsgiver:</b> {arbeidsgiverNavn}
-                    </BodyShort>
+                    <div className="flex">
+                        <Heading size="xsmall" level="2">
+                            Arbeidsgiver:
+                        </Heading>
+                        <BodyShort className="ml-1">{arbeidsgiverNavn}</BodyShort>
+                    </div>
                 )}
                 {sykmelder && (
-                    <BodyShort>
-                        <b>Sykmelder:</b> {sykmelder}
-                    </BodyShort>
+                    <div className="flex">
+                        <Heading size="xsmall" level="2">
+                            Sykmelder:
+                        </Heading>
+                        <BodyShort className="ml-1">{sykmelder}</BodyShort>
+                    </div>
                 )}
             </div>
 
             <div className="my-8">
-                <Label>Datoen NAV mottok sykmeldingen:</Label>
+                <Heading size="xsmall" level="2">
+                    Datoen NAV mottok sykmeldingen:
+                </Heading>
                 <BodyShort>{dayjs(mottattDato).format('DD.MM.YYYY kl. HH:mm:ss')}</BodyShort>
             </div>
         </div>

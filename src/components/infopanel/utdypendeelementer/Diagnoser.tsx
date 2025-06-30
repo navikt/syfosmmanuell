@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort, Heading } from '@navikt/ds-react'
 
 import { AnnenFraverGrunnValues, MedisinskVurdering } from '../../../types/sykmelding'
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils'
@@ -26,7 +26,9 @@ function Diagnoser({ medisinskVurdering, skjermesForPasient }: DiagnoserProps): 
             {medisinskVurdering.annenFraversArsak && (
                 <>
                     <Margin>
-                        <Label>3.3.1. Lovfestet fraværsgrunn</Label>
+                        <Heading size="xsmall" level="4">
+                            3.3.1. Lovfestet fraværsgrunn
+                        </Heading>
                         {medisinskVurdering.annenFraversArsak.grunn.map((grunn) => (
                             <BodyShort key={grunn}>- {AnnenFraverGrunnValues[grunn]}</BodyShort>
                         ))}
@@ -36,6 +38,7 @@ function Diagnoser({ medisinskVurdering, skjermesForPasient }: DiagnoserProps): 
                         tittel="3.3.2 Beskriv fraværsgrunnen"
                         tekst={medisinskVurdering.annenFraversArsak.beskrivelse}
                         margin
+                        headingLevel="5"
                     />
                 </>
             )}
