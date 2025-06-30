@@ -27,12 +27,14 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                     <ElementMedTekst
                         tittel="4.1.3. Innspill til arbeidsgiver om tilrettelegging"
                         tekst={periode.avventendeInnspillTilArbeidsgiver}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                 </div>
             ))}
@@ -44,12 +46,14 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                     <ElementMedTekst
                         tittel="4.2.3. Oppgi grad for sykmeldingen"
                         tekst={periode.gradert?.grad ? String(periode.gradert?.grad) : '-'}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                     <EnkelCheckbox
                         tittel="4.2.4. Pasienten kan være i delvis arbeid ved bruk av reisetilskudd"
@@ -68,6 +72,7 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                     <EnkelCheckbox
                         tittel="4.3.3. Medisinske årsaker hindrer arbeidsrelatert aktivitet"
@@ -85,6 +90,7 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         tekst={periode.aktivitetIkkeMulig?.medisinskArsak?.beskrivelse}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                     <EnkelCheckbox
                         tittel="4.3.4. Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet"
@@ -102,6 +108,7 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         tekst={periode.aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                 </div>
             ))}
@@ -113,6 +120,7 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                     <ElementMedTekst
                         vis
@@ -120,6 +128,7 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         tekst={periode.behandlingsdager ? String(periode.behandlingsdager) : '-'}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                 </div>
             ))}
@@ -131,6 +140,7 @@ function MulighetForArbeid({ perioder }: MulighetForArbeidProps): ReactElement {
                         tekst={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
                         margin
                         innrykk
+                        headingLevel="5"
                     />
                 </div>
             ))}

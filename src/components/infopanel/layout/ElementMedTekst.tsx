@@ -1,5 +1,5 @@
 import React from 'react'
-import { BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort, Heading } from '@navikt/ds-react'
 
 import Innrykk from './Innrykk'
 import Margin from './Margin'
@@ -10,16 +10,19 @@ interface ElementMedTekstProps {
     tekst?: string | null
     innrykk?: boolean
     margin?: boolean
+    headingLevel?: '1' | '2' | '3' | '4' | '5' | '6'
 }
 
-const ElementMedTekst = ({ vis, tittel, tekst, innrykk, margin }: ElementMedTekstProps) => {
+const ElementMedTekst = ({ vis, tittel, tekst, innrykk, margin, headingLevel = '4' }: ElementMedTekstProps) => {
     if (vis === false) {
         return null
     }
 
     const innhold = (
         <>
-            <Label>{tittel}</Label>
+            <Heading size="xsmall" level={headingLevel}>
+                {tittel}
+            </Heading>
             {tekst && <BodyShort>{tekst}</BodyShort>}
         </>
     )

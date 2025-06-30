@@ -30,18 +30,21 @@ const HeleSykmeldingen = ({ sykmelding, setVisHeleSykmeldingen }: HeleSykmelding
                     tittel="Datoen sykmeldingen ble skrevet"
                     tekst={tilLesbarDatoMedArstall(sykmelding.signaturDato)}
                     margin
+                    headingLevel="3"
                 />
                 <ElementMedTekst
                     vis={!!sykmelding.kontaktMedPasient.kontaktDato}
                     tittel="Datoen for dokumenterbar kontakt med pasienten"
                     tekst={tilLesbarDatoMedArstall(sykmelding.kontaktMedPasient.kontaktDato)}
                     margin
+                    headingLevel="3"
                 />
                 <ElementMedTekst
                     vis={!!sykmelding.behandler}
                     tittel="Sykmelder"
                     tekst={tilLesbarSykmelder(sykmelding.behandler)}
                     margin
+                    headingLevel="3"
                 />
             </div>
             <ArbeidsgiverSection arbeidsgiver={sykmelding.arbeidsgiver} />
