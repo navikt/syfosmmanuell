@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { BodyShort, Heading } from '@navikt/ds-react'
+import { Heading } from '@navikt/ds-react'
 
 import { AnnenFraverGrunnValues, MedisinskVurdering } from '../../../types/sykmelding'
 import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils'
@@ -29,9 +29,13 @@ function Diagnoser({ medisinskVurdering, skjermesForPasient }: DiagnoserProps): 
                         <Heading size="xsmall" level="4">
                             3.3.1. Lovfestet fraværsgrunn
                         </Heading>
-                        {medisinskVurdering.annenFraversArsak.grunn.map((grunn) => (
-                            <BodyShort key={grunn}>- {AnnenFraverGrunnValues[grunn]}</BodyShort>
-                        ))}
+                        <ul className="list-disc">
+                            {medisinskVurdering.annenFraversArsak.grunn.map((grunn) => (
+                                <li key={grunn} className="ml-6">
+                                    {AnnenFraverGrunnValues[grunn]}
+                                </li>
+                            ))}
+                        </ul>
                     </Margin>
                     <ElementMedTekst
                         vis={!!medisinskVurdering.annenFraversArsak.beskrivelse}
