@@ -12,13 +12,13 @@ interface SykmeldingPerioderProps {
 function SykmeldingPerioder({ perioder }: SykmeldingPerioderProps): ReactElement {
     const sortert = sorterPerioderEldsteFoerst(perioder)
     return (
-        <div className="flex flex-col gap-4">
+        <ul className="flex flex-col gap-4">
             {sortert.map((periode) => (
-                <div key={`${periode.fom}-${periode.tom}`}>
+                <li key={`${periode.fom}-${periode.tom}`}>
                     <PeriodeSeksjon periode={periode} />
-                </div>
+                </li>
             ))}
-        </div>
+        </ul>
     )
 }
 
