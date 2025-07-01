@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react'
 import { BodyShort, Detail, Heading } from '@navikt/ds-react'
 
+import { cleanId } from '../../../utils/uu'
+
 import Innrykk from './Innrykk'
 import Margin from './Margin'
 
@@ -14,13 +16,16 @@ interface EtikettMedTekstProps {
 }
 
 const EtikettMedTekst = ({ tittel, tekst, undertekst, margin, innrykk, headingLevel = '3' }: EtikettMedTekstProps) => {
+    const labelId = cleanId(tekst + '-etikett-' + headingLevel)
     const innhold = (
         <div>
-            <Heading size="xsmall" level={headingLevel}>
+            <Heading id={labelId} size="xsmall" level={headingLevel}>
                 {tittel}
             </Heading>
-            <BodyShort>{tekst}</BodyShort>
-            {undertekst && <Detail>{undertekst}</Detail>}
+            <section aria-labelledby={labelId}>
+                <BodyShort>{tekst}</BodyShort>
+                {undertekst && <Detail>{undertekst}</Detail>}
+            </section>
         </div>
     )
 
