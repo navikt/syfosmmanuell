@@ -43,9 +43,11 @@ const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true, lis
                 </span>
             </div>
             {!!listItems?.length && (
-                <ul style={{ marginTop: '1rem', marginLeft: '2.5rem' }} aria-labelledby={labelId}>
+                <ul className="list-disc mt-4 ml-10" aria-labelledby={labelId}>
                     {listItems.map((item) => (
-                        <li key={item}>- {item}</li>
+                        <li key={item} className="ml-6">
+                            {item}
+                        </li>
                     ))}
                 </ul>
             )}
