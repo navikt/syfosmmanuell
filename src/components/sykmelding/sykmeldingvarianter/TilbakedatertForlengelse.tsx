@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Panel } from '@navikt/ds-react'
+import { Box, Heading } from '@navikt/ds-react'
 import Image from 'next/image'
 
 import DiagnoseSeksjon from '../../infopanel/panelelementer/diagnose/DiagnoseSeksjon'
@@ -14,7 +14,7 @@ interface TilbakedatertForlengelseProps {
 
 const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps) => {
     return (
-        <Panel border className="relative">
+        <Box padding="4" borderWidth="1" className="relative">
             <div className="absolute left-0 top-0 flex h-12 w-full items-center gap-3 border-b border-border-default bg-surface-warning-moderate p-4">
                 <Image src={plaster} alt="" />
                 <Heading size="medium" level="2">
@@ -39,7 +39,7 @@ const TilbakedatertForlengelse = ({ sykmelding }: TilbakedatertForlengelseProps)
                     genereringsDato={sykmelding.signaturDato}
                 />
             </div>
-        </Panel>
+        </Box>
     )
 }
 
