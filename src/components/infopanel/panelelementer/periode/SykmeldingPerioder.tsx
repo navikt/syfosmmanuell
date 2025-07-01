@@ -15,7 +15,7 @@ function SykmeldingPerioder({ perioder }: SykmeldingPerioderProps): ReactElement
         <div className="flex flex-col gap-4">
             {sortert.map((periode) => (
                 <div key={`${periode.fom}-${periode.tom}`}>
-                    <PeriodeSeksjon periode={periode} understrek={false} />
+                    <PeriodeSeksjon periode={periode} />
                 </div>
             ))}
         </div>
