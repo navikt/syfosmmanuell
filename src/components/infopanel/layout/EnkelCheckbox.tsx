@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react'
 import Image from 'next/image'
-import { BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
 
 import sjekkboks from '../../../svg/sjekkboks.svg'
 import sjekkboksKryss from '../../../svg/sjekkboksKryss.svg'
+import { cleanId } from '../../../utils/uu'
 
 import Innrykk from './Innrykk'
 import Margin from './Margin'
@@ -23,19 +24,29 @@ const EnkelCheckbox = ({ tittel, checked, margin, innrykk, bold, vis = true, lis
         return null
     }
 
+    const labelId = cleanId(tittel)
+
     const innhold: ReactElement = (
         <div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ marginRight: '1rem' }}>
-                    <Image src={checked ? sjekkboks : sjekkboksKryss} alt="sjekkboks ikon" />
+                    <Image src={checked ? sjekkboks : sjekkboksKryss} alt={checked ? 'Checked' : 'Kryss'} />
                 </span>
-                <span>{bold ? <Label>{tittel}</Label> : <BodyShort>{tittel}</BodyShort>}</span>
+                <span>
+                    {bold ? (
+                        <BodyShort id={labelId} className="font-bold">
+                            {tittel}
+                        </BodyShort>
+                    ) : (
+                        <BodyShort id={labelId}>{tittel}</BodyShort>
+                    )}
+                </span>
             </div>
             {!!listItems?.length && (
-                <ul style={{ marginTop: '1rem', marginLeft: '2.5rem' }}>
+                <ul className="list-disc mt-4 ml-10" aria-labelledby={labelId}>
                     {listItems.map((item) => (
-                        <li key={item}>
-                            <BodyShort>{item}</BodyShort>
+                        <li key={item} className="ml-6">
+                            {item}
                         </li>
                     ))}
                 </ul>

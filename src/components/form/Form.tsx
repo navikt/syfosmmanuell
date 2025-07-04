@@ -48,9 +48,11 @@ const Form = ({ onSubmit, submitting }: Props) => {
                     }}
                     render={({ field: { onChange, value }, fieldState: { error } }) => (
                         <RadioGroup
+                            id="status"
                             className="mt-4"
                             name="status"
-                            legend=""
+                            legend="Velg vurdering av sykmelding"
+                            hideLegend
                             onChange={(value) => onChange(value)}
                             value={value ?? ''}
                             error={error?.message}
