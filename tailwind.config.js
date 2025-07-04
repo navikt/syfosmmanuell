@@ -3,7 +3,11 @@ module.exports = {
     presets: [require('@navikt/ds-tailwind')],
     content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
     theme: {
-        extend: {},
+        extend: {
+            screens: {
+                xs: '370px',
+            },
+        },
     },
     plugins: [],
 }

@@ -13,7 +13,7 @@ interface DiagnoseSeksjonProps {
 
 function DiagnoseSeksjon({ diagnose: { tekst, kode, system }, bidiagnose, withPrefix = false }: DiagnoseSeksjonProps) {
     return (
-        <div className="mb-4 grid grid-cols-2">
+        <div className="flex flex-wrap mb-4">
             <EtikettMedTekst
                 tittel={getDiagnoseTitle(bidiagnose, withPrefix)}
                 tekst={tekst}
