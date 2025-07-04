@@ -88,15 +88,15 @@ function OppgaveLinkPanel({ oppgave }: { oppgave: UlostOppgave }) {
             as={Link}
             key={oppgave.oppgaveId}
             href={`/?oppgaveid=${oppgave.oppgaveId}`}
-            className="w-[600px] [&>div]:w-full"
+            className="flex flex-wrap xs:flex-nowrap [&>div]:w-full"
             prefetch={false}
         >
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap xs:flex-nowrap items-center">
                 <div className="w-full">
                     <LinkPanel.Title>
                         {oppgave.oppgaveId}: {tilLesbarDatoMedArstall(oppgave.mottattDato)}
                     </LinkPanel.Title>
-                    <LinkPanel.Description className="flex w-full justify-between">
+                    <LinkPanel.Description className="flex w-full">
                         {diffInDays > 0 ? <div>Mottatt for {diffInDays} dager siden</div> : <div>Mottatt i dag</div>}
                     </LinkPanel.Description>
                 </div>

@@ -32,7 +32,7 @@ const EtikettMedTekst = ({ tittel, tekst, undertekst, margin, innrykk, headingLe
     const medMargin = margin ? <Margin>{innhold}</Margin> : innhold
     const medInnrykk = innrykk ? <Innrykk>{medMargin}</Innrykk> : medMargin
 
-    return <div style={{ flex: '1 1 auto' }}>{medInnrykk}</div>
+    return <div className="mr-14">{medInnrykk}</div>
 }
 
 export default EtikettMedTekst
