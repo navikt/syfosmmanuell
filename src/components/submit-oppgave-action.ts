@@ -19,7 +19,7 @@ const FormSchema = z.object({
 })
 
 export async function submitOppgaveAction(oppgaveId: number, aktivEnhet: string, formData: FormShape) {
-    const token = getUserToken(headers())
+    const token = getUserToken(await headers())
     const formValues = FormSchema.parse(formData)
 
     await submitOppgave(oppgaveId, aktivEnhet, formValues, token)
