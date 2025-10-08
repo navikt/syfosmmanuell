@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
         ignoreDuringBuilds: true,
         dirs: ['src'],
     },
+    serverExternalPackages: ['@navikt/next-logger', 'next-logger', 'pino'],
     experimental: {
         optimizePackageImports: ['@navikt/ds-react'],
     },
