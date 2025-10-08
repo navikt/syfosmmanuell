@@ -132,3 +132,16 @@ jobs:
           RESOURCE: .nais/nais-prod.yaml
           VAR: image=${{ needs.build-prod.outputs.image }}
           NAIS_DEPLOY_SUMMARY: false
+
+  security:
+    name: Security
+    secrets: inherit
+    permissions:
+      contents: read
+      id-token: write
+      security-events: write
+    needs: build-prod
+    uses: navikt/tsm-workflows/.github/workflows/security.yaml@main
+    with:
+      image: ${{ needs.build-prod.outputs.image }}
+      team: 'teamsykmelding'
