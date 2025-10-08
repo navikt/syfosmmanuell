@@ -11,7 +11,7 @@
         "start": "next dev | pino-pretty",
         "build": "next build",
         "test": "vitest",
-        "lint": "next lint"
+        "lint": "eslint src"
     },
     "dependencies": {
         "@navikt/aksel-icons": "^7.32.1",
@@ -33,12 +33,13 @@
         "zod": "^4.1.11"
     },
     "devDependencies": {
+        "@eslint/eslintrc": "^3.3.1",
         "@tailwindcss/postcss": "4.1.14",
         "@types/node": "24.7.0",
         "@types/react": "^19.2.0",
         "@types/react-collapse": "^5.0.4",
         "@types/react-dom": "^19.2.0",
-        "eslint": "^8.57.1",
+        "eslint": "^9.37.0",
         "eslint-config-next": "15.5.4",
         "next": "15.5.4",
         "pino-pretty": "^13.1.1",
@@ -48,17 +49,5 @@
         "tailwindcss": "4.1.14",
         "vitest": "^3.2.4"
     },
-    "resolutions": {
-        "eslint-plugin-react-hooks": "5.0.0-canary-7118f5dd7-20230705"
-    },
-    "prettier": "@navikt/eslint-config-teamsykmelding/prettier",
-    "eslintConfig": {
-        "extends": [
-            "@navikt/eslint-config-teamsykmelding",
-            "next/core-web-vitals"
-        ],
-        "rules": {
-            "@typescript-eslint/explicit-function-return-type": "off"
-        }
-    }
+    "prettier": "@navikt/eslint-config-teamsykmelding/prettier"
 }
