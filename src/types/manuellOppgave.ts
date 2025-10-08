@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import * as z from 'zod'
 
 import { Sykmelding } from './sykmelding'
 import { ValidationResult } from './validationResult'

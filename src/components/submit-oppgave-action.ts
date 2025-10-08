@@ -1,7 +1,7 @@
 'use server'
 
 import { headers } from 'next/headers'
-import { z } from 'zod'
+import * as z from 'zod'
 
 import { submitOppgave } from '../services/oppgaveService'
 import { getUserToken } from '../auth/authentication'

@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import * as z from 'zod'
 
 const RuleNames = z.enum([
     'TILBAKEDATERT_MER_ENN_8_DAGER_FORSTE_SYKMELDING_MED_BEGRUNNELSE',

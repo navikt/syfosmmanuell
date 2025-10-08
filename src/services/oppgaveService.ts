@@ -1,6 +1,6 @@
 import { logger } from '@navikt/next-logger'
 import { requestOboToken } from '@navikt/oasis'
-import { z } from 'zod'
+import * as z from 'zod'
 
 import { ManuellOppgave } from '../types/manuellOppgave'
 import { manuellOppgave } from '../mock/manuellOppgave'
