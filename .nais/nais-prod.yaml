@@ -47,6 +47,7 @@ spec:
           - id: "100e88eb-79af-4136-8bfe-f79b32021f43"
     sidecar:
       enabled: true
+      autoLogin: true
   ingresses:
     - 'https://syfosmmanuell.intern.nav.no'
   accessPolicy:

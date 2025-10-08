@@ -38,6 +38,7 @@ spec:
       tenant: trygdeetaten.no
     sidecar:
       enabled: true
+      autoLogin: true
   ingresses:
     - 'https://syfosmmanuell.intern.dev.nav.no'
   accessPolicy:
