@@ -763,13 +763,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/fnrvalidator@npm:^2.1.5":
-  version: 2.1.5
-  resolution: "@navikt/fnrvalidator@npm:2.1.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ffnrvalidator%2F2.1.5%2Fe33cbc5693b14419bbcf4d5daee2ac9eeec532e5"
-  checksum: 10c0/eef0c2dcfc8007a4411726daa737f9f6e2a07c3ae3974f026ed19526c44f724877d1368e6b293031203de6cd99103d02726244386cd42d2b19fe3c04cd2355f6
-  languageName: node
-  linkType: hard
-
 "@navikt/next-logger@npm:^4.3.3":
   version: 4.3.3
   resolution: "@navikt/next-logger@npm:4.3.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F4.3.3%2Faa1c32684f7aad80ab7614e4122dadbb02b83cdf"
@@ -1361,15 +1354,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-collapse@npm:^5.0.4":
-  version: 5.0.4
-  resolution: "@types/react-collapse@npm:5.0.4"
-  dependencies:
-    "@types/react": "npm:*"
-  checksum: 10c0/aee373253e3a3ecc0b695810760ecacb6beae64b695a677c4fafbeb03f6e67f85a846de06ae9b22f3f77d5e785c98874e67561a3a2f25fab167f1704a6018210
-  languageName: node
-  linkType: hard
-
 "@types/react-dom@npm:^19.2.0":
   version: 19.2.0
   resolution: "@types/react-dom@npm:19.2.0"
@@ -1379,7 +1363,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^19.2.0":
+"@types/react@npm:^19.2.0":
   version: 19.2.0
   resolution: "@types/react@npm:19.2.0"
   dependencies:
@@ -2168,13 +2152,6 @@ __metadata:
   version: 0.0.1
   resolution: "client-only@npm:0.0.1"
   checksum: 10c0/9d6cfd0c19e1c96a434605added99dff48482152af791ec4172fb912a71cff9027ff174efd8cdb2160cc7f377543e0537ffc462d4f279bc4701de3f2a3c4b358
-  languageName: node
-  linkType: hard
-
-"clone@npm:2.x":
-  version: 2.1.2
-  resolution: "clone@npm:2.1.2"
-  checksum: 10c0/ed0601cd0b1606bc7d82ee7175b97e68d1dd9b91fd1250a3617b38d34a095f8ee0431d40a1a611122dcccb4f93295b4fdb94942aa763392b5fe44effa50c2d5e
   languageName: node
   linkType: hard
 
@@ -4399,15 +4376,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-cache@npm:^5.1.2":
-  version: 5.1.2
-  resolution: "node-cache@npm:5.1.2"
-  dependencies:
-    clone: "npm:2.x"
-  checksum: 10c0/2f91907510a1276415ae5898269d0765934d5a4f3682c8b1b19964694a9b841c8bd791e1a125d1f89050f412e1da5dd982179d714252b3a7223abb05b8cb24d5
-  languageName: node
-  linkType: hard
-
 "node-gyp@npm:latest":
   version: 11.4.2
   resolution: "node-gyp@npm:11.4.2"
@@ -5831,25 +5799,21 @@ __metadata:
   resolution: "syfosmmanuell@workspace:."
   dependencies:
     "@eslint/eslintrc": "npm:^3.3.1"
-    "@navikt/aksel-icons": "npm:^7.32.1"
     "@navikt/ds-css": "npm:^7.32.1"
     "@navikt/ds-react": "npm:^7.32.1"
     "@navikt/ds-tailwind": "npm:^7.32.1"
     "@navikt/eslint-config-teamsykmelding": "npm:^8.1.1"
-    "@navikt/fnrvalidator": "npm:^2.1.5"
     "@navikt/next-logger": "npm:^4.3.3"
     "@navikt/oasis": "npm:^3.8.0"
     "@tailwindcss/postcss": "npm:4.1.14"
     "@types/node": "npm:24.7.0"
     "@types/react": "npm:^19.2.0"
-    "@types/react-collapse": "npm:^5.0.4"
     "@types/react-dom": "npm:^19.2.0"
     dayjs: "npm:^1.11.18"
     eslint: "npm:^9.37.0"
     eslint-config-next: "npm:15.5.4"
     next: "npm:15.5.4"
     next-logger: "npm:^5.0.1"
-    node-cache: "npm:^5.1.2"
     pino: "npm:^10.0.0"
     pino-pretty: "npm:^13.1.1"
     postcss: "npm:^8.5.6"

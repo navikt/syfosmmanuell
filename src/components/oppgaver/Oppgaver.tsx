@@ -28,7 +28,7 @@ interface Props {
     oppgaver: UlostOppgave[]
 }
 
-export function Oppgaver({ oppgaver }: Props): ReactElement {
+function Oppgaver({ oppgaver }: Props): ReactElement {
     const [showRest, setShowRest] = useState(false)
     const [statusFilter, setStatusFilter] = useState('FEILREGISTRERT')
     const options = OPTIONS
