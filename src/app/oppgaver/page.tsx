@@ -1,9 +1,7 @@
-import React, { ReactElement, Suspense } from 'react'
-import { headers } from 'next/headers'
+import { ReactElement, Suspense } from 'react'
 import { Skeleton } from '@navikt/ds-react'
 
-import { getUlosteOppgaver } from '../../services/oppgaveService'
-import { getUserToken } from '../../auth/authentication'
+import { getUlosteOppgaver } from '../../services/syfosmmanuell-backend-service'
 import Oppgaver from '../../components/oppgaver/Oppgaver'
 import ManuellOppgaveErrors from '../../components/ManuellOppgaveErrors'
 
@@ -24,7 +22,7 @@ function Page(): ReactElement {
 }
 
 async function UlosteOppgaver(): Promise<ReactElement> {
-    const ulosteOppgaver = await getUlosteOppgaver(getUserToken(await headers()))
+    const ulosteOppgaver = await getUlosteOppgaver()
 
     if ('errorType' in ulosteOppgaver) {
         return <ManuellOppgaveErrors errors={ulosteOppgaver} />

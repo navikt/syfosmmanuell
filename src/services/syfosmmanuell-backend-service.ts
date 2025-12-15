@@ -9,33 +9,25 @@ import { ClientError } from '../utils/typeUtils'
 import { UlostOppgave, UlostOppgaveSchema } from '../types/ulost-oppgave'
 import { ulosteOppgaver } from '../mock/ulosteOppgaver'
 import { ValidatedFormValues } from '../components/submit-oppgave-action'
+import { verifiedAccessToken } from '../auth/authentication'
 
 export type OppgaveFetchingError = ClientError<
     'AUTHORIZATION' | 'OPPGAVE_NOT_FOUND' | 'ALREADY_RESOLVED' | 'GENERAL_ERROR' | 'PARSE_ERROR'
 >
 
-export async function getOppgave(
-    oppgaveid: string,
-    accessToken: string,
-): Promise<ManuellOppgave | OppgaveFetchingError> {
+export async function getOppgave(oppgaveid: string): Promise<ManuellOppgave | OppgaveFetchingError> {
     if (isLocalOrDemo) {
         return ManuellOppgave.parse(manuellOppgave)
     }
 
-    const serverEnv = getServerEnv()
-    const oboResult = await requestOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
+    const oboResult = await getSyfosmmanuellOboToken()
     if (!oboResult.ok) {
-        return {
-            errorType: 'AUTHORIZATION',
-            message: `Unable to get access token: ${oboResult.error.message}`,
-        }
+        return { errorType: 'AUTHORIZATION', message: `Unable to get access token` }
     }
 
-    const OPPGAVE_URL = `${serverEnv.SYFOSMMANUELL_BACKEND_URL}/api/v1/manuellOppgave/${oppgaveid}`
+    const OPPGAVE_URL = `${getServerEnv().SYFOSMMANUELL_BACKEND_URL}/api/v1/manuellOppgave/${oppgaveid}`
     const response = await fetch(OPPGAVE_URL, {
-        headers: {
-            Authorization: `Bearer ${oboResult.token}`,
-        },
+        headers: { Authorization: `Bearer ${oboResult.okoToken}` },
     })
 
     if (response.status === 401) {
@@ -80,22 +72,21 @@ export async function getOppgave(
 
 export type UlosteOppgaverFetchingError = ClientError<'AUTHORIZATION' | 'GENERAL_ERROR' | 'PARSE_ERROR'>
 
-export async function getUlosteOppgaver(accessToken: string): Promise<UlostOppgave[] | UlosteOppgaverFetchingError> {
+export async function getUlosteOppgaver(): Promise<UlostOppgave[] | UlosteOppgaverFetchingError> {
     if (isLocalOrDemo) {
         logger.warn(`Is local or demo: Mocking uloste oppgaver`)
         return z.array(UlostOppgaveSchema).parse(ulosteOppgaver)
     }
 
-    const serverEnv = getServerEnv()
-    const oboResult = await requestOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
+    const oboResult = await getSyfosmmanuellOboToken()
     if (!oboResult.ok) {
-        throw new Error(`Unable to get access token: ${oboResult.error.message}`)
+        return { errorType: 'AUTHORIZATION', message: `Unable to get access token` }
     }
 
-    const OPPGAVE_URL = `${serverEnv.SYFOSMMANUELL_BACKEND_URL}/api/v1/oppgaver`
+    const OPPGAVE_URL = `${getServerEnv().SYFOSMMANUELL_BACKEND_URL}/api/v1/oppgaver`
     const response = await fetch(OPPGAVE_URL, {
         headers: {
-            Authorization: `Bearer ${oboResult.token}`,
+            Authorization: `Bearer ${oboResult.okoToken}`,
         },
     })
 
@@ -127,30 +118,24 @@ export async function getUlosteOppgaver(accessToken: string): Promise<UlostOppga
     return parseResult.data
 }
 
-export async function submitOppgave(
-    oppgaveid: number,
-    aktivEnhet: string,
-    body: ValidatedFormValues,
-    accessToken: string,
-): Promise<void> {
+export async function submitOppgave(oppgaveid: number, aktivEnhet: string, body: ValidatedFormValues): Promise<void> {
     if (isLocalOrDemo) {
         logger.warn(`Mocking submit for development, valgt enhet: ${aktivEnhet}, oppgaveid: ${oppgaveid}`)
         return
     }
 
-    const serverEnv = getServerEnv()
-    const oboResult = await requestOboToken(accessToken, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
+    const oboResult = await getSyfosmmanuellOboToken()
     if (!oboResult.ok) {
-        throw new Error(`Unable to get access token: ${oboResult.error.message}`)
+        throw new Error(`Unable to get access token: ${oboResult.errorType}`)
     }
 
-    const VURDERE_OPPGAVE_URL = `${serverEnv.SYFOSMMANUELL_BACKEND_URL}/api/v1/vurderingmanuelloppgave/${oppgaveid}`
+    const VURDERE_OPPGAVE_URL = `${getServerEnv().SYFOSMMANUELL_BACKEND_URL}/api/v1/vurderingmanuelloppgave/${oppgaveid}`
     const result = await fetch(VURDERE_OPPGAVE_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-Nav-Enhet': aktivEnhet,
-            Authorization: `Bearer ${oboResult.token}`,
+            Authorization: `Bearer ${oboResult.okoToken}`,
         },
         body: JSON.stringify(body),
     })
@@ -161,4 +146,31 @@ export async function submitOppgave(
     } else {
         throw new Error(`Unable to submit oppgave: ${result.status} ${result.statusText}`)
     }
+}
+
+/**
+ * Verifies the current user, and exchanges the access token to a OBO token for syfosmmanuell-backend.
+ */
+async function getSyfosmmanuellOboToken(): Promise<
+    { ok: false; errorType: 'AUTH_ERROR'; message: string } | { ok: true; okoToken: string }
+> {
+    const serverEnv = getServerEnv()
+
+    const verifiedResult = await verifiedAccessToken()
+    if (!verifiedResult.ok) {
+        return verifiedResult
+    }
+
+    const oboResult = await requestOboToken(verifiedResult.token, serverEnv.SYFOSMMANUELL_BACKEND_SCOPE)
+
+    if (!oboResult.ok) {
+        logger.error(`Unable to get OBO token: ${oboResult.error.message}`)
+        return {
+            ok: false,
+            errorType: 'AUTH_ERROR',
+            message: 'Unable to get access token for syfosmmanuell-backend',
+        }
+    }
+
+    return { ok: true, okoToken: oboResult.token }
 }

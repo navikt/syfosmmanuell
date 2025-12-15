@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { Alert } from '@navikt/ds-react'
 
-import { OppgaveFetchingError, UlosteOppgaverFetchingError } from '../services/oppgaveService'
+import { OppgaveFetchingError, UlosteOppgaverFetchingError } from '../services/syfosmmanuell-backend-service'
 
 interface Props {
     errors: OppgaveFetchingError | UlosteOppgaverFetchingError

@@ -1,47 +1,34 @@
 import { headers } from 'next/headers'
 import { logger } from '@navikt/next-logger'
-import { validateToken, getToken } from '@navikt/oasis'
-import { redirect } from 'next/navigation'
+import { getToken, validateToken } from '@navikt/oasis'
 
-import { isLocalOrDemo } from '../utils/env'
-import { raise } from '../utils/ts-utils'
+type VerifiedAccessTokenResult =
+    | { ok: false; errorType: 'AUTH_ERROR'; message: string }
+    | {
+          ok: true
+          token: string
+      }
 
-export async function verifyUserLoggedIn(): Promise<void> {
-    const requestHeaders = await headers()
-
-    if (isLocalOrDemo) {
-        logger.warn('Is running locally, skipping RSC auth')
-        return
-    }
-
-    const redirectPath = requestHeaders.get('x-path')
-    if (!redirectPath == null) {
-        logger.warn("Missing 'x-path' header, is middleware middlewaring?")
-    }
-    logger.info(`Redirect path is ${redirectPath}`)
-
-    const token = getToken(requestHeaders)
-    if (!token) {
-        logger.info('Found no token, redirecting to login')
-        redirect(`/oauth2/login?redirect=${redirectPath}`)
-    }
-
-    const result = await validateToken(token)
-    if (!result.ok) {
-        if (result.errorType !== 'token expired') {
-            logger.error(
-                new Error(
-                    `Invalid JWT token found (${result.errorType}) (cause: ${result.errorType} ${result.error.message}, redirecting to login.`,
-                    { cause: result.error },
-                ),
-            )
+export async function verifiedAccessToken(): Promise<VerifiedAccessTokenResult> {
+    const accessToken = getToken(await headers())
+    if (!accessToken) {
+        logger.warn('No access token found when trying to get modia context, why is wonderwall not wonderwalling?')
+        return {
+            ok: false,
+            errorType: 'AUTH_ERROR',
+            message: 'No access token found',
         }
-        redirect(`/oauth2/login?redirect=${redirectPath}`)
     }
-}
 
-export function getUserToken(headers: Headers): string {
-    if (isLocalOrDemo) return 'fake-token'
+    const validatedToken = await validateToken(accessToken)
+    if (!validatedToken.ok) {
+        logger.warn(`Invalid access token found when trying to get modia context: ${validatedToken.error.message}`)
+        return {
+            ok: false,
+            errorType: 'AUTH_ERROR',
+            message: `Invalid access token`,
+        }
+    }
 
-    return getToken(headers) ?? raise(new Error('Tried to get token, but header is missing'))
+    return { ok: true, token: accessToken }
 }

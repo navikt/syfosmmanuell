@@ -5,7 +5,7 @@ import { InternalHeader } from '@navikt/ds-react'
 import { Heading, Label, Select } from '@navikt/ds-react'
 import Link from 'next/link'
 
-import { ModiaContext, ModiaContextError } from '../../services/modiaService'
+import { ModiaContext, ModiaContextError } from '../../services/modia-service'
 import { StoreContext } from '../../data/store'
 
 interface Props {

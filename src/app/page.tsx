@@ -1,10 +1,8 @@
-import React, { ReactElement, Suspense } from 'react'
-import { headers } from 'next/headers'
+import { ReactElement, Suspense } from 'react'
 import { notFound } from 'next/navigation'
-import { Alert, Heading, BodyShort, Skeleton } from '@navikt/ds-react'
+import { Alert, BodyShort, Heading, Skeleton } from '@navikt/ds-react'
 
-import { getOppgave } from '../services/oppgaveService'
-import { getUserToken } from '../auth/authentication'
+import { getOppgave } from '../services/syfosmmanuell-backend-service'
 import ManuellOppgaveErrors from '../components/ManuellOppgaveErrors'
 import MainContent from '../components/MainContent'
 
@@ -50,7 +48,7 @@ async function Page(props: { searchParams: Promise<{ oppgaveid: string | undefin
 }
 
 async function Oppgave({ oppgaveId }: { oppgaveId: string }) {
-    const oppgave = await getOppgave(oppgaveId, getUserToken(await headers()))
+    const oppgave = await getOppgave(oppgaveId)
 
     if ('errorType' in oppgave && oppgave.errorType === 'OPPGAVE_NOT_FOUND') {
         notFound()

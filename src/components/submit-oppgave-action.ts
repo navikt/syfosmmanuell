@@ -1,10 +1,8 @@
 'use server'
 
-import { headers } from 'next/headers'
 import * as z from 'zod'
 
-import { submitOppgave } from '../services/oppgaveService'
-import { getUserToken } from '../auth/authentication'
+import { submitOppgave } from '../services/syfosmmanuell-backend-service'
 
 import { FormShape } from './form/Form'
 
@@ -19,8 +17,7 @@ const FormSchema = z.object({
 })
 
 export async function submitOppgaveAction(oppgaveId: number, aktivEnhet: string, formData: FormShape) {
-    const token = getUserToken(await headers())
     const formValues = FormSchema.parse(formData)
 
-    await submitOppgave(oppgaveId, aktivEnhet, formValues, token)
+    await submitOppgave(oppgaveId, aktivEnhet, formValues)
 }

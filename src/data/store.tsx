@@ -1,6 +1,6 @@
 import React, { createContext, PropsWithChildren, useCallback, useState } from 'react'
 
-import { ModiaContext, ModiaContextError } from '../services/modiaService'
+import { ModiaContext, ModiaContextError } from '../services/modia-service'
 
 interface Store {
     aktivEnhet: string | null

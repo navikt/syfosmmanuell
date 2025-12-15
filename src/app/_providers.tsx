@@ -3,7 +3,7 @@
 import React, { PropsWithChildren, ReactElement } from 'react'
 
 import StoreProvider from '../data/store'
-import { ModiaContext, ModiaContextError } from '../services/modiaService'
+import { ModiaContext, ModiaContextError } from '../services/modia-service'
 
 type Props = {
     modiaContext: ModiaContext | ModiaContextError

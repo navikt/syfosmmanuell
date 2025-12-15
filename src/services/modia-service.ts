@@ -4,6 +4,7 @@ import { requestOboToken } from '@navikt/oasis'
 
 import { ClientError } from '../utils/typeUtils'
 import { getServerEnv, isLocalOrDemo } from '../utils/env'
+import { verifiedAccessToken } from '../auth/authentication'
 
 export interface ModiaContext {
     fornavn: string
@@ -15,7 +16,7 @@ export interface ModiaContext {
 
 export type ModiaContextError = ClientError<'MODIA_ERROR' | 'PARSE_ERROR' | 'AUTH_ERROR'>
 
-export async function getModiaContext(userAccessToken: string): Promise<ModiaContext | ModiaContextError> {
+export async function getModiaContext(): Promise<ModiaContext | ModiaContextError> {
     if (isLocalOrDemo) {
         logger.warn('Using mocked modia context for local development (or demo)')
         return {
@@ -30,7 +31,12 @@ export async function getModiaContext(userAccessToken: string): Promise<ModiaCon
         }
     }
 
-    const modiaContextAccessToken = await requestOboToken(userAccessToken, getServerEnv().MODIA_CONTEXT_SCOPE)
+    const verifiedResult = await verifiedAccessToken()
+    if (!verifiedResult.ok) {
+        return verifiedResult
+    }
+
+    const modiaContextAccessToken = await requestOboToken(verifiedResult.token, getServerEnv().MODIA_CONTEXT_SCOPE)
     if (!modiaContextAccessToken.ok) {
         return {
             errorType: 'MODIA_ERROR',

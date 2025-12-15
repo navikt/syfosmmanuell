@@ -1,12 +1,10 @@
 import '../global.css'
 
 import React, { PropsWithChildren } from 'react'
-import { headers } from 'next/headers'
 import { Metadata } from 'next'
 
-import { getUserToken, verifyUserLoggedIn } from '../auth/authentication'
 import ModiaHeader from '../components/modiaheader/ModiaHeader'
-import { getModiaContext } from '../services/modiaService'
+import { getModiaContext } from '../services/modia-service'
 import NoEnhetError from '../components/NoEnhetError'
 
 import Providers from './_providers'
@@ -18,9 +16,7 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: PropsWithChildren) {
-    await verifyUserLoggedIn()
-
-    const modiaContext = await getModiaContext(getUserToken(await headers()))
+    const modiaContext = await getModiaContext()
 
     return (
         <html lang="no">
