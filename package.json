@@ -44,7 +44,7 @@
         "prettier": "3.8.3",
         "prettier-plugin-tailwindcss": "^0.7.4",
         "tailwindcss": "4.3.0",
-        "typescript": "^5.9.3",
+        "typescript": "^6.0.3",
         "vitest": "^4.1.7"
     },
     "prettier": "@navikt/tsm-prettier"
